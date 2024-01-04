@@ -10,6 +10,7 @@ export default {
     extend: {},
   },
   plugins: [
+    require('flowbite-typography'),
     require('flowbite/plugin')
   ],
 }
