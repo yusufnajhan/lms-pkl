@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('welcome');
 });
 
 Route::get('/login', function (){
@@ -35,12 +35,24 @@ Route::get('/dashboardGuru', function () {
 Route::get('/berandaSiswa', function () {
     return view('siswa/beranda');
 });
+Route::get('/profilSiswa', function () {
+    return view('siswa/profil');
+});
 Route::get('/dasborSiswa', function () {
     return view('siswa/dasbor');
+});
+Route::get('/guruteman', function () {
+    return view('siswa/guruteman');
 });
 Route::get('/kelasSiswa', function () {
     return view('siswa/kelas');
 });
 Route::get('/kelasMatematika', function () {
     return view('siswa/mat');
+});
+Route::get('/tugasMatematika', function () {
+    return view('siswa/mattugas');
+});
+Route::get('/kuisMatematika', function () {
+    return view('siswa/matkuis');
 });
