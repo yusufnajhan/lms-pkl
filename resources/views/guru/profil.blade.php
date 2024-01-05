@@ -1,10 +1,10 @@
-@extends('siswa.layouts.layout')
+@extends('guru.layouts.layout')
 @section('content')
 <div class="mb-4">
     <nav class="flex mb-5" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
           <li class="inline-flex items-center">
-            <a href="/berandaSiswa"
+            <a href="/berandaGuru"
                 class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -20,7 +20,7 @@
           </li>
         </ol>
     </nav>
-    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Profil Siswa</h1>
+    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Profil Guru</h1>
 </div>
 
     <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
@@ -29,7 +29,7 @@
                 <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar">
             </div>
             <div class="col-span-6 sm:col-full">
-                <a href="/editprofilSiswa"
+                <a href="/editprofilGuru"
                     class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                     type="submit">
                     Ubah foto profil
@@ -46,7 +46,7 @@
             </div>
             <div class="col-span-6 sm:col-span-3">
                 <label for="kode"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIS</label>
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NUPTK</label>
                 <input type="text" name="kode" id="kode"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     value="#" wfd-id="id2" readonly disabled>
@@ -66,7 +66,7 @@
                     value="#" disabled>
             </div>
             <div class="col-span-6 sm:col-full">
-                <a href="/editprofilSiswa"
+                <a href="/editprofilGuru"
                     class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                     type="submit">
                     Ubah kata sandi

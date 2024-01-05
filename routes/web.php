@@ -22,14 +22,43 @@ Route::get('/login', function (){
 });
 
 // admin
-Route::get('/dashboardAdmin', function () {
-    return view('admin/dashboard');
+Route::get('/berandaAdmin', function () {
+    return view('admin/beranda');
+});
+Route::get('/profilAdmin', function () {
+    return view('admin/profil');
+});
+Route::get('/editprofilAdmin', function () {
+    return view('admin/editprofil');
+});
+Route::get('/akunGuru', function () {
+    return view('admin/guru');
+});
+Route::get('/akunSiswa', function () {
+    return view('admin/siswa');
 });
 
+
 // guru
-Route::get('/dashboardGuru', function () {
-    return view('guru/dashboard');
+Route::get('/berandaGuru', function () {
+    return view('guru/beranda');
 });
+Route::get('/profilGuru', function () {
+    return view('guru/profil');
+});
+Route::get('/editprofilGuru', function () {
+    return view('guru/editprofil');
+});
+Route::get('/murid', function () {
+    return view('guru/murid');
+});
+Route::get('/kelasGuru', function () {
+    return view('guru/kelas');
+});
+Route::get('/kelasMat', function () {
+    return view('guru/mat');
+});
+
 
 // siswa
 Route::get('/berandaSiswa', function () {
@@ -37,6 +66,9 @@ Route::get('/berandaSiswa', function () {
 });
 Route::get('/profilSiswa', function () {
     return view('siswa/profil');
+});
+Route::get('/editprofilSiswa', function () {
+    return view('siswa/editprofil');
 });
 Route::get('/dasborSiswa', function () {
     return view('siswa/dasbor');

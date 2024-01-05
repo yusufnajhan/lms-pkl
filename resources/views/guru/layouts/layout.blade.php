@@ -31,27 +31,6 @@
     <link rel="mask-icon" href="https://flowbite-admin-dashboard.vercel.app/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@">
-    <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="Tailwind CSS User Settings Page - Flowbite">
-    <meta name="twitter:description"
-        content="Get started with a free and open-source admin dashboard layout built with Tailwind CSS and Flowbite featuring charts, widgets, CRUD layouts, authentication pages, and more">
-    <meta name="twitter:image" content="https://flowbite-admin-dashboard.vercel.app/images/og-image.png">
-
-    <!-- Facebook -->
-    <meta property="og:url" content="https://flowbite-admin-dashboard.vercel.app/settings/">
-    <meta property="og:title" content="Tailwind CSS User Settings Page - Flowbite">
-    <meta property="og:description"
-        content="Get started with a free and open-source admin dashboard layout built with Tailwind CSS and Flowbite featuring charts, widgets, CRUD layouts, authentication pages, and more">
-    <meta property="og:type" content="article">
-    <meta property="og:image" content="https://flowbite-admin-dashboard.vercel.app/images/og-image.png">
-    <meta property="og:image:type" content="image/png">
-
-
-
-
 
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
@@ -64,10 +43,6 @@
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-800">
-
-
-
-
     <nav class="fixed z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <div class="px-3 py-3 lg:px-5 lg:pl-3">
             <div class="flex items-center justify-between">
@@ -96,14 +71,8 @@
 
                 </div>
                 <div class="flex items-center">
-                    <div class="hidden mr-3 -mb-1 sm:block">
-                        <span></span>
-                    </div>
-
                     <button id="toggleSidebarMobileSearch" type="button"
                         class="p-2 text-gray-500 rounded-lg lg:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                        <span class="sr-only">Search</span>
-
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -111,39 +80,6 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </button>
-
-
-                    <div class="z-20 z-50 hidden max-w-sm my-4 overflow-hidden text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-gray-700 dark:divide-gray-600"
-                        id="apps-dropdown"
-                        style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(1139.33px, 64.6667px, 0px);"
-                        data-popper-placement="bottom">
-                        <div
-                            class="block px-4 py-2 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            Apps
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 p-4">
-                            <a href="/profilOperator"
-                                class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <svg class="mx-auto mb-1 text-gray-500 w-7 h-7 dark:text-gray-400" fill="currentColor"
-                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <div class="text-sm font-medium text-gray-900 dark:text-white">Settings</div>
-                            </a>
-                            <a href="/login"
-                                class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <svg class="mx-auto mb-1 text-gray-500 w-7 h-7 dark:text-gray-400" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
-                                    </path>
-                                </svg>
-                                <div class="text-sm font-medium text-gray-900 dark:text-white">Logout</div>
-                            </a>
-                        </div>
-                    </div>
                     <button id="theme-toggle" data-tooltip-target="tooltip-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
                         <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -156,7 +92,7 @@
                         class="absolute z-10 inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm tooltip opacity-0 invisible"
                         style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(1107.33px, 60px, 0px);"
                         data-popper-placement="bottom">
-                        Toggle dark mode
+                        Mode Gelap
                         <div class="tooltip-arrow" data-popper-arrow=""
                             style="position: absolute; left: 0px; transform: translate3d(68.6667px, 0px, 0px);"></div>
                     </div>
@@ -168,8 +104,7 @@
                                 id="user-menu-button-2" aria-expanded="false" data-dropdown-toggle="dropdown-2">
                                 <span class="sr-only">Open user menu</span>
                                 <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="foto-profil" />
-                                
-                            </button>
+                            </button>                              
                         </div>
 
                         <div class="z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600 hidden"
@@ -178,29 +113,23 @@
                             data-popper-placement="bottom">
                             <div class="px-4 py-3" role="none">
                                 <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                    {{-- {{Auth::user()->username}} --}}
+                                    username
                                 </p>
                                 <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
                                     role="none">
-                                    {{-- {{Auth::user()->departemen->kode}} --}}
+                                    NUPTK
                                 </p>
                             </div>
                             <ul class="py-1" role="none">
                                 <li>
-
-                                </li>
-                                <li>
-                                    <a href="/profilOperator"
+                                    <a href="/profilGuru"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                        role="menuitem">Settings</a>
-                                </li>
-                                <li>
-
+                                        role="menuitem">Pengaturan</a>
                                 </li>
                                 <li>
                                     <a href="/login"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                        role="menuitem">Sign out</a>
+                                        role="menuitem">Keluar</a>
                                 </li>
                             </ul>
                         </div>
@@ -221,126 +150,95 @@
                         class="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                         <ul class="pb-2 space-y-2">
                             <li>
-                                <form action="#" method="GET" class="lg:hidden">
-                                    <label for="mobile-search" class="sr-only">Search</label>
-                                    <div class="relative">
-                                        <div
-                                            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                            <svg class="w-5 h-5 text-gray-500" fill="currentColor"
-                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd"
-                                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                                    clip-rule="evenodd"></path>
-                                            </svg>
-                                        </div>
-                                        <input type="text" name="email" id="mobile-search"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200 dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Search">
-                                    </div>
-                                </form>
-                            </li>
-                            <li>
-                                <a href="/dashboardOperator"
+                                <a href="/berandaGuru"
                                     class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
-                                    <svg class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                                    </svg>
-                                    <span class="ml-3" sidebar-toggle-item="">Dashboard</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                    </svg>                                                                         
+                                    <span class="ml-3" sidebar-toggle-item="">Beranda</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="/DaftarDetailMahasiswa"
-                                    class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 ">
-                                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                                        <path fill-rule="evenodd"
-                                            d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                    <span class="ml-3" sidebar-toggle-item="">Detail Mahasiswa</span>
+                                <a href="/murid"
+                                    class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>                                                                                                                                                   
+                                    <span class="ml-3" sidebar-toggle-item="">Murid Didik</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="/RekapDepartemen"
+                                <a href="/kelasGuru"
                                     class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 ">
-                                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                                        <path fill-rule="evenodd"
-                                            d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                    <span class="ml-3" sidebar-toggle-item="">Rekap</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+                                    </svg>                                      
+                                    <span class="ml-3" sidebar-toggle-item="">Kelas</span>
                                 </a>
                             </li>
                         </ul>
-
                     </div>
                 </div>
-
             </div>
         </aside>
 
         <div class="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
 
         <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
-            <main>
-                <div class="absolute w-full flex justify-center top-0 mt-5">
-                    @if (session('success'))
-                        <div id="alert-1"
-                            class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
-                            role="alert">
-                            <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                            </svg>
-                            <span class="sr-only">Info</span>
-                            <div class="ms-3 text-sm font-medium">
-                                {{ session('success') }}!
-                            </div>
-                        </div>
-                    @endif
-
-                    @if (session('error'))
-                        <div id="alert-1"
-                            class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
-                            role="alert">
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-                            <div class="ms-3 text-sm font-medium">
-                                {{ session('error') }}
-                            </div>
-                        </div>
-                    @endif
+            <main class="p-4 md:ml-50 h-auto pt-20">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                  @yield('content')
+                  <div>@yield('content1')</div>
+                  {{-- <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-32 md:h-64"
+                  ></div>
+                  <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-32 md:h-64"
+                  ></div>
                 </div>
-                
-
-                <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
-                    @yield('content')
+                <div
+                  class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4"
+                ></div>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                  <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                  ></div>
+                  <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                  ></div>
+                  <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                  ></div>
+                  <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                  ></div>
                 </div>
-
-                <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-2 xl:gap-4 dark:bg-gray-900">
-                    @yield('content6')
-                </div>
-
-                <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-2 xl:gap-4 dark:bg-gray-900">
-                    @yield('content5')
-                </div>
-
-                <div class="px-4 pb-6">
-                    @yield('content2')
-                </div>
-
-                
+                <div
+                  class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4"
+                ></div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                  ></div>
+                  <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                  ></div>
+                  <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                  ></div>
+                  <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                  ></div>
+                </div> --}}
             </main>
+            <p class="my-10 text-sm text-center text-gray-500">
+                &copy; PKL 2024. Karya Divia dan Yusuf.
+            </p>
         </div>
 
     </div>
 
-    <script>
+    {{-- <script>
         // Add a script to hide the alert after 10 seconds
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
@@ -350,7 +248,7 @@
                 }
             }, 3000); // 10000 milliseconds = 10 seconds
         });
-    </script>
+    </script> --}}
 
     @yield('script')
 
