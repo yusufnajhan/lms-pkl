@@ -73,9 +73,9 @@ Route::get('/editprofilSiswa', function () {
 Route::get('/dasborSiswa', function () {
     return view('siswa/dasbor');
 });
-Route::get('/guruteman', function () {
-    return view('siswa/guruteman');
-});
+// Route::get('/guruteman', function () {
+//     return view('siswa/guruteman');
+// });
 Route::get('/kelasSiswa', function () {
     return view('siswa/kelas');
 });
@@ -87,4 +87,7 @@ Route::get('/tugasMatematika', function () {
 });
 Route::get('/kuisMatematika', function () {
     return view('siswa/matkuis');
+});
+Route::get('/diskusiMatematika', function () {
+    return view('siswa/diskusi');
 });

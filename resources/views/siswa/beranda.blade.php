@@ -62,37 +62,3 @@
     </div>
 </section>
 @endsection
-
-@section('content1')
-<!-- 
-Install the "flowbite-typography" NPM package to apply styles and format the article content: 
-
-URL: https://flowbite.com/docs/components/typography/ 
--->
-<main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
-    <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
-        <article class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
-            <header class="mb-4 lg:mb-6 not-format">
-                <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">Panduan Menggunakan LMS SMP Semarang</h1>
-            </header>
-            <p class="lead">Learning Management System (LMS) adalah perangkat lunak yang dirancang untuk membuat, mendistribusikan, dan mengatur penyampaian konten pembelajaran. LMS biasanya digunakan untuk penyusunan materi pembelajaran, pengelolaan proses pembelajaran, dan menilai hasil kerja
-            </p>
-            <iframe class="w-full" width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY"> </iframe>
-            <p>Berikut adalah beberapa langkah yang dapat Anda ikuti untuk menggunakan Google Classroom:</p>
-            <ol>
-                <li><strong>Usability testing</strong>. Does your user know how to exit out of screens? Can they
-                    follow your intended user journey and buy something from the site you’ve designed? By running a
-                    usability test, you’ll be able to see how users will interact with your design once it’s live;
-                </li>
-                <li><strong>Involving stakeholders</strong>. Need to check if your GDPR consent boxes are displaying
-                    properly? Pass your prototype to your data protection team and they can test it for real;</li>
-                <li><strong>Impressing a client</strong>. Prototypes can help explain or even sell your idea by
-                    providing your client with a hands-on experience;</li>
-                <li><strong>Communicating your vision</strong>. By using an interactive medium to preview and test
-                    design elements, designers and developers can understand each other — and the project — better.
-                </li>
-            </ol>
-        </article>
-    </div>
-</main>
-@endsection

@@ -30,6 +30,7 @@
             <option>Statistics</option>
             <option>Services</option>
             <option>FAQ</option>
+            <option>Teman</option>
         </select>
     </div>
     <ul class="hidden text-sm font-medium text-center text-red-500 divide-x divide-red-200 rounded-lg sm:flex dark:divide-red-600 dark:text-red-400" id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
@@ -42,9 +43,19 @@
       <li class="w-full">
           <button id="diskusi-tab" data-tabs-target="#diskusi" type="button" role="tab" aria-controls="diskusi" aria-selected="false" class="inline-block w-full p-4 rounded-tr-lg bg-red-50 hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600">Diskusi</button>
       </li>
+      <li class="w-full">
+        <button id="teman-tab" data-tabs-target="#teman" type="button" role="tab" aria-controls="teman" aria-selected="false" class="inline-block w-full p-4 rounded-tr-lg bg-red-50 hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600">Teman Kelas</button>
+      </li>
     </ul>  
     <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
         <div class="hidden pt-4" id="faq" role="tabpanel" aria-labelledby="faq-tab">
+          <div class="col-span-6 sm:col-span-3">
+            <select name="status" id="status" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-half p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+              <option value="telah">Semua tugas dan kuis</option>  
+              <option value="telah">Sudah dikerjakan</option>
+                <option value="belum">Belum dikerjakan</option>
+            </select>
+          </div>        
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
@@ -61,6 +72,10 @@
                         Tenggat waktu
                       </p>
                     </div>
+                    <td class="p-4 whitespace-nowrap">
+                      <span
+                        class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500">Sudah dikerjakan</span>
+                    </td>
                     <a href="/tugasMatematika" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
                       Detail
                       <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
@@ -82,6 +97,10 @@
                             Tenggat waktu
                         </p>
                     </div>
+                    <td class="p-4 whitespace-nowrap">
+                      <span
+                        class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500">Sudah dikerjakan</span>
+                    </td>
                     <a href="/kuisMatematika" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
                       Detail
                       <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
@@ -103,6 +122,10 @@
                             Tenggat waktu
                         </p>
                     </div>
+                    <td class="p-4 whitespace-nowrap">
+                      <span
+                        class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md border border-red-100 dark:border-red-400 dark:bg-gray-700 dark:text-red-400">Belum dikerjakan</span>
+                    </td>
                     <a href="/kuisMatematika" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
                       Detail
                       <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
@@ -124,6 +147,10 @@
                             Tenggat waktu
                         </p>
                     </div>
+                    <td class="p-4 whitespace-nowrap">
+                      <span
+                        class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md border border-red-100 dark:border-red-400 dark:bg-gray-700 dark:text-red-400">Belum dikerjakan</span>
+                    </td>
                       <a href="/tugasMatematika" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
                         Detail
                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
@@ -230,167 +257,138 @@
         </div>
         <div class="hidden pt-4" id="diskusi" role="tabpanel" aria-labelledby="diskusi-tab">
           <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-              <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 dark:border-gray-700 dark:bg-gray-800 xl:mb-0">
-                <!-- Chat -->
-                <form class="overflow-y-auto lg:max-h-[60rem] 2xl:max-h-fit">
-                  <article class="mb-5">
-                    <footer class="flex items-center justify-between mb-2">
-                        <div class="flex items-center">
-                            <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white"><img class="w-6 h-6 mr-2 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"alt="Jese avatar">Jese Leos</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023</time></p>
-                        </div>
-                    </footer>
-                    <p class="mb-2 text-gray-900 dark:text-white">
-                      Ok <a href="#" class="font-medium hover:underline text-primary-600 dark:text-primary-500">@team</a> I'am attaching our offer and pitch deck. Take your time to review everything. I'am looking forward to the next steps! Thank you.
-                    </p>
-                    <p class="mb-3 text-gray-900 dark:text-white">Looking forward to it! Thanks.</p>
-                  </article>
-                  <article class="pl-12 mb-5">
-                    <footer class="flex items-center justify-between mb-2">
-                        <div class="flex items-center">
-                            <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white"><img class="w-6 h-6 mr-2 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg"alt="Joseph avatar">Joseph McFallen</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023</time></p>
-                        </div>
-                    </footer>
-                    <p class="mb-2 text-gray-900 dark:text-white">
-                      Hello <a href="#" class="font-medium hover:underline text-primary-600 dark:text-primary-500">@jeseleos</a> I need some informations about flowbite react version.
-                    </p>
-                  </article>
-                  <article class="pl-12 mb-5">
-                    <footer class="flex items-center justify-between mb-2">
-                        <div class="flex items-center">
-                          <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white"><img class="w-6 h-6 mr-2 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"alt="Jese avatar">Jese Leos</p>
-                          <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023</time></p>
-                        </div>
-                    </footer>
-                    <p class="mb-4 text-gray-900 dark:text-white">
-                      Hi <a href="#" class="font-medium hover:underline text-primary-600 dark:text-primary-500">@josephh</a> Sure, just let me know whean you are available and we can speak.
-                    </p>
-                    <form>
-                      <label for="chat" class="sr-only">Your message</label>
-                      <div class="flex items-center mb-5">
-                          <textarea id="chat" rows="1" class="block mr-4 p-2.5 w-full text-sm text-red-900 bg-red-50 rounded-lg border border-red-300 focus:ring-red-500 focus:border-red-500 dark:bg-red-700 dark:border-red-600 dark:placeholder-red-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500" placeholder="Membalas diskusi kelas..."></textarea>
-                          <button type="submit" class="inline-flex justify-center p-2 rounded-lg cursor-pointer text-red-600 hover:bg-red-100 dark:text-red-500 dark:hover:bg-red-600">
-                              <svg aria-hidden="true" class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
-                              <span class="sr-only">Send message</span>
-                          </button>
-                      </div>
-                    </form>                  
-                    <span class="inline-flex items-center text-xs font-medium cursor-pointer hover:underline text-red-700 sm:text-sm dark:text-red-500">
-                      Hide thread
-                      <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                          <path clip-rule="evenodd" fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"></path>
-                      </svg>
-                    </span>                  
-                  </article>
-                </form>
-                <form class="overflow-y-auto lg:max-h-[60rem] 2xl:max-h-fit">
-                  <article class="mb-5">
-                    <footer class="flex items-center justify-between mb-2">
-                        <div class="flex items-center">
-                            <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white"><img class="w-6 h-6 mr-2 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"alt="Jese avatar">Jese Leos</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023</time></p>
-                        </div>
-                    </footer>
-                    <p class="mb-2 text-gray-900 dark:text-white">
-                      Ok <a href="#" class="font-medium hover:underline text-primary-600 dark:text-primary-500">@team</a> I'am attaching our offer and pitch deck. Take your time to review everything. I'am looking forward to the next steps! Thank you.
-                    </p>
-                    <p class="mb-3 text-gray-900 dark:text-white">Looking forward to it! Thanks.</p>
-                  </article>
-                  <article class="pl-12 mb-5">
-                    <footer class="flex items-center justify-between mb-2">
-                        <div class="flex items-center">
-                            <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white"><img class="w-6 h-6 mr-2 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg"alt="Joseph avatar">Joseph McFallen</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023</time></p>
-                        </div>
-                    </footer>
-                    <p class="mb-2 text-gray-900 dark:text-white">
-                      Hello <a href="#" class="font-medium hover:underline text-primary-600 dark:text-primary-500">@jeseleos</a> I need some informations about flowbite react version.
-                    </p>
-                  </article>
-                  <article class="pl-12 mb-5">
-                    <footer class="flex items-center justify-between mb-2">
-                        <div class="flex items-center">
-                          <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white"><img class="w-6 h-6 mr-2 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"alt="Jese avatar">Jese Leos</p>
-                          <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023</time></p>
-                        </div>
-                    </footer>
-                    <p class="mb-4 text-gray-900 dark:text-white">
-                      Hi <a href="#" class="font-medium hover:underline text-primary-600 dark:text-primary-500">@josephh</a> Sure, just let me know whean you are available and we can speak.
-                    </p>
-                    <form>
-                      <label for="chat" class="sr-only">Your message</label>
-                      <div class="flex items-center mb-5">
-                          <textarea id="chat" rows="1" class="block mr-4 p-2.5 w-full text-sm text-red-900 bg-red-50 rounded-lg border border-red-300 focus:ring-red-500 focus:border-red-500 dark:bg-red-700 dark:border-red-600 dark:placeholder-red-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500" placeholder="Membalas diskusi kelas..."></textarea>
-                          <button type="submit" class="inline-flex justify-center p-2 rounded-lg cursor-pointer text-red-600 hover:bg-red-100 dark:text-red-500 dark:hover:bg-red-600">
-                              <svg aria-hidden="true" class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
-                              <span class="sr-only">Send message</span>
-                          </button>
-                      </div>
-                    </form>                  
-                    <span class="inline-flex items-center text-xs font-medium cursor-pointer hover:underline text-red-700 sm:text-sm dark:text-red-500">
-                      Hide thread
-                      <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                          <path clip-rule="evenodd" fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"></path>
-                      </svg>
-                    </span>                  
-                  </article>
-                </form>
-                <form class="overflow-y-auto lg:max-h-[60rem] 2xl:max-h-fit">
-                  <article class="mb-5">
-                    <footer class="flex items-center justify-between mb-2">
-                        <div class="flex items-center">
-                            <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white"><img class="w-6 h-6 mr-2 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"alt="Jese avatar">Jese Leos</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023</time></p>
-                        </div>
-                    </footer>
-                    <p class="mb-2 text-gray-900 dark:text-white">
-                      Ok <a href="#" class="font-medium hover:underline text-primary-600 dark:text-primary-500">@team</a> I'am attaching our offer and pitch deck. Take your time to review everything. I'am looking forward to the next steps! Thank you.
-                    </p>
-                    <p class="mb-3 text-gray-900 dark:text-white">Looking forward to it! Thanks.</p>
-                  </article>
-                  <article class="pl-12 mb-5">
-                    <footer class="flex items-center justify-between mb-2">
-                        <div class="flex items-center">
-                            <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white"><img class="w-6 h-6 mr-2 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg"alt="Joseph avatar">Joseph McFallen</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023</time></p>
-                        </div>
-                    </footer>
-                    <p class="mb-2 text-gray-900 dark:text-white">
-                      Hello <a href="#" class="font-medium hover:underline text-primary-600 dark:text-primary-500">@jeseleos</a> I need some informations about flowbite react version.
-                    </p>
-                  </article>
-                  <article class="pl-12 mb-5">
-                    <footer class="flex items-center justify-between mb-2">
-                        <div class="flex items-center">
-                          <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white"><img class="w-6 h-6 mr-2 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"alt="Jese avatar">Jese Leos</p>
-                          <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023</time></p>
-                        </div>
-                    </footer>
-                    <p class="mb-4 text-gray-900 dark:text-white">
-                      Hi <a href="#" class="font-medium hover:underline text-primary-600 dark:text-primary-500">@josephh</a> Sure, just let me know whean you are available and we can speak.
-                    </p>
-                    <form>
-                      <label for="chat" class="sr-only">Your message</label>
-                      <div class="flex items-center mb-5">
-                          <textarea id="chat" rows="1" class="block mr-4 p-2.5 w-full text-sm text-red-900 bg-red-50 rounded-lg border border-red-300 focus:ring-red-500 focus:border-red-500 dark:bg-red-700 dark:border-red-600 dark:placeholder-red-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500" placeholder="Membalas diskusi kelas..."></textarea>
-                          <button type="submit" class="inline-flex justify-center p-2 rounded-lg cursor-pointer text-red-600 hover:bg-red-100 dark:text-red-500 dark:hover:bg-red-600">
-                              <svg aria-hidden="true" class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
-                              <span class="sr-only">Send message</span>
-                          </button>
-                      </div>
-                    </form>                  
-                    <span class="inline-flex items-center text-xs font-medium cursor-pointer hover:underline text-red-700 sm:text-sm dark:text-red-500">
-                      Hide thread
-                      <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                          <path clip-rule="evenodd" fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"></path>
-                      </svg>
-                    </span>                  
-                  </article>
-                </form>
+            <li class="py-3 sm:py-4">
+              <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium text-gray-900 truncate dark:text-white">
+                    Topic diskusi
+                  </p>
+                  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                    pertanyaan
+                  </p>
+                </div>
+                <a href="/diskusiMatematika" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
+                  Detail
+                  <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </a>
               </div>
+            </li>
+            <li class="py-3 sm:py-4">
+              <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="font-medium text-gray-900 truncate dark:text-white">
+                        Topic diskusi
+                    </p>
+                    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                        pertanyaan
+                    </p>
+                </div>
+                <a href="/diskusiMatematika" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
+                  Detail
+                  <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </a>
+              </div>
+            </li>
           </ul>
       </div>
+      <div class="hidden pt-4" id="teman" role="tabpanel" aria-labelledby="teman-tab">
+        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+          <li class="py-3 sm:py-4">
+            <div class="flex items-center space-x-4">
+              <div class="flex-shrink-0">
+                <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="font-medium text-gray-900 truncate dark:text-white">
+                  Nama teman
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="py-3 sm:py-4">
+            <div class="flex items-center space-x-4">
+              <div class="flex-shrink-0">
+                <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/bonnie-green.png" alt="Neil image">
+              </div>
+              <div class="flex-1 min-w-0">
+                  <p class="font-medium text-gray-900 truncate dark:text-white">
+                  Nama teman
+                  </p>
+              </div>
+            </div>
+          </li>
+          <li class="py-3 sm:py-4">
+              <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0">
+                  <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium text-gray-900 truncate dark:text-white">
+                    Nama teman
+                  </p>
+                </div>
+              </div>
+          </li>
+          <li class="py-3 sm:py-4">
+              <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0">
+                  <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium text-gray-900 truncate dark:text-white">
+                    Nama teman
+                  </p>
+                </div>
+              </div>
+          </li>
+          <li class="py-3 sm:py-4">
+              <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0">
+                  <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium text-gray-900 truncate dark:text-white">
+                    Nama teman
+                  </p>
+                </div>
+              </div>
+          </li>
+          <li class="py-3 sm:py-4">
+              <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0">
+                  <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium text-gray-900 truncate dark:text-white">
+                    Nama teman
+                  </p>
+                </div>
+              </div>
+          </li>
+          <li class="py-3 sm:py-4">
+              <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0">
+                  <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium text-gray-900 truncate dark:text-white">
+                    Nama teman
+                  </p>
+                </div>
+              </div>
+          </li>
+        </ul>
+    </div>
     </div>
   </div>
 </div>

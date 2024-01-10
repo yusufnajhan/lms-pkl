@@ -164,7 +164,7 @@
                                     <span class="ml-3" sidebar-toggle-item="">Dasbor</span>
                                 </a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="/guruteman"
                                     class="flex items-center p-2 text-base text-red-900 rounded-lg hover:bg-red-100 group dark:text-gray-200 dark:hover:bg-gray-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -172,7 +172,7 @@
                                     </svg>                                                                                                                                                   
                                     <span class="ml-3" sidebar-toggle-item="">Guru dan Teman</span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="/kelasSiswa"
                                     class="flex items-center p-2 text-base text-red-900 rounded-lg hover:bg-red-100 group dark:text-gray-200 dark:hover:bg-gray-700 ">
