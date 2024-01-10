@@ -49,9 +49,9 @@ Route::get('/profilGuru', function () {
 Route::get('/editprofilGuru', function () {
     return view('guru/editprofil');
 });
-Route::get('/murid', function () {
-    return view('guru/murid');
-});
+// Route::get('/murid', function () {
+//     return view('guru/murid');
+// });
 Route::get('/kelasGuru', function () {
     return view('guru/kelas');
 });
