@@ -58,7 +58,21 @@ Route::get('/kelasGuru', function () {
 Route::get('/kelasMat', function () {
     return view('guru/mat');
 });
-
+Route::get('/tugasMat', function () {
+    return view('guru/nilaitugas');
+});
+Route::get('/kuisMat', function () {
+    return view('guru/nilaikuis');
+});
+Route::get('/diskusiMat', function () {
+    return view('guru/diskusi');
+});
+Route::get('/progresMat', function () {
+    return view('guru/progres');
+});
+Route::get('/progresKelasMat', function () {
+    return view('guru/rekapkelas');
+});
 
 // siswa
 Route::get('/berandaSiswa', function () {

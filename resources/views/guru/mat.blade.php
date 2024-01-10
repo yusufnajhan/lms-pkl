@@ -64,18 +64,20 @@
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                      </svg>
+                      <a href="tugasMat">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                          </svg>
+                      </a>
                     </div>
                     <div class="flex-1 min-w-0">
-                      <p class="font-medium text-gray-900 truncate dark:text-white">
-                        Nama tugas
-                      </p>
-                      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                        Tenggat waktu
-                      </p>
-                    </div>
+                        <p class="font-medium text-gray-900 truncate dark:text-white">
+                          <a href="tugasMat">Nama tugas</a>
+                        </p>
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                          <a href="tugasMat">Tenggat waktu</a>
+                        </p>
+                    </div>                  
                     <td class="p-4 space-x-2 whitespace-nowrap">
                         <button type="button" data-modal-toggle="edit-tugas-modal" class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
@@ -91,16 +93,18 @@
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                      </svg>
+                      <a href="/kuisMat">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                        </svg>
+                      </a>
                     </div>
                     <div class="flex-1 min-w-0">
                         <p class="font-medium text-gray-900 truncate dark:text-white">
-                            Nama kuis
+                          <a href="kuisMat">Nama kuis</a>
                         </p>
                         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            Tenggat waktu
+                          <a href="kuisMat">Tenggat waktu</a>
                         </p>
                     </div>
                     <td class="p-4 space-x-2 whitespace-nowrap">
@@ -119,16 +123,18 @@
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                      </svg>
+                      <a href="/kuisMat">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                        </svg>
+                      </a>
                     </div>
                     <div class="flex-1 min-w-0">
                         <p class="font-medium text-gray-900 truncate dark:text-white">
-                            Nama kuis
+                          <a href="kuisMat">Nama kuis</a>
                         </p>
                         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            Tenggat waktu
+                          <a href="kuisMat">Tenggat waktu</a>
                         </p>
                     </div>
                     <td class="p-4 space-x-2 whitespace-nowrap">
@@ -141,24 +147,25 @@
                             Hapus
                         </button>
                     </td>
-
                   </div>
                 </li>
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                      </svg>
+                      <a href="tugasMat">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                          </svg>
+                      </a>
                     </div>
                     <div class="flex-1 min-w-0">
                         <p class="font-medium text-gray-900 truncate dark:text-white">
-                            Nama tugas
+                          <a href="tugasMat">Nama tugas</a>
                         </p>
                         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            Tenggat waktu
+                          <a href="tugasMat">Tenggat waktu</a>
                         </p>
-                    </div>
+                    </div> 
                     <td class="p-4 space-x-2 whitespace-nowrap">
                         <button type="button" data-modal-toggle="edit-tugas-modal" class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
@@ -313,7 +320,7 @@
                 </div>
                 <div class="flex-1 min-w-0">
                   <p class="font-medium text-gray-900 truncate dark:text-white">
-                    Topic diskusi
+                    Topik diskusi
                   </p>
                   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                     pertanyaan
@@ -329,7 +336,7 @@
                       Hapus
                   </button>
                 </td>
-                <a href="/diskusiMatematika" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
+                <a href="/diskusiMat" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
                   Detail
                   <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </a>
@@ -344,7 +351,7 @@
                 </div>
                 <div class="flex-1 min-w-0">
                     <p class="font-medium text-gray-900 truncate dark:text-white">
-                        Topic diskusi
+                        Topik diskusi
                     </p>
                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                         pertanyaan
@@ -360,7 +367,7 @@
                       Hapus
                   </button>
                 </td>
-                <a href="/diskusiMatematika" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
+                <a href="/diskusiMat" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
                   Detail
                   <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </a>
@@ -377,97 +384,83 @@
               </div>
           </form>
           <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
+            <a href="progresKelasMat">
               <button type="button" class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-                  <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                  Undang siswa
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2 -ml-1">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
+                </svg>              
+                Progres Kelas
               </button>
+            </a>                   
+            <button type="button" data-modal-toggle="add-siswa-modal" class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+              <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+              </svg>
+              Undang siswa
+            </button>  
           </div>
         </div>  
         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-          <li class="py-3 sm:py-4">
-            <div class="flex items-center space-x-4">
-              <div class="flex-shrink-0">
-                <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
-              </div>
-              <div class="flex-1 min-w-0">
-                <p class="font-medium text-gray-900 truncate dark:text-white">
-                  Nama teman
-                </p>
-              </div>
-            </div>
-          </li>
-          <li class="py-3 sm:py-4">
-            <div class="flex items-center space-x-4">
-              <div class="flex-shrink-0">
-                <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/bonnie-green.png" alt="Neil image">
-              </div>
-              <div class="flex-1 min-w-0">
-                  <p class="font-medium text-gray-900 truncate dark:text-white">
-                  Nama teman
-                  </p>
-              </div>
-            </div>
-          </li>
-          <li class="py-3 sm:py-4">
+          <a href="progresMat">
+            <li class="py-3 sm:py-4">
               <div class="flex items-center space-x-4">
                 <div class="flex-shrink-0">
                   <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
                 </div>
                 <div class="flex-1 min-w-0">
                   <p class="font-medium text-gray-900 truncate dark:text-white">
-                    Nama teman
+                    Nama siswa
                   </p>
                 </div>
               </div>
-          </li>
-          <li class="py-3 sm:py-4">
+            </li>
+          </a>
+
+          <a href="progresMat">
+            <li class="py-3 sm:py-4">
               <div class="flex items-center space-x-4">
                 <div class="flex-shrink-0">
                   <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
                 </div>
                 <div class="flex-1 min-w-0">
                   <p class="font-medium text-gray-900 truncate dark:text-white">
-                    Nama teman
+                    Nama siswa
                   </p>
                 </div>
               </div>
-          </li>
-          <li class="py-3 sm:py-4">
+            </li>
+          </a>
+
+          <a href="progresMat">
+            <li class="py-3 sm:py-4">
               <div class="flex items-center space-x-4">
                 <div class="flex-shrink-0">
                   <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
                 </div>
                 <div class="flex-1 min-w-0">
                   <p class="font-medium text-gray-900 truncate dark:text-white">
-                    Nama teman
+                    Nama siswa
                   </p>
                 </div>
               </div>
-          </li>
-          <li class="py-3 sm:py-4">
+            </li>
+          </a>
+
+          <a href="progresMat">
+            <li class="py-3 sm:py-4">
               <div class="flex items-center space-x-4">
                 <div class="flex-shrink-0">
                   <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
                 </div>
                 <div class="flex-1 min-w-0">
                   <p class="font-medium text-gray-900 truncate dark:text-white">
-                    Nama teman
+                    Nama siswa
                   </p>
                 </div>
               </div>
-          </li>
-          <li class="py-3 sm:py-4">
-              <div class="flex items-center space-x-4">
-                <div class="flex-shrink-0">
-                  <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
-                </div>
-                <div class="flex-1 min-w-0">
-                  <p class="font-medium text-gray-900 truncate dark:text-white">
-                    Nama teman
-                  </p>
-                </div>
-              </div>
-          </li>
+            </li>
+          </a>
+          
         </ul>    
       </div>
     </div>
@@ -503,7 +496,7 @@
                         <textarea id="deskripsi" rows="4" value="jadi ini tuh ada deskirpsi buat tugas ini yaah" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="deskripsi tugas apa hayoo"></textarea>
                       </div>
                       <div class="col-span-6">                        
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Unggah file tugas</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Unggah berkas tugas</label>
                         <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple>
                       </div>
                   </div> 
@@ -543,7 +536,7 @@
                         <textarea id="deskripsi" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="deskripsi tugas apa hayoo"></textarea>
                       </div>
                       <div class="col-span-6">                        
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Unggah file tugas</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Unggah berkas tugas</label>
                         <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple>
                       </div>                     
                   </div> 
@@ -610,7 +603,7 @@
                         <textarea id="deskripsi" rows="4" value="jadi ini tuh ada deskirpsi buat materi ini yaah" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="deskripsi materi apa hayoo"></textarea>
                       </div>
                       <div class="col-span-6">                        
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Unggah file materi</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Unggah berkas materi</label>
                         <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple>
                       </div>
                   </div> 
@@ -650,7 +643,7 @@
                         <textarea id="deskripsi" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="deskripsi materi apa hayoo"></textarea>
                       </div>
                       <div class="col-span-6">                        
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Unggah file materi</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Unggah berkas materi</label>
                         <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple>
                       </div>                     
                   </div> 
@@ -784,6 +777,54 @@
                   Tidak hapus
               </a>
           </div>
+      </div>
+  </div>
+</div>
+
+{{-- tab progres --}}
+<!-- Undang siswa Modal -->
+<div class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full" id="add-siswa-modal">
+  <div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+          <!-- Modal header -->
+          <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
+              <h3 class="text-xl font-semibold dark:text-white">
+                  Undang siswa
+              </h3>
+              <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-modal-toggle="add-siswa-modal">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+              </button>
+          </div>
+          <!-- Modal body -->
+          <div class="p-6 space-y-6">
+              <form action="#">
+                  <div class="grid grid-cols-6 gap-6">
+                    <div class="col-span-6 sm:col-span-3">
+                      <label for="filter-kelas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kelas</label>
+                      <select name="filter-kelas" id="filter-kelas" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                          <option value="7">Kelas 7</option>
+                          <option value="8">Kelas 8</option>
+                          <option value="9">Kelas 9</option>
+                      </select>
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                      <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+                      <select name="nama" id="nama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                          <option value="7">yusuf</option>
+                          <option value="8">divia</option>
+                          <option value="9">dhiya</option>
+                          <option value="10">dika</option>
+                          <option value="11">georgy</option>
+                      </select>
+                    </div>
+                  </div> 
+              </div>
+              <!-- Modal footer -->
+              <div class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
+                  <button class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="submit">Undang siswa</button>
+              </div>                
+          </form>
       </div>
   </div>
 </div>
