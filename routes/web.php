@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,15 +23,21 @@ Route::get('/login', function (){
 });
 
 // admin
-Route::get('/berandaAdmin', function () {
-    return view('admin/beranda');
-});
-Route::get('/profilAdmin', function () {
-    return view('admin/profil');
-});
-Route::get('/editprofilAdmin', function () {
-    return view('admin/editprofil');
-});
+Route::get('/berandaAdmin', [AdminController::class, 'beranda']);
+
+Route::get('/profilAdmin', [AdminController::class, 'profil']);
+
+// Route::get('/profilAdmin', function () {
+//     return view('admin/profil');
+// });
+
+Route::get('/editprofilAdmin', [AdminController::class, 'editprofil'])->name('admin.editprofil');
+Route::post('/profilAdmin', [AdminController::class, 'updateprofil'])->name('admin.profil');
+
+// Route::get('/editprofilAdmin', function () {
+//     return view('admin/editprofil');
+// });
+
 Route::get('/akunGuru', function () {
     return view('admin/guru');
 });
