@@ -124,9 +124,12 @@
                                         role="menuitem">Pengaturan</a>
                                 </li>
                                 <li>
-                                    <a href="/login"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                        role="menuitem">Keluar</a>
+                                    <form action="logout" method="post">
+                                        @csrf
+                                        <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"> 
+                                            Keluar
+                                        </button>
+                                    </form>
                                 </li>
                             </ul>
                         </div>

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +20,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function (){
-    return view('login');
+
+Route::controller(LoginController::class)->group(function (){
+    Route::get('/login', 'index')->middleware('guest')->name('login');
+    Route::post('/login', 'authenticate');
+    Route::post('/logout', 'logout')->middleware('auth');
 });
+
+Route::controller(DashboardController::class)->group(function () {
+    Route::get('/berandaGuru', 'viewDashboardGuru');
+    Route::get('/berandaSiswa', 'viewDashboardSiswa');
+});
+
 
 // admin
 Route::get('/berandaAdmin', [AdminController::class, 'beranda']);
@@ -47,9 +58,6 @@ Route::get('/akunSiswa', function () {
 
 
 // guru
-Route::get('/berandaGuru', function () {
-    return view('guru/beranda');
-});
 Route::get('/profilGuru', function () {
     return view('guru/profil');
 });
@@ -82,9 +90,6 @@ Route::get('/progresKelasMat', function () {
 });
 
 // siswa
-Route::get('/berandaSiswa', function () {
-    return view('siswa/beranda');
-});
 Route::get('/profilSiswa', function () {
     return view('siswa/profil');
 });
