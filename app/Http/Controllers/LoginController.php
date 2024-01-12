@@ -37,16 +37,16 @@ class LoginController extends Controller
             $user = $request->user();
 
             if ($user->idrole === 1) {
-                return redirect()->intended('/berandaAdmin');
+                return redirect()->intended('/berandaAdmin')->with('success', 'Login berhasil');
             } else if ($user->idrole === 2) {
-                return redirect()->intended('/berandaGuru');
+                return redirect()->intended('/berandaGuru')->with('success', 'Login berhasil');
             } else if ($user->idrole === 3) {
-                return redirect()->intended('/berandaSiswa');
+                return redirect()->intended('/berandaSiswa')->with('success', 'Login berhasil');
             }
    
         };
 
-        return back()->with('loginError', 'Login Gagal');
+        return back()->with('loginError', 'Login gagal');
 
     }
 
@@ -57,6 +57,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return view('login');
     }
 }

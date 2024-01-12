@@ -20,21 +20,40 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login', function () {
+    return view('login');
+})->middleware('auth');
+
+// Route::get('login', [LoginController::class,'index'])->middleware('guest')->name('login');
+// Route::post('login', [LoginController::class, 'authenticate']);
+
+// Route::controller(LoginController::class)->middleware('auth')->group(function(){
+//     Route::get('logout', 'logout')->name('logout');
+// });
+
 
 Route::controller(LoginController::class)->group(function (){
-    Route::get('/login', 'index')->middleware('guest')->name('login');
+    Route::get('/login', 'index')->name('login')->middleware('guest');
     Route::post('/login', 'authenticate');
-    Route::post('/logout', 'logout')->middleware('auth');
+    Route::post('/logout', 'logout');
 });
 
+
 Route::controller(DashboardController::class)->group(function () {
-    Route::get('/berandaGuru', 'viewDashboardGuru');
-    Route::get('/berandaSiswa', 'viewDashboardSiswa');
+    Route::get('/berandaGuru', 'viewDashboardGuru')->middleware('auth');
+    Route::get('/berandaSiswa', 'viewDashboardSiswa')->middleware('auth');
+    Route::get('/berandaAdmin', 'viewDashboardAdmin')->middleware('auth');
 });
+
+// Route::get('/berandaGuru', [DashboardController::class,'viewDashboardGuru']);
+// Route::get('/berandaSiswa', [DashboardController::class,'viewDashboardSiswa'])->middleware(['auth'])->name('viewDashboardSiswa');
+// Route::get('/berandaAdmin', [DashboardController::class,'viewDashboardAdmin'])->middleware(['auth'])->name('viewDashboardAdmin');
+
+
 
 
 // admin
-Route::get('/berandaAdmin', [AdminController::class, 'beranda']);
+// Route::get('/berandaAdmin', [AdminController::class, 'beranda']);
 
 Route::get('/profilAdmin', [AdminController::class, 'profil']);
 
