@@ -12,8 +12,8 @@ class Guru extends Model
     public $timestamps = false;
 
     // Relationship dengan tabel users
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'iduser');
-    }
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class, 'iduser');
+    // }
 }
