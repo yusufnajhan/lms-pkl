@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Guru;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
@@ -9,7 +10,11 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function viewDashboardAdmin() {
-        return view('admin.beranda');
+        $userID = auth()->user()->id;
+        $admin = Admin::where('iduser', $userID)->first();
+        $nama = $admin->nama;
+        
+        return view("admin.beranda", compact('nama'));
     }
 
     public function viewDashboardGuru() {
