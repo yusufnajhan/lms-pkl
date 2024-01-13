@@ -34,15 +34,9 @@ Route::controller(DashboardController::class)->middleware('auth')->group(functio
     Route::get('/berandaAdmin', 'viewDashboardAdmin');
 });
 
-// Route::get('/berandaGuru', [DashboardController::class,'viewDashboardGuru']);
-// Route::get('/berandaSiswa', [DashboardController::class,'viewDashboardSiswa'])->middleware(['auth'])->name('viewDashboardSiswa');
-// Route::get('/berandaAdmin', [DashboardController::class,'viewDashboardAdmin'])->middleware(['auth'])->name('viewDashboardAdmin');
-
-
 
 
 // admin
-// Route::get('/berandaAdmin', [AdminController::class, 'beranda']);
 
 Route::get('/profilAdmin', [AdminController::class, 'profil']);
 

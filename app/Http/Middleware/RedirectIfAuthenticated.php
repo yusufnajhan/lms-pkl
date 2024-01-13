@@ -21,10 +21,29 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                return $this->redirectTo($request);
             }
         }
 
         return $next($request);
+    }
+
+    protected function redirectTo($request): Response
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        // Cek role pengguna dan arahkan sesuai dengan role
+        if (Auth::user()->idrole === 1) {
+            return redirect('/berandaAdmin');
+        } elseif (Auth::user()->idrole === 2) {
+            return redirect('/berandaGuru');
+        } elseif (Auth::user()->idrole == 3) {
+            return redirect('/berandaSiswa');
+        }
+
+        // Jika pengguna tidak memiliki role yang sesuai, arahkan ke halaman default
+        return redirect()->route('/');
     }
 }
