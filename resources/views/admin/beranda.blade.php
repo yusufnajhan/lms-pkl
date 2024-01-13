@@ -78,7 +78,7 @@
                 </svg>
                 <h3 class="text-lg text-gray-500 dark:text-gray-400">Guru</h3>        
                 <h4 class="text-xl font-bold dark:text-white">
-                    {{ $jumlahAkunGuru }}
+                    {{-- {{ $jumlahAkunGuru }} --}}
                 </h4>
             </div>
         </a>
@@ -90,7 +90,7 @@
                 </svg>
                 <h3 class="text-lg text-gray-500 dark:text-gray-400">Siswa</h3>
                 <h4 class="text-xl font-bold dark:text-white">
-                    {{ $jumlahAkunSiswa }}
+                    {{-- {{ $jumlahAkunSiswa }} --}}
                 </h4>
             </div>
         </a>
