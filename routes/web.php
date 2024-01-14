@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AkunGuruController;
+use App\Http\Controllers\AkunSiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,12 +53,22 @@ Route::post('/profilAdmin', [AdminController::class, 'updateprofil'])->name('adm
 //     return view('admin/editprofil');
 // });
 
-Route::get('/akunGuru', function () {
-    return view('admin/guru');
-});
-Route::get('/akunSiswa', function () {
-    return view('admin/siswa');
-});
+// Route::get('/akunGuru', function () {
+//     return view('admin/guru');
+// });
+
+Route::get('/akunGuru', [AkunGuruController::class, 'index'])->name('guru.index');
+Route::post('/akunGuru', [AkunGuruController::class, 'store'])->name('guru.store');
+
+Route::get('/editakunGuru/{idguru}', [AkunGuruController::class, 'edit'])->name('guru.edit.get');
+Route::post('/editakunGuru/{idguru}', [AkunGuruController::class, 'edit'])->name('guru.edit');
+
+// Route::get('/akunSiswa', function () {
+//     return view('admin/siswa');
+// });
+
+Route::get('/akunSiswa', [AkunSiswaController::class, 'index'])->name('siswa.index');
+Route::post('/akunSiswa', [AkunSiswaController::class, 'store'])->name('siswa.store');
 
 
 // guru

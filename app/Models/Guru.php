@@ -7,13 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guru extends Model
 {
+    use HasFactory;
     protected $table = 'guru';
     protected $primaryKey = 'idguru';
     public $timestamps = false;
 
-    // Relationship dengan tabel users
+    protected $fillable = [
+        'idguru',
+        'nama',
+        'tanggal_lahir',
+        'jenis_kelamin',
+        'nik',
+        'email',
+        'nomor_hp',
+        'iduser'
+    ];
+
+    // Definisikan relasi dengan tabel users
     // public function user()
     // {
-    //     return $this->belongsTo(User::class, 'iduser');
+    //     return $this->belongsTo(User::class, 'idguru', 'id');
     // }
 }

@@ -7,9 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Siswa extends Model
 {
+    use HasFactory;
     protected $table = 'siswa';
     protected $primaryKey = 'idsiswa';
     public $timestamps = false;
+
+    protected $fillable = [
+        'idsiswa',
+        'nama',
+        'tanggal_lahir',
+        'jenis_kelamin',
+        'nik',
+        'email',
+        'nomor_hp',
+        'iduser'
+    ];
 
     // Relationship dengan tabel users
     public function user()
