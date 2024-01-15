@@ -34,6 +34,67 @@
                     type="submit">
                     Ubah foto profil
                 </a>
+
+            <!-- Modal body -->
+            <div class="p-6 space-y-6">
+                <form action="#">
+                    <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="idguru" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Guru</label>
+                            <input type="number" name="idguru" id="idguru" value="{{ $idguru }}" class="shadow-sm bg-gray-50 bordr border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" disabled>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+                            <input type="text" name="nama" value="Bonnie" id="nama" value="{{ $nama }}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="nuptk" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NUPTK</label>
+                            <input type="number" name="nuptk" value="121212121" id="nuptk" value="{{ $nik }}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="jenkel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
+                            <select name="jenkel" id="jenkel" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                                <option value="pria" {{ $jenis_kelamin == 'pria' ? 'selected' : '' }}>Pria</option>
+                                <option value="wanita" {{ $jenis_kelamin == 'wanita' ? 'selected' : '' }}>Wanita</option>
+                            </select>
+                        </div>                        
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="tgllahir" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Lahir</label>
+                            <input type="date" name="tgllahir" id="tgllahir" value="{{ $tanggal_lahir }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                        </div>  
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-Mail</label>
+                            <input type="email" name="email" id="email" value="{{ $email }}" class="shadow-sm bg-gray-50 bordr border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="nohp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No HP</label>
+                            <input type="number" name="nohp" id="nohp" value="{{ $nomor_hp }}" class="shadow-sm bg-gray-50 bordr border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                        </div>  
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="iduser" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID User</label>
+                            <input type="number" name="iduser" id="iduser" value="{{ $iduser }}" class="shadow-sm bg-gray-50 bordr border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" disabled>
+                        </div>
+                        {{-- <div class="col-span-6 sm:col-span-3">
+                            <label for="mapel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mata pelajaran</label>
+                            <select name="mapel" id="mapel" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                                <option value="PAI">PAI dan Budi Pekerti</option>
+                                <option value="Mat">Matematika</option>
+                                <option value="Ingg">Bahasa Indonesia</option>
+                                <option value="Indo">Bahasa Indonesia</option>
+                                <option value="PKN">PKN</option>
+                                <option value="IPAS">IPAS</option>
+                                <option value="IPS">IPS</option>
+                                <option value="IF">Informatika</option>
+                                <option value="Prak">Prakarya</option>
+                                <option value="PJOK">PJOK</option>
+                            </select>
+                        </div> --}}
+                    </div> 
+                    <!-- Modal footer -->
+                    <div class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
+                        <button class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="submit">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
         {{-- <form action="{{ route('admin.editprofil') }}" method="POST"> --}}

@@ -264,7 +264,7 @@
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NUPTK</label>
-                            <input type="number" name="nik" placeholder="nik" id="nik" 
+                            <input type="number" name="nik" id="nik" 
                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
                         </div>
                         <div class="col-span-6 sm:col-span-3">
@@ -276,22 +276,22 @@
                         </div>                        
                         <div class="col-span-6 sm:col-span-3">
                             <label for="tgllahir" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Lahir</label>
-                            <input type="date" name="tgllahir" placeholder="tgllahir" id="tgllahir" 
+                            <input type="date" name="tgllahir" id="tgllahir" 
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
                         </div>  
                         <div class="col-span-6 sm:col-span-3">
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-Mail</label>
-                            <input type="email" name="email" placeholder="email" id="email" 
+                            <input type="email" name="email" id="email" 
                             class="shadow-sm bg-gray-50 bordr border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="nohp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No HP</label>
-                            <input type="number" name="nohp" placeholder="nohp" 
+                            <input type="number" name="nohp"  
                             id="nohp" class="shadow-sm bg-gray-50 bordr border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
                         </div>  
                         <div class="col-span-6 sm:col-span-3">
                             <label for="iduser" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID User</label>
-                            <input type="number" name="iduser" placeholder="iduser" id="iduser" 
+                            <input type="number" name="iduser" id="iduser" 
                             class="shadow-sm bg-gray-50 bordr border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
                         </div>
                         {{-- <div class="col-span-6 sm:col-span-3">
@@ -341,23 +341,15 @@
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 sm:col-span-3">
                             <label for="idguru" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Guru</label>
-                            <input type="number" name="idguru" id="idguru" class="shadow-sm bg-gray-50 bordr border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                            <input type="number" name="idguru" id="idguru" class="shadow-sm bg-gray-50 bordr border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="1" required>
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
-                            <input type="text" name="nama" id="nama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-                            <input type="text" name="username" id="username" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="text" name="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                            <input type="text" name="nama" id="nama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Bonnie" required>
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NUPTK</label>
-                            <input type="number" name="nik" id="nik" class="shadow-sm bg-gray-50 bordr border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required>
+                            <input type="number" name="nik" id="nik" class="shadow-sm bg-gray-50 bordr border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="29102912190" required>
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="jenkel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
@@ -368,7 +360,7 @@
                         </div>                        
                         <div class="col-span-6 sm:col-span-3">
                             <label for="tgllahir" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Lahir</label>
-                            <input type="date" name="tgllahir" id="tgllahir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Pilih tanggal lahir" required>
+                            <input type="date" name="tgllahir" id="tgllahir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Pilih tanggal lahir">
                         </div>  
                         <div class="col-span-6 sm:col-span-3">
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-Mail</label>
