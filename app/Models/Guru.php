@@ -24,8 +24,8 @@ class Guru extends Model
     ];
 
     // Definisikan relasi dengan tabel users
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class, 'idguru', 'id');
-    // }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'idguru', 'id');
+    }
 }

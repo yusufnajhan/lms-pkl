@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Guru;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class AkunGuruController extends Controller
@@ -12,7 +13,8 @@ class AkunGuruController extends Controller
     public function index()
     {
     $gurus = Guru::all();
-    return view('admin.guru', compact('gurus'));
+    $users = User::all();
+    return view('admin.guru', compact('gurus', 'users'));
     }
 
     // add
@@ -27,7 +29,16 @@ class AkunGuruController extends Controller
         'tgllahir' => 'required|date',
         'email' => 'required|email|max:255',
         'nohp' => 'required|numeric',
-        'iduser' => 'required|numeric'
+        'iduser' => 'required|numeric',
+        'username' => 'required|string|unique:users',
+        'password' => 'required|string',
+    ]);
+
+    // Simpan data user ke dalam database
+    $user = User::create([
+        'username' => $request->input('username'),
+        'password' => bcrypt($request->input('password')),
+        'idrole' => 2, // ID untuk role guru
     ]);
 
     // Simpan data guru ke dalam database
@@ -39,8 +50,10 @@ class AkunGuruController extends Controller
         'tanggal_lahir' => $request->input('tgllahir'),
         'email' => $request->input('email'),
         'nomor_hp' => $request->input('nohp'),
-        'iduser' => $request->input('iduser')
+        'iduser' => $user->id,
     ]);
+
+    
 
     // Redirect atau kembalikan respons sesuai kebutuhan
     return redirect()->route('guru.index')->with('success', 'Akun guru berhasil ditambahkan.');
@@ -117,6 +130,22 @@ class AkunGuruController extends Controller
 
         // $guru = Guru::find($idguru);
         // return view('guru.edit', compact('guru'));
+    }
+
+    // delete
+    public function destroy($id)
+    {
+        // Find the guru by ID
+        $guru = Guru::findOrFail($id);
+
+        // Delete the associated user
+        $guru->user->delete();
+
+        // Delete the guru
+        $guru->delete();
+
+        // Redirect back or to a specific route after deletion
+        return redirect()->back()->with('success', 'Akun guru berhasil dihapus.');
     }
 
 }
