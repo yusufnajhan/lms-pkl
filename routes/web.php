@@ -74,6 +74,10 @@ Route::post('/editakunGuru/{idguru}', [AkunGuruController::class, 'update'])->na
 Route::get('/akunSiswa', [AkunSiswaController::class, 'index'])->name('siswa.index');
 Route::post('/akunSiswa', [AkunSiswaController::class, 'store'])->name('siswa.store');
 
+Route::get('/editakunSiswa', function () {
+    return view('admin/editsiswa');
+});
+
 
 // guru
 Route::get('/profilGuru', function () {
