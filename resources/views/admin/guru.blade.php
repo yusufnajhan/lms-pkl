@@ -158,9 +158,6 @@
                                 Username
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Password
-                            </th>
-                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 NUPTK
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
@@ -196,14 +193,13 @@
                                 </div>
                             </td>
                             <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">{{ $guru->user->username }}</td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $guru->user->password }}</td>
                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $guru->nik }}</td>
                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $guru->jenis_kelamin }}</td>
                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $guru->tanggal_lahir }}</td>
                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $guru->email }}</td>
                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $guru->nomor_hp }}</td>
                             <td class="p-4 space-x-2 whitespace-nowrap">
-                                <a href="/editakunGuru">
+                                <a href="{{ route('guru.edit', $guru->idguru) }}">
                                     <button type="button" 
                                     class="open-modal-button inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
                                     data-idguru="{{ $guru->idguru }}">

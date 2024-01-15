@@ -62,7 +62,7 @@ class AkunGuruController extends Controller
     // edit
     public function edit(Request $request, $idguru)
     {
-        $guru = Guru::where('idguru,', $idguru)->first();
+        $guru = Guru::where('idguru', $idguru)->first();
 
         $nama = $guru->nama;
         $nik = $guru->nik;
@@ -70,64 +70,28 @@ class AkunGuruController extends Controller
         $tanggal_lahir = $guru->tanggal_lahir;
         $email = $guru->email;
         $nomor_hp = $guru->nomor_hp;
-        $iduser = $guru->iduser;
+
+        $username = $guru->user->username;
+        $password = $guru->user->password;
 
         return view("admin.editguru", compact('idguru','nama', 'nik', 'jenis_kelamin', 'tanggal_lahir',
-                                                'email', 'nomor_hp', 'iduser'));
+                                                'email', 'nomor_hp', 'username'));
     }
 
     public function update(Request $request, $idguru)
     {
-        $user = Guru::where('idguru', $idguru)->first();
-
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'nik' => 'required|numeric',
-            'jenkel' => 'required|in:pria,wanita',
-            'tgllahir' => 'required|date',
+            'jenis_kelamin' => 'required|in:pria,wanita',
+            'tanggal_lahir' => 'required|date',
             'email' => 'required|email|max:255',
-            'nohp' => 'required|numeric',
+            'nomor_hp' => 'required|numeric',
         ]);
 
         DB::beginTransaction();
-
         try {
-            if (!empty($validated['nama'])) {
-                Guru::where('idguru', $idguru)->update([
-                    'nama' => $validated['nama'],
-                ]);
-            }
-
-            if (!empty($validated['nik'])) {
-                Guru::where('idguru', $idguru)->update([
-                    'nik' => $validated['nik'],
-                ]);
-            }
-
-            if (!empty($validated['jenkel'])) {
-                Guru::where('idguru', $idguru)->update([
-                    'jenkel' => $validated['jenkel'],
-                ]);
-            }
-
-            if (!empty($validated['tgllahir'])) {
-                Guru::where('idguru', $idguru)->update([
-                    'tgllahir' => $validated['tgllahir'],
-                ]);
-            }
-
-            if (!empty($validated['email'])) {
-                Guru::where('idguru', $idguru)->update([
-                    'email' => $validated['email'],
-                ]);
-            }
-
-            if (!empty($validated['nohp'])) {
-                Guru::where('idguru', $idguru)->update([
-                    'nohp' => $validated['nohp'],
-                ]);
-            }
-
+            Guru::where('idguru', $idguru)->update($validated);
             DB::commit();
 
             return redirect()
@@ -141,7 +105,7 @@ class AkunGuruController extends Controller
             DB::rollBack();
             return redirect()
                 ->route('guru.edit')
-                ->with('error', 'Gagal memperbarui akun guru. Error: ' . $e->getMessage());
+                ->with('error', 'Gagal memperbarui akun guru. Error: ');
         }
 
         // $guru = Guru::find($idguru);
