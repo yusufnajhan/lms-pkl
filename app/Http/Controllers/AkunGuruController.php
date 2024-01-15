@@ -49,6 +49,22 @@ class AkunGuruController extends Controller
     // edit
     public function edit(Request $request, $idguru)
     {
+        $guru = Guru::where('idguru,', $idguru)->first();
+
+        $nama = $guru->nama;
+        $nik = $guru->nik;
+        $jenis_kelamin = $guru->jenis_kelamin;
+        $tanggal_lahir = $guru->tanggal_lahir;
+        $email = $guru->email;
+        $nomor_hp = $guru->nomor_hp;
+        $iduser = $guru->iduser;
+
+        return view("admin.editguru", compact('idguru','nama', 'nik', 'jenis_kelamin', 'tanggal_lahir',
+                                                'email', 'nomor_hp', 'iduser'));
+    }
+
+    public function update(Request $request, $idguru)
+    {
         $user = Guru::where('idguru', $idguru)->first();
 
         $validated = $request->validate([

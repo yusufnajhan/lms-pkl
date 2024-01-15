@@ -60,8 +60,8 @@ Route::post('/profilAdmin', [AdminController::class, 'updateprofil'])->name('adm
 Route::get('/akunGuru', [AkunGuruController::class, 'index'])->name('guru.index');
 Route::post('/akunGuru', [AkunGuruController::class, 'store'])->name('guru.store');
 
-Route::get('/editakunGuru/{idguru}', [AkunGuruController::class, 'edit'])->name('guru.edit.get');
-Route::post('/editakunGuru/{idguru}', [AkunGuruController::class, 'edit'])->name('guru.edit');
+Route::get('/editakunGuru/{idguru}', [AkunGuruController::class, 'edit'])->name('guru.edit');
+Route::post('/editakunGuru/{idguru}', [AkunGuruController::class, 'update'])->name('guru.update');
 
 // Route::get('/akunSiswa', function () {
 //     return view('admin/siswa');
