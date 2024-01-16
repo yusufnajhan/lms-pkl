@@ -22,7 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+// login dan dasbor
 Route::controller(LoginController::class)->group(function (){
     Route::get('/login', 'index')->name('login')->middleware('guest');
     Route::post('/login', 'authenticate');
@@ -39,7 +39,6 @@ Route::controller(DashboardController::class)->middleware('auth')->group(functio
 
 
 // admin
-
 Route::get('/profilAdmin', [AdminController::class, 'profil']);
 
 // Route::get('/profilAdmin', function () {
@@ -62,10 +61,11 @@ Route::get('/editakunGuru', function () {
     return view('admin/editguru');
 });
 Route::post('/akunGuru', [AkunGuruController::class, 'store'])->name('guru.store');
-Route::delete('/guru/{id}', [AkunGuruController::class, 'destroy'])->name('guru.destroy');
 
 Route::get('/editakunGuru/{idguru}', [AkunGuruController::class, 'edit'])->name('guru.edit');
 Route::post('/editakunGuru/{idguru}', [AkunGuruController::class, 'update'])->name('guru.update');
+
+Route::delete('/akunGuru/{idguru}', [AkunGuruController::class, 'destroy'])->name('guru.destroy');
 
 // Route::get('/akunSiswa', function () {
 //     return view('admin/siswa');
@@ -77,6 +77,9 @@ Route::post('/akunSiswa', [AkunSiswaController::class, 'store'])->name('siswa.st
 Route::get('/editakunSiswa', function () {
     return view('admin/editsiswa');
 });
+
+Route::get('/editakunSiswa/{idsiswa}', [AkunSiswaController::class, 'edit'])->name('siswa.edit');
+Route::post('/editakunSiswa/{idsiswa}', [AkunSiswaController::class, 'update'])->name('siswa.update');
 
 
 // guru

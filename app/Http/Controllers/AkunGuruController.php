@@ -25,7 +25,7 @@ class AkunGuruController extends Controller
         'idguru' => 'required|numeric',
         'nama' => 'required|string|max:255',
         'nik' => 'required|numeric',
-        'jenkel' => 'required|in:pria,wanita',
+        'jenkel' => 'required|in:Pria,Wanita',
         'tgllahir' => 'required|date',
         'email' => 'required|email|max:255',
         'nohp' => 'required|numeric',
@@ -83,7 +83,7 @@ class AkunGuruController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'nik' => 'required|numeric',
-            'jenis_kelamin' => 'required|in:pria,wanita',
+            'jenis_kelamin' => 'required|in:Pria,Wanita',
             'tanggal_lahir' => 'required|date',
             'email' => 'required|email|max:255',
             'nomor_hp' => 'required|numeric',
@@ -113,19 +113,26 @@ class AkunGuruController extends Controller
     }
 
     // delete
-    public function destroy($id)
+    public function destroy(Request $request, $idguru)
     {
-        // Find the guru by ID
-        $guru = Guru::findOrFail($id);
+        DB::beginTransaction();
 
-        // Delete the associated user
-        $guru->user->delete();
+        try {
+            // Find the guru by ID and delete
+            $guru = Guru::findOrFail($idguru);
+            $guru->user()->delete(); // Delete related user record
+            $guru->delete();
 
-        // Delete the guru
-        $guru->delete();
+            DB::commit();
 
-        // Redirect back or to a specific route after deletion
-        return redirect()->back()->with('success', 'Akun guru berhasil dihapus.');
+            return redirect()->route('guru.index')->with('success', 'Akun guru berhasil dihapus.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()
+                ->route('guru.index')
+                ->withErrors(['error' => 'Gagal menghapus akun guru. Error: ' . $e->getMessage()]);
+        }
     }
 
 }

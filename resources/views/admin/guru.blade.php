@@ -391,7 +391,7 @@
 </div>
 
 <!-- Hapus User Modal -->
-<form id="delete-form" action="{{ route('guru.destroy', ['id' => '2']) }}" method="post" class="hidden">
+<form id="delete-form" action="{{ route('guru.destroy', ['idguru' => 1]) }}" method="post" class="hidden">
     @csrf
     @method('DELETE')
 </form>
