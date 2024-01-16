@@ -100,4 +100,24 @@ class AkunSiswaController extends Controller
         // $siswa = Siswa::find($idsiswa);
         // return view('siswa.edit', compact('siswa'));
     }
+
+    // delete
+    public function destroy($idsiswa)
+    {
+        $siswa = Siswa::where('idsiswa', $idsiswa)->first();
+
+        if ($siswa){
+            Siswa::where('idsiswa', $idsiswa)->delete();
+
+            $siswa->delete();
+
+            return redirect()->route('siswa.index')->with('success', 'Akun siswa berhasil dihapus.');
+        }
+        else{
+            return redirect()
+                ->route('siswa.index')
+                ->withErrors('error', 'Gagal menghapus akun siswa.');
+        
+        }
+    }
 }

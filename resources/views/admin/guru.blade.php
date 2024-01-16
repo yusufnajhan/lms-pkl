@@ -208,15 +208,13 @@
                                     </button>
                                 </a>
                                 
-
-                                <button type="button" data-modal-toggle="delete-user-modal" 
-                                    data-delete-user-id="{{ $guru->idguru }}"
-                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-600 bg-white rounded-lg hover:bg-gray-200 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900 border-red-600 border-2">
+                                <button type="button" data-modal-toggle="delete-user-modal" data-guru-id="{{ $guru->idguru }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-600 bg-white rounded-lg hover:bg-gray-200 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900 border-red-600 border-2">
                                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                                     </svg>
                                     Hapus
-                                </button>                                                              
+                                </button>
+
                             </td>
                         </tr>
                         @endforeach
@@ -391,10 +389,7 @@
 </div>
 
 <!-- Hapus User Modal -->
-<form id="delete-form" action="{{ route('guru.destroy', ['idguru' => 1]) }}" method="post" class="hidden">
-    @csrf
-    @method('DELETE')
-</form>
+@foreach($gurus as $guru)
 <div class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full" id="delete-user-modal">
     <div class="relative w-full h-full max-w-md px-4 md:h-auto">
         <!-- Modal content -->
@@ -409,9 +404,16 @@
             <div class="p-6 pt-0 text-center">
                 <svg class="w-16 h-16 mx-auto text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <h3 class="mt-5 mb-6 text-lg text-gray-500 dark:text-gray-400">Apakah Anda yakin ingin menghapus akun ini?</h3>
-                <a href="#" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 dark:focus:ring-red-800">
+
+                <form method="POST" action="{{ route('guru.destroy', $guru->idguru) }}"  
+                    class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 dark:focus:ring-red-800">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">
                     Ya, saya yakin
-                </a>
+                    </button>
+                </form>
+                
                 <a href="#" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700" data-modal-toggle="delete-user-modal">
                     Tidak hapus
                 </a>
@@ -419,6 +421,7 @@
         </div>
     </div>
 </div>
+@endforeach
 
 
 <script>
@@ -479,25 +482,30 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const deleteModal = document.getElementById('delete-user-modal');
+        const deleteButtons = document.querySelectorAll('[data-modal-toggle="delete-user-modal"]');
 
-        if (deleteModal) {
-            const deleteButtons = document.querySelectorAll('[data-delete-user-id]');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                const guruId = this.getAttribute('data-guru-id');
+                const deleteForm = document.getElementById('delete-form');
+                const actionUrl = deleteForm.getAttribute('action');
 
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function (event) {
-                    event.preventDefault();
+                // Update the form action with the guru ID
+                deleteForm.setAttribute('action', actionUrl.replace('__guru_id__', guruId));
 
-                    const guruId = this.getAttribute('data-delete-user-id');
-                    const deleteForm = document.getElementById('delete-form');
-                    const actionUrl = deleteForm.getAttribute('action');
-
-                    // Update the form action with the guru ID
-                    deleteForm.setAttribute('action', actionUrl.replace('__guru_id__', guruId));
-
-                    // Show the delete modal
-                    deleteModal.classList.remove('hidden');
-                });
+                // Show the delete modal
+                deleteModal.classList.remove('hidden');
             });
-        }
+        });
+
+        // Add an event listener for the confirmation button
+        const confirmButton = document.getElementById('confirm-delete-button');
+        confirmButton.addEventListener('click', function () {
+            // Perform the form submission
+            const deleteForm = document.getElementById('delete-form');
+            deleteForm.submit();
+        });
     });
 </script>
+

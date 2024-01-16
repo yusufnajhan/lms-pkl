@@ -113,25 +113,22 @@ class AkunGuruController extends Controller
     }
 
     // delete
-    public function destroy(Request $request, $idguru)
+    public function destroy($idguru)
     {
-        DB::beginTransaction();
+        $guru = Guru::where('idguru', $idguru)->first();
 
-        try {
-            // Find the guru by ID and delete
-            $guru = Guru::findOrFail($idguru);
-            $guru->user()->delete(); // Delete related user record
+        if ($guru){
+            Guru::where('idguru', $idguru)->delete();
+
             $guru->delete();
 
-            DB::commit();
-
             return redirect()->route('guru.index')->with('success', 'Akun guru berhasil dihapus.');
-        } catch (\Exception $e) {
-            DB::rollBack();
-
+        }
+        else{
             return redirect()
                 ->route('guru.index')
-                ->withErrors(['error' => 'Gagal menghapus akun guru. Error: ' . $e->getMessage()]);
+                ->withErrors('error', 'Gagal menghapus akun guru.');
+        
         }
     }
 

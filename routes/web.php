@@ -81,6 +81,8 @@ Route::get('/editakunSiswa', function () {
 Route::get('/editakunSiswa/{idsiswa}', [AkunSiswaController::class, 'edit'])->name('siswa.edit');
 Route::post('/editakunSiswa/{idsiswa}', [AkunSiswaController::class, 'update'])->name('siswa.update');
 
+Route::delete('/akunSiswa/{idsiswa}', [AkunSiswaController::class, 'destroy'])->name('siswa.destroy');
+
 
 // guru
 Route::get('/profilGuru', function () {
