@@ -95,7 +95,7 @@ class AkunGuruController extends Controller
             DB::commit();
 
             return redirect()
-                ->route('guru.edit')
+                ->route('guru.index')
                 ->with('success', 'Akun guru berhasil diperbarui.');
 
         }
@@ -104,8 +104,8 @@ class AkunGuruController extends Controller
         {
             DB::rollBack();
             return redirect()
-                ->route('guru.edit')
-                ->with('error', 'Gagal memperbarui akun guru. Error: ');
+                ->route('guru.index')
+                ->withErrors(['error' => 'Gagal memperbarui akun guru. Error: ' . $e->getMessage()]);
         }
 
         // $guru = Guru::find($idguru);
