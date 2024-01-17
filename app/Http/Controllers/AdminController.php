@@ -11,6 +11,26 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    // profil
+    public function edit(){
+        $userID = auth()->user()->id;
+
+        $admin = Admin::where('iduser', $userID)->first();
+
+        $nama = $admin->nama;
+        $nik = $admin->nik;
+        $jenis_kelamin = $admin->jenis_kelamin;
+        $tanggal_lahir = $admin->tanggal_lahir;
+        $email = $admin->email;
+        $nomor_hp = $admin->nomor_hp;
+
+        $username = $admin->user->username;
+        $password = $admin->user->password;
+
+        return view("admin.profil", compact('nama', 'nik', 'jenis_kelamin', 'tanggal_lahir',
+                                                'email', 'nomor_hp', 'username', 'password'));
+    }
+
     public function beranda()
     {
         // Mengambil satu data admin pertama dengan relasi ke users
@@ -25,45 +45,5 @@ class AdminController extends Controller
         // Menampilkan view beranda dengan data admin
         return view('admin.beranda', ['admin' => $admin, 'jumlahAkunGuru' => $jumlahAkunGuru, 'jumlahAkunSiswa' => $jumlahAkunSiswa]);
         
-    }
-
-    public function profil()
-    {
-        // Mengambil satu data admin pertama dengan relasi ke users
-        $admin = Admin::with('user')->first();
-
-        // Menampilkan view beranda dengan data admin
-        return view('admin.profil', ['admin' => $admin]);
-    }
-
-    public function editprofil()
-    {
-        // Mengambil satu data admin pertama dengan relasi ke users
-        $admin = Admin::with('user')->first();
-
-        // Menampilkan view beranda dengan data admin
-        return view('admin.editprofil', compact('admin'));
-    }
-
-    public function updateprofil(Request $request)
-    {
-        $admin = Admin::with('user')->first();
-
-        // Validasi input jika diperlukan
-
-        // Update email dan nomor HP
-        $admin->email = $request->input('email');
-        $admin->nomor_hp = $request->input('nohp');
-
-        // Update password jika ada perubahan
-        if ($request->filled('new_password')) {
-            $admin->user->password = Hash::make($request->input('new_password'));
-        }
-
-        // Simpan perubahan
-        $admin->save();
-        $admin->user->save();
-
-        return redirect('/profilAdmin')->with('success', 'Profil berhasil diperbarui!');
     }
 }

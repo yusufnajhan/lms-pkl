@@ -13,8 +13,10 @@ class DashboardController extends Controller
         $userID = auth()->user()->id;
         $admin = Admin::where('iduser', $userID)->first();
         $nama = $admin->nama;
+        $nik = $admin->nik;
+        $username = $admin->user->username;
         
-        return view("admin.beranda", compact('nama'));
+        return view("admin.beranda", compact('nama', 'nik', 'username'));
     }
 
     public function viewDashboardGuru() {

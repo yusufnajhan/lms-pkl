@@ -41,7 +41,10 @@ Route::controller(DashboardController::class)->middleware('auth')->group(functio
 
 
 // admin
-Route::get('/profilAdmin', [AdminController::class, 'profil']);
+Route::controller(AdminController::class)->middleware('auth')->group(function () {
+    Route::get('/profilAdmin', 'edit');
+});
+// Route::get('/profilAdmin', [AdminController::class, 'profil']);
 
 // Route::get('/profilAdmin', function () {
 //     return view('admin/profil');
