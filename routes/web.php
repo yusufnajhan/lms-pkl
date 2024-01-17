@@ -96,14 +96,16 @@ Route::delete('/akunSiswa/{idsiswa}', [AkunSiswaController::class, 'destroy'])->
 
 Route::controller(GuruController::class)->middleware('auth')->group(function () {
     Route::get('/profilGuru', 'edit');
+    Route::get('/editprofilGuru/{iduser}', 'edit2')->name('guru.edit2');
+    Route::post('/editprofilGuru/{iduser}', 'update')->name('guru.updateprofil');
 });
 
 // Route::get('/profilGuru', function () {
 //     return view('guru/profil');
 // });
-Route::get('/editprofilGuru', function () {
-    return view('guru/editprofil');
-});
+// Route::get('/editprofilGuru', function () {
+//     return view('guru/editprofil');
+// });
 // Route::get('/murid', function () {
 //     return view('guru/murid');
 // });
