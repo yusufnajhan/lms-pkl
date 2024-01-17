@@ -42,28 +42,56 @@
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
                 <input type="text" name="nama" id="nama"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="#" wfd-id="id1" readonly disabled>
+                    value="{{ $nama }}" wfd-id="id1" readonly disabled>
             </div>
             <div class="col-span-6 sm:col-span-3">
-                <label for="kode"
+                <label for="nik"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NUPTK</label>
-                <input type="text" name="kode" id="kode"
+                <input type="text" name="nik" id="nik"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="#" wfd-id="id2" readonly disabled>
+                    value="{{ $nik }}" wfd-id="id2" readonly disabled>
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <label for="jenis_kelamin"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
+                <input type="text" name="jenis_kelamin" id="jenis_kelamin"
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    value="{{ $jenis_kelamin }}" wfd-id="id2" readonly disabled>
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <label for="tanggal_lahir"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Lahir</label>
+                <input type="date" name="tanggal_lahir" id="tanggal_lahir"
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    value="{{ $tanggal_lahir }}" wfd-id="id2" readonly disabled>
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <label for="email"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-Mail</label>
+                <input type="email" name="email" id="email"
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    value="{{ $email }}" wfd-id="id2" readonly disabled>
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <label for="nomor_hp"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No HP</label>
+                <input type="number" name="nomor_hp" id="nomor_hp"
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    value="{{ $nomor_hp }}" wfd-id="id2" readonly disabled>
             </div>
             <div class="col-span-6 sm:col-span-3">
                 <label for="username"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
                 <input type="text" name="username" id="username"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="#" wfd-id="id6" disabled>
+                    value="{{ $username }}" wfd-id="id6" readonly disabled>
             </div>
             <div class="col-span-6 sm:col-span-3">
-                <label for="current_password"
+                <label for="password"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata sandi saat ini</label>
-                <input type="password" name="current_password" id="current_password"
+                <input type="password" name="password" id="password"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="#" disabled>
+                    value="{{ $password }}" readonly disabled>
             </div>
             <div class="col-span-6 sm:col-full">
                 <a href="/editprofilGuru"

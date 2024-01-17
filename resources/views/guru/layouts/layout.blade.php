@@ -110,13 +110,14 @@
                             data-popper-placement="bottom">
                             <div class="px-4 py-3" role="none">
                                 <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                    username
+                                    {{ $username }}
                                 </p>
                                 <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
                                     role="none">
-                                    NUPTK
+                                    {{ $nik }}
                                 </p>
                             </div>
+                        
                             <ul class="py-1" role="none">
                                 <li>
                                     <a href="/profilGuru"

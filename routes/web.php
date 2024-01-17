@@ -6,6 +6,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AkunGuruController;
 use App\Http\Controllers\AkunSiswaController;
+use App\Http\Controllers\GuruController;
+use App\Http\Controllers\SiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,9 +87,17 @@ Route::delete('/akunSiswa/{idsiswa}', [AkunSiswaController::class, 'destroy'])->
 
 
 // guru
-Route::get('/profilGuru', function () {
-    return view('guru/profil');
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/profilGuru', [GuruController::class, 'edit'])->name('edit2');
+// });
+
+Route::controller(GuruController::class)->middleware('auth')->group(function () {
+    Route::get('/profilGuru', 'edit');
 });
+
+// Route::get('/profilGuru', function () {
+//     return view('guru/profil');
+// });
 Route::get('/editprofilGuru', function () {
     return view('guru/editprofil');
 });
@@ -117,9 +127,12 @@ Route::get('/progresKelasMat', function () {
 });
 
 // siswa
-Route::get('/profilSiswa', function () {
-    return view('siswa/profil');
+Route::controller(SiswaController::class)->middleware('auth')->group(function () {
+    Route::get('/profilSiswa', 'edit');
 });
+// Route::get('/profilSiswa', function () {
+//     return view('siswa/profil');
+// });
 Route::get('/editprofilSiswa', function () {
     return view('siswa/editprofil');
 });

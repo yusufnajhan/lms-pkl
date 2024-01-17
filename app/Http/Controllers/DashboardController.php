@@ -21,16 +21,20 @@ class DashboardController extends Controller
         $userID = auth()->user()->id;
         $guru = Guru::where('iduser', $userID)->first();
         $nama = $guru->nama;
+        $nik = $guru->nik;
+        $username = $guru->user->username;
 
-        return view("guru.beranda", compact('nama'));
+        return view("guru.beranda", compact('nama', 'nik', 'username'));
     }
 
     public function viewDashboardSiswa() {
         $userID = auth()->user()->id;
         $siswa = Siswa::where('iduser', $userID)->first();
         $nama = $siswa->nama;
+        $nik = $siswa->nik;
+        $username = $siswa->user->username;
 
-        return view("siswa.beranda", compact('nama'));
+        return view("siswa.beranda", compact('nama', 'nik', 'username'));
     }
     
 }
