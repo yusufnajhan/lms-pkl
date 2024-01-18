@@ -17,46 +17,65 @@ class AkunGuruController extends Controller
     return view('admin.guru', compact('gurus', 'users'));
     }
 
+    public function create()
+    {
+        return view('admin.tambahguru');
+    }
+
     // add
     public function store(Request $request)
     {
-    // Validasi data input
-    $request->validate([
-        'idguru' => 'required|numeric',
-        'nama' => 'required|string|max:255',
-        'nik' => 'required|numeric',
-        'jenkel' => 'required|in:Pria,Wanita',
-        'tgllahir' => 'required|date',
-        'email' => 'required|email|max:255',
-        'nohp' => 'required|numeric',
-        'iduser' => 'required|numeric',
-        'username' => 'required|string|unique:users',
-        'password' => 'required|string',
-    ]);
+        // Validasi data input
+        $request->validate([
+            'idguru' => 'required|numeric',
+            'nama' => 'required|string|max:255',
+            'nik' => 'required|numeric',
+            'jenis_kelamin' => 'required|in:Pria,Wanita',
+            'tanggal_lahir' => 'required|date',
+            'email' => 'required|email|max:255',
+            'nomor_hp' => 'required|numeric',
+            'iduser' => 'required|numeric',
+            'username' => 'required|string|unique:users',
+            'password' => 'required|string',
+        ]);
 
-    // Simpan data user ke dalam database
-    $user = User::create([
-        'username' => $request->input('username'),
-        'password' => bcrypt($request->input('password')),
-        'idrole' => 2, // ID untuk role guru
-    ]);
+        DB::beginTransaction();
+        try 
+        {
+            // Simpan data user ke dalam database
+            $user = User::create([
+                'id' => $request->input('iduser'),
+                'username' => $request->input('username'),
+                'password' => bcrypt($request->input('password')),
+                'idrole' => 2, // ID untuk role guru
+            ]);
 
-    // Simpan data guru ke dalam database
-    Guru::create([
-        'idguru' => $request->input('idguru'),
-        'nama' => $request->input('nama'),
-        'nik' => $request->input('nik'),
-        'jenis_kelamin' => $request->input('jenkel'),
-        'tanggal_lahir' => $request->input('tgllahir'),
-        'email' => $request->input('email'),
-        'nomor_hp' => $request->input('nohp'),
-        'iduser' => $user->id,
-    ]);
+            // Simpan data guru ke dalam database
+            Guru::create([
+                'idguru' => $request->input('idguru'),
+                'nama' => $request->input('nama'),
+                'nik' => $request->input('nik'),
+                'jenis_kelamin' => $request->input('jenis_kelamin'),
+                'tanggal_lahir' => $request->input('tanggal_lahir'),
+                'email' => $request->input('email'),
+                'nomor_hp' => $request->input('nomor_hp'),
+                'iduser' => $request->input('iduser'),
+            ]);
 
+            DB::commit();
+            // Redirect atau kembalikan respons sesuai kebutuhan
+            return redirect()->route('guru.index')->with('success', 'Akun guru berhasil ditambahkan.');
+        }
+
+        catch (\Exception $e) 
+        {
+            DB::rollBack();
+            return redirect()
+                ->route('guru.index')
+                ->with(['error' => 'Gagal menambah akun guru. Error: ' . $e->getMessage()]);
+        }
     
-
-    // Redirect atau kembalikan respons sesuai kebutuhan
-    return redirect()->route('guru.index')->with('success', 'Akun guru berhasil ditambahkan.');
+    
     }
 
     // edit

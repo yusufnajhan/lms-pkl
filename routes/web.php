@@ -65,7 +65,10 @@ Route::get('/akunGuru', [AkunGuruController::class, 'index'])->name('guru.index'
 Route::get('/editakunGuru', function () {
     return view('admin/editguru');
 });
-Route::post('/akunGuru', [AkunGuruController::class, 'store'])->name('guru.store');
+// Route::post('/akunGuru', [AkunGuruController::class, 'store'])->name('guru.store');
+
+Route::get('/tambahakunGuru', [AkunGuruController::class, 'create'])->name('guru.create');
+Route::post('/tambahakunGuru', [AkunGuruController::class, 'store'])->name('guru.store');
 
 Route::get('/editakunGuru/{idguru}', [AkunGuruController::class, 'edit'])->name('guru.edit');
 Route::post('/editakunGuru/{idguru}', [AkunGuruController::class, 'update'])->name('guru.update');
