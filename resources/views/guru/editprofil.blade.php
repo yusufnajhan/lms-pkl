@@ -117,6 +117,11 @@
                         @error('current_password')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
+                        @if (session()->has('error'))
+                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                                <p>{{ session('error') }}</p>
+                            </div>
+                        @endif
                 </div>
 
                 <div class="col-span-6 sm:col-span-3">

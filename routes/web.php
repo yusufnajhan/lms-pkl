@@ -41,17 +41,24 @@ Route::controller(DashboardController::class)->middleware('auth')->group(functio
 
 
 // admin
+// Route::controller(AdminController::class)->middleware('auth')->group(function () {
+//     Route::get('/profilAdmin', 'edit');
+// });
+
 Route::controller(AdminController::class)->middleware('auth')->group(function () {
-    Route::get('/profilAdmin', 'edit');
+    Route::get('/profilAdmin', 'edit')->name('edit1');
+    Route::get('/editprofilAdmin', 'showEdit')->name('showEdit1');
+    Route::post('/editprofilAdmin', 'update')->name('update1');
 });
+
 // Route::get('/profilAdmin', [AdminController::class, 'profil']);
 
 // Route::get('/profilAdmin', function () {
 //     return view('admin/profil');
 // });
 
-Route::get('/editprofilAdmin', [AdminController::class, 'editprofil'])->name('admin.editprofil');
-Route::post('/profilAdmin', [AdminController::class, 'updateprofil'])->name('admin.profil');
+// Route::get('/editprofilAdmin', [AdminController::class, 'editprofil'])->name('admin.editprofil');
+// Route::post('/profilAdmin', [AdminController::class, 'updateprofil'])->name('admin.profil');
 
 // Route::get('/editprofilAdmin', function () {
 //     return view('admin/editprofil');

@@ -20,10 +20,23 @@
           </li>
         </ol>
     </nav>
+    @if(session()->has('success'))
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <p>{{ session('success') }}</p>
+        </div>
+    @endif
+    @if (session()->has('error'))
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <p>{{ session('error') }}</p>
+        </div>
+    @endif
     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Profil Admin</h1>
 </div>
 
     <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+        <form action="{{ route('showEdit1', [Auth::user()->id]) }}" method="get">
+            @csrf
+            @method('GET')
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6"> 
             <div class="text-center text-gray-500 dark:text-gray-400">
                 <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar">
@@ -42,65 +55,65 @@
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
                 <input type="text" name="nama" id="nama"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ $nama }}" wfd-id="id1" readonly disabled>
+                    value="{{ $admin->nama }}" wfd-id="id1" readonly disabled>
             </div>
             <div class="col-span-6 sm:col-span-3">
                 <label for="nik"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NUPTK</label>
                 <input type="text" name="nik" id="nik"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ $nik }}" wfd-id="id2" readonly disabled>
+                    value="{{ $admin->nik }}" wfd-id="id2" readonly disabled>
             </div>
             <div class="col-span-6 sm:col-span-3">
                 <label for="jenis_kelamin"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
                 <input type="text" name="jenis_kelamin" id="jenis_kelamin"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ $jenis_kelamin }}" wfd-id="id2" readonly disabled>
+                    value="{{ $admin->jenis_kelamin }}" wfd-id="id2" readonly disabled>
             </div>
             <div class="col-span-6 sm:col-span-3">
                 <label for="tanggal_lahir"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Lahir</label>
                 <input type="date" name="tanggal_lahir" id="tanggal_lahir"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ $tanggal_lahir }}" wfd-id="id2" readonly disabled>
+                    value="{{ $admin->tanggal_lahir }}" wfd-id="id2" readonly disabled>
             </div>
             <div class="col-span-6 sm:col-span-3">
                 <label for="email"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-Mail</label>
                 <input type="email" name="email" id="email"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ $email }}" wfd-id="id2" readonly disabled>
+                    value="{{ $admin->email }}" wfd-id="id2" readonly disabled>
             </div>
             <div class="col-span-6 sm:col-span-3">
                 <label for="nomor_hp"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No HP</label>
                 <input type="number" name="nomor_hp" id="nomor_hp"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ $nomor_hp }}" wfd-id="id2" readonly disabled>
+                    value="{{ $admin->nomor_hp }}" wfd-id="id2" readonly disabled>
             </div>
             <div class="col-span-6 sm:col-span-3">
                 <label for="username"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
                 <input type="text" name="username" id="username"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ $username }}" wfd-id="id6" readonly disabled>
+                    value="{{ $admin->user->username }}" wfd-id="id6" readonly disabled>
             </div>
             <div class="col-span-6 sm:col-span-3">
                 <label for="password"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata sandi saat ini</label>
                 <input type="password" name="password" id="password"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ $password }}" readonly disabled>
+                    value="{{ $admin->user->password }}" readonly disabled>
             </div>
             <div class="col-span-6 sm:col-full">
-                <a href="/editprofilAdmin"
-                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                <button
+                class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                     type="submit">
-                    Ubah kata sandi
-                </a>
+                    Ubah data profil
+                </button>
             </div>                       
         </div>
-        
+        </form>
     </div>
 @endsection

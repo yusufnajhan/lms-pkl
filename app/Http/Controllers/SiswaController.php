@@ -47,8 +47,8 @@ class SiswaController extends Controller
         if (array_key_exists('new_password', $validated) && $validated['new_password'] !== null) {
             if (!Hash::check($validated['current_password'], $user->password)) {
                 return redirect()
-                    ->route('siswa.showEdit')
-                    ->with('error', 'Password lama tidak cocok');
+                    ->route('showEdit3')
+                    ->with('error', 'Kata sandi lama tidak cocok');
             }
         }
 

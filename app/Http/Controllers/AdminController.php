@@ -4,46 +4,91 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
-use App\Models\Guru;
-use App\Models\Siswa;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 
 class AdminController extends Controller
 {
-    // profil
-    public function edit(){
-        $userID = auth()->user()->id;
+    // edit profil 
+    public function edit(Request $request)
+    {
+        $user = $request->user();
+        $idadmin = $request->user()->admin->idadmin;
 
-        $admin = Admin::where('iduser', $userID)->first();
+        $admin = Admin::where('idadmin', $idadmin)->first();
 
-        $nama = $admin->nama;
-        $nik = $admin->nik;
-        $jenis_kelamin = $admin->jenis_kelamin;
-        $tanggal_lahir = $admin->tanggal_lahir;
-        $email = $admin->email;
-        $nomor_hp = $admin->nomor_hp;
-
-        $username = $admin->user->username;
-        $password = $admin->user->password;
-
-        return view("admin.profil", compact('nama', 'nik', 'jenis_kelamin', 'tanggal_lahir',
-                                                'email', 'nomor_hp', 'username', 'password'));
+        return view('admin.profil', ['user' => $user, 'admin' => $admin]);
     }
 
-    public function beranda()
+    public function showEdit(Request $request)
     {
-        // Mengambil satu data admin pertama dengan relasi ke users
-        $admin = Admin::with('user')->first();
-
-        // Mengambil jumlah akun Guru
-        $jumlahAkunGuru = Guru::count();
-
-        // Mengambil jumlah akun Siswa
-        $jumlahAkunSiswa = Siswa::count();
-
-        // Menampilkan view beranda dengan data admin
-        return view('admin.beranda', ['admin' => $admin, 'jumlahAkunGuru' => $jumlahAkunGuru, 'jumlahAkunSiswa' => $jumlahAkunSiswa]);
+        $user = $request->user();
+        $idadmin = $request->user()->admin->idadmin;
         
+        $admin = Admin::where('idadmin', $idadmin)->first();
+        return view('admin.editprofil', ['user' => $user, 'admin' => $admin]);
+    }
+
+    public function update(Request $request)
+    {
+        $user = $request->user();
+        $idadmin = $request->user()->admin->idadmin;
+
+        $validated = $request->validate([
+            'nomor_hp' => 'required|numeric',
+            'email' => 'required|email|max:255',
+            'username' => 'nullable|string',
+            'current_password' => 'nullable|string',
+            'new_password' => 'nullable|string|min:8',
+            'new_confirm_password' => 'nullable|same:new_password',
+        ]);
+
+        // Check if 'new_password' key exists and not null in $validated
+        if (array_key_exists('new_password', $validated) && $validated['new_password'] !== null) {
+            if (!Hash::check($validated['current_password'], $user->password)) {
+                return redirect()
+                    ->route('showEdit1')
+                    ->with('error', 'Kata sandi lama tidak cocok');
+            }
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $userData = [
+                'nomor_hp' => $validated['nomor_hp'],
+                'email' => $validated['email'],
+                'username' => $validated['username'] ?? null,
+            ];
+
+            $adminData = [
+                'nomor_hp' => $validated['nomor_hp'],
+                'email' => $validated['email'],
+            ];
+
+            if (!is_null($userData['username'])) {
+                $user->update($userData);
+            }
+
+            if (array_key_exists('new_password', $validated) && $validated['new_password'] !== null) {
+                $user->update([
+                    'password' => Hash::make($validated['new_password']),
+                ]);
+            }
+
+            Admin::where('idadmin', $idadmin)->update($adminData);
+
+            DB::commit();
+
+            return redirect()
+                ->route('edit1')
+                ->with('success', 'Profil berhasil diperbarui');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()
+                ->route('showEdit1')
+                ->with('error', 'Gagal memperbarui profil.');
+        }
     }
 }
