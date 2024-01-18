@@ -86,6 +86,9 @@ Route::get('/editakunSiswa', function () {
     return view('admin/editsiswa');
 });
 
+Route::get('/tambahakunSiswa', [AkunSiswaController::class, 'create'])->name('siswa.create');
+Route::post('/tambahakunSiswa', [AkunSiswaController::class, 'store'])->name('siswa.store');
+
 Route::get('/editakunSiswa/{idsiswa}', [AkunSiswaController::class, 'edit'])->name('siswa.edit');
 Route::post('/editakunSiswa/{idsiswa}', [AkunSiswaController::class, 'update'])->name('siswa.update');
 

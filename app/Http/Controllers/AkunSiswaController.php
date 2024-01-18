@@ -17,6 +17,11 @@ class AkunSiswaController extends Controller
     return view('admin.siswa', compact('siswas', 'users'));
     }
 
+    public function create()
+    {
+        return view('admin.tambahsiswa');
+    }
+
     // add
     public function store(Request $request)
     {
@@ -25,27 +30,50 @@ class AkunSiswaController extends Controller
         'idsiswa' => 'required|numeric',
         'nama' => 'required|string|max:255',
         'nik' => 'required|numeric',
-        'jenkel' => 'required|in:pria,wanita',
-        'tgllahir' => 'required|date',
+        'jenis_kelamin' => 'required|in:Pria,Wanita',
+        'tanggal_lahir' => 'required|date',
         'email' => 'required|email|max:255',
-        'nohp' => 'required|numeric',
-        'iduser' => 'required|numeric'
+        'nomor_hp' => 'required|numeric',
+        'iduser' => 'required|numeric',
+        'username' => 'required|string|unique:users',
+        'password' => 'required|string',
     ]);
 
-    // Simpan data siswa ke dalam database
-    Siswa::create([
-        'idsiswa' => $request->input('idsiswa'),
-        'nama' => $request->input('nama'),
-        'nik' => $request->input('nik'),
-        'jenis_kelamin' => $request->input('jenkel'),
-        'tanggal_lahir' => $request->input('tgllahir'),
-        'email' => $request->input('email'),
-        'nomor_hp' => $request->input('nohp'),
-        'iduser' => $request->input('iduser')
-    ]);
+    DB::beginTransaction();
+        try 
+        {
+            // Simpan data user ke dalam database
+            $user = User::create([
+                'id' => $request->input('iduser'),
+                'username' => $request->input('username'),
+                'password' => bcrypt($request->input('password')),
+                'idrole' => 2, // ID untuk role siswa
+            ]);
 
-    // Redirect atau kembalikan respons sesuai kebutuhan
-    return redirect()->route('siswa.index')->with('success', 'Akun siswa berhasil ditambahkan.');
+            // Simpan data siswa ke dalam database
+            Siswa::create([
+                'idsiswa' => $request->input('idsiswa'),
+                'nama' => $request->input('nama'),
+                'nik' => $request->input('nik'),
+                'jenis_kelamin' => $request->input('jenis_kelamin'),
+                'tanggal_lahir' => $request->input('tanggal_lahir'),
+                'email' => $request->input('email'),
+                'nomor_hp' => $request->input('nomor_hp'),
+                'iduser' => $request->input('iduser'),
+            ]);
+
+            DB::commit();
+            // Redirect atau kembalikan respons sesuai kebutuhan
+            return redirect()->route('siswa.index')->with('success', 'Akun siswa berhasil ditambahkan.');
+        }
+
+        catch (\Exception $e) 
+        {
+            DB::rollBack();
+            return redirect()
+                ->route('siswa.index')
+                ->with(['error' => 'Gagal menambah akun siswa. Error: ' . $e->getMessage()]);
+        }
     }
 
     // edit
