@@ -107,9 +107,14 @@ class AkunSiswaController extends Controller
         $siswa = Siswa::where('idsiswa', $idsiswa)->first();
 
         if ($siswa){
-            Siswa::where('idsiswa', $idsiswa)->delete();
+            $userId = $siswa->iduser; 
 
             $siswa->delete();
+
+            $user = User::find($userId);
+            if ($user) {
+                $user->delete();
+            }
 
             return redirect()->route('siswa.index')->with('success', 'Akun siswa berhasil dihapus.');
         }

@@ -118,9 +118,15 @@ class AkunGuruController extends Controller
         $guru = Guru::where('idguru', $idguru)->first();
 
         if ($guru){
-            Guru::where('idguru', $idguru)->delete();
+
+            $userId = $guru->iduser;   
 
             $guru->delete();
+
+            $user = User::find($userId);
+            if ($user) {
+                $user->delete();
+            }
 
             return redirect()->route('guru.index')->with('success', 'Akun guru berhasil dihapus.');
         }

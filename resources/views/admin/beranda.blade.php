@@ -62,6 +62,7 @@
 @endsection
 
 @section('content1')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
     <div class="flex items-center justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
       <div>
@@ -97,20 +98,24 @@
     </div>
 </div>
 
+<script>
+    var ctx = document.getElementById('traffic-by-device').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Guru', 'Siswa'],
+            datasets: [{
+                data: [234000, 94000], // Ubah angka ini dengan data aktual Anda
+                backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)']
+            }]
+        },
+        options: {
+            responsive: true,
+        }
+    });    
+</script>
 @endsection
 
-{{-- pakai ini untuk ubah data chart pie. jangan lupa ganti warna pie chart jadi tema merah:
-var ctx = document.getElementById('traffic-by-device').getContext('2d');
-var chart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: ['Guru', 'Siswa'],
-        datasets: [{
-            data: [234000, 94000], // Ubah angka ini dengan data aktual Anda
-            backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)']
-        }]
-    },
-    options: {
-        responsive: true,
-    }
-}); --}}
+
+
+

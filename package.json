@@ -16,6 +16,7 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
+        "apexcharts": "^3.45.1",
         "flowbite-datepicker": "^1.2.6"
     }
 }
