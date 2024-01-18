@@ -101,9 +101,9 @@ Route::delete('/akunSiswa/{idsiswa}', [AkunSiswaController::class, 'destroy'])->
 // });
 
 Route::controller(GuruController::class)->middleware('auth')->group(function () {
-    Route::get('/profilGuru', 'edit');
-    Route::get('/editprofilGuru/{iduser}', 'edit2')->name('guru.edit2');
-    Route::post('/editprofilGuru/{iduser}', 'update')->name('guru.updateprofil');
+    Route::get('/profilGuru', 'edit')->name('edit2');
+    Route::get('/editprofilGuru', 'showEdit')->name('showEdit2');
+    Route::post('/editprofilGuru', 'update')->name('update2');
 });
 
 // Route::get('/profilGuru', function () {
@@ -139,14 +139,17 @@ Route::get('/progresKelasMat', function () {
 
 // siswa
 Route::controller(SiswaController::class)->middleware('auth')->group(function () {
-    Route::get('/profilSiswa', 'edit');
+    Route::get('/profilSiswa', 'edit')->name('edit3');
+    Route::get('/editprofilSiswa', 'showEdit')->name('showEdit3');
+    Route::post('/editprofilSiswa', 'update')->name('update3');
 });
+
 // Route::get('/profilSiswa', function () {
 //     return view('siswa/profil');
 // });
-Route::get('/editprofilSiswa', function () {
-    return view('siswa/editprofil');
-});
+// Route::get('/editprofilSiswa', function () {
+//     return view('siswa/editprofil');
+// });
 Route::get('/dasborSiswa', function () {
     return view('siswa/dasbor');
 });

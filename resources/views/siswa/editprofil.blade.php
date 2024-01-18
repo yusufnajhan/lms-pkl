@@ -24,6 +24,9 @@
 </div>
 
     <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+        <form action="{{ route('update3', [Auth::user()->id]) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('POST')
             <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6"> 
                 <div class="text-center text-gray-500 dark:text-gray-400">
                     <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar">
@@ -38,80 +41,114 @@
             </div>
             <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6 sm:col-span-3">
-                    <label for="current_password"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata sandi saat ini</label>
-                    <input type="password" name="current_password" id="current_password"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        value="#" >
+                    <label for="nama"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+                    <input type="text" name="nama" id="nama"
+                        class="shadow-sm bg-gray-200 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        value="{{ $siswa->nama }}" wfd-id="id1" readonly disabled>
+    
                 </div>
                 <div class="col-span-6 sm:col-span-3">
-                    <label for="new_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata sandi baru</label>
-                    <input data-popover-target="popover-password" data-popover-placement="bottom" type="password"
-                        id="new_password"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value="#" >
-                    <div data-popover="" id="popover-password" role="tooltip"
-                        class="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
-                        style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(680px, -1808.67px, 0px);"
-                        data-popper-placement="top">
-                        <div class="p-3 space-y-2">
-                            <h3 class="font-semibold text-gray-900 dark:text-white">Must have at least 6 characters
-                            </h3>
-                            <div class="grid grid-cols-4 gap-2">
-                                <div class="h-1 bg-orange-300 dark:bg-orange-400"></div>
-                                <div class="h-1 bg-orange-300 dark:bg-orange-400"></div>
-                                <div class="h-1 bg-gray-200 dark:bg-gray-600"></div>
-                                <div class="h-1 bg-gray-200 dark:bg-gray-600"></div>
-                            </div>
-                            <p>It’s better to have:</p>
-                            <ul>
-                                <li class="flex items-center mb-1">
-                                    <svg class="w-4 h-4 mr-2 text-green-400 dark:text-green-500" aria-hidden="true"
-                                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                    Upper &amp; lower case letters
-                                </li>
-                                <li class="flex items-center mb-1">
-                                    <svg class="w-4 h-4 mr-2 text-gray-300 dark:text-gray-400" aria-hidden="true"
-                                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                    A symbol (#$&amp;)
-                                </li>
-                                <li class="flex items-center">
-                                    <svg class="w-4 h-4 mr-2 text-gray-300 dark:text-gray-400" aria-hidden="true"
-                                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                    A longer password (min. 12 chars.)
-                                </li>
-                            </ul>
-                        </div>
-                        <div data-popper-arrow=""
-                            style="position: absolute; left: 0px; transform: translate3d(139.333px, 0px, 0px);"></div>
-                    </div>
+                    <label for="nik"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NUPTK</label>
+                    <input type="text" name="nik" id="nik"
+                        class="shadow-sm bg-gray-200 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        value="{{ $siswa->nik }}" wfd-id="id2" readonly disabled>
+    
                 </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="jenis_kelamin"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
+                    <input type="text" name="jenis_kelamin" id="jenis_kelamin"
+                        class="shadow-sm bg-gray-200 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        value="{{ $siswa->jenis_kelamin }}" wfd-id="id2" readonly disabled>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="tanggal_lahir"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Lahir</label>
+                    <input type="date" name="tanggal_lahir" id="tanggal_lahir"
+                        class="shadow-sm bg-gray-200 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        value="{{ $siswa->tanggal_lahir }}" wfd-id="id2" readonly disabled>
+    
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="email"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-Mail</label>
+                    <input type="email" name="email" id="email"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        value="{{ $siswa->email }}" wfd-id="id2" >
+    
+                        @error('email')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+    
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="nomor_hp"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No HP</label>
+                    <input type="number" name="nomor_hp" id="nomor_hp"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        value="{{ $siswa->nomor_hp }}" wfd-id="id2" >
+    
+                        @error('nomor_hp')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+    
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="username"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                    <input type="text" name="username" id="username"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        value="{{ $siswa->user->username }}" wfd-id="id6">
+
+                        @error('username')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="current_password"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata Sandi Saat Ini</label>
+                    <input type="text" name="current_password" id="current_password"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="••••••••" wfd-id="id6">
+                        
+                        @error('current_password')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="new_password"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata Sandi Baru</label>
+                    <input type="text" name="new_password" id="new_password"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="••••••••" wfd-id="id6">
+                        
+                        @error('new_password')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                </div>
+
                 <div class="col-span-6 sm:col-span-3">
                     <label for="new_confirm_password"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Konfirmasi kata sandi baru</label>
-                    <input type="password" name="new_confirm_password" id="new_confirm_password"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Konfirmasi Kata Sandi Baru</label>
+                    <input type="text" name="new_confirm_password" id="new_confirm_password"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        value="#" >
+                        placeholder="••••••••" wfd-id="id6">
+                        
+                        @error('new_confirm_password')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                 </div>
+                
                 <div class="col-span-6 sm:col-full">
-                    <a href="/profilSiswa"
-                        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
-                        type="submit">
+                    <button class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                        type="submit" name="submit">
                         Simpan
-                    </a>
-                </div>  
+                    </button>
+                </div>                       
             </div>
         </form>
     </div>
