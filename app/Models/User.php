@@ -42,6 +42,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function admin()
+    {
+        return $this->hasOne(Admin::class, 'iduser');
+    }
+    
     public function guru()
     {
         return $this->hasOne(Guru::class, 'iduser');
