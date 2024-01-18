@@ -15,8 +15,12 @@ class DashboardController extends Controller
         $nama = $admin->nama;
         $nik = $admin->nik;
         $username = $admin->user->username;
+
+        // jumlah akun siswa dan guru
+        $jumlahSiswa = Siswa::count();
+        $jumlahGuru = Guru::count();
         
-        return view("admin.beranda", compact('nama', 'nik', 'username'));
+        return view("admin.beranda", compact('nama', 'nik', 'username', 'jumlahSiswa', 'jumlahGuru'));
     }
 
     public function viewDashboardGuru() {

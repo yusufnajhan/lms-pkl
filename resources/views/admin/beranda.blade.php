@@ -62,58 +62,99 @@
 @endsection
 
 @section('content1')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-    <div class="flex items-center justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
-      <div>
-        <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">Jumlah Akun Guru dan Siswa</span>
-      </div>
+    <div class="flex justify-between items-start w-full">
+        <div class="flex-col items-center">
+          <div class="flex items-center mb-1">
+                <h1 class="text-3xl font-bold leading-none text-gray-900 dark:text-white me-1">Jumlah Guru dan Siswa</h1>
+              <div data-popover id="chart-info" role="tooltip" class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
+                  <div class="p-3 space-y-2">
+                      <a href="#" class="flex items-center font-medium text-blue-600 dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:underline">Read more <svg class="w-2 h-2 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                </svg></a>
+              </div>
+              <div data-popper-arrow></div>
+          </div>
+        </div>
     </div>
-    <div id="traffic-by-device"></div>
-    <!-- Card Footer -->
-    <div class="flex items-center justify-between pt-4 lg:justify-evenly sm:pt-6">
-        <a href="/akunGuru">
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-                </svg>
-                <h3 class="text-lg text-gray-500 dark:text-gray-400">Guru</h3>        
-                <h4 class="text-xl font-bold dark:text-white">
-                    {{-- {{ $jumlahAkunGuru }} --}}
-                </h4>
-            </div>
-        </a>
-
-        <a href="/akunSiswa">
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
-                </svg>
-                <h3 class="text-lg text-gray-500 dark:text-gray-400">Siswa</h3>
-                <h4 class="text-xl font-bold dark:text-white">
-                    {{-- {{ $jumlahAkunSiswa }} --}}
-                </h4>
-            </div>
-        </a>
-    </div>
+    <div class="flex justify-end items-center"></div>
 </div>
-
+  
+<!-- Line Chart -->
+<div id="pie-chart" data-jumlah-siswa="{{ $jumlahSiswa }}" data-jumlah-guru="{{ $jumlahGuru }}"></div>
+  
 <script>
-    var ctx = document.getElementById('traffic-by-device').getContext('2d');
-    var chart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Guru', 'Siswa'],
-            datasets: [{
-                data: [234000, 94000], // Ubah angka ini dengan data aktual Anda
-                backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)']
-            }]
-        },
-        options: {
-            responsive: true,
+    // ApexCharts options and config
+    window.addEventListener("load", function() {
+        const pieChartElement = document.getElementById("pie-chart");
+        const jumlahSiswa = parseFloat(pieChartElement.dataset.jumlahSiswa);
+        const jumlahGuru = parseFloat(pieChartElement.dataset.jumlahGuru);
+        
+        const getChartOptions = () => {
+          return {
+            series: [jumlahGuru, jumlahSiswa],
+            colors: ["#E02424", "#F8B4B4"], // Merubah warna menjadi merah
+            chart: {
+              height: 420,
+              width: "100%",
+              type: "pie",
+            },
+            stroke: {
+              colors: ["white"],
+              lineCap: "",
+            },
+            plotOptions: {
+              pie: {
+                labels: {
+                  show: true,
+                },
+                size: "100%",
+                dataLabels: {
+                  offset: -25
+                }
+              },
+            },
+            labels: ["Guru", "Siswa"],
+            dataLabels: {
+              enabled: true,
+              style: {
+                fontFamily: "Inter, sans-serif",
+              },
+            },
+            legend: {
+              position: "bottom",
+              fontFamily: "Inter, sans-serif",
+            },
+            yaxis: {
+              labels: {
+                formatter: function (value) {
+                  return value + "%"
+                },
+              },
+            },
+            xaxis: {
+              labels: {
+                formatter: function (value) {
+                  return value  + "%"
+                },
+              },
+              axisTicks: {
+                show: false,
+              },
+              axisBorder: {
+                show: false,
+              },
+            },
+          }
         }
-    });    
+  
+        if (document.getElementById("pie-chart") && typeof ApexCharts !== 'undefined') {
+          const chart = new ApexCharts(document.getElementById("pie-chart"), getChartOptions());
+          chart.render();
+        }
+    });
 </script>
+
 @endsection
 
 
