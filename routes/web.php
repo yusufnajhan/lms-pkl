@@ -67,6 +67,7 @@ Route::post('/editakunGuru/{idguru}', [AkunGuruController::class, 'update'])->na
 
 Route::delete('/akunGuru/{idguru}', [AkunGuruController::class, 'destroy'])->name('guru.destroy');
 
+Route::get('/searchGuru', [AkunGuruController::class, 'search'])->name('guru.search');
 // Route::get('/akunSiswa', function () {
 //     return view('admin/siswa');
 // });
@@ -86,6 +87,7 @@ Route::post('/editakunSiswa/{idsiswa}', [AkunSiswaController::class, 'update'])-
 
 Route::delete('/akunSiswa/{idsiswa}', [AkunSiswaController::class, 'destroy'])->name('siswa.destroy');
 
+Route::get('/searchSiswa', [AkunSiswaController::class, 'search'])->name('siswa.search');
 
 // guru
 // Route::middleware(['auth'])->group(function () {

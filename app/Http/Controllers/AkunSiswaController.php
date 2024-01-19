@@ -13,8 +13,7 @@ class AkunSiswaController extends Controller
     public function index()
     {
     $siswas = Siswa::all();
-    $users = User::all();
-    return view('admin.siswa', compact('siswas', 'users'));
+    return view('admin.siswa', compact('siswas'));
     }
 
     public function create()
@@ -128,6 +127,20 @@ class AkunSiswaController extends Controller
         // $siswa = Siswa::find($idsiswa);
         // return view('siswa.edit', compact('siswa'));
     }
+
+    public function search(Request $request) 
+    {
+        $search = $request->input('search');
+
+        if (!empty($search)) {
+            $siswas = Siswa::where(function($query) use ($search) {
+                $query->where('nama', 'like', '%' . $search . '%');
+            })->get();
+        }
+
+        return view('admin.siswa', ['siswas' => $siswas]);
+    }
+
 
     // delete
     public function destroy($idsiswa)

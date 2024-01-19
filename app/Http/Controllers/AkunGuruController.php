@@ -13,8 +13,7 @@ class AkunGuruController extends Controller
     public function index()
     {
     $gurus = Guru::all();
-    $users = User::all();
-    return view('admin.guru', compact('gurus', 'users'));
+    return view('admin.guru', compact('gurus'));
     }
 
     public function create()
@@ -129,6 +128,19 @@ class AkunGuruController extends Controller
 
         // $guru = Guru::find($idguru);
         // return view('guru.edit', compact('guru'));
+    }
+
+    public function search(Request $request) 
+    {
+        $search = $request->input('search');
+
+        if (!empty($search)) {
+            $gurus = Guru::where(function($query) use ($search) {
+                $query->where('nama', 'like', '%' . $search . '%');
+            })->get();
+        }
+
+        return view('admin.guru', ['gurus' => $gurus]);
     }
 
     // delete
