@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AkunGuruController;
 use App\Http\Controllers\AkunSiswaController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 
 /*
@@ -41,28 +42,12 @@ Route::controller(DashboardController::class)->middleware('auth')->group(functio
 
 
 // admin
-// Route::controller(AdminController::class)->middleware('auth')->group(function () {
-//     Route::get('/profilAdmin', 'edit');
-// });
-
 Route::controller(AdminController::class)->middleware('auth')->group(function () {
     Route::get('/profilAdmin', 'edit')->name('edit1');
     Route::get('/editprofilAdmin', 'showEdit')->name('showEdit1');
     Route::post('/editprofilAdmin', 'update')->name('update1');
 });
 
-// Route::get('/profilAdmin', [AdminController::class, 'profil']);
-
-// Route::get('/profilAdmin', function () {
-//     return view('admin/profil');
-// });
-
-// Route::get('/editprofilAdmin', [AdminController::class, 'editprofil'])->name('admin.editprofil');
-// Route::post('/profilAdmin', [AdminController::class, 'updateprofil'])->name('admin.profil');
-
-// Route::get('/editprofilAdmin', function () {
-//     return view('admin/editprofil');
-// });
 
 // Route::get('/akunGuru', function () {
 //     return view('admin/guru');
@@ -122,9 +107,22 @@ Route::controller(GuruController::class)->middleware('auth')->group(function () 
 // Route::get('/murid', function () {
 //     return view('guru/murid');
 // });
-Route::get('/kelasGuru', function () {
-    return view('guru/kelas');
-});
+// Route::get('/kelasGuru', function () {
+//     return view('guru/kelas');
+// });
+// Route::get('/tambahkelasGuru', function () {
+//     return view('guru/tambahkelas');
+// });
+
+Route::get('/kelasGuru', [KelasController::class, 'index'])->name('kelas.index');
+Route::get('/tambahkelasGuru', [KelasController::class, 'create'])->name('kelas.create');
+Route::post('/tambahkelasGuru', [KelasController::class, 'store'])->name('kelas.store');
+
+Route::get('/editkelasGuru/{idkelas}', [KelasController::class, 'edit'])->name('kelas.edit');
+Route::post('/editkelasGuru/{idkelas}', [KelasController::class, 'update'])->name('kelas.update');
+
+Route::delete('/kelasGuru/{idkelas}', [KelasController::class, 'destroy'])->name('kelas.destroy');
+
 Route::get('/kelasMat', function () {
     return view('guru/mat');
 });
