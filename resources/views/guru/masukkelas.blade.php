@@ -23,6 +23,7 @@
     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Kelas Matematika 7A</h1>
     <h1 class="text-base text-gray-900 sm:text-lg dark:text-white">Deskripsi kelas</h1>
 </div>
+
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
     <div class="sm:hidden">
         <label for="tabs" class="sr-only">Select tab</label>

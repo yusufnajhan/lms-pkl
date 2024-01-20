@@ -125,8 +125,10 @@ Route::post('/editkelasGuru/{idkelas}', [KelasController::class, 'update'])->nam
 
 Route::delete('/kelasGuru/{idkelas}', [KelasController::class, 'destroy'])->name('kelas.destroy');
 
-Route::get('/kelasMat', function () {
-    return view('guru/mat');
+Route::get('/masukKelas', [KelasController::class, 'index2'])->name('kelas.index2');
+
+Route::get('/masukKelas', function () {
+    return view('guru/masukkelas');
 });
 Route::get('/tugasMat', function () {
     return view('guru/nilaitugas');

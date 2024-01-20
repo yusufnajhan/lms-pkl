@@ -3,6 +3,16 @@
 @section('content')
 <section class="bg-white dark:bg-gray-900">
     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        @if(session()->has('success'))
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <p>{{ session('success') }}</p>
+        </div>
+        @endif
+        @if (session()->has('error'))
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <p>{{ session('error') }}</p>
+        </div>
+        @endif
         <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
             <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Kelas</h2>
             {{-- <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">We use an agile approach to test assumptions and connect with the needs of your audience early and often.</p> --}}
@@ -42,7 +52,7 @@
                     </button>
                 </div>                                                    
                 <div class="mt-4 flex justify-end items-center">
-                    <a href="/kelasMat" class="inline-flex items-center font-medium text-red-600 dark:text-red-500 hover:underline">
+                    <a href="/masukKelas" class="inline-flex items-center font-medium text-red-600 dark:text-red-500 hover:underline">
                         Masuk kelas
                         <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </a>
