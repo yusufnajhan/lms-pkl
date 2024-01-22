@@ -139,11 +139,4 @@ class KelasController extends Controller
                 ->withErrors(['error' => 'Gagal menghapus kelas. Error: ' . $e->getMessage()]);
         }
     }
-
-    // untuk view masuk kelas
-    public function index2()
-    {
-    $kelass = Kelas::all();
-    return view('guru.masukKelas', compact('kelass'));
-    }
 }

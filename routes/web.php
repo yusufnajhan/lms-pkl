@@ -8,7 +8,10 @@ use App\Http\Controllers\AkunGuruController;
 use App\Http\Controllers\AkunSiswaController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\KuisController;
+use App\Http\Controllers\MasukKelasController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\TugasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,11 +128,20 @@ Route::post('/editkelasGuru/{idkelas}', [KelasController::class, 'update'])->nam
 
 Route::delete('/kelasGuru/{idkelas}', [KelasController::class, 'destroy'])->name('kelas.destroy');
 
-Route::get('/masukKelas', [KelasController::class, 'index2'])->name('kelas.index2');
+Route::get('/masukKelas', [TugasController::class, 'index'])->name('tugaskuis.index');
+Route::get('/tambahTugas', [TugasController::class, 'create'])->name('tugas.create');
+Route::post('/tambahTugas', [TugasController::class, 'store'])->name('tugas.store');
+Route::get('/editTugas/{idtugas}', [TugasController::class, 'edit'])->name('tugas.edit');
+Route::post('/editTugas/{idtugas}', [TugasController::class, 'update'])->name('tugas.update');
+Route::delete('/masukKelas/{idtugas}', [TugasController::class, 'destroy'])->name('tugas.destroy');
 
-Route::get('/masukKelas', function () {
-    return view('guru/masukkelas');
-});
+Route::get('/tambahKuis', [TugasController::class, 'create2'])->name('kuis.create');
+Route::post('/tambahKuis', [TugasController::class, 'store2'])->name('kuis.store');
+Route::get('/editKuis/{idkuis}', [TugasController::class, 'edit2'])->name('kuis.edit');
+Route::post('/editKuis/{idkuis}', [TugasController::class, 'update2'])->name('kuis.update');
+Route::delete('/masukKelas/{idkuis}', [TugasController::class, 'destroy2'])->name('kuis.destroy');
+
+
 Route::get('/tugasMat', function () {
     return view('guru/nilaitugas');
 });

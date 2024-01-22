@@ -102,17 +102,6 @@
                     @enderror
 
             </div>
-            
-            {{-- <div class="col-span-6 sm:col-span-3">
-                <label for="idguru"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Guru</label>
-                <input type="idguru" name="idguru" id="idguru"
-                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ old('idguru') }}" wfd-id="id2" >
-                    @foreach($gurus as $guruId)
-                        <option value="{{ $guruId }}">{{ $guruId }}</option>
-                    @endforeach
-            </div> --}}
 
             <div class="col-span-6 sm:col-span-3">
                 <label for="idguru" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Guru</label>
@@ -130,7 +119,7 @@
             <div class="col-span-6 sm:col-full">
                 <button class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                     type="submit" name="submit">
-                    Tambah kelas
+                    Simpan
                 </button>
             </div>                       
         </div>
