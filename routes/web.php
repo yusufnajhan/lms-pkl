@@ -133,13 +133,13 @@ Route::get('/tambahTugas', [TugasController::class, 'create'])->name('tugas.crea
 Route::post('/tambahTugas', [TugasController::class, 'store'])->name('tugas.store');
 Route::get('/editTugas/{idtugas}', [TugasController::class, 'edit'])->name('tugas.edit');
 Route::post('/editTugas/{idtugas}', [TugasController::class, 'update'])->name('tugas.update');
-Route::delete('/masukKelas/{idtugas}', [TugasController::class, 'destroy'])->name('tugas.destroy');
+Route::delete('/masukKelas/tugas/{idtugas}', [TugasController::class, 'destroy'])->name('tugas.destroy');
 
 Route::get('/tambahKuis', [TugasController::class, 'create2'])->name('kuis.create');
 Route::post('/tambahKuis', [TugasController::class, 'store2'])->name('kuis.store');
 Route::get('/editKuis/{idkuis}', [TugasController::class, 'edit2'])->name('kuis.edit');
 Route::post('/editKuis/{idkuis}', [TugasController::class, 'update2'])->name('kuis.update');
-Route::delete('/masukKelas/{idkuis}', [TugasController::class, 'destroy2'])->name('kuis.destroy');
+Route::delete('/masukKelas/kuis/{idkuis}', [TugasController::class, 'destroy2'])->name('kuis.destroy');
 
 
 Route::get('/tugasMat', function () {
