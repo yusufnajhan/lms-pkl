@@ -10,8 +10,10 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KuisController;
 use App\Http\Controllers\MasukKelasController;
+use App\Http\Controllers\NilaiTugasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TugasController;
+use App\Http\Controllers\TugasKuisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -128,24 +130,26 @@ Route::post('/editkelasGuru/{idkelas}', [KelasController::class, 'update'])->nam
 
 Route::delete('/kelasGuru/{idkelas}', [KelasController::class, 'destroy'])->name('kelas.destroy');
 
-Route::get('/masukKelas', [TugasController::class, 'index'])->name('tugaskuis.index');
-Route::get('/tambahTugas', [TugasController::class, 'create'])->name('tugas.create');
-Route::post('/tambahTugas', [TugasController::class, 'store'])->name('tugas.store');
-Route::get('/editTugas/{idtugas}', [TugasController::class, 'edit'])->name('tugas.edit');
-Route::post('/editTugas/{idtugas}', [TugasController::class, 'update'])->name('tugas.update');
-Route::delete('/masukKelas/tugas/{idtugas}', [TugasController::class, 'destroy'])->name('tugas.destroy');
+Route::get('/masukKelas', [TugasKuisController::class, 'index'])->name('tugaskuis.index');
+Route::get('/tambahTugas', [TugasKuisController::class, 'create'])->name('tugas.create');
+Route::post('/tambahTugas', [TugasKuisController::class, 'store'])->name('tugas.store');
+Route::get('/editTugas/{idtugas}', [TugasKuisController::class, 'edit'])->name('tugas.edit');
+Route::post('/editTugas/{idtugas}', [TugasKuisController::class, 'update'])->name('tugas.update');
+Route::delete('/masukKelas/tugas/{idtugas}', [TugasKuisController::class, 'destroy'])->name('tugas.destroy');
 
-Route::get('/tambahKuis', [TugasController::class, 'create2'])->name('kuis.create');
-Route::post('/tambahKuis', [TugasController::class, 'store2'])->name('kuis.store');
-Route::get('/editKuis/{idkuis}', [TugasController::class, 'edit2'])->name('kuis.edit');
-Route::post('/editKuis/{idkuis}', [TugasController::class, 'update2'])->name('kuis.update');
-Route::delete('/masukKelas/kuis/{idkuis}', [TugasController::class, 'destroy2'])->name('kuis.destroy');
+Route::get('/tambahKuis', [TugasKuisController::class, 'create2'])->name('kuis.create');
+Route::post('/tambahKuis', [TugasKuisController::class, 'store2'])->name('kuis.store');
+Route::get('/editKuis/{idkuis}', [TugasKuisController::class, 'edit2'])->name('kuis.edit');
+Route::post('/editKuis/{idkuis}', [TugasKuisController::class, 'update2'])->name('kuis.update');
+Route::delete('/masukKelas/kuis/{idkuis}', [TugasKuisController::class, 'destroy2'])->name('kuis.destroy');
 
+// Route::get('/nilaiTugas/{idtugas}', [NilaiTugasController::class, 'index']);
 
-Route::get('/tugasMat', function () {
+Route::get('/nilaiTugas', function () {
     return view('guru/nilaitugas');
 });
-Route::get('/kuisMat', function () {
+
+Route::get('/nilaiKuis', function () {
     return view('guru/nilaikuis');
 });
 Route::get('/diskusiMat', function () {
