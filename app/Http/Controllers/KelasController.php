@@ -18,8 +18,7 @@ class KelasController extends Controller
 
     public function create()
     {
-        $gurus = Guru::pluck('idguru', 'idguru');
-        return view('guru.tambahkelas', compact('gurus'));
+        return view('guru.tambahkelas');
     }
 
     // add
@@ -30,7 +29,7 @@ class KelasController extends Controller
             'idkelas' => 'required|numeric',
             'mata_pelajaran' => 'required|in:Agama,Matematika,Bahasa Inggris,
             Bahasa Indonesia,PKN,IPAS,IPS,Informatika,Prakarya,PJOK',
-            'indeks_kelas' => 'required|numeric',
+            'indeks_kelas' => 'required|in:A,B,C,D,E',
             'jenjang_kelas' => 'required|in:7,8,9',
             'tanggal_dibuat' => 'required|date',
             'tanggal_tutup' => 'required|date',
@@ -79,10 +78,9 @@ class KelasController extends Controller
         $tanggal_tutup = $kelas->tanggal_tutup;
         $idguru = $kelas->idguru;
 
-        $gurus = Guru::pluck('idguru', 'idguru');
 
         return view("guru.editkelas", compact('idkelas','mata_pelajaran', 'indeks_kelas', 'jenjang_kelas', 'tanggal_dibuat',
-                                                'tanggal_tutup','idguru','gurus'));
+                                                'tanggal_tutup','idguru'));
     }
 
     public function update(Request $request, $idkelas)
@@ -90,7 +88,7 @@ class KelasController extends Controller
         $validated = $request->validate([
             'mata_pelajaran' => 'required|in:Agama,Matematika,Bahasa Inggris,
             Bahasa Indonesia,PKN,IPAS,IPS,Informatika,Prakarya,PJOK',
-            'indeks_kelas' => 'required|numeric',
+            'indeks_kelas' => 'required|in:A,B,C,D,E',
             'jenjang_kelas' => 'required|in:7,8,9',
             'tanggal_dibuat' => 'required|date',
             'tanggal_tutup' => 'required|date',

@@ -43,16 +43,16 @@
                 <label for="mata_pelajaran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mata Pelajaran</label>
                 <select name="mata_pelajaran" id="mata_pelajaran" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option value="" disabled selected>Pilih Mata Pelajaran</option>
-                    <option value="Agama">Agama dan Budi Pekerti</option>
-                    <option value="Matematika">Matematika</option>
-                    <option value="Bahasa Inggris">Bahasa Inggris</option>
-                    <option value="Bahasa Indonesia">Bahasa Indonesia</option>
-                    <option value="PKN">Pendidikan Kewarganegaraan (PKN)</option>
-                    <option value="IPAS">Ilmu Pengetahuan Alam dan Sosial (IPAS)</option>
-                    <option value="IPS">Ilmu Pengetahuan Sosial (IPS)</option>
-                    <option value="Informatika">Informatika</option>
-                    <option value="Prakarya">Prakarya</option>
-                    <option value="PJOK">Pendidikan Jasmani, Olahraga, dan Kesehatan (PJOK)</option>
+                    <option value="Agama"{{ old('mata_pelajaran') == 'Agama' ? 'selected' : '' }}>Agama dan Budi Pekerti</option>
+                    <option value="Matematika"{{ old('mata_pelajaran') == 'Matematika' ? 'selected' : '' }}>Matematika</option>
+                    <option value="Bahasa Inggris"{{ old('mata_pelajaran') == 'Bahasa Inggris' ? 'selected' : '' }}>Bahasa Inggris</option>
+                    <option value="Bahasa Indonesia"{{ old('mata_pelajaran') == 'Bahasa Indonesia' ? 'selected' : '' }}>Bahasa Indonesia</option>
+                    <option value="PKN"{{ old('mata_pelajaran') == 'PKN' ? 'selected' : '' }}>Pendidikan Kewarganegaraan (PKN)</option>
+                    <option value="IPAS"{{ old('mata_pelajaran') == 'IPAS' ? 'selected' : '' }}>Ilmu Pengetahuan Alam dan Sosial (IPAS)</option>
+                    <option value="IPS"{{ old('mata_pelajaran') == 'IPS' ? 'selected' : '' }}>Ilmu Pengetahuan Sosial (IPS)</option>
+                    <option value="Informatika"{{ old('mata_pelajaran') == 'Informatika' ? 'selected' : '' }}>Informatika</option>
+                    <option value="Prakarya"{{ old('mata_pelajaran') == 'Prakarya' ? 'selected' : '' }}>Prakarya</option>
+                    <option value="PJOK"{{ old('mata_pelajaran') == 'PJOK' ? 'selected' : '' }}>Pendidikan Jasmani, Olahraga, dan Kesehatan (PJOK)</option>
                 </select>
             
                 @error('mata_pelajaran')
@@ -79,9 +79,9 @@
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     value="{{ old('jenjang_kelas') }}" wfd-id="id2">
                     <option value="" disabled selected>Pilih Jenjang Kelas</option>
-                    <option value="7">Kelas 7</option>
-                    <option value="8">Kelas 8</option>
-                    <option value="9">Kelas 9</option>
+                    <option value="7"{{ old('jenjang_kelas') == '7' ? 'selected' : '' }}>Kelas 7</option>
+                    <option value="8"{{ old('jenjang_kelas') == '8' ? 'selected' : '' }}>Kelas 8</option>
+                    <option value="9"{{ old('jenjang_kelas') == '9' ? 'selected' : '' }}>Kelas 9</option>
                 </select>
             
                     @error('jenjang_kelas')
@@ -117,10 +117,12 @@
                 <label for="idguru" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Guru</label>
                 <select name="idguru" id="idguru" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option value="" disabled selected>Pilih ID Guru</option>
-                    @foreach($gurus as $guruId)
-                        <option value="{{ $guruId }}">{{ $guruId }}</option>
-                    @endforeach
+                    <option value="{{ auth()->user()->guru->idguru }}">{{ auth()->user()->guru->idguru }}</option>
                 </select>
+
+                @error('idguru')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
             
             
