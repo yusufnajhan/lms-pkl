@@ -28,4 +28,12 @@ class Kuis extends Model
     {
         return $this->belongsTo(Kelas::class, 'idkelas');
     }
+
+    public function show($idkuis)
+    {
+        $esais = Esai::where('idkuis', $idkuis)->get();
+
+        return view('esai.index', compact('esais'));
+    }
+
 }

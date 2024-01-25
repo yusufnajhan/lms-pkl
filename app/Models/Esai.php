@@ -15,6 +15,7 @@ class Esai extends Model
     protected $fillable = [
         'idkuis',
         'soal',
+        'idesai',
     ];
 
     public function kuis()

@@ -145,9 +145,17 @@ Route::get('/editKuis/{idkuis}', [TugasKuisController::class, 'edit2'])->name('k
 Route::post('/editKuis/{idkuis}', [TugasKuisController::class, 'update2'])->name('kuis.update');
 Route::delete('/masukKelas/kuis/{idkuis}', [TugasKuisController::class, 'destroy2'])->name('kuis.destroy');
 
-Route::get('/tambahKuis/soalEsai', function () {
-    return view('guru/soalesai');
-});
+Route::get('/soalEsai', [EsaiController::class, 'index'])->name('esai.index');
+Route::get('/tambahEsai', [EsaiController::class, 'create'])->name('esai.create');
+Route::post('/tambahEsai', [EsaiController::class, 'store'])->name('esai.store');
+Route::get('/editEsai/{idesai}', [EsaiController::class, 'edit'])->name('esai.edit');
+Route::post('/editEsai/{idesai}', [EsaiController::class, 'update'])->name('esai.update');
+Route::delete('/soalEsai/{idesai}', [EsaiController::class, 'destroy'])->name('esai.destroy');
+
+
+// Route::get('/tambahKuis/soalEsai', function () {
+//     return view('guru/soalesai');
+// });
 
 // Route::get('/nilaiTugas/{idtugas}', [NilaiTugasController::class, 'index']);
 
