@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MateriController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
@@ -149,6 +150,10 @@ Route::get('/tambahKuis/soalEsai', function () {
 });
 
 // Route::get('/nilaiTugas/{idtugas}', [NilaiTugasController::class, 'index']);
+
+Route::get('/viewMateri', [MateriController::class, 'index'])->name('materi.index');
+Route::get('/uploadMateri', [MateriController::class, 'create'])->name('materi.create');
+Route::post('/uploadMateri', [MateriController::class, 'store'])->name('materi.store');
 
 Route::get('/nilaiTugas', function () {
     return view('guru/nilaitugas');
