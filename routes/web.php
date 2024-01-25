@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AkunGuruController;
 use App\Http\Controllers\AkunSiswaController;
+use App\Http\Controllers\EsaiController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KuisController;
@@ -142,6 +143,10 @@ Route::post('/tambahKuis', [TugasKuisController::class, 'store2'])->name('kuis.s
 Route::get('/editKuis/{idkuis}', [TugasKuisController::class, 'edit2'])->name('kuis.edit');
 Route::post('/editKuis/{idkuis}', [TugasKuisController::class, 'update2'])->name('kuis.update');
 Route::delete('/masukKelas/kuis/{idkuis}', [TugasKuisController::class, 'destroy2'])->name('kuis.destroy');
+
+Route::get('/tambahKuis/soalEsai', function () {
+    return view('guru/soalesai');
+});
 
 // Route::get('/nilaiTugas/{idtugas}', [NilaiTugasController::class, 'index']);
 

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use CreateSoalEsai;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use SoalEsai;
 
 class Kuis extends Model
 {
