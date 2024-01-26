@@ -27,10 +27,14 @@ class MateriController extends Controller
         $request->validate([
             'idmateri' => 'required|numeric',
             'judul_materi' => 'required',
-            'file_materi' => 'required',
+            'file_materi' => 'required|file|max:25600',
             'tanggal_upload' => 'required|date',
             'idkelas' => 'required|numeric',
         ]);
+
+        if ($request->file('file_materi')) {
+            $file_materi = $request->file('file_materi')->store('file_materi', 'public');
+        }
 
         DB::beginTransaction();
         try 
@@ -39,7 +43,7 @@ class MateriController extends Controller
             Materi::create([
                 'idmateri' => $request->input('idmateri'),
                 'judul_materi' => $request->input('judul_materi'),
-                'file_materi' => $request->input('file_materi'),
+                'file_materi' => $file_materi,
                 'tanggal_upload' => $request->input('tanggal_upload'),
                 'idkelas' => $request->input('idkelas'),
             ]);
