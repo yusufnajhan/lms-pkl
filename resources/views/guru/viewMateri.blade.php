@@ -57,10 +57,10 @@
             <div class="flex items-center space-x-4">
               <div class="flex-1 min-w-0">
                   <p class="font-medium text-gray-900 truncate dark:text-white">
-                    {{ $materi->judul_materi }}
+                    <a href="{{ route('materi.read', $materi->idmateri) }}">{{ $materi->judul_materi }}</a>
                   </p>
                   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                    {{ $materi->tanggal_upload }}
+                    <a href="{{ route('materi.read', $materi->idmateri) }}">{{ $materi->tanggal_upload }}</a>
                   </p>
               </div>                  
               <td class="p-4 space-x-2 whitespace-nowrap">
