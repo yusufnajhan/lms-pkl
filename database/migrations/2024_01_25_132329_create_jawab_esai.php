@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('jawab_esai', function (Blueprint $table) {
             $table->id('idjawabesai');
-            $table->foreignId('idesai');
-            $table->foreignId('user_id');
-            $table->text('response_text');
+            $table->integer('idesai');
+            $table->text('jawaban');
             $table->timestamps();
+
+            $table->foreign('idesai')->references('idesai')->on('esai')->onDelete('cascade');
         });
     }
 
