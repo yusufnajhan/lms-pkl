@@ -28,4 +28,11 @@ class Siswa extends Model
     {
         return $this->belongsTo(User::class, 'iduser');
     }
+
+    // Relationship with Kelas through Enrollment
+    public function kelas()
+    {
+        return $this->belongsToMany(Kelas::class, 'enrollment', 'idsiswa', 'idkelas', 'idsiswa', 'idkelas');
+    }
+    
 }

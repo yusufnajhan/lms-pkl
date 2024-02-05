@@ -152,6 +152,13 @@ Route::get('/editEsai/{idesai}', [EsaiController::class, 'edit'])->name('esai.ed
 Route::post('/editEsai/{idesai}', [EsaiController::class, 'update'])->name('esai.update');
 Route::delete('/soalEsai/{idesai}', [EsaiController::class, 'destroy'])->name('esai.destroy');
 
+// Route::post('/masukKelas/siswa/{idkelas}', [TugasKuisController::class, 'create3'])->name('assign.siswa');
+// Route::post('/undangSiswa/{idkelas}', [TugasKuisController::class, 'assignSiswa'])->name('assign.siswa');
+
+Route::get('/undangSiswa', [TugasKuisController::class, 'create3'])->name('enroll.create');
+Route::post('/undangSiswa', [TugasKuisController::class, 'store3'])->name('enroll.store');
+
+
 
 // Route::get('/tambahKuis/soalEsai', function () {
 //     return view('guru/soalesai');

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enrollment;
 use App\Models\Kelas;
 use App\Models\Kuis;
+use App\Models\Siswa;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +18,8 @@ class TugasKuisController extends Controller
         $kelas = Kelas::findOrFail($idkelas);
         $tugass = Tugas::where('idkelas', $idkelas)->get();
         $kuiss = Kuis::where('idkelas', $idkelas)->get();
-        return view('guru.masukKelas', compact('kelas','tugass','kuiss'));
+        $enrollments = Enrollment::with('siswa')->where('idkelas', $idkelas)->get();
+        return view('guru.masukKelas', compact('kelas','tugass','kuiss','enrollments'));
     }
     
     public function create()
@@ -30,6 +33,53 @@ class TugasKuisController extends Controller
         $kelass = Kelas::pluck('idkelas', 'idkelas');
         return view('guru.tambahKuis', compact('kelass'));
     }
+
+    public function create3()
+    {
+        $kelass = Kelas::pluck('idkelas', 'idkelas');
+        $siswas = Siswa::pluck('idsiswa', 'idsiswa');
+        return view('guru.undangSiswa', compact('kelass','siswas'));
+    }
+
+    // public function create3($idkelas)
+    // {
+    //     // Menggunakan ID kelas dari parameter URL
+    //     $kelas = Kelas::find($idkelas);
+
+    //     // Dapatkan siswa yang belum di-assign ke kelas
+    //     $siswasBelumDiAssign = Siswa::whereDoesntHave('enrollments', function ($query) use ($idkelas) {
+    //         $query->where('idkelas', $idkelas);
+    //     })->get();
+
+    //     return view('guru.masukKelas', compact('kelas', 'siswasBelumDiAssign'));
+    // }
+
+    // undang siswa
+    // public function assignSiswa(Request $request, $idkelas)
+    // {
+    //     // Validasi form jika diperlukan
+    //     $request->validate([
+    //         'idsiswa' => 'required|exists:siswa,idsiswa',
+    //     ]);
+
+    //     // Cek apakah siswa sudah di-assign ke kelas tersebut
+    //     $enrollmentExists = Enrollment::where('idkelas', $idkelas)
+    //         ->where('idsiswa', $request->idsiswa)
+    //         ->exists();
+
+    //     if (!$enrollmentExists) {
+    //         // Jika belum di-assign, tambahkan ke tabel enrollment
+    //         Enrollment::create([
+    //             'idkelas' => $idkelas,
+    //             'idsiswa' => $request->idsiswa,
+    //             'tanggal_enroll' => now(), // Sesuaikan dengan kebutuhan
+    //         ]);
+
+    //         return redirect()->route('route.name')->with('success', 'Siswa berhasil di-assign ke kelas.');
+    //     } else {
+    //         return redirect()->route('route.name')->with('error', 'Siswa sudah di-assign ke kelas tersebut.');
+    //     }
+    // }
 
     // add tugas
     public function store(Request $request)
@@ -99,7 +149,7 @@ class TugasKuisController extends Controller
 
             DB::commit();
             // Redirect atau kembalikan respons sesuai kebutuhan
-            return redirect()->route('tugaskuis.index')->with('success', 'kuis baru berhasil ditambahkan.');
+            return redirect()->route('tugaskuis.index')->with('success', 'Kuis baru berhasil ditambahkan.');
         }
 
         catch (\Exception $e) 
@@ -108,6 +158,43 @@ class TugasKuisController extends Controller
             return redirect()
                 ->route('tugaskuis.index')
                 ->with(['error' => 'Gagal menambah kuis baru. Error: ' . $e->getMessage()]);
+        }
+    }
+
+    // undang siswa
+    public function store3(Request $request)
+    {
+        // Validasi data input
+        $request->validate([
+            'idenroll' => 'required|numeric',
+            'tanggal_enroll' => 'required',
+            'idsiswa' => 'required|numeric',
+            'idkelas' => 'required|numeric',
+        ]);
+
+        DB::beginTransaction();
+        try 
+        {
+            // Simpan data enrollment ke dalam database
+            Enrollment::create([
+                'idenroll' => $request->input('idenroll'),
+                'tanggal_enroll' => $request->input('tanggal_enroll'),
+                'idsiswa' => $request->input('idsiswa'),
+                'idkelas' => $request->input('idkelas'),
+            ]);
+
+            DB::commit();
+            // Redirect atau kembalikan respons sesuai kebutuhan
+            return redirect()->route('tugaskuis.index', ['idkelas' => $request->input('idkelas')])
+                ->with('success', 'Siswa berhasil diundang.');
+        }
+
+        catch (\Exception $e) 
+        {
+            DB::rollBack();
+            return redirect()
+                ->route('tugaskuis.index')
+                ->with(['error' => 'Gagal mengundang siswa. Error: ' . $e->getMessage()]);
         }
     }
 
@@ -248,5 +335,65 @@ class TugasKuisController extends Controller
                 ->withErrors(['error' => 'Gagal menghapus kuis. Error: ' . $e->getMessage()]);
         }
     }
+
+    // // delete siswa
+    // public function destroy3($idenroll)
+    // {
+    //     DB::beginTransaction();
+
+    //     try {
+    //         Enrollment::where('idenroll', $idenroll)->delete();
+    
+    //         DB::commit();
+    
+    //         return redirect()
+    //             ->route('tugaskuis.index')
+    //             ->with('success', 'Siswa berhasil dihapus.');
+    //     } catch (\Exception $e) {
+    //         DB::rollBack();
+    
+    //         return redirect()
+    //             ->route('tugaskuis.index')
+    //             ->withErrors(['error' => 'Gagal menghapus siswa. Error: ' . $e->getMessage()]);
+    //     }
+    // }
+
+    // delete siswa
+    // public function destroy3($idenroll)
+    // {
+    //     try {
+    //         DB::beginTransaction();
+
+    //         // Retrieve the idkelas before deleting the enrollment record
+    //         $enrollment = Enrollment::where('idenroll', $idenroll)->first();
+
+    //         if (!$enrollment) {
+    //             // Handle the case where the enrollment record is not found
+    //             DB::rollBack();
+    //             return redirect()
+    //                 ->route('tugaskuis.index')
+    //                 ->withErrors(['error' => 'Enrollment record not found.']);
+    //         }
+
+    //         $idkelas = $enrollment->idkelas;
+
+    //         Enrollment::where('idenroll', $idenroll)->delete();
+
+    //         DB::commit();
+
+    //         // Redirect to tugaskuis.index with the required idkelas parameter
+    //         return redirect()
+    //             ->route('tugaskuis.index', ['idkelas' => $idkelas])
+    //             ->with('success', 'Siswa berhasil dihapus.');
+    //     } catch (\Exception $e) {
+    //         DB::rollBack();
+
+    //         $idkelas = $enrollment->idkelas;
+
+    //         return redirect()
+    //             ->route('tugaskuis.index', ['idkelas' => $idkelas])
+    //             ->withErrors(['error' => 'Gagal menghapus siswa. Error: ' . $e->getMessage()]);
+    //     }
+    // }
 
 }

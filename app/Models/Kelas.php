@@ -28,4 +28,10 @@ class Kelas extends Model
         return $this->belongsTo(Guru::class, 'idguru');
     }
 
+    // Relationship with Siswa through Enrollment
+    public function siswas()
+    {
+        return $this->belongsToMany(Siswa::class, 'enrollment', 'idkelas', 'idsiswa', 'idkelas', 'idsiswa');
+    }
+
 }
