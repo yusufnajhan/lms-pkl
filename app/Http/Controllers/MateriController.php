@@ -6,19 +6,21 @@ use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\Materi;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class MateriController extends Controller
 {
-    public function index()
+    public function index(int $idkelas)
     {
-        $materis = Materi::all();
-        return view('guru.viewMateri', compact('materis'));
+        $kelas = Kelas::findOrFail($idkelas);
+        $materis = Materi::where('idkelas', $idkelas)->get();
+        return view('guru.viewMateri', compact('kelas','materis'));
     }
 
-    public function create()
+    public function create(int $idkelas)
     {
-        $kelass = Kelas::pluck('idkelas', 'idkelas');
-        return view('guru.tambahMateri', compact('kelass'));
+        $kelas = Kelas::findOrFail($idkelas);
+        return view('guru.tambahMateri', compact('kelas'));
     }
 
     public function store(Request $request)
@@ -31,6 +33,7 @@ class MateriController extends Controller
             'tanggal_upload' => 'required|date',
             'idkelas' => 'required|numeric',
         ]);
+        $idkelas = $request->input('idkelas');
 
         if ($request->file('file_materi')) {
             $file_materi = $request->file('file_materi')->store('file_materi', 'public');
@@ -50,21 +53,69 @@ class MateriController extends Controller
 
             DB::commit();
             // Redirect atau kembalikan respons sesuai kebutuhan
-            return redirect()->route('materi.index')->with('success', 'Materi baru berhasil diupload.');
+            return redirect()->route('materi.index', $idkelas)->with('success', 'Materi baru berhasil diupload.');
         }
 
         catch (\Exception $e) 
         {
             DB::rollBack();
             return redirect()
-                ->route('materi.index')
+                ->route('materi.index', $idkelas)
                 ->with(['error' => 'Gagal upload materi baru. Error: ' . $e->getMessage()]);
         }
     }
 
     public function read(int $idmateri)
     {
-        
-        return view('guru.readMateri');
+        $materi = Materi::where('idmateri', $idmateri)->first();
+        $kelas = Kelas::where('idkelas', $materi->idkelas)->first();
+
+        return view('guru.readMateri', compact('materi', 'kelas'));
+    }
+
+    public function edit(int $idmateri)
+    {
+        $materi = Materi::where('idmateri', $idmateri)->first();
+        $kelas = Kelas::where('idkelas', $materi->idkelas)->first();
+
+        return view('guru.editMateri', compact('materi', 'kelas'));
+    }
+
+    public function update(Request $request, int $idmateri)
+    {
+        $request->validate([
+            'judul_materi' => 'required',
+            'tanggal_upload' => 'required|date',
+            'file_materi' => 'file|max:25600',
+        ]);
+        $idkelas = $request->input('idkelas');
+
+        if ($request->file('file_materi')) {
+            Storage::delete($request->input('oldFile'));
+            $file_materi = $request->file('file_materi')->store('file_materi', 'public');
+        }
+
+        DB::beginTransaction();
+        try {
+            Materi::where('idmateri', $idmateri)->update([
+                'judul_materi' => $request->input('judul_materi'),
+                'file_materi' => $file_materi,
+                'tanggal_upload' => $request->input('tanggal_upload'),
+            ]);
+            DB::commit();
+
+            return redirect()
+                ->route('materi.index', $idkelas)
+                ->with('success', 'Materi berhasil diperbarui.');
+
+        }
+
+        catch (\Exception $e) 
+        {
+            DB::rollBack();
+            return redirect()
+                ->route('materi.index', $idkelas)
+                ->withErrors(['error' => 'Gagal memperbarui materi. Error: ' . $e->getMessage()]);
+        }
     }
 }
