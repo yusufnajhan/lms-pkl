@@ -166,10 +166,12 @@ Route::post('/undangSiswa', [TugasKuisController::class, 'store3'])->name('enrol
 
 // Route::get('/nilaiTugas/{idtugas}', [NilaiTugasController::class, 'index']);
 
-Route::get('/viewMateri', [MateriController::class, 'index'])->name('materi.index');
-Route::get('/uploadMateri', [MateriController::class, 'create'])->name('materi.create');
+Route::get('/viewMateri/{idkelas}', [MateriController::class, 'index'])->name('materi.index');
+Route::get('/uploadMateri/{idkelas}', [MateriController::class, 'create'])->name('materi.create');
 Route::post('/uploadMateri', [MateriController::class, 'store'])->name('materi.store');
-Route::get('readMateri/{idmateri}', [MateriController::class, 'read'])->name('materi.read');
+Route::get('/readMateri/{idmateri}', [MateriController::class, 'read'])->name('materi.read');
+Route::get('/editMateri/{idmateri}', [MateriController::class, 'edit'])->name('materi.edit');
+Route::post('/editMateri/{idmateri}', [MateriController::class, 'update'])->name('materi.update');
 
 Route::get('/nilaiTugas', function () {
     return view('guru/nilaitugas');
