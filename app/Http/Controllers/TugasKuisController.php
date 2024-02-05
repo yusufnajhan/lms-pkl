@@ -11,11 +11,12 @@ use Illuminate\Support\Facades\DB;
 class TugasKuisController extends Controller
 {
     // read
-    public function index()
+    public function index($idkelas)
     {
-    $tugass = Tugas::all();
-    $kuiss = Kuis::all();
-    return view('guru.masukKelas', compact('tugass','kuiss'));
+        $kelas = Kelas::findOrFail($idkelas);
+        $tugass = Tugas::where('idkelas', $idkelas)->get();
+        $kuiss = Kuis::where('idkelas', $idkelas)->get();
+        return view('guru.masukKelas', compact('kelas','tugass','kuiss'));
     }
     
     public function create()

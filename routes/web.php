@@ -132,7 +132,7 @@ Route::post('/editkelasGuru/{idkelas}', [KelasController::class, 'update'])->nam
 
 Route::delete('/kelasGuru/{idkelas}', [KelasController::class, 'destroy'])->name('kelas.destroy');
 
-Route::get('/masukKelas', [TugasKuisController::class, 'index'])->name('tugaskuis.index');
+Route::get('/masukKelas/{idkelas}', [TugasKuisController::class, 'index'])->name('tugaskuis.index');
 Route::get('/tambahTugas', [TugasKuisController::class, 'create'])->name('tugas.create');
 Route::post('/tambahTugas', [TugasKuisController::class, 'store'])->name('tugas.store');
 Route::get('/editTugas/{idtugas}', [TugasKuisController::class, 'edit'])->name('tugas.edit');
