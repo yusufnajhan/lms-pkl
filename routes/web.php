@@ -162,6 +162,7 @@ Route::delete('/soalEsai/{idesai}', [EsaiController::class, 'destroy'])->name('e
 Route::get('/viewMateri', [MateriController::class, 'index'])->name('materi.index');
 Route::get('/uploadMateri', [MateriController::class, 'create'])->name('materi.create');
 Route::post('/uploadMateri', [MateriController::class, 'store'])->name('materi.store');
+Route::get('readMateri/{idmateri}', [MateriController::class, 'read'])->name('materi.read');
 
 Route::get('/nilaiTugas', function () {
     return view('guru/nilaitugas');

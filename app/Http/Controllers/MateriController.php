@@ -61,4 +61,10 @@ class MateriController extends Controller
                 ->with(['error' => 'Gagal upload materi baru. Error: ' . $e->getMessage()]);
         }
     }
+
+    public function read(int $idmateri)
+    {
+        
+        return view('guru.readMateri');
+    }
 }
