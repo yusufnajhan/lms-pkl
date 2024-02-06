@@ -91,7 +91,7 @@ class MateriController extends Controller
         $idkelas = $request->input('idkelas');
 
         if ($request->file('file_materi')) {
-            Storage::delete($request->input('oldFile'));
+            Storage::disk('public')->delete($request->input('oldFile'));
             $file_materi = $request->file('file_materi')->store('file_materi', 'public');
         }
 
@@ -99,9 +99,14 @@ class MateriController extends Controller
         try {
             Materi::where('idmateri', $idmateri)->update([
                 'judul_materi' => $request->input('judul_materi'),
-                'file_materi' => $file_materi,
                 'tanggal_upload' => $request->input('tanggal_upload'),
             ]);
+            if (isset($file_materi)) {
+                Materi::where('idmateri', $idmateri)->update([
+                    'file_materi' => $file_materi
+                ]);
+            }
+            
             DB::commit();
 
             return redirect()
@@ -115,7 +120,29 @@ class MateriController extends Controller
             DB::rollBack();
             return redirect()
                 ->route('materi.index', $idkelas)
-                ->withErrors(['error' => 'Gagal memperbarui materi. Error: ' . $e->getMessage()]);
+                ->with(['error' => 'Gagal memperbarui materi. Error: ' . $e->getMessage()]);
+        }
+    }
+
+    public function destroy($idkelas, $idmateri)
+    {
+        DB::beginTransaction();
+
+        try {
+            Materi::where('idmateri', $idmateri)->delete();
+    
+            DB::commit();
+    
+            return redirect()
+                ->route('materi.index', $idkelas)
+                ->with('success', 'Materi berhasil dihapus.');
+                
+        } catch (\Exception $e) {
+            DB::rollBack();
+    
+            return redirect()
+                ->route('materi.index', $idkelas)
+                ->with(['error' => 'Gagal menghapus materi. Error: ' . $e->getMessage()]);
         }
     }
 }

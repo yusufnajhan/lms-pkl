@@ -172,6 +172,7 @@ Route::post('/uploadMateri', [MateriController::class, 'store'])->name('materi.s
 Route::get('/readMateri/{idmateri}', [MateriController::class, 'read'])->name('materi.read');
 Route::get('/editMateri/{idmateri}', [MateriController::class, 'edit'])->name('materi.edit');
 Route::post('/editMateri/{idmateri}', [MateriController::class, 'update'])->name('materi.update');
+Route::delete('/viewMateri/{idkelas}/{idmateri}', [MateriController::class, 'destroy'])->name('materi.destroy');
 
 Route::get('/nilaiTugas', function () {
     return view('guru/nilaitugas');
