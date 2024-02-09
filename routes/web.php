@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AkunGuruController;
 use App\Http\Controllers\AkunSiswaController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\DiskusiController;
 use App\Http\Controllers\EsaiController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\QuizController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\TugasKuisController;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
