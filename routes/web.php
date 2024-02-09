@@ -7,15 +7,19 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AkunGuruController;
 use App\Http\Controllers\AkunSiswaController;
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\EsaiController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KuisController;
 use App\Http\Controllers\MasukKelasController;
 use App\Http\Controllers\NilaiTugasController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\TugasKuisController;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +34,24 @@ use App\Http\Controllers\TugasKuisController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+// coba kuis pakai inertia
+Route::get('/kuis', function () {
+    return Inertia('Home');
+});
+
+Route::get('/questions', [QuestionController::class, 'index'])->name('questions');
+Route::post('/questions', [QuestionController::class, 'store']);
+Route::put('/questions', [QuestionController::class, 'update']);
+Route::delete('/questions/{question}', [QuestionController::class, 'destroy']);
+Route::put('/answers', [AnswerController::class, 'update']);
+
+Route::get('/quiz', [QuizController::class, 'index']);
+Route::post('/results', [QuizController::class, 'results']);
+
+Route::fallback(function(){
+    return Inertia('Home');
 });
 
 // login dan dasbor
@@ -145,12 +167,12 @@ Route::get('/editKuis/{idkuis}', [TugasKuisController::class, 'edit2'])->name('k
 Route::post('/editKuis/{idkuis}', [TugasKuisController::class, 'update2'])->name('kuis.update');
 Route::delete('/masukKelas/kuis/{idkuis}', [TugasKuisController::class, 'destroy2'])->name('kuis.destroy');
 
-Route::get('/soalEsai', [EsaiController::class, 'index'])->name('esai.index');
-Route::get('/tambahEsai', [EsaiController::class, 'create'])->name('esai.create');
-Route::post('/tambahEsai', [EsaiController::class, 'store'])->name('esai.store');
-Route::get('/editEsai/{idesai}', [EsaiController::class, 'edit'])->name('esai.edit');
-Route::post('/editEsai/{idesai}', [EsaiController::class, 'update'])->name('esai.update');
-Route::delete('/soalEsai/{idesai}', [EsaiController::class, 'destroy'])->name('esai.destroy');
+// Route::get('/soalEsai', [EsaiController::class, 'index'])->name('esai.index');
+// Route::get('/tambahEsai', [EsaiController::class, 'create'])->name('esai.create');
+// Route::post('/tambahEsai', [EsaiController::class, 'store'])->name('esai.store');
+// Route::get('/editEsai/{idesai}', [EsaiController::class, 'edit'])->name('esai.edit');
+// Route::post('/editEsai/{idesai}', [EsaiController::class, 'update'])->name('esai.update');
+// Route::delete('/soalEsai/{idesai}', [EsaiController::class, 'destroy'])->name('esai.destroy');
 
 // Route::post('/masukKelas/siswa/{idkelas}', [TugasKuisController::class, 'create3'])->name('assign.siswa');
 // Route::post('/undangSiswa/{idkelas}', [TugasKuisController::class, 'assignSiswa'])->name('assign.siswa');
