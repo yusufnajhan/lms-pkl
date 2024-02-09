@@ -16,6 +16,7 @@ use App\Http\Controllers\NilaiTugasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\TugasKuisController;
+use App\Http\Controllers\DiskusiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -173,6 +174,14 @@ Route::get('/readMateri/{idmateri}', [MateriController::class, 'read'])->name('m
 Route::get('/editMateri/{idmateri}', [MateriController::class, 'edit'])->name('materi.edit');
 Route::post('/editMateri/{idmateri}', [MateriController::class, 'update'])->name('materi.update');
 Route::delete('/viewMateri/{idkelas}/{idmateri}', [MateriController::class, 'destroy'])->name('materi.destroy');
+
+Route::get('/viewDiskusi/{idkelas}', [DiskusiController::class, 'index'])->name('diskusi.index');
+Route::get('/tambahDiskusi/{idkelas}', [DiskusiController::class, 'create'])->name('diskusi.create');
+Route::post('/tambahDiskusi', [DiskusiController::class, 'store'])->name('diskusi.store');
+Route::get('/readDiskusi/{iddiskusi}', [DiskusiController::class, 'read'])->name('diskusi.read');
+Route::get('/editDiskusi/{iddiskusi}', [DiskusiController::class, 'edit'])->name('diskusi.edit');
+Route::post('/editDiskusi/{iddiskusi}', [DiskusiController::class, 'update'])->name('diskusi.update');
+Route::delete('/viewDiskusi/{idkelas}/{iddiskusi}', [DiskusiController::class, 'destroy'])->name('diskusi.destroy');
 
 Route::get('/nilaiTugas', function () {
     return view('guru/nilaitugas');
