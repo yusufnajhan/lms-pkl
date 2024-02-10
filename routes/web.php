@@ -20,6 +20,7 @@ use App\Http\Controllers\QuizController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\TugasKuisController;
+use App\Http\Controllers\CommentController;
 use Inertia\Inertia;
 
 /*
@@ -204,6 +205,8 @@ Route::get('/readDiskusi/{iddiskusi}', [DiskusiController::class, 'read'])->name
 Route::get('/editDiskusi/{iddiskusi}', [DiskusiController::class, 'edit'])->name('diskusi.edit');
 Route::post('/editDiskusi/{iddiskusi}', [DiskusiController::class, 'update'])->name('diskusi.update');
 Route::delete('/viewDiskusi/{idkelas}/{iddiskusi}', [DiskusiController::class, 'destroy'])->name('diskusi.destroy');
+
+Route::post('/tambahKomen', [CommentController::class, 'store'])->name('comments.store');
 
 Route::get('/nilaiTugas', function () {
     return view('guru/nilaitugas');
