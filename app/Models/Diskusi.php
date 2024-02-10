@@ -26,4 +26,9 @@ class Diskusi extends Model
         return $this->belongsTo(Kelas::class, 'idkelas');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'iddiskusi')->whereNull('idparent');
+    }
+
 }
