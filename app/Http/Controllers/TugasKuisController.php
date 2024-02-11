@@ -22,23 +22,26 @@ class TugasKuisController extends Controller
         return view('guru.masukKelas', compact('kelas','tugass','kuiss','enrollments'));
     }
     
-    public function create()
+    public function create($idkelas)
     {
-        $kelass = Kelas::pluck('idkelas', 'idkelas');
+        $kelass = Kelas::findOrFail($idkelas);
+        // $kelass = Kelas::pluck('idkelas', 'idkelas');
         return view('guru.tambahTugas', compact('kelass'));
     }
 
-    public function create2()
+    public function create2($idkelas)
     {
-        $kelass = Kelas::pluck('idkelas', 'idkelas');
+        $kelass = Kelas::findOrFail($idkelas);
+        // $kelass = Kelas::pluck('idkelas', 'idkelas');
         return view('guru.tambahKuis', compact('kelass'));
     }
 
-    public function create3()
+    public function create3($idkelas)
     {
-        $kelass = Kelas::pluck('idkelas', 'idkelas');
+        $kelas = Kelas::findOrFail($idkelas);
+        // $kelass = Kelas::pluck('idkelas', 'idkelas');
         $siswas = Siswa::pluck('idsiswa', 'idsiswa');
-        return view('guru.undangSiswa', compact('kelass','siswas'));
+        return view('guru.undangSiswa', compact('kelas','siswas'));
     }
 
     // public function create3($idkelas)
@@ -93,6 +96,7 @@ class TugasKuisController extends Controller
             'tanggal_selesai' => 'required|date',
             'idkelas' => 'required|numeric',
         ]);
+        $idkelas = $request->input('idkelas');
 
         DB::beginTransaction();
         try 
@@ -109,14 +113,14 @@ class TugasKuisController extends Controller
 
             DB::commit();
             // Redirect atau kembalikan respons sesuai kebutuhan
-            return redirect()->route('tugaskuis.index')->with('success', 'Tugas baru berhasil ditambahkan.');
+            return redirect()->route('tugaskuis.index', $idkelas)->with('success', 'Tugas baru berhasil ditambahkan.');
         }
 
         catch (\Exception $e) 
         {
             DB::rollBack();
             return redirect()
-                ->route('tugaskuis.index')
+                ->route('tugaskuis.index', $idkelas)
                 ->with(['error' => 'Gagal menambah tugas baru. Error: ' . $e->getMessage()]);
         }
     }
@@ -133,6 +137,7 @@ class TugasKuisController extends Controller
             'tanggal_selesai' => 'required|date',
             'idkelas' => 'required|numeric',
         ]);
+        $idkelas = $request->input('idkelas');
 
         DB::beginTransaction();
         try 
@@ -149,14 +154,14 @@ class TugasKuisController extends Controller
 
             DB::commit();
             // Redirect atau kembalikan respons sesuai kebutuhan
-            return redirect()->route('tugaskuis.index')->with('success', 'Kuis baru berhasil ditambahkan.');
+            return redirect()->route('tugaskuis.index', $idkelas)->with('success', 'Kuis baru berhasil ditambahkan.');
         }
 
         catch (\Exception $e) 
         {
             DB::rollBack();
             return redirect()
-                ->route('tugaskuis.index')
+                ->route('tugaskuis.index', $idkelas)
                 ->with(['error' => 'Gagal menambah kuis baru. Error: ' . $e->getMessage()]);
         }
     }
@@ -171,6 +176,18 @@ class TugasKuisController extends Controller
             'idsiswa' => 'required|numeric',
             'idkelas' => 'required|numeric',
         ]);
+        $idkelas = $request->input('idkelas');
+
+        // Memeriksa apakah siswa sudah diundang pada kelas yang sama
+        $existingEnrollment = Enrollment::where('idsiswa', $request->input('idsiswa'))
+            ->where('idkelas', $request->input('idkelas'))
+            ->first();
+
+        if ($existingEnrollment) {
+            return redirect()
+                ->route('tugaskuis.index', ['idkelas' => $request->input('idkelas')])
+                ->with(['error' => 'Siswa sudah diundang pada kelas yang sama.']);
+        }
 
         DB::beginTransaction();
         try 
@@ -185,7 +202,7 @@ class TugasKuisController extends Controller
 
             DB::commit();
             // Redirect atau kembalikan respons sesuai kebutuhan
-            return redirect()->route('tugaskuis.index', ['idkelas' => $request->input('idkelas')])
+            return redirect()->route('tugaskuis.index', $idkelas)
                 ->with('success', 'Siswa berhasil diundang.');
         }
 
@@ -193,7 +210,7 @@ class TugasKuisController extends Controller
         {
             DB::rollBack();
             return redirect()
-                ->route('tugaskuis.index')
+                ->route('tugaskuis.index', $idkelas)
                 ->with(['error' => 'Gagal mengundang siswa. Error: ' . $e->getMessage()]);
         }
     }

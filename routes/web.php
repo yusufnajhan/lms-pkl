@@ -159,13 +159,13 @@ Route::post('/editkelasGuru/{idkelas}', [KelasController::class, 'update'])->nam
 Route::delete('/kelasGuru/{idkelas}', [KelasController::class, 'destroy'])->name('kelas.destroy');
 
 Route::get('/masukKelas/{idkelas}', [TugasKuisController::class, 'index'])->name('tugaskuis.index');
-Route::get('/tambahTugas', [TugasKuisController::class, 'create'])->name('tugas.create');
+Route::get('/tambahTugas/{idkelas}', [TugasKuisController::class, 'create'])->name('tugas.create');
 Route::post('/tambahTugas', [TugasKuisController::class, 'store'])->name('tugas.store');
 Route::get('/editTugas/{idtugas}', [TugasKuisController::class, 'edit'])->name('tugas.edit');
 Route::post('/editTugas/{idtugas}', [TugasKuisController::class, 'update'])->name('tugas.update');
 Route::delete('/masukKelas/tugas/{idtugas}', [TugasKuisController::class, 'destroy'])->name('tugas.destroy');
 
-Route::get('/tambahKuis', [TugasKuisController::class, 'create2'])->name('kuis.create');
+Route::get('/tambahKuis/{idkelas}', [TugasKuisController::class, 'create2'])->name('kuis.create');
 Route::post('/tambahKuis', [TugasKuisController::class, 'store2'])->name('kuis.store');
 Route::get('/editKuis/{idkuis}', [TugasKuisController::class, 'edit2'])->name('kuis.edit');
 Route::post('/editKuis/{idkuis}', [TugasKuisController::class, 'update2'])->name('kuis.update');
@@ -181,7 +181,7 @@ Route::delete('/masukKelas/kuis/{idkuis}', [TugasKuisController::class, 'destroy
 // Route::post('/masukKelas/siswa/{idkelas}', [TugasKuisController::class, 'create3'])->name('assign.siswa');
 // Route::post('/undangSiswa/{idkelas}', [TugasKuisController::class, 'assignSiswa'])->name('assign.siswa');
 
-Route::get('/undangSiswa', [TugasKuisController::class, 'create3'])->name('enroll.create');
+Route::get('/undangSiswa/{idkelas}', [TugasKuisController::class, 'create3'])->name('enroll.create');
 Route::post('/undangSiswa', [TugasKuisController::class, 'store3'])->name('enroll.store');
 
 
