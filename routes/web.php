@@ -21,6 +21,8 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\TugasKuisController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\KelasSiswaController;
+use App\Http\Controllers\MasukKelasSiswaController;
 use Inertia\Inertia;
 
 /*
@@ -244,12 +246,18 @@ Route::get('/dasborSiswa', function () {
 // Route::get('/guruteman', function () {
 //     return view('siswa/guruteman');
 // });
-Route::get('/kelasSiswa', function () {
-    return view('siswa/kelas');
-});
-Route::get('/kelasMatematika', function () {
-    return view('siswa/mat');
-});
+// Route::get('/kelasSiswa', function () {
+//     return view('siswa/kelas');
+// });
+
+Route::get('/kelasSiswa', [KelasSiswaController::class, 'index'])->name('siswakelas.index');
+
+// Route::get('/kelasMatematika', function () {
+//     return view('siswa/mat');
+// });
+
+Route::get('/masukKelasSiswa/{idkelas}', [MasukKelasSiswaController::class, 'index'])->name('siswamasuk.index');
+
 Route::get('/tugasMatematika', function () {
     return view('siswa/mattugas');
 });

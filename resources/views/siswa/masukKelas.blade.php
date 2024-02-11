@@ -15,13 +15,13 @@
           <li>
             <div class="flex items-center">
               <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-              <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Kelas Matematika 7A</span>
+              <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">{{ $kelas->mata_pelajaran }} {{ $kelas->jenjang_kelas }}{{ $kelas->indeks_kelas }}</span>
             </div>
           </li>
         </ol>
     </nav>
-    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Kelas Matematika 7A</h1>
-    <h1 class="text-base text-gray-900 sm:text-lg dark:text-white">Deskripsi kelas</h1>
+    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Kelas {{ $kelas->mata_pelajaran }} {{ $kelas->jenjang_kelas }}{{ $kelas->indeks_kelas }}</h1>
+    {{-- <h1 class="text-base text-gray-900 sm:text-lg dark:text-white">Deskripsi kelas</h1> --}}
 </div>
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
     <div class="sm:hidden">
@@ -57,6 +57,7 @@
             </select>
           </div>        
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+              @foreach($tugass as $tugas)
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
@@ -66,10 +67,10 @@
                     </div>
                     <div class="flex-1 min-w-0">
                       <p class="font-medium text-gray-900 truncate dark:text-white">
-                        Nama tugas
+                        {{ $tugas->judul_tugas }}
                       </p>
                       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                        Tenggat waktu
+                        {{ $tugas->tanggal_selesai }}
                       </p>
                     </div>
                     <td class="p-4 whitespace-nowrap">
@@ -82,6 +83,9 @@
                     </a>
                   </div>
                 </li>
+                @endforeach
+
+                @foreach($kuiss as $kuis)
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
@@ -91,10 +95,10 @@
                     </div>
                     <div class="flex-1 min-w-0">
                         <p class="font-medium text-gray-900 truncate dark:text-white">
-                            Nama kuis
+                          {{ $kuis->judul_kuis }}
                         </p>
                         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            Tenggat waktu
+                          {{ $kuis->tanggal_selesai }}
                         </p>
                     </div>
                     <td class="p-4 whitespace-nowrap">
@@ -107,56 +111,7 @@
                     </a>
                   </div>
                 </li>
-                <li class="py-3 sm:py-4">
-                  <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                      </svg>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="font-medium text-gray-900 truncate dark:text-white">
-                            Nama kuis
-                        </p>
-                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            Tenggat waktu
-                        </p>
-                    </div>
-                    <td class="p-4 whitespace-nowrap">
-                      <span
-                        class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md border border-red-100 dark:border-red-400 dark:bg-gray-700 dark:text-red-400">Belum dikerjakan</span>
-                    </td>
-                    <a href="/kuisMatematika" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
-                      Detail
-                      <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </a>
-                  </div>
-                </li>
-                <li class="py-3 sm:py-4">
-                  <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                      </svg>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="font-medium text-gray-900 truncate dark:text-white">
-                            Nama tugas
-                        </p>
-                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            Tenggat waktu
-                        </p>
-                    </div>
-                    <td class="p-4 whitespace-nowrap">
-                      <span
-                        class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md border border-red-100 dark:border-red-400 dark:bg-gray-700 dark:text-red-400">Belum dikerjakan</span>
-                    </td>
-                      <a href="/tugasMatematika" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
-                        Detail
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                      </a>
-                  </div>
-                </li>
+                @endforeach
             </ul>
         </div>
         <div class="hidden pt-4" id="about" role="tabpanel" aria-labelledby="about-tab">
@@ -303,6 +258,7 @@
       </div>
       <div class="hidden pt-4" id="teman" role="tabpanel" aria-labelledby="teman-tab">
         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+          @foreach($enrollments as $enrollment)
           <li class="py-3 sm:py-4">
             <div class="flex items-center space-x-4">
               <div class="flex-shrink-0">
@@ -310,83 +266,12 @@
               </div>
               <div class="flex-1 min-w-0">
                 <p class="font-medium text-gray-900 truncate dark:text-white">
-                  Nama teman
+                  {{ $enrollment->siswa->nama }}
                 </p>
               </div>
             </div>
           </li>
-          <li class="py-3 sm:py-4">
-            <div class="flex items-center space-x-4">
-              <div class="flex-shrink-0">
-                <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/bonnie-green.png" alt="Neil image">
-              </div>
-              <div class="flex-1 min-w-0">
-                  <p class="font-medium text-gray-900 truncate dark:text-white">
-                  Nama teman
-                  </p>
-              </div>
-            </div>
-          </li>
-          <li class="py-3 sm:py-4">
-              <div class="flex items-center space-x-4">
-                <div class="flex-shrink-0">
-                  <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
-                </div>
-                <div class="flex-1 min-w-0">
-                  <p class="font-medium text-gray-900 truncate dark:text-white">
-                    Nama teman
-                  </p>
-                </div>
-              </div>
-          </li>
-          <li class="py-3 sm:py-4">
-              <div class="flex items-center space-x-4">
-                <div class="flex-shrink-0">
-                  <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
-                </div>
-                <div class="flex-1 min-w-0">
-                  <p class="font-medium text-gray-900 truncate dark:text-white">
-                    Nama teman
-                  </p>
-                </div>
-              </div>
-          </li>
-          <li class="py-3 sm:py-4">
-              <div class="flex items-center space-x-4">
-                <div class="flex-shrink-0">
-                  <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
-                </div>
-                <div class="flex-1 min-w-0">
-                  <p class="font-medium text-gray-900 truncate dark:text-white">
-                    Nama teman
-                  </p>
-                </div>
-              </div>
-          </li>
-          <li class="py-3 sm:py-4">
-              <div class="flex items-center space-x-4">
-                <div class="flex-shrink-0">
-                  <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
-                </div>
-                <div class="flex-1 min-w-0">
-                  <p class="font-medium text-gray-900 truncate dark:text-white">
-                    Nama teman
-                  </p>
-                </div>
-              </div>
-          </li>
-          <li class="py-3 sm:py-4">
-              <div class="flex items-center space-x-4">
-                <div class="flex-shrink-0">
-                  <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
-                </div>
-                <div class="flex-1 min-w-0">
-                  <p class="font-medium text-gray-900 truncate dark:text-white">
-                    Nama teman
-                  </p>
-                </div>
-              </div>
-          </li>
+          @endforeach
         </ul>
     </div>
     </div>
