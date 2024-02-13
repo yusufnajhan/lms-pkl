@@ -212,6 +212,10 @@ Route::post('/tambahKomen', [CommentController::class, 'store'])->name('comments
 Route::post('/editKomen/{idcomment}', [CommentController::class, 'update'])->name('comments.update');
 Route::post('/deleteKomen/{idcomment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
+//siswa
+Route::get('/siswa/viewDiskusi/{idkelas}', [DiskusiController::class, 'index2'])->name('diskusi.index2');
+Route::get('/siswa/readDiskusi/{iddiskusi}', [DiskusiController::class, 'read2'])->name('diskusi.read2');
+
 Route::get('/nilaiTugas', function () {
     return view('guru/nilaitugas');
 });

@@ -14,7 +14,7 @@ class KelasSiswaController extends Controller
      */
     public function index()
     {
-        $kelass = Auth::user()->siswa->kelas;
+        $kelass = Auth::user()->dataPribadi->kelas;
 
         return view('siswa.kelas', compact('kelass'));
     }

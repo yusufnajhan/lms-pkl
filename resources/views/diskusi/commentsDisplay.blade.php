@@ -56,13 +56,13 @@
       <!-- Modal content -->
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
           <!-- Modal body -->
-          <div class="p-6 pt-0 text-center">
-              <svg class="w-16 h-16 mx-auto text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <div class="p-6 pt-2 text-center">
+            <h2 class="mt-4 mb-4 text-2xl font-semibold text-gray-900 dark:text-white">Edit Comment</h2>
               <form method="POST" action="{{ route('comments.update', $comment->idcomment) }}" >
                 @csrf
-                <div> 
+                <div class="border border-gray-500 rounded-md"> 
                 <textarea id="body" name="body" rows="6"
-                    class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                    class="px-3 py-2 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
                     required>{{ $comment->body }}</textarea>
                 </div>
                 <div class="flex justify-between mt-4">
