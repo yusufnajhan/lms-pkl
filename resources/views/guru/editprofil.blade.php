@@ -5,8 +5,8 @@
         <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
           <li class="inline-flex items-center">
             <a href="/berandaGuru"
-                class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 ">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                class="flex items-center p-2 text-base text-red-900 rounded-lg hover:bg-red-100 group dark:text-red-200 dark:hover:bg-red-700 ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                 </svg>                                                                         
                 <span class="ml-3" sidebar-toggle-item="">Beranda</span>
@@ -73,7 +73,11 @@
                 </div>
                 <div class="col-span-6 sm:col-span-3">
                     <label for="email"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-Mail</label>
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-Mail
+                        <span class="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                            (Maks. 255 karakter)
+                        </span>
+                    </label>
                     <input type="email" name="email" id="email"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         value="{{ $guru->email }}" wfd-id="id2" >
@@ -85,7 +89,11 @@
                 </div>
                 <div class="col-span-6 sm:col-span-3">
                     <label for="nomor_hp"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No HP</label>
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No HP
+                        <span class="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                            (Maks. 15 karakter)
+                        </span>
+                    </label>
                     <input type="number" name="nomor_hp" id="nomor_hp"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         value="{{ $guru->nomor_hp }}" wfd-id="id2" >

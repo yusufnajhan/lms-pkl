@@ -14,7 +14,8 @@ class AdminController extends Controller
     public function edit(Request $request)
     {
         $user = $request->user();
-        $idadmin = $request->user()->admin->idadmin;
+        // $idadmin = $request->user()->admin->idadmin;
+        $idadmin = $request->user()->dataPribadi->idadmin;
 
         $admin = Admin::where('idadmin', $idadmin)->first();
 
@@ -24,7 +25,8 @@ class AdminController extends Controller
     public function showEdit(Request $request)
     {
         $user = $request->user();
-        $idadmin = $request->user()->admin->idadmin;
+        // $idadmin = $request->user()->admin->idadmin;
+        $idadmin = $request->user()->dataPribadi->idadmin;
         
         $admin = Admin::where('idadmin', $idadmin)->first();
         return view('admin.editprofil', ['user' => $user, 'admin' => $admin]);
@@ -33,7 +35,8 @@ class AdminController extends Controller
     public function update(Request $request)
     {
         $user = $request->user();
-        $idadmin = $request->user()->admin->idadmin;
+        // $idadmin = $request->user()->admin->idadmin;
+        $idadmin = $request->user()->dataPribadi->idadmin;
 
         $validated = $request->validate([
             'nomor_hp' => 'required|numeric',

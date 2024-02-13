@@ -80,10 +80,10 @@
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
                 <select name="jenis_kelamin" id="jenis_kelamin"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ old('jenis_kelamin') }}" wfd-id="id2">
+                    wfd-id="id2">
                     <option value="" disabled selected>Pilih Jenis Kelamin</option>
-                    <option value="Pria">Pria</option>
-                    <option value="Wanita">Wanita</option>
+                    <option value="Pria"{{ old('jenis_kelamin') == 'Pria' ? 'selected' : ''}}>Pria</option>
+                    <option value="Wanita"{{ old('jenis_kelamin') == 'Wanita' ? 'selected' : ''}}>Wanita</option>
                 </select>
             
                     @error('jenis_kelamin')

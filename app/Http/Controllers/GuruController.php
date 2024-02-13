@@ -91,7 +91,8 @@ class GuruController extends Controller
     public function edit(Request $request)
     {
         $user = $request->user();
-        $idguru = $request->user()->guru->idguru;
+        // $idguru = $request->user()->guru->idguru;
+        $idguru = $request->user()->dataPribadi->idguru;
 
         $guru = Guru::where('idguru', $idguru)->first();
 
@@ -101,7 +102,8 @@ class GuruController extends Controller
     public function showEdit(Request $request)
     {
         $user = $request->user();
-        $idguru = $request->user()->guru->idguru;
+        // $idguru = $request->user()->guru->idguru;
+        $idguru = $request->user()->dataPribadi->idguru;
         
         $guru = Guru::where('idguru', $idguru)->first();
         return view('guru.editprofil', ['user' => $user, 'guru' => $guru]);
@@ -110,7 +112,8 @@ class GuruController extends Controller
     public function update(Request $request)
     {
         $user = $request->user();
-        $idguru = $request->user()->guru->idguru;
+        // $idguru = $request->user()->guru->idguru;
+        $idguru = $request->user()->dataPribadi->idguru;
 
         $validated = $request->validate([
             'nomor_hp' => 'required|numeric',

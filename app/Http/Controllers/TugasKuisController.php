@@ -241,6 +241,7 @@ class TugasKuisController extends Controller
             'tanggal_selesai' => 'required|date',
             'idkelas' => 'required|numeric',
         ]);
+        $idkelas = $request->input('idkelas');
 
         DB::beginTransaction();
         try {
@@ -248,7 +249,7 @@ class TugasKuisController extends Controller
             DB::commit();
 
             return redirect()
-                ->route('tugaskuis.index')
+                ->route('tugaskuis.index', $idkelas)
                 ->with('success', 'Tugas berhasil diperbarui.');
 
         }
@@ -257,7 +258,7 @@ class TugasKuisController extends Controller
         {
             DB::rollBack();
             return redirect()
-                ->route('tugaskuis.index')
+                ->route('tugaskuis.index', $idkelas)
                 ->withErrors(['error' => 'Gagal memperbarui tugas. Error: ' . $e->getMessage()]);
         }
     }

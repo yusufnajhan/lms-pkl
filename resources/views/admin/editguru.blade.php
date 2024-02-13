@@ -27,13 +27,13 @@
         <div class="text-center text-gray-500 dark:text-gray-400">
             <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar">
         </div>
-        <div class="col-span-6 sm:col-full">
+        {{-- <div class="col-span-6 sm:col-full">
             <a href="/editprofilAdmin"
                 class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                 type="submit">
                 Ubah foto profil
             </a>
-        </div>
+        </div> --}}
     </div>
     <form action="{{ route('guru.update', $idguru) }}" method="POST">
         @csrf
@@ -75,9 +75,10 @@
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
                 <select name="jenis_kelamin" id="jenis_kelamin"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ $jenis_kelamin }}" wfd-id="id2">
-                    <option value="Pria">Pria</option>
-                    <option value="Wanita">Wanita</option>
+                    wfd-id="id2">
+                    <option value="" disabled selected>Pilih Jenis Kelamin</option>
+                    <option value="Pria"{{ $jenis_kelamin === 'Pria' ? 'selected' : '' }}>Pria</option>
+                    <option value="Wanita"{{ $jenis_kelamin === 'Wanita' ? 'selected' : '' }}>Wanita</option>
                 </select>
             
                     @error('jenis_kelamin')
