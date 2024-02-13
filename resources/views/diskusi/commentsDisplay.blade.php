@@ -14,7 +14,7 @@
         <footer class="flex justify-between items-center mb-1">
             <div class="flex items-center">
                 <!-- Menampilkan username pengguna -->
-                <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">{{ $comment->user->username }}</p>
+                <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">{{ $comment->user->dataPribadi->nama }}</p>
                 <!-- Menampilkan tanggal pembuatan komentar -->
                 <p class="text-sm text-gray-600 dark:text-gray-400"><time>{{ $comment->created_at->format('d M Y') }}</time></p>
             </div>
