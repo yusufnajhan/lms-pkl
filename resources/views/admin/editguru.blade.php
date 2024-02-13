@@ -5,8 +5,8 @@
         <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
           <li class="inline-flex items-center">
             <a href="/akunGuru"
-                class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 ">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                class="flex items-center p-2 text-base text-red-900 rounded-lg hover:bg-red-100 group dark:text-red-200 dark:hover:bg-red-700 ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
                 </svg>                                                                                                                                                                                        
                 <span class="ml-3" sidebar-toggle-item="">Akun Guru</span>
@@ -40,7 +40,11 @@
         <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-3">
                 <label for="nama"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
+                    <span class="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                        (Maks. 255 karakter)
+                    </span>
+                </label>
                 <input type="text" name="nama" id="nama"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     value="{{ $nama }}" wfd-id="id1" >
@@ -52,7 +56,11 @@
             </div>
             <div class="col-span-6 sm:col-span-3">
                 <label for="nik"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NUPTK</label>
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NUPTK
+                    <span class="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                        (Maks. 20 karakter)
+                    </span>
+                </label>
                 <input type="text" name="nik" id="nik"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     value="{{ $nik }}" wfd-id="id2" >
@@ -90,7 +98,11 @@
             </div>
             <div class="col-span-6 sm:col-span-3">
                 <label for="email"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-Mail</label>
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-Mail
+                    <span class="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                        (Maks. 255 karakter)
+                    </span>
+                </label>
                 <input type="email" name="email" id="email"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     value="{{ $email }}" wfd-id="id2" >
@@ -102,7 +114,11 @@
             </div>
             <div class="col-span-6 sm:col-span-3">
                 <label for="nomor_hp"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No HP</label>
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No HP
+                    <span class="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                        (Maks. 15 karakter)
+                    </span>
+                </label>
                 <input type="number" name="nomor_hp" id="nomor_hp"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     value="{{ $nomor_hp }}" wfd-id="id2" >

@@ -241,7 +241,7 @@
                 </div> --}}
             </main>
             <p class="my-10 text-sm text-center text-gray-500">
-                &copy; PKL 2024. Karya Divia dan Yusuf.
+                &copy; PKL Informatika 2024. Karya Divia dan Yusuf.
             </p>
         </div>
 

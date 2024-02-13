@@ -83,7 +83,7 @@ class AdminController extends Controller
 
             return redirect()
                 ->route('edit1')
-                ->with('success', 'Profil berhasil diperbarui');
+                ->with('success', 'Profil berhasil diperbarui.');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()
