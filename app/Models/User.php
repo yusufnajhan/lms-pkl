@@ -42,19 +42,18 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function admin()
+    public function dataPribadi()
     {
-        return $this->hasOne(Admin::class, 'iduser');
-    }
-    
-    public function guru()
-    {
-        return $this->hasOne(Guru::class, 'iduser');
-    }
-
-    public function siswa()
-    {
-        return $this->hasOne(Siswa::class, 'iduser');
+        switch ($this->idrole) {
+            case 1:
+                return $this->hasOne(Admin::class, 'iduser');
+            case 2:
+                return $this->hasOne(Guru::class, 'iduser');
+            case 3:
+                return $this->hasOne(Siswa::class, 'iduser');
+            default:
+                return null;
+        }
     }
     
 }

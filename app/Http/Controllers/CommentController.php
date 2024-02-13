@@ -16,15 +16,15 @@ class CommentController extends Controller
         DB::beginTransaction();
         try 
         {
-            $id = Comment::max('id');
-            if ($id === null) {
-                $id = 8112;
+            $idcomment = Comment::max('idcomment');
+            if ($idcomment === null) {
+                $idcomment = 8112;
             } else {
-                $id = $id + 1;
+                $idcomment = $idcomment + 1;
             }
             // Simpan data ke dalam database
             Comment::create([
-                'id' => $id,
+                'idcomment' => $idcomment,
                 'iduser' => $request->input('iduser'),
                 'iddiskusi' => $request->input('iddiskusi'),
                 'body' => $request->input('body'),
@@ -41,6 +41,49 @@ class CommentController extends Controller
             return back()
                 ->with(['error' => 'Gagal menambah comment baru. Error: ' . $e->getMessage()]);
         }
-        
+    }
+
+    public function update(Request $request, $idcomment)
+    {
+        $request->validate([
+            'body'=>'required',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            Comment::where('idcomment', $idcomment)->update([
+                'body' => $request->input('body'),                
+            ]);
+    
+            DB::commit();
+    
+            return back()->with('success', 'Comment berhasil diedit');
+                
+        } catch (\Exception $e) {
+            DB::rollBack();
+    
+            return back()
+                ->with(['error' => 'Gagal mengedit comment. Error: ' . $e->getMessage()]);
+        }
+    }
+
+    public function destroy($idcomment) 
+    {
+        DB::beginTransaction();
+
+        try {
+            Comment::where('idcomment', $idcomment)->delete();
+    
+            DB::commit();
+    
+            return back()->with('success', 'Comment berhasil dihapus');
+                
+        } catch (\Exception $e) {
+            DB::rollBack();
+    
+            return back()
+                ->with(['error' => 'Gagal menghapus comment. Error: ' . $e->getMessage()]);
+        }
     }
 }

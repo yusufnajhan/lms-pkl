@@ -9,7 +9,7 @@ class Comment extends Model
 {
     use HasFactory;
     protected $table = 'comments';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'idcomment';
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
