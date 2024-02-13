@@ -24,11 +24,11 @@ class LoginController extends Controller
 
         $user = User::where('username', $credentials['username'])->first();
         if (!$user) {
-            return back()->with('loginError', 'Username tidak ditemukan');
+            return back()->with('loginError', 'Username tidak ditemukan.');
         }
 
         if (!Hash::check($credentials['password'], $user->password)) {
-            return back()->with('loginError', 'Password salah');
+            return back()->with('loginError', 'Password salah.');
         }
 
         if(Auth::attempt($credentials)) {
@@ -37,11 +37,11 @@ class LoginController extends Controller
             $user = $request->user();
 
             if ($user->idrole === 1) {
-                return redirect('/berandaAdmin')->with('success', 'Login berhasil');
+                return redirect('/berandaAdmin')->with('success', 'Login admin berhasil.');
             } else if ($user->idrole === 2) {
-                return redirect('/berandaGuru')->with('success', 'Login berhasil');
+                return redirect('/berandaGuru')->with('success', 'Login guru berhasil.');
             } else if ($user->idrole === 3) {
-                return redirect('/berandaSiswa')->with('success', 'Login berhasil');
+                return redirect('/berandaSiswa')->with('success', 'Login siswa berhasil.');
             }
    
         };

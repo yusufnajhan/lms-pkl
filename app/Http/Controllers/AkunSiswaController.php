@@ -28,11 +28,11 @@ class AkunSiswaController extends Controller
     $request->validate([
         'idsiswa' => 'required|numeric',
         'nama' => 'required|string|max:255',
-        'nik' => 'required|numeric',
+        'nik' => 'required|string|max:20',
         'jenis_kelamin' => 'required|in:Pria,Wanita',
         'tanggal_lahir' => 'required|date',
         'email' => 'required|email|max:255',
-        'nomor_hp' => 'required|numeric',
+        'nomor_hp' => 'required|string|max:15',
         'iduser' => 'required|numeric',
         'username' => 'required|string|unique:users',
         'password' => 'required|string',
@@ -46,7 +46,7 @@ class AkunSiswaController extends Controller
                 'id' => $request->input('iduser'),
                 'username' => $request->input('username'),
                 'password' => bcrypt($request->input('password')),
-                'idrole' => 2, // ID untuk role siswa
+                'idrole' => 3, // ID untuk role siswa
             ]);
 
             // Simpan data siswa ke dalam database

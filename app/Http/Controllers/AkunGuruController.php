@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Diskusi;
+use App\Models\Enrollment;
 use Illuminate\Http\Request;
 use App\Models\Guru;
+use App\Models\Kelas;
+use App\Models\Kuis;
+use App\Models\Materi;
+use App\Models\Tugas;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -28,11 +34,11 @@ class AkunGuruController extends Controller
         $request->validate([
             'idguru' => 'required|numeric',
             'nama' => 'required|string|max:255',
-            'nik' => 'required|numeric',
+            'nik' => 'required|string|max:20',
             'jenis_kelamin' => 'required|in:Pria,Wanita',
             'tanggal_lahir' => 'required|date',
             'email' => 'required|email|max:255',
-            'nomor_hp' => 'required|numeric',
+            'nomor_hp' => 'required|string|max:15',
             'iduser' => 'required|numeric',
             'username' => 'required|string|unique:users',
             'password' => 'required|string',
@@ -151,6 +157,29 @@ class AkunGuruController extends Controller
         if ($guru){
 
             $userId = $guru->iduser;   
+            
+            // Get all kelas by the guru
+            $kelas = Kelas::where('idguru', $idguru)->get();
+
+            foreach ($kelas as $k) {
+                // Delete all enrollments for the kelas
+                Enrollment::where('idkelas', $k->idkelas)->delete();
+
+                // Delete all kuis for the kelas
+                Kuis::where('idkelas', $k->idkelas)->delete();
+
+                // Delete all materi for the kelas
+                Materi::where('idkelas', $k->idkelas)->delete();
+
+                // Delete all diskusi for the kelas
+                Diskusi::where('idkelas', $k->idkelas)->delete();
+
+                // Delete all tugas for the kelas
+                Tugas::where('idkelas', $k->idkelas)->delete();
+
+                // Delete the kelas
+                $k->delete();
+            }
 
             $guru->delete();
 
