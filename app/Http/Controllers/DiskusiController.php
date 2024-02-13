@@ -17,6 +17,13 @@ class DiskusiController extends Controller
         return view('guru.viewDiskusi', compact('kelas','diskusis'));
     }
 
+    public function index2(int $idkelas)
+    {
+        $kelas = Kelas::findOrFail($idkelas);
+        $diskusis = Diskusi::where('idkelas', $idkelas)->get();
+        return view('siswa.viewDiskusi', compact('kelas','diskusis'));
+    }
+
     public function create(int $idkelas)
     {
         $kelas = Kelas::findOrFail($idkelas);
@@ -67,6 +74,14 @@ class DiskusiController extends Controller
         $kelas = Kelas::where('idkelas', $diskusi->idkelas)->first();
 
         return view('guru.readDiskusi', compact('diskusi', 'kelas'));
+    }
+
+    public function read2(int $iddiskusi)
+    {
+        $diskusi = Diskusi::where('iddiskusi', $iddiskusi)->first();
+        $kelas = Kelas::where('idkelas', $diskusi->idkelas)->first();
+
+        return view('siswa.readDiskusi', compact('diskusi', 'kelas'));
     }
 
     public function edit(int $iddiskusi)
