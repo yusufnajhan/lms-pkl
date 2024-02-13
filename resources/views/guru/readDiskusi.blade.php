@@ -65,8 +65,6 @@
         </form>
 
         @include('diskusi.commentsDisplay', ['comments' => $diskusi->comments, 'iddiskusi' => $diskusi->iddiskusi])
-        <hr />
-
     </div>
   </section>
 

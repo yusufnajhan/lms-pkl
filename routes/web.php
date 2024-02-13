@@ -209,6 +209,8 @@ Route::post('/editDiskusi/{iddiskusi}', [DiskusiController::class, 'update'])->n
 Route::delete('/viewDiskusi/{idkelas}/{iddiskusi}', [DiskusiController::class, 'destroy'])->name('diskusi.destroy');
 
 Route::post('/tambahKomen', [CommentController::class, 'store'])->name('comments.store');
+Route::post('/editKomen/{idcomment}', [CommentController::class, 'update'])->name('comments.update');
+Route::post('/deleteKomen/{idcomment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 Route::get('/nilaiTugas', function () {
     return view('guru/nilaitugas');
