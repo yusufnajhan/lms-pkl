@@ -215,6 +215,8 @@ Route::post('/deleteKomen/{idcomment}', [CommentController::class, 'destroy'])->
 //siswa
 Route::get('/siswa/viewDiskusi/{idkelas}', [DiskusiController::class, 'index2'])->name('diskusi.index2');
 Route::get('/siswa/readDiskusi/{iddiskusi}', [DiskusiController::class, 'read2'])->name('diskusi.read2');
+Route::get('/siswa/viewMateri/{idkelas}', [MateriController::class, 'index2'])->name('materi.index2');
+Route::get('/siswa/readMateri/{idmateri}', [MateriController::class, 'read2'])->name('materi.read2');
 
 Route::get('/nilaiTugas', function () {
     return view('guru/nilaitugas');

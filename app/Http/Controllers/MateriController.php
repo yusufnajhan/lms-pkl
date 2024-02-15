@@ -17,6 +17,14 @@ class MateriController extends Controller
         return view('guru.viewMateri', compact('kelas','materis'));
     }
 
+    public function index2(int $idkelas)
+    {
+        $kelas = Kelas::findOrFail($idkelas);
+        $materis = Materi::where('idkelas', $idkelas)->get();
+        return view('siswa.viewMateri', compact('kelas','materis'));
+    }
+
+
     public function create(int $idkelas)
     {
         $kelas = Kelas::findOrFail($idkelas);
@@ -71,6 +79,14 @@ class MateriController extends Controller
         $kelas = Kelas::where('idkelas', $materi->idkelas)->first();
 
         return view('guru.readMateri', compact('materi', 'kelas'));
+    }
+
+    public function read2(int $idmateri)
+    {
+        $materi = Materi::where('idmateri', $idmateri)->first();
+        $kelas = Kelas::where('idkelas', $materi->idkelas)->first();
+
+        return view('siswa.readMateri', compact('materi', 'kelas'));
     }
 
     public function edit(int $idmateri)

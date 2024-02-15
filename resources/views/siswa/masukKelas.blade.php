@@ -38,10 +38,10 @@
           <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="faq" aria-selected="true" class="inline-block w-full p-4 rounded-tl-lg bg-red-50 hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600">Tugas dan Kuis</button>
       </li>
       <li class="w-full">
-          <button id="about-tab" data-tabs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="false" class="inline-block w-full p-4 rounded-tr-lg bg-red-50 hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600">Materi</button>
+          <a href="{{ route('materi.index2', $kelas->idkelas) }}" class="inline-block w-full p-4 rounded-tr-lg hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600 text-gray-500">Materi</a>
       </li>
       <li class="w-full">
-        <a href="{{ route('diskusi.index2', $kelas->idkelas) }}" class="inline-block w-full p-4 rounded-tr-lg bg-red-50 hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600 text-gray-500">Diskusi</a>
+          <a href="{{ route('diskusi.index2', $kelas->idkelas) }}" class="inline-block w-full p-4 rounded-tr-lg hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600 text-gray-500">Diskusi</a>
       </li>
       <li class="w-full">
         <button id="teman-tab" data-tabs-target="#teman" type="button" role="tab" aria-controls="teman" aria-selected="false" class="inline-block w-full p-4 rounded-tr-lg bg-red-50 hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600">Teman Kelas</button>
