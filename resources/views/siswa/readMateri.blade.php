@@ -43,6 +43,10 @@
                 <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $materi->tanggal_upload }}</dd>
             </div>
         </dl>
+        <dl>
+            <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Deskripsi</dt>
+            <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $materi->deskripsi_materi }}</dd>
+        </dl>
         <div class="mt-8 flex items-center space-x-4">
             <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">File Materi</dt>
             <a href="{{ asset('storage/' . $materi->file_materi) }}"

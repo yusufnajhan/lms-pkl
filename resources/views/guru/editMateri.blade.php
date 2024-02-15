@@ -43,6 +43,19 @@
             </div>
 
             <div class="col-span-6 sm:col-span-3">
+                <label for="deskripsi_materi" 
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi Materi</label>
+                <textarea id="deskripsi_materi" name="deskripsi_materi" rows="6"
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    >{{ $materi->deskripsi_materi }}</textarea>
+
+                    @error('deskripsi_materi')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+
+            </div>
+
+            <div class="col-span-6 sm:col-span-3">
                 <label for="tanggal_upload"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Upload</label>
                 <input type="date" name="tanggal_upload" id="tanggal_upload"

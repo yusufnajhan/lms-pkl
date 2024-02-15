@@ -37,6 +37,7 @@ class MateriController extends Controller
         $request->validate([
             'idmateri' => 'required|numeric',
             'judul_materi' => 'required',
+            'deskripsi_materi' => 'required',
             'file_materi' => 'required|file|max:25600',
             'tanggal_upload' => 'required|date',
             'idkelas' => 'required|numeric',
@@ -54,6 +55,7 @@ class MateriController extends Controller
             Materi::create([
                 'idmateri' => $request->input('idmateri'),
                 'judul_materi' => $request->input('judul_materi'),
+                'deskripsi_materi' => $request->input('deskripsi_materi'),
                 'file_materi' => $file_materi,
                 'tanggal_upload' => $request->input('tanggal_upload'),
                 'idkelas' => $request->input('idkelas'),
@@ -101,6 +103,7 @@ class MateriController extends Controller
     {
         $request->validate([
             'judul_materi' => 'required',
+            'deskripsi_materi' => 'required',
             'tanggal_upload' => 'required|date',
             'file_materi' => 'file|max:25600',
         ]);
@@ -115,6 +118,7 @@ class MateriController extends Controller
         try {
             Materi::where('idmateri', $idmateri)->update([
                 'judul_materi' => $request->input('judul_materi'),
+                'deskripsi_materi' => $request->input('deskripsi_materi'),
                 'tanggal_upload' => $request->input('tanggal_upload'),
             ]);
             if (isset($file_materi)) {
@@ -145,10 +149,14 @@ class MateriController extends Controller
         DB::beginTransaction();
 
         try {
-            Materi::where('idmateri', $idmateri)->delete();
+            $materi = Materi::where('idmateri', $idmateri);
+            $file_materi = $materi->file_materi;
+            $materi->delete();
     
             DB::commit();
-    
+
+            Storage::disk('public')->delete($file_materi);
+
             return redirect()
                 ->route('materi.index', $idkelas)
                 ->with('success', 'Materi berhasil dihapus.');

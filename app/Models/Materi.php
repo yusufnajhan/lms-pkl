@@ -15,6 +15,7 @@ class Materi extends Model
     protected $fillable = [
         'idmateri',
         'judul_materi',
+        'deskripsi_materi',
         'file_materi',
         'tanggal_upload',
         'idkelas',
