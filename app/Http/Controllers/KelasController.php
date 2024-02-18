@@ -12,8 +12,12 @@ class KelasController extends Controller
     // read
     public function index()
     {
-    $kelass = Kelas::all();
-    return view('guru.kelas', compact('kelass'));
+        // $kelass = Kelas::all();
+        // return view('guru.kelas', compact('kelass'));
+
+        $idguru = auth()->user()->id; // Get the id of the currently logged-in user
+        $kelass = Kelas::where('idguru', $idguru)->get(); // Filter Kelas based on idguru
+        return view('guru.kelas', compact('kelass'));
     }
 
     public function create()

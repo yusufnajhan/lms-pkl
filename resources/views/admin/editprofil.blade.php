@@ -31,13 +31,13 @@
                 <div class="text-center text-gray-500 dark:text-gray-400">
                     <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar">
                 </div>
-                <div class="col-span-6 sm:col-full">
+                {{-- <div class="col-span-6 sm:col-full">
                     <a href="/profilAdmin"
                         class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                         type="submit">
                         Simpan
                     </a>
-                </div>
+                </div> --}}
             </div>
             <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6 sm:col-span-3">

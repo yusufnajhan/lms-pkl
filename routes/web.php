@@ -21,6 +21,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\TugasKuisController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DasborSiswaController;
 use App\Http\Controllers\KelasSiswaController;
 use App\Http\Controllers\MasukKelasSiswaController;
 use Inertia\Inertia;
@@ -165,6 +166,8 @@ Route::get('/editTugas/{idtugas}', [TugasKuisController::class, 'edit'])->name('
 Route::post('/editTugas/{idtugas}', [TugasKuisController::class, 'update'])->name('tugas.update');
 Route::delete('/masukKelas/tugas/{idtugas}', [TugasKuisController::class, 'destroy'])->name('tugas.destroy');
 
+Route::get('/nilaiTugas/{idtugas}', [NilaiTugasController::class, 'index']);
+
 Route::get('/tambahKuis/{idkelas}', [TugasKuisController::class, 'create2'])->name('kuis.create');
 Route::post('/tambahKuis', [TugasKuisController::class, 'store2'])->name('kuis.store');
 Route::get('/editKuis/{idkuis}', [TugasKuisController::class, 'edit2'])->name('kuis.edit');
@@ -190,7 +193,7 @@ Route::post('/undangSiswa', [TugasKuisController::class, 'store3'])->name('enrol
 //     return view('guru/soalesai');
 // });
 
-// Route::get('/nilaiTugas/{idtugas}', [NilaiTugasController::class, 'index']);
+
 
 Route::get('/viewMateri/{idkelas}', [MateriController::class, 'index'])->name('materi.index');
 Route::get('/uploadMateri/{idkelas}', [MateriController::class, 'create'])->name('materi.create');
@@ -248,15 +251,16 @@ Route::controller(SiswaController::class)->middleware('auth')->group(function ()
 // Route::get('/editprofilSiswa', function () {
 //     return view('siswa/editprofil');
 // });
-Route::get('/dasborSiswa', function () {
-    return view('siswa/dasbor');
-});
+// Route::get('/dasborSiswa', function () {
+//     return view('siswa/dasbor');
+// });
 // Route::get('/guruteman', function () {
 //     return view('siswa/guruteman');
 // });
 // Route::get('/kelasSiswa', function () {
 //     return view('siswa/kelas');
 // });
+Route::get('/dasborSiswa', [DasborSiswaController::class, 'index'])->name('dasborsiswa.index');
 
 Route::get('/kelasSiswa', [KelasSiswaController::class, 'index'])->name('siswakelas.index');
 

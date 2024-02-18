@@ -261,12 +261,12 @@
       </div>
       <div class="hidden pt-4" id="progres" role="tabpanel" aria-labelledby="progres-tab">
         <div class="flex justify-between">
-          <form class="lg:pr-3" action="#" method="GET">
+          {{-- <form class="lg:pr-3" action="#" method="GET">
               <label for="users-search" class="sr-only">Search</label>
               <div class="relative mt-1 lg:w-64 xl:w-96">
                   <input type="text" name="email" id="users-search" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Mencari siswa">
               </div>
-          </form>
+          </form> --}}
           <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
             <a href="progresKelasMat">
               <button type="button" class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">

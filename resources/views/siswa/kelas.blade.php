@@ -17,7 +17,7 @@
                     <div class="flex items-center space-x-4">
                         <img class="w-7 h-7 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="Jese Leos avatar" />
                         <span class="font-medium dark:text-white">
-                            Nama guru
+                            {{ $kelas->guru->nama }}
                         </span>
                     </div>
                     <a href="{{ route('siswamasuk.index', $kelas->idkelas) }}" class="inline-flex items-center font-medium text-red-600 dark:text-red-500 hover:underline">

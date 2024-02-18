@@ -28,6 +28,7 @@
     <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
         <div class="hidden pt-4" id="faq" role="tabpanel" aria-labelledby="faq-tab">
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                @foreach($tugass as $tugas)
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
@@ -37,21 +38,24 @@
                     </div>
                     <div class="flex-1 min-w-0">
                       <p class="font-medium text-gray-900 truncate dark:text-white">
-                        Nama tugas
+                        {{ $tugas->judul_tugas }}
                       </p>
                       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                        Nama kelas
+                        {{ $tugas->kelas->mata_pelajaran }} {{ $tugas->kelas->jenjang_kelas }}{{ $tugas->kelas->indeks_kelas }}
                       </p>
                       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                        Tenggat waktu
+                        {{ $tugas->tanggal_selesai }}
                       </p>
                     </div>
-                    <a href="/kelasMatematika" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
-                      Detail
+                    <a href="{{ route('siswamasuk.index', $tugas->kelas->idkelas) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
+                      masuk kelas
                       <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </a>                  
                   </div>
                 </li>
+                @endforeach
+
+                @foreach($kuiss as $kuis)
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
@@ -61,21 +65,22 @@
                     </div>                   
                     <div class="flex-1 min-w-0">
                         <p class="font-medium text-gray-900 truncate dark:text-white">
-                            Nama kuis
+                          {{ $kuis->judul_kuis }}
                         </p>
                         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            Nama kelas
+                          {{ $kuis->kelas->mata_pelajaran }} {{ $kuis->kelas->jenjang_kelas }}{{ $kuis->kelas->indeks_kelas }}
                         </p>
                         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            Tenggat waktu
+                          {{ $kuis->tanggal_selesai }}
                         </p>
                     </div>
                     <a href="/kelasMatematika" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
-                      Detail
+                      masuk kelas
                       <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </a>
                   </div>
                 </li>
+                @endforeach
             </ul>
         </div>
         <div class="hidden pt-4" id="about" role="tabpanel" aria-labelledby="about-tab">

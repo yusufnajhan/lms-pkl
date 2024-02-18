@@ -13,7 +13,8 @@ class SiswaController extends Controller
     public function edit(Request $request)
     {
         $user = $request->user();
-        $idsiswa = $request->user()->siswa->idsiswa;
+        // $idsiswa = $request->user()->siswa->idsiswa;
+        $idsiswa = $request->user()->dataPribadi->idsiswa;
 
         $siswa = Siswa::where('idsiswa', $idsiswa)->first();
 
@@ -23,7 +24,8 @@ class SiswaController extends Controller
     public function showEdit(Request $request)
     {
         $user = $request->user();
-        $idsiswa = $request->user()->siswa->idsiswa;
+        // $idsiswa = $request->user()->siswa->idsiswa;
+        $idsiswa = $request->user()->dataPribadi->idsiswa;
         
         $siswa = Siswa::where('idsiswa', $idsiswa)->first();
         return view('siswa.editprofil', ['user' => $user, 'siswa' => $siswa]);
@@ -32,7 +34,8 @@ class SiswaController extends Controller
     public function update(Request $request)
     {
         $user = $request->user();
-        $idsiswa = $request->user()->siswa->idsiswa;
+        // $idsiswa = $request->user()->siswa->idsiswa;
+        $idsiswa = $request->user()->dataPribadi->idsiswa;
 
         $validated = $request->validate([
             'nomor_hp' => 'required|numeric',

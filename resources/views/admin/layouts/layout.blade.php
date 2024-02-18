@@ -63,7 +63,7 @@
                         <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Lambang_Kota_Semarang.png" class="h-8 mr-3"
                             alt="Diskominfo Logo"> 
                         <span
-                            class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white">LMS SMP</span>
+                            class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white">SMPedia</span>
                     </a>
 
                 </div>
