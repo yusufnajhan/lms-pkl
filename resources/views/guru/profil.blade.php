@@ -1,6 +1,16 @@
 @extends('guru.layouts.layout')
 @section('content')
 <div class="mb-4">
+    @if(session()->has('success'))
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <p>{{ session('success') }}</p>
+        </div>
+    @endif
+    @if (session()->has('error'))
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <p>{{ session('error') }}</p>
+        </div>
+    @endif
     <nav class="flex mb-5" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
           <li class="inline-flex items-center">
@@ -20,16 +30,6 @@
           </li>
         </ol>
     </nav>
-    @if(session()->has('success'))
-        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-            <p>{{ session('success') }}</p>
-        </div>
-    @endif
-    @if (session()->has('error'))
-        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-            <p>{{ session('error') }}</p>
-        </div>
-    @endif
     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Profil Guru</h1>
 </div>
     <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">

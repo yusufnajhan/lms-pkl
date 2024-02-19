@@ -9,7 +9,7 @@
   @endif
     <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div class="mr-auto place-self-center lg:col-span-7">
-            <h1 class="max-w-2xl mb-4 text-3xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl dark:text-white">Hai, {{ $nama }}</h1>
+            <h1 class="max-w-2xl mb-4 text-3xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl dark:text-white">Hai, {{ $nama }}!</h1>
             <h1 class="max-w-2xl mb-4 text-5xl font-extrabold tracking-tight leading-none md:text-6xl xl:text-7xl dark:text-white">Selamat Datang di SMPedia</h1>
             <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">"Pendidikan Tanpa Batas dengan Learning Management System"</p>    
             <a href="/akunGuru" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
@@ -21,7 +21,12 @@
         </div>
         
         <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-            <div id="default-carousel" class="relative w-full" data-carousel="slide">
+          <iframe class="w-full" width="600" height="350" src="https://www.youtube.com/embed/MkmHZAZt_Qc?autoplay=1&mute=1&loop=1&playlist=MkmHZAZt_Qc" 
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen style="border-radius: 15px;">
+          </iframe>
+
+            {{-- <div id="default-carousel" class="relative w-full" data-carousel="slide">
                 <!-- Carousel wrapper -->
                 <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                     <!-- Item 1 -->
@@ -60,7 +65,7 @@
                         <span class="sr-only">Next</span>
                     </span>
                 </button>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

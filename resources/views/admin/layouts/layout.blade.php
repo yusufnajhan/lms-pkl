@@ -9,7 +9,7 @@
     <meta name="author" content="Themesberg">
     <meta name="generator" content="Hugo 0.58.2">
 
-    <title>Admin</title>
+    <title>SMPedia | Admin</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
@@ -90,7 +90,7 @@
                         class="absolute z-10 inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm tooltip opacity-0 invisible"
                         style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(1107.33px, 60px, 0px);"
                         data-popper-placement="bottom">
-                        Mode Gelap
+                        Mode Gelap/Terang
                         <div class="tooltip-arrow" data-popper-arrow=""
                             style="position: absolute; left: 0px; transform: translate3d(68.6667px, 0px, 0px);"></div>
                     </div>

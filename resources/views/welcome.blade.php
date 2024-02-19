@@ -9,7 +9,7 @@
     <meta name="author" content="Themesberg">
     <meta name="generator" content="Hugo 0.58.2">
 
-    <title>LMS SMP</title>
+    <title>SMPedia</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
