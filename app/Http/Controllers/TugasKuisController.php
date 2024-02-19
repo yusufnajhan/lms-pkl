@@ -9,6 +9,7 @@ use App\Models\Siswa;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class TugasKuisController extends Controller
 {
@@ -92,11 +93,16 @@ class TugasKuisController extends Controller
             'idtugas' => 'required|numeric',
             'judul_tugas' => 'required',
             'deskripsi_tugas' => 'required',
+            'file_tugas' => 'required|file|max:25600',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date',
             'idkelas' => 'required|numeric',
         ]);
         $idkelas = $request->input('idkelas');
+
+        if ($request->file('file_tugas')) {
+            $file_tugas = $request->file('file_tugas')->store('file_tugas', 'public');
+        }
 
         DB::beginTransaction();
         try 
@@ -106,6 +112,7 @@ class TugasKuisController extends Controller
                 'idtugas' => $request->input('idtugas'),
                 'judul_tugas' => $request->input('judul_tugas'),
                 'deskripsi_tugas' => $request->input('deskripsi_tugas'),
+                'file_tugas' => $file_tugas,
                 'tanggal_mulai' => $request->input('tanggal_mulai'),
                 'tanggal_selesai' => $request->input('tanggal_selesai'),
                 'idkelas' => $request->input('idkelas'),
@@ -124,6 +131,15 @@ class TugasKuisController extends Controller
                 ->with(['error' => 'Gagal menambah tugas baru. Error: ' . $e->getMessage()]);
         }
     }
+
+    public function read(int $idtugas)
+    {
+        $tugas = Tugas::where('idtugas', $idtugas)->first();
+        $kelas = Kelas::where('idkelas', $tugas->idkelas)->first();
+
+        return view('guru.nilaiTugas', compact('tugas', 'kelas'));
+    }
+
 
     // add kuis
     public function store2(Request $request)
@@ -216,36 +232,55 @@ class TugasKuisController extends Controller
     }
 
     // edit tugas
-    public function edit(Request $request, $idtugas)
+    public function edit(int $idtugas)
     {
         $tugas = Tugas::where('idtugas', $idtugas)->first();
 
-        $judul_tugas = $tugas->judul_tugas;
-        $deskripsi_tugas = $tugas->deskripsi_tugas;
-        $tanggal_mulai = $tugas->tanggal_mulai;
-        $tanggal_selesai = $tugas->tanggal_selesai;
-        $idkelas = $tugas->idkelas;
+        // $judul_tugas = $tugas->judul_tugas;
+        // $deskripsi_tugas = $tugas->deskripsi_tugas;
+        // $file_tugas = $tugas->file_tugas;
+        // $tanggal_mulai = $tugas->tanggal_mulai;
+        // $tanggal_selesai = $tugas->tanggal_selesai;
+        // $idkelas = $tugas->idkelas;
 
-        $kelass = Kelas::pluck('idkelas', 'idkelas');
+        // $kelass = Kelas::pluck('idkelas', 'idkelas');
+        $kelas = Kelas::where('idkelas', $tugas->idkelas)->first();
 
-        return view("guru.edittugas", compact('idtugas','judul_tugas', 'deskripsi_tugas', 'tanggal_mulai', 'tanggal_selesai'
-                                            ,'idkelas','kelass'));
+        // return view("guru.edittugas", compact('idtugas','judul_tugas', 'deskripsi_tugas','file_tugas', 'tanggal_mulai', 'tanggal_selesai'
+        //                                     ,'idkelas','kelass'));
+        return view("guru.edittugas", compact('tugas','kelas'));
     }
 
-    public function update(Request $request, $idtugas)
+    public function update(Request $request, int $idtugas)
     {
-        $validated = $request->validate([
+        $request->validate([
             'judul_tugas' => 'required',
             'deskripsi_tugas' => 'required',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date',
-            'idkelas' => 'required|numeric',
+            'file_tugas' => 'file|max:25600',
         ]);
         $idkelas = $request->input('idkelas');
 
+        if ($request->file('file_tugas')) {
+            Storage::disk('public')->delete($request->input('oldFile'));
+            $file_tugas = $request->file('file_tugas')->store('file_tugas', 'public');
+        }
+
         DB::beginTransaction();
         try {
-            Tugas::where('idtugas', $idtugas)->update($validated);
+            Tugas::where('idtugas', $idtugas)->update([
+                'judul_tugas' => $request->input('judul_tugas'),
+                'deskripsi_tugas' => $request->input('deskripsi_tugas'),
+                'tanggal_mulai' => $request->input('tanggal_mulai'),
+                'tanggal_selesai' => $request->input('tanggal_selesai'),
+            ]);
+            if (isset($file_tugas)) {
+                Tugas::where('idtugas', $idtugas)->update([
+                    'file_tugas' => $file_tugas
+                ]);
+            }
+
             DB::commit();
 
             return redirect()
@@ -311,23 +346,31 @@ class TugasKuisController extends Controller
     }
 
     // delete tugas
-    public function destroy($idtugas)
+    public function destroy($idkelas, $idtugas)
     {
         DB::beginTransaction();
 
         try {
-            Tugas::where('idtugas', $idtugas)->delete();
+            // $tugas = Tugas::where('idtugas', $idtugas);
+            $tugas = Tugas::where('idtugas', $idtugas)->first();
+
+            $file_tugas = $tugas->file_tugas;
+            $idkelas = $tugas->idkelas;
+            $tugas->delete();
     
             DB::commit();
+
+            Storage::disk('public')->delete($file_tugas);
     
             return redirect()
-                ->route('tugaskuis.index')
+                ->route('tugaskuis.index', ['idkelas' => $idkelas])
                 ->with('success', 'Tugas berhasil dihapus.');
+
         } catch (\Exception $e) {
             DB::rollBack();
     
             return redirect()
-                ->route('tugaskuis.index')
+                ->route('tugaskuis.index', ['idkelas' => $idkelas])
                 ->withErrors(['error' => 'Gagal menghapus tugas. Error: ' . $e->getMessage()]);
         }
     }

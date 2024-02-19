@@ -149,7 +149,7 @@ class MateriController extends Controller
         DB::beginTransaction();
 
         try {
-            $materi = Materi::where('idmateri', $idmateri);
+            $materi = Materi::where('idmateri', $idmateri)->first();
             $file_materi = $materi->file_materi;
             $materi->delete();
     

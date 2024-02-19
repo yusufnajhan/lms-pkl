@@ -16,6 +16,7 @@ class Tugas extends Model
         'idtugas',
         'judul_tugas',
         'deskripsi_tugas',
+        'file_tugas',
         'tanggal_mulai',
         'tanggal_selesai',
         'idkelas',

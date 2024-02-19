@@ -11,12 +11,11 @@ class NilaiTugasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($idtugas)
+    public function index($idkelas)
     {
-        $tugas = Tugas::where('idtugas', $idtugas)->first();
-        $kelass = Kelas::pluck('idkelas', 'idkelas');
-
-        return view('siswa.masukKelas', compact('idtugas','kelass'));
+        $kelas = Kelas::findOrFail($idkelas);
+    
+        return view('guru.nilaitugas', compact('kelas'));
     }
 
     /**

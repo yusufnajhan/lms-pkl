@@ -22,6 +22,14 @@ class MasukKelasSiswaController extends Controller
         return view('siswa.masukKelas', compact('kelas','tugass','kuiss','enrollments'));
     }
 
+    public function read(int $idtugas)
+    {
+        $tugas = Tugas::where('idtugas', $idtugas)->first();
+        $kelas = Kelas::where('idkelas', $tugas->idkelas)->first();
+
+        return view('siswa.detailtugas', compact('tugas', 'kelas'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

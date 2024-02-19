@@ -16,7 +16,7 @@
           <li>
             <div class="flex items-center">
               <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-              <a href="/masukKelas" class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Kelas PKN</a>
+              <a href="{{ route('tugaskuis.index', $kelas->idkelas) }}" class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">{{ $kelas->mata_pelajaran }} {{ $kelas->jenjang_kelas }}{{ $kelas->indeks_kelas }}</a>
             </div>
           </li>
           <li>
@@ -27,7 +27,27 @@
           </li>
         </ol>
     </nav>
-    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Judul Tugas</h1>
+    <section class="bg-white dark:bg-gray-900">
+      <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+          <p class="mb-4 text-xl font-extrabold leading-none text-gray-900 md:text-2xl dark:text-white">{{ $tugas->judul_tugas }}</p>
+          <dl class="mt-8 flex items-center space-x-6">
+              <div>
+                  <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Tanggal Selesai</dt>
+                  <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $tugas->tanggal_selesai }}</dd>
+              </div>
+          </dl>
+          <dl>
+              <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Deskripsi</dt>
+              <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $tugas->deskripsi_tugas }}</dd>
+          </dl>
+          <div class="mt-8 flex items-center space-x-4">
+              <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">File Tugas</dt>
+              <a href="{{ asset('storage/' . $tugas->file_tugas) }}"
+                  class="ml-2 w-24 h-12 bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center">Lihat
+                  file</a></label>
+          </div>
+      </div>
+    </section>
 </div>
 
 <div class="flex justify-between">

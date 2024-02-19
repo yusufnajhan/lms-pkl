@@ -162,11 +162,12 @@ Route::delete('/kelasGuru/{idkelas}', [KelasController::class, 'destroy'])->name
 Route::get('/masukKelas/{idkelas}', [TugasKuisController::class, 'index'])->name('tugaskuis.index');
 Route::get('/tambahTugas/{idkelas}', [TugasKuisController::class, 'create'])->name('tugas.create');
 Route::post('/tambahTugas', [TugasKuisController::class, 'store'])->name('tugas.store');
+Route::get('/nilaiTugas/{idtugas}', [TugasKuisController::class, 'read'])->name('tugas.read');
 Route::get('/editTugas/{idtugas}', [TugasKuisController::class, 'edit'])->name('tugas.edit');
 Route::post('/editTugas/{idtugas}', [TugasKuisController::class, 'update'])->name('tugas.update');
-Route::delete('/masukKelas/tugas/{idtugas}', [TugasKuisController::class, 'destroy'])->name('tugas.destroy');
+Route::delete('/masukKelas/{idkelas}/{idtugas}', [TugasKuisController::class, 'destroy'])->name('tugas.destroy');
 
-Route::get('/nilaiTugas/{idtugas}', [NilaiTugasController::class, 'index']);
+// Route::get('/nilaiTugas/{idkelas}', [NilaiTugasController::class, 'index']);
 
 Route::get('/tambahKuis/{idkelas}', [TugasKuisController::class, 'create2'])->name('kuis.create');
 Route::post('/tambahKuis', [TugasKuisController::class, 'store2'])->name('kuis.store');
@@ -269,10 +270,11 @@ Route::get('/kelasSiswa', [KelasSiswaController::class, 'index'])->name('siswake
 // });
 
 Route::get('/masukKelasSiswa/{idkelas}', [MasukKelasSiswaController::class, 'index'])->name('siswamasuk.index');
+Route::get('/detailTugas/{idtugas}', [MasukKelasSiswaController::class, 'read'])->name('siswamasuk.read');
 
-Route::get('/tugasMatematika', function () {
-    return view('siswa/mattugas');
-});
+// Route::get('/tugasMatematika', function () {
+//     return view('siswa/mattugas');
+// });
 Route::get('/kuisMatematika', function () {
     return view('siswa/matkuis');
 });

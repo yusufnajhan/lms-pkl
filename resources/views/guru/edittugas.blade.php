@@ -32,7 +32,7 @@
 </div>
 
 <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-    <form action="{{ route('tugas.update', $idtugas) }}" method="POST" >
+    <form action="{{ route('tugas.update', $tugas->idtugas) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="grid grid-cols-6 gap-6">
             
@@ -41,7 +41,7 @@
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Judul Tugas</label>
                 <input type="text" name="judul_tugas" id="judul_tugas"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ $judul_tugas }}" wfd-id="id2" >
+                    value="{{ $tugas->judul_tugas }}" wfd-id="id2" >
 
                     @error('judul_tugas')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -50,11 +50,11 @@
             </div>
 
             <div class="col-span-6 sm:col-span-3">
-                <label for="deskripsi_tugas"
+                <label for="deskripsi_tugas" 
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi Tugas</label>
-                <input type="text" name="deskripsi_tugas" id="deskripsi_tugas"
+                <textarea id="deskripsi_tugas" name="deskripsi_tugas" rows="6"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ $deskripsi_tugas }}" wfd-id="id2" >
+                    >{{ $tugas->deskripsi_tugas }}</textarea>
 
                     @error('deskripsi_tugas')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -67,7 +67,7 @@
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Mulai</label>
                 <input type="date" name="tanggal_mulai" id="tanggal_mulai"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ $tanggal_mulai }}" wfd-id="id2" >
+                    value="{{ $tugas->tanggal_mulai }}" wfd-id="id2" >
 
                     @error('tanggal_mulai')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -79,7 +79,7 @@
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Selesai</label>
                 <input type="date" name="tanggal_selesai" id="tanggal_selesai"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ $tanggal_selesai }}" wfd-id="id2" >
+                    value="{{ $tugas->tanggal_selesai }}" wfd-id="id2" >
 
                     @error('tanggal_selesai')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -87,7 +87,7 @@
 
             </div>
 
-            <div class="col-span-6 sm:col-span-3">
+            {{-- <div class="col-span-6 sm:col-span-3">
                 <label for="idkelas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Kelas</label>
                 <select name="idkelas" id="idkelas" 
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" wfd-id="id2">
@@ -96,6 +96,37 @@
                         <option value="{{ $kelasId }}">{{ $kelasId }}</option>
                     @endforeach
                 </select>
+            </div> --}}
+
+            <div class="col-span-6 sm:col-span-3">
+                <label for="idkelas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Kelas</label>
+                <select name="idkelas" id="idkelas" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <option value="{{ $kelas->idkelas }}">{{ $kelas->idkelas }}</option>
+                </select>
+
+                @error('idkelas')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="col-span-6 sm:col-span-3">
+                <label for="file_tugas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">File Tugas</label>
+                <a href="{{ asset('storage/' . $tugas->file_tugas) }}"
+                    class="ml-2 w-24 h-12 bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center mb-4">Lihat
+                    file</a></label>
+                    
+                <input type="file" name="file_tugas" id="file_tugas"
+                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                wfd-id="id2" >
+
+                @error('file_tugas')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+
+            </div>
+
+            <div>
+                <input type="hidden" name="oldFile" id="oldFile" value="{{ $tugas->file_tugas }}">
             </div>
             
             <div class="col-span-6 sm:col-full">
