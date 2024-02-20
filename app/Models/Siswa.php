@@ -34,5 +34,10 @@ class Siswa extends Model
     {
         return $this->belongsToMany(Kelas::class, 'enrollment', 'idsiswa', 'idkelas', 'idsiswa', 'idkelas');
     }
+
+    public function pengumpulanTugas()
+    {
+        return $this->hasMany(Pengumpulan_Tugas::class, 'idsiswa');
+    }
     
 }

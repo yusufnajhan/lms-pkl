@@ -271,6 +271,8 @@ Route::get('/kelasSiswa', [KelasSiswaController::class, 'index'])->name('siswake
 
 Route::get('/masukKelasSiswa/{idkelas}', [MasukKelasSiswaController::class, 'index'])->name('siswamasuk.index');
 Route::get('/detailTugas/{idtugas}', [MasukKelasSiswaController::class, 'read'])->name('siswamasuk.read');
+Route::get('/kumpulTugas/{idtugas}', [MasukKelasSiswaController::class, 'create'])->name('kumpultugas.create');
+Route::post('/kumpulTugas', [MasukKelasSiswaController::class, 'store'])->name('kumpultugas.store');
 
 // Route::get('/tugasMatematika', function () {
 //     return view('siswa/mattugas');

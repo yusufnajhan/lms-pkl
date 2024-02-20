@@ -27,4 +27,10 @@ class Tugas extends Model
     {
         return $this->belongsTo(Kelas::class, 'idkelas');
     }
+
+    public function pengumpulanTugas()
+    {
+        return $this->hasMany(Pengumpulan_Tugas::class, 'idtugas');
+    }
+
 }
