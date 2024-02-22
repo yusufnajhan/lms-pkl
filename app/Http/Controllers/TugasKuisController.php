@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Enrollment;
 use App\Models\Kelas;
 use App\Models\Kuis;
+use App\Models\Pengumpulan_Tugas;
 use App\Models\Siswa;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
@@ -137,7 +138,15 @@ class TugasKuisController extends Controller
         $tugas = Tugas::where('idtugas', $idtugas)->first();
         $kelas = Kelas::where('idkelas', $tugas->idkelas)->first();
 
-        return view('guru.nilaiTugas', compact('tugas', 'kelas'));
+        // Get the students who have submitted the task
+        $pengumpulanTugas = Pengumpulan_Tugas::where('idtugas', $idtugas)->get();
+        $siswa = [];
+        foreach ($pengumpulanTugas as $pengumpulan) {
+            $siswa[] = Siswa::where('idsiswa', $pengumpulan->idsiswa)->first();
+        }
+
+        return view('guru.nilaiTugas', compact('tugas', 'kelas', 'siswa'));
+
     }
 
 
