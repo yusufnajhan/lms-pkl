@@ -15,7 +15,7 @@ class KelasController extends Controller
         // $kelass = Kelas::all();
         // return view('guru.kelas', compact('kelass'));
 
-        $idguru = auth()->user()->id; // Get the id of the currently logged-in user
+        $idguru = auth()->user()->dataPribadi->idguru; // Get the id of the currently logged-in user
         $kelass = Kelas::where('idguru', $idguru)->get(); // Filter Kelas based on idguru
         return view('guru.kelas', compact('kelass'));
     }

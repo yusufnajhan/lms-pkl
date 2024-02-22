@@ -16,7 +16,7 @@
             <a href="/masukKelas">
                 <div class="flex items-center">
                     <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                    <span class="ml-1 text-black md:ml-2" aria-current="page">Kelas PKN</span>
+                    <span class="ml-1 text-black md:ml-2" aria-current="page">{{ $kelas->mata_pelajaran }} {{ $kelas->jenjang_kelas }}{{ $kelas->indeks_kelas }}</span>
                 </div>
             </a>
         </li>        
@@ -93,18 +93,16 @@
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     value="{{ $idkelas }}" wfd-id="id2">
                     <option value="" disabled selected>Pilih ID Kelas</option>
-                    @foreach($kelass as $kelasId)
-                        <option value="{{ $kelasId }}">{{ $kelasId }}</option>
-                    @endforeach
+                    <option value="{{ $kelas->idkelas }}">{{ $kelas->idkelas }}</option>
                 </select>
             </div>
 
-            <div class="col-span-6 sm:col-full">
+            {{-- <div class="col-span-6 sm:col-full">
                 <a href="/soalEsai" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
                     esai
                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </a>    
-            </div>
+            </div> --}}
             
             <div class="col-span-6 sm:col-full">
                 <a href="#" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
