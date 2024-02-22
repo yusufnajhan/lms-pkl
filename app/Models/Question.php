@@ -9,7 +9,12 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $fillable=['question'];
+    protected $fillable=['question', 'idkuis'];
+
+    public function quiz()
+    {
+        return $this->belongsTo(Kuis::class, 'idkuis');
+    }
     
     public function answers(){
         return $this->hasMany(Answer::class);

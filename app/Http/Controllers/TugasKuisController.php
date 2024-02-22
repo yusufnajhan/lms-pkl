@@ -33,9 +33,9 @@ class TugasKuisController extends Controller
 
     public function create2($idkelas)
     {
-        $kelass = Kelas::findOrFail($idkelas);
+        $kelas = Kelas::findOrFail($idkelas);
         // $kelass = Kelas::pluck('idkelas', 'idkelas');
-        return view('guru.tambahKuis', compact('kelass'));
+        return view('guru.tambahKuis', compact('kelas'));
     }
 
     public function create3($idkelas)
@@ -311,6 +311,7 @@ class TugasKuisController extends Controller
     public function edit2(Request $request, $idkuis)
     {
         $kuis = Kuis::where('idkuis', $idkuis)->first();
+        $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
 
         $judul_kuis = $kuis->judul_kuis;
         $deskripsi_kuis = $kuis->deskripsi_kuis;
@@ -318,10 +319,9 @@ class TugasKuisController extends Controller
         $tanggal_selesai = $kuis->tanggal_selesai;
         $idkelas = $kuis->idkelas;
 
-        $kelass = Kelas::pluck('idkelas', 'idkelas');
 
         return view("guru.editkuis", compact('idkuis','judul_kuis', 'deskripsi_kuis', 'tanggal_mulai', 'tanggal_selesai'
-                                            ,'idkelas','kelass'));
+                                            ,'idkelas','kelas'));
     }
 
     public function update2(Request $request, $idkuis)

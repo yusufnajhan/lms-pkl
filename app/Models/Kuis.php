@@ -29,6 +29,11 @@ class Kuis extends Model
         return $this->belongsTo(Kelas::class, 'idkelas');
     }
 
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
+
     // public function show($idkuis)
     // {
     //     $esais = Esai::where('idkuis', $idkuis)->get();

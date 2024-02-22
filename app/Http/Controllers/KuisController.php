@@ -9,17 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class KuisController extends Controller
 {
-    // read
-    public function index()
+    public function create(int $idkelas)
     {
-    $kuiss = Kuis::all();
-    return view('guru.masukKelas', compact('kuiss'));
-    }
-    
-    public function create()
-    {
-        $kelass = Kelas::pluck('idkelas', 'idkelas');
-        return view('guru.tambahKuis', compact('kelass'));
+        $kelas = Kelas::findOrFail($idkelas);
+        return view('guru.tambahKuis', compact('kelas'));
     }
 
     // add
