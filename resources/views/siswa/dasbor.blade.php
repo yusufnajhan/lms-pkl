@@ -162,7 +162,7 @@
 
 @section('content1')
 <!-- component -->
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -568,5 +568,5 @@
     </div>
   </div>
   </body>
-</html>
+</html> --}}
 @endsection

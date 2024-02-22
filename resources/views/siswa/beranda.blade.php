@@ -23,7 +23,11 @@
             <img src="https://images.pexels.com/photos/357271/pexels-photo-357271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="gedung_smp">
         </div>            --}}
         <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-            <div id="default-carousel" class="relative w-full" data-carousel="slide">
+            <iframe class="w-full" width="600" height="350" src="https://www.youtube.com/embed/UebZk-UJEdE?autoplay=1&mute=1&loop=1&playlist=UebZk-UJEdE" 
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen style="border-radius: 15px;">
+            </iframe>
+            {{-- <div id="default-carousel" class="relative w-full" data-carousel="slide">
                 <!-- Carousel wrapper -->
                 <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                     <!-- Item 1 -->
@@ -62,7 +66,7 @@
                         <span class="sr-only">Next</span>
                     </span>
                 </button>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

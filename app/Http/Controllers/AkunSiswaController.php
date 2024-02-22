@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enrollment;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -149,6 +150,9 @@ class AkunSiswaController extends Controller
 
         if ($siswa){
             $userId = $siswa->iduser; 
+
+            // Delete all enrollments for the siswa
+            Enrollment::where('idsiswa', $idsiswa)->delete();
 
             $siswa->delete();
 

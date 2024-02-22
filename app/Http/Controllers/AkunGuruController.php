@@ -9,6 +9,7 @@ use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Kuis;
 use App\Models\Materi;
+use App\Models\Pengumpulan_Tugas;
 use App\Models\Tugas;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -174,8 +175,16 @@ class AkunGuruController extends Controller
                 // Delete all diskusi for the kelas
                 Diskusi::where('idkelas', $k->idkelas)->delete();
 
-                // Delete all tugas for the kelas
-                Tugas::where('idkelas', $k->idkelas)->delete();
+                // Get all tugas for the kelas
+                $tugas = Tugas::where('idkelas', $k->idkelas)->get();
+
+                foreach ($tugas as $t) {
+                    // Delete all pengumpulan_tugas for the tugas
+                    Pengumpulan_Tugas::where('idtugas', $t->idtugas)->delete();
+
+                    // Delete the tugas
+                    $t->delete();
+                }
 
                 // Delete the kelas
                 $k->delete();
