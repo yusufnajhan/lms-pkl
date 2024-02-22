@@ -2,6 +2,16 @@
 
 @section('content')
 <div class="mb-4">
+  @if(session()->has('success'))
+  <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+      <p>{{ session('success') }}</p>
+  </div>
+  @endif
+  @if (session()->has('error'))
+  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <p>{{ session('error') }}</p>
+  </div>
+  @endif
     <nav class="flex mb-5" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
           <li class="inline-flex items-center">
@@ -27,27 +37,7 @@
           </li>
         </ol>
     </nav>
-    <section class="bg-white dark:bg-gray-900">
-      <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-          <p class="mb-4 text-xl font-extrabold leading-none text-gray-900 md:text-2xl dark:text-white">{{ $tugas->judul_tugas }}</p>
-          <dl class="mt-8 flex items-center space-x-6">
-              <div>
-                  <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Tanggal Selesai</dt>
-                  <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $tugas->tanggal_selesai }}</dd>
-              </div>
-          </dl>
-          <dl>
-              <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Deskripsi</dt>
-              <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $tugas->deskripsi_tugas }}</dd>
-          </dl>
-          <div class="mt-8 flex items-center space-x-4">
-              <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">File Tugas</dt>
-              <a href="{{ asset('storage/' . $tugas->file_tugas) }}"
-                  class="ml-2 w-24 h-12 bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center">Lihat
-                  file</a></label>
-          </div>
-      </div>
-    </section>
+    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Rekap Tugas {{ $tugas->judul_tugas }} </h1>
 </div>
 
 <div class="flex justify-between">
@@ -57,12 +47,16 @@
             <input type="text" name="email" id="users-search" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Mencari siswa">
         </div>
     </form>
+    <a href="{{ route('tugas.downloadRekap', $tugas->idtugas) }}" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-red-900 bg-white border border-red-300 rounded-lg hover:bg-red-100 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-red-800 dark:text-red-400 dark:border-red-600 dark:hover:text-white dark:hover:bg-red-700 dark:focus:ring-red-700">
+      <svg class="w-5 h-5 mr-2 -ml-1" fill="red" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"></path></svg>
+      Unduh Rekap
+    </a>
 </div>
 
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
   <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-      @foreach($siswa as $s)
-        @foreach($s->pengumpulanTugas as $pengumpulan)
+      {{-- @foreach($siswa as $s) --}}
+        @foreach($pengumpulanTugas as $pengumpulan)
         <li class="py-3 sm:py-4">
           <div class="flex items-center space-x-4">
             <div class="flex-shrink-0">
@@ -70,12 +64,22 @@
             </div>
             <div class="flex-1 min-w-0">
               <p class="font-medium text-gray-900 truncate dark:text-white">
-                {{ $s->nama }}
+                {{ $pengumpulan->siswa->nama }}
               </p>
             </div>
-            <div>
-                <input type="number" id="nilai-tugas" name="nilai-tugas" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-3/4 p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="nilai tugas (1-100)" required>
+            <div class="flex-1 min-w-0">
+              <p class="font-medium text-gray-500 truncate dark:text-white">
+                {{ $pengumpulan->siswa->nik }}
+              </p>
             </div>
+            <form action="{{ route('guru.updateNilai', $pengumpulan->idpengumpulan) }}" method="POST">
+              @csrf
+              @method('PUT')
+              <div class="flex justify-between">
+                  <input type="number" id="nilai" name="nilai" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-3/4 p-1.5 mr-4 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="nilai tugas (1-100)" value="{{ $pengumpulan->nilai }}" required>
+                  <button type="submit" class="focus:outline-none text-white text-xs bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-4 py-1.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Simpan</button>
+              </div>
+            </form>    
             <a href="{{ Storage::url($pengumpulan->file_submit_tugas) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
               Berkas tugas
               <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
@@ -83,7 +87,7 @@
           </div>
         </li>
         @endforeach
-      @endforeach
+      {{-- @endforeach --}}
   </ul>
 </div>
 

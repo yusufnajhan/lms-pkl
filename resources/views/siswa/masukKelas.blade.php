@@ -84,11 +84,23 @@
                       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                         <a href="{{ route('siswamasuk.read', $tugas->idtugas) }}">{{ $tugas->tanggal_selesai }}</a>
                       </p>
-                    </div> 
+                    </div>
+
+                    @php
+                        $pengumpulan = $kumpultugas->where('idtugas', $tugas->idtugas)->first();
+                    @endphp
                     <td class="p-4 whitespace-nowrap">
-                      <span
-                        class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-red-400 border border-red-100 dark:border-red-500">statusnya disini blm bisa keganti</span>
+                        @if ($pengumpulan && $pengumpulan->status == '1')
+                            <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500">
+                                Sudah dikerjakan
+                            </span>
+                        @else
+                            <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-red-400 border border-red-100 dark:border-red-500">
+                                Belum dikerjakan
+                            </span>
+                        @endif
                     </td>
+
                     <a href="{{ route('kumpultugas.create', $tugas->idtugas) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
                       kumpul tugas
                       <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>

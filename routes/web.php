@@ -163,6 +163,8 @@ Route::get('/masukKelas/{idkelas}', [TugasKuisController::class, 'index'])->name
 Route::get('/tambahTugas/{idkelas}', [TugasKuisController::class, 'create'])->name('tugas.create');
 Route::post('/tambahTugas', [TugasKuisController::class, 'store'])->name('tugas.store');
 Route::get('/nilaiTugas/{idtugas}', [TugasKuisController::class, 'read'])->name('tugas.read');
+Route::put('/nilaiTugas/{idpengumpulan}', [TugasKuisController::class, 'updateNilai'])->name('guru.updateNilai');
+Route::get('/rekapTugas/{idtugas}', [TugasKuisController::class, 'downloadRekap'])->name('tugas.downloadRekap');
 Route::get('/editTugas/{idtugas}', [TugasKuisController::class, 'edit'])->name('tugas.edit');
 Route::post('/editTugas/{idtugas}', [TugasKuisController::class, 'update'])->name('tugas.update');
 Route::delete('/masukKelas/{idkelas}/{idtugas}', [TugasKuisController::class, 'destroy'])->name('tugas.destroy');

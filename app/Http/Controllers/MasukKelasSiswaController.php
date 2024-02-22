@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Enrollment;
+use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Kuis;
 use App\Models\Pengumpulan_Tugas;
@@ -39,7 +40,8 @@ class MasukKelasSiswaController extends Controller
         $tugas = Tugas::findOrFail($idtugas);
         $siswas = Siswa::pluck('idsiswa', 'idsiswa');
         $kelas = Kelas::where('idkelas', $tugas->idkelas)->first();
-        return view('siswa.kumpulTugas', compact('tugas', 'siswas', 'kelas'));
+        $guru = Guru::find($kelas->idguru);
+        return view('siswa.kumpulTugas', compact('tugas', 'siswas', 'kelas', 'guru'));
     }
 
 
@@ -48,15 +50,19 @@ class MasukKelasSiswaController extends Controller
         // Validasi data input
         $request->validate([
             'idpengumpulan' => 'required|numeric',
-            'status' => 'required|in:Belum dikerjakan,Sudah dikerjakan',
+            'status' => 'required|in:1,0',
             'file_submit_tugas' => 'required|file|max:25600',
             'tanggal_pengumpulan' => 'required|date',
             'idsiswa' => 'required|numeric',
+            'idguru' => 'required|numeric',
             'idtugas' => 'required|numeric',
+            
         ]);
         $idtugas = $request->input('idtugas');
         $tugas = Tugas::find($idtugas);
         $idkelas = $tugas->idkelas;
+        $kelas = Kelas::find($idkelas);
+        $idguru = $kelas->idguru;
 
         if ($request->file('file_submit_tugas')) {
             $file_submit_tugas = $request->file('file_submit_tugas')->store('file_submit_tugas', 'public');
@@ -83,6 +89,7 @@ class MasukKelasSiswaController extends Controller
                 'file_submit_tugas' => $file_submit_tugas,
                 'tanggal_pengumpulan' => $request->input('tanggal_pengumpulan'),
                 'idsiswa' => $request->input('idsiswa'),
+                'idguru' => $idguru,
                 'idtugas' => $request->input('idtugas'),
             ]);
 

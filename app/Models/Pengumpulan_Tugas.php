@@ -19,6 +19,8 @@ class Pengumpulan_Tugas extends Model
         'tanggal_pengumpulan',
         'file_submit_tugas',
         'idsiswa',
+        'nilai', // kolom baru untuk nilai
+        'idguru', // kolom baru untuk id guru
     ];
     public function siswa()
     {
@@ -28,6 +30,11 @@ class Pengumpulan_Tugas extends Model
     public function tugas()
     {
         return $this->belongsTo(Tugas::class, 'idtugas');
-    }    
+    } 
+    
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class, 'idguru'); // relasi baru ke model Guru
+    }
 
 }

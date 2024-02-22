@@ -8,9 +8,13 @@ use App\Models\Kuis;
 use App\Models\Pengumpulan_Tugas;
 use App\Models\Siswa;
 use App\Models\Tugas;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class TugasKuisController extends Controller
 {
@@ -133,20 +137,46 @@ class TugasKuisController extends Controller
         }
     }
 
+    // menampilkan siswa yang sudah mengumpulkan tugas
     public function read(int $idtugas)
     {
         $tugas = Tugas::where('idtugas', $idtugas)->first();
         $kelas = Kelas::where('idkelas', $tugas->idkelas)->first();
 
-        // Get the students who have submitted the task
-        $pengumpulanTugas = Pengumpulan_Tugas::where('idtugas', $idtugas)->get();
-        $siswa = [];
-        foreach ($pengumpulanTugas as $pengumpulan) {
-            $siswa[] = Siswa::where('idsiswa', $pengumpulan->idsiswa)->first();
+        // Get the task submissions for the specific task
+        $pengumpulanTugas = Pengumpulan_Tugas::where('idtugas', $idtugas)->with('siswa')->get();
+
+        return view('guru.nilaiTugas', compact('tugas', 'kelas', 'pengumpulanTugas'));
+    }
+
+
+    // guru bisa memberi nilai tugas
+    public function updateNilai(Request $request, $idpengumpulan)
+    {
+        $request->validate([
+            'nilai' => 'required|integer|min:0|max:100',
+        ]);
+
+        try {
+            $pengumpulan = Pengumpulan_Tugas::find($idpengumpulan);
+            $pengumpulan->nilai = $request->nilai;
+            $pengumpulan->save();
+
+            return back()->with('success', 'Berhasil memperbarui nilai tugas.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal memperbarui nilai tugas.');
         }
+    }
 
-        return view('guru.nilaiTugas', compact('tugas', 'kelas', 'siswa'));
+    // download rekap setiap tugas
+    public function downloadRekap($idtugas)
+    {
+        $tugas = Tugas::where('idtugas', $idtugas)->first();
+        $kelas = Kelas::where('idkelas', $tugas->idkelas)->first();
+        $pengumpulanTugas = Pengumpulan_Tugas::where('idtugas', $idtugas)->with('siswa')->get();
 
+        $pdf = FacadePdf::loadView('guru.rekapTugas', compact('tugas', 'kelas', 'pengumpulanTugas'));
+        return $pdf->download('rekap_tugas.pdf');
     }
 
 
