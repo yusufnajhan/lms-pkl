@@ -9,6 +9,7 @@ use App\Models\Kuis;
 use App\Models\Pengumpulan_Tugas;
 use App\Models\Siswa;
 use App\Models\Tugas;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -106,6 +107,18 @@ class MasukKelasSiswaController extends Controller
                 ->with(['error' => 'Gagal mengumpulkan tugas. Error: ' . $e->getMessage()]);
         }
     }
+
+    public function downloadRekapTugas($idkelas)
+    {
+        // Ambil semua data tugas dan kuis serta pengumpulan untuk kelas tertentu
+        $tugass = Tugas::where('idkelas', $idkelas)->with('pengumpulanTugas.siswa')->get();
+        $kuiss = Kuis::where('idkelas', $idkelas)->with('pengumpulanKuis.siswa')->get();
+
+        // Buat PDF
+        $pdf = PDF::loadView('siswa.rekapTugas', compact('tugass', 'kuiss'));
+        return $pdf->download('rekap_tugas.pdf');
+    }
+
 
     // public function store(Request $request)
     // {

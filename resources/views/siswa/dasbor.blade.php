@@ -28,32 +28,35 @@
     <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
         <div class="hidden pt-4" id="faq" role="tabpanel" aria-labelledby="faq-tab">
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+
                 @foreach($tugass as $tugas)
-                <li class="py-3 sm:py-4">
-                  <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                      </svg>                      
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <p class="font-medium text-gray-900 truncate dark:text-white">
-                        {{ $tugas->judul_tugas }}
-                      </p>
-                      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {{ $tugas->kelas->mata_pelajaran }} {{ $tugas->kelas->jenjang_kelas }}{{ $tugas->kelas->indeks_kelas }}
-                      </p>
-                      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {{ $tugas->tanggal_selesai }}
-                      </p>
-                    </div>
-                    <a href="{{ route('siswamasuk.index', $tugas->kelas->idkelas) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
-                      masuk kelas
-                      <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </a>                  
-                  </div>
-                </li>
-                @endforeach
+                  @if($tugas->pengumpulanTugas->count() == 0)
+                      <li class="py-3 sm:py-4">
+                          <div class="flex items-center space-x-4">
+                              <div class="flex-shrink-0">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="w-6 h-6">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                  </svg>                      
+                              </div>
+                              <div class="flex-1 min-w-0">
+                                  <p class="font-medium text-gray-900 truncate dark:text-white">
+                                      {{ $tugas->judul_tugas }}
+                                  </p>
+                                  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                      {{ $tugas->kelas->mata_pelajaran }} {{ $tugas->kelas->jenjang_kelas }}{{ $tugas->kelas->indeks_kelas }}
+                                  </p>
+                                  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                      {{ $tugas->tanggal_selesai }}
+                                  </p>
+                              </div>
+                              <a href="{{ route('siswamasuk.index', $tugas->kelas->idkelas) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
+                                  masuk kelas
+                                  <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                              </a>                  
+                          </div>
+                      </li>
+                  @endif
+              @endforeach
 
                 @foreach($kuiss as $kuis)
                 <li class="py-3 sm:py-4">
@@ -85,23 +88,35 @@
         </div>
         <div class="hidden pt-4" id="about" role="tabpanel" aria-labelledby="about-tab">
           <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-            <li class="py-3 sm:py-4">
-                <div class="flex items-center space-x-4">
-                  <div class="flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                    </svg>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <p class="font-medium text-gray-900 truncate dark:text-white">
-                      Nama tugas
-                    </p>
-                    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                      Nama kelas
-                    </p>
-                  </div>
-                </div>
-              </li>
+            @foreach($tugass as $tugas)
+                  @if($tugas->pengumpulanTugas->count() > 0)
+                      <li class="py-3 sm:py-4">
+                          <div class="flex items-center space-x-4">
+                              <div class="flex-shrink-0">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="w-6 h-6">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                  </svg>                      
+                              </div>
+                              <div class="flex-1 min-w-0">
+                                  <p class="font-medium text-gray-900 truncate dark:text-white">
+                                      {{ $tugas->judul_tugas }}
+                                  </p>
+                                  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                      {{ $tugas->kelas->mata_pelajaran }} {{ $tugas->kelas->jenjang_kelas }}{{ $tugas->kelas->indeks_kelas }}
+                                  </p>
+                                  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                      {{ $tugas->tanggal_selesai }}
+                                  </p>
+                              </div>
+                              <a href="{{ route('siswamasuk.index', $tugas->kelas->idkelas) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
+                                  masuk kelas
+                                  <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                              </a>                  
+                          </div>
+                      </li>
+                  @endif
+              @endforeach
+            
               <li class="py-3 sm:py-4">
                 <div class="flex items-center space-x-4">
                   <div class="flex-shrink-0">

@@ -37,11 +37,11 @@ class LoginController extends Controller
             $user = $request->user();
 
             if ($user->idrole === 1) {
-                return redirect('/berandaAdmin')->with('success', 'Login admin berhasil.');
+                return redirect('/berandaAdmin')->with('success', 'Admin berhasil masuk.');
             } else if ($user->idrole === 2) {
-                return redirect('/berandaGuru')->with('success', 'Login guru berhasil.');
+                return redirect('/berandaGuru')->with('success', 'Guru berhasil masuk.');
             } else if ($user->idrole === 3) {
-                return redirect('/berandaSiswa')->with('success', 'Login siswa berhasil.');
+                return redirect('/berandaSiswa')->with('success', 'Siswa berhasil masuk.');
             }
    
         };

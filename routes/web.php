@@ -275,6 +275,7 @@ Route::get('/masukKelasSiswa/{idkelas}', [MasukKelasSiswaController::class, 'ind
 Route::get('/detailTugas/{idtugas}', [MasukKelasSiswaController::class, 'read'])->name('siswamasuk.read');
 Route::get('/kumpulTugas/{idtugas}', [MasukKelasSiswaController::class, 'create'])->name('kumpultugas.create');
 Route::post('/kumpulTugas', [MasukKelasSiswaController::class, 'store'])->name('kumpultugas.store');
+Route::get('/rekapTugas/{idkelas}', [TugasKuisController::class, 'downloadRekapTugas'])->name('siswamasuk.rekapTugas');
 
 // Route::get('/tugasMatematika', function () {
 //     return view('siswa/mattugas');
