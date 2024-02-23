@@ -24,6 +24,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DasborSiswaController;
 use App\Http\Controllers\KelasSiswaController;
 use App\Http\Controllers\MasukKelasSiswaController;
+use App\Http\Controllers\ProgresSiswaController;
 use Inertia\Inertia;
 
 /*
@@ -189,6 +190,7 @@ Route::delete('/masukKelas/kuis/{idkuis}', [TugasKuisController::class, 'destroy
 
 Route::get('/undangSiswa/{idkelas}', [TugasKuisController::class, 'create3'])->name('enroll.create');
 Route::post('/undangSiswa', [TugasKuisController::class, 'store3'])->name('enroll.store');
+Route::get('/progresSiswa/{idsiswa}', [TugasKuisController::class, 'read2'])->name('progres.read');
 
 
 
@@ -218,6 +220,9 @@ Route::post('/tambahKomen', [CommentController::class, 'store'])->name('comments
 Route::post('/editKomen/{idcomment}', [CommentController::class, 'update'])->name('comments.update');
 Route::post('/deleteKomen/{idcomment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
+// Route::get('/progresSiswa/{idkelas}', [ProgresSiswaController::class, 'index'])->name('progressiswa.index');
+
+
 //siswa
 Route::get('/siswa/viewDiskusi/{idkelas}', [DiskusiController::class, 'index2'])->name('diskusi.index2');
 Route::get('/siswa/readDiskusi/{iddiskusi}', [DiskusiController::class, 'read2'])->name('diskusi.read2');
@@ -234,9 +239,9 @@ Route::get('/nilaiKuis', function () {
 Route::get('/diskusiMat', function () {
     return view('guru/diskusi');
 });
-Route::get('/progresMat', function () {
-    return view('guru/progres');
-});
+// Route::get('/progresMat', function () {
+//     return view('guru/progres');
+// });
 Route::get('/progresKelasMat', function () {
     return view('guru/rekapkelas');
 });
@@ -275,7 +280,7 @@ Route::get('/masukKelasSiswa/{idkelas}', [MasukKelasSiswaController::class, 'ind
 Route::get('/detailTugas/{idtugas}', [MasukKelasSiswaController::class, 'read'])->name('siswamasuk.read');
 Route::get('/kumpulTugas/{idtugas}', [MasukKelasSiswaController::class, 'create'])->name('kumpultugas.create');
 Route::post('/kumpulTugas', [MasukKelasSiswaController::class, 'store'])->name('kumpultugas.store');
-Route::get('/rekapTugas/{idkelas}', [TugasKuisController::class, 'downloadRekapTugas'])->name('siswamasuk.rekapTugas');
+Route::get('/rekapTugasKuis/{idkelas}', [MasukKelasSiswaController::class, 'downloadRekapTugas'])->name('siswamasuk.rekapTugas');
 
 // Route::get('/tugasMatematika', function () {
 //     return view('siswa/mattugas');

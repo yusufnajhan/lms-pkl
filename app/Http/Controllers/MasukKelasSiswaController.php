@@ -9,7 +9,7 @@ use App\Models\Kuis;
 use App\Models\Pengumpulan_Tugas;
 use App\Models\Siswa;
 use App\Models\Tugas;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -108,16 +108,33 @@ class MasukKelasSiswaController extends Controller
         }
     }
 
+    // rekap tugas dan kuis siswa
     public function downloadRekapTugas($idkelas)
     {
-        // Ambil semua data tugas dan kuis serta pengumpulan untuk kelas tertentu
-        $tugass = Tugas::where('idkelas', $idkelas)->with('pengumpulanTugas.siswa')->get();
-        $kuiss = Kuis::where('idkelas', $idkelas)->with('pengumpulanKuis.siswa')->get();
-
+        // Dapatkan idsiswa dari sesi atau guard auth saat ini
+        $idsiswa = auth()->user()->id;
+    
+        // Ambil data kelas
+        $kelas = Kelas::findOrFail($idkelas);
+    
+        // Ambil semua data tugas dan pengumpulan tugas untuk kelas dan siswa tertentu
+        $tugass = Tugas::where('idkelas', $idkelas)
+            ->with(['pengumpulanTugas' => function ($query) use ($idsiswa) {
+                $query->where('idsiswa', $idsiswa);
+            }])
+            ->get();
+    
+        // Ambil semua data kuis dan pengumpulan kuis untuk kelas dan siswa tertentu
+        $kuiss = Kuis::where('idkelas', $idkelas)
+            ->with(['pengumpulanKuis' => function ($query) use ($idsiswa) {
+                $query->where('idsiswa', $idsiswa);
+            }])
+            ->get();
+    
         // Buat PDF
-        $pdf = PDF::loadView('siswa.rekapTugas', compact('tugass', 'kuiss'));
-        return $pdf->download('rekap_tugas.pdf');
-    }
+        $pdf = FacadePdf::loadView('siswa.rekapTugas', compact('kelas', 'tugass', 'kuiss'));
+        return $pdf->download('rekap_tugas_kuis.pdf');
+    }    
 
 
     // public function store(Request $request)

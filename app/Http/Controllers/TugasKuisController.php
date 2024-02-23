@@ -270,6 +270,52 @@ class TugasKuisController extends Controller
         }
     }
 
+    // progres siswa
+    // public function read2(int $idsiswa)
+    // {
+    //     // Ambil data siswa
+    //     $siswa = Siswa::findOrFail($idsiswa);
+
+    //     // Ambil idkelas dari data siswa
+    //     $idkelas = $siswa->idkelas;
+
+    //     // Ambil data kelas
+    //     $kelas = Kelas::findOrFail($idkelas);
+
+    //     // Ambil semua data tugas dan pengumpulan tugas untuk kelas dan siswa tertentu
+    //     $tugass = Tugas::where('idkelas', $idkelas)
+    //         ->with(['pengumpulanTugas' => function ($query) use ($idsiswa) {
+    //             $query->where('idsiswa', $idsiswa);
+    //         }])
+    //         ->get();
+
+    //     return view('guru.progres', compact('kelas', 'siswa', 'tugass'));
+    // }
+
+    public function read2(int $idsiswa)
+    {
+        // Dapatkan siswa berdasarkan id
+        $siswa = Siswa::where('idsiswa', $idsiswa)->first();
+
+        // Dapatkan kelas berdasarkan idkelas dari objek siswa
+        $kelas = Kelas::where('idkelas', $siswa->idkelas)->first();
+
+        // Dapatkan semua tugas yang telah dikumpulkan siswa tersebut pada kelas tersebut
+        $tugasSiswa = Pengumpulan_Tugas::where('idsiswa', $idsiswa)
+            ->whereHas('tugas', function ($query) use ($siswa) {
+                $query->where('idkelas', $siswa->idkelas);
+            })->with('tugas')->get();
+
+        // Dapatkan semua tugas untuk kelas tersebut
+        $semuaTugas = Tugas::where('idkelas', $siswa->idkelas)->get();
+
+        // Filter tugas yang belum dikumpulkan oleh siswa
+        $tugasBelumDikumpulkan = $semuaTugas->diff($tugasSiswa);
+
+        return view('guru.progres', compact('siswa', 'kelas', 'tugasSiswa','tugasBelumDikumpulkan'));
+    }
+
+
     // edit tugas
     public function edit(int $idtugas)
     {
