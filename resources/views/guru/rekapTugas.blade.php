@@ -42,12 +42,29 @@
         <tbody>
             @foreach($pengumpulanTugas as $index => $pengumpulan)
           <tr>
-            <th scope="row">{{ $index + 1 }}</th>
+            <th scope="row">{{ $index + 1 }}.</th>
             <td>{{ $pengumpulan->siswa->nama }}</td>
             <td>{{ $pengumpulan->siswa->nik }}</td>
             <td>{{ $pengumpulan->nilai }}</td>
           </tr>
           @endforeach
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nilai Tertinggi</th>
+            <th scope="col">Nilai Terendah</th>
+            <th scope="col">Nilai Rata-Rata</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ $nilaiTertinggi }}</td>
+            <td>{{ $nilaiTerendah }}</td>
+            <td>{{ $nilaiRata }}</td>
+          </tr>
         </tbody>
     </table>
 </body>

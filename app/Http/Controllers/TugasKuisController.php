@@ -146,7 +146,26 @@ class TugasKuisController extends Controller
         // Get the task submissions for the specific task
         $pengumpulanTugas = Pengumpulan_Tugas::where('idtugas', $idtugas)->with('siswa')->get();
 
-        return view('guru.nilaiTugas', compact('tugas', 'kelas', 'pengumpulanTugas'));
+        // Hitung jumlah siswa yang telah mengumpulkan tugas
+        $jumlahPengumpulan = $pengumpulanTugas->count();
+
+        // Hitung jumlah total siswa dalam kelas
+        $totalSiswa = $kelas->siswas()->count();
+
+        // Hitung jumlah siswa yang belum mengumpulkan tugas
+        $belumMengumpulkan = $totalSiswa - $jumlahPengumpulan;
+
+        // Hitung nilai tertinggi yang diperoleh siswa
+        $nilaiTertinggi = $pengumpulanTugas->max('nilai');
+
+        // Hitung nilai terendah yang diperoleh siswa
+        $nilaiTerendah = $pengumpulanTugas->min('nilai');
+
+        // Hitung nilai rata-rata yang diperoleh siswa
+        $nilaiRata = $pengumpulanTugas->avg('nilai');
+
+        return view('guru.nilaiTugas', compact('tugas', 'kelas', 'pengumpulanTugas',
+                'jumlahPengumpulan','belumMengumpulkan','nilaiTertinggi','nilaiTerendah','nilaiRata'));
     }
 
 
@@ -168,6 +187,22 @@ class TugasKuisController extends Controller
         }
     }
 
+    // sorting nilai tugas
+    public function sortNilai($idtugas, $column, $direction)
+    {
+        $tugas = Tugas::sortable()->findOrFail($idtugas);
+        $kelas = Kelas::sortable()->findOrFail($tugas->idkelas);
+
+        // Ambil data pengumpulan tugas dengan sorting
+        $pengumpulanTugas = Pengumpulan_Tugas::where('idtugas', $idtugas)
+            ->orderBy($column, $direction)
+            ->with('siswa')
+            ->get();
+
+        return view('guru.nilaiTugas', compact('tugas', 'kelas', 'pengumpulanTugas'));
+    }
+
+
     // download rekap setiap tugas
     public function downloadRekap($idtugas)
     {
@@ -175,7 +210,16 @@ class TugasKuisController extends Controller
         $kelas = Kelas::where('idkelas', $tugas->idkelas)->first();
         $pengumpulanTugas = Pengumpulan_Tugas::where('idtugas', $idtugas)->with('siswa')->get();
 
-        $pdf = FacadePdf::loadView('guru.rekapTugas', compact('tugas', 'kelas', 'pengumpulanTugas'));
+        // Hitung nilai tertinggi yang diperoleh siswa
+        $nilaiTertinggi = $pengumpulanTugas->max('nilai');
+
+        // Hitung nilai terendah yang diperoleh siswa
+        $nilaiTerendah = $pengumpulanTugas->min('nilai');
+
+        // Hitung nilai rata-rata yang diperoleh siswa
+        $nilaiRata = $pengumpulanTugas->avg('nilai');
+
+        $pdf = FacadePdf::loadView('guru.rekapTugas', compact('tugas', 'kelas', 'pengumpulanTugas','nilaiTertinggi','nilaiTerendah','nilaiRata'));
         return $pdf->download('rekap_tugas.pdf');
     }
 

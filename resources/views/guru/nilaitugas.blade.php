@@ -38,6 +38,34 @@
         </ol>
     </nav>
     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Rekap Tugas {{ $tugas->judul_tugas }} </h1>
+    <div class="grid w-full grid-cols-1 gap-4 mt-4">
+      <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+        <div class="w-full text-center">
+          <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Sudah Mengumpulkan</h3>
+          <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{ $jumlahPengumpulan }}</span>
+        </div>
+
+        <div class="w-full text-center">
+          <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Belum Mengumpulkan</h3>
+          <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{ $belumMengumpulkan }}</span>
+        </div>
+
+        <div class="w-full text-center">
+          <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Nilai Tertinggi</h3>
+          <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{ $nilaiTertinggi }}</span>
+        </div>
+
+        <div class="w-full text-center">
+          <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Nilai Rata-Rata</h3>
+          <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{ $nilaiRata }}</span>
+        </div>
+
+        <div class="w-full text-center">
+          <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Nilai Terendah</h3>
+          <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{ $nilaiTerendah }}</span>
+        </div>
+      </div>
+  </div>
 </div>
 
 <div class="flex justify-between">
@@ -54,27 +82,23 @@
 </div>
 
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-  <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+  <table id="tabelPengumpulanTugas" class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
       <thead class="bg-gray-100 dark:bg-gray-700">
           <tr>
               <th scope="col" class="py-2 dark:text-white">No.</th>
-              <th scope="col" class="py-2 dark:text-white">
-                <div class="flex items-center justify-center">
-                  Nama Siswa
-                <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                </svg></a>
-                </div>
-              </th>
+              <th scope="col" class="py-2 dark:text-white">Nama Siswa</th>
               <th scope="col" class="py-2 dark:text-white">NIM</th>
-              <th scope="col" class="py-2 dark:text-white">
+              <th scope="col" class="py-2 dark:text-white">Nilai Tugas</th>
+              {{-- <th scope="col" class="py-2 dark:text-white">
                 <div class="flex items-center justify-center">
                   Nilai Tugas
-                <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                </svg></a>
+                <a href="javascript:void(0);" id="sort-nilai">
+                  <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
+                  </svg>
+                </a>
                 </div>
-              </th>
+              </th> --}}
               <th scope="col" class="py-2 dark:text-white">Berkas Tugas</th>
           </tr>
       </thead>
@@ -99,10 +123,41 @@
                       </a>
                   </td>
               </tr>
-          @endforeach
+          @endforeach      
+          <!-- resources/views/guru/nilaiTugas.blade.php -->
+          {{-- <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const sortNilaiButton = document.getElementById('sort-nilai');
+                let direction = 'asc'; // default direction
+
+                sortNilaiButton.addEventListener('click', function () {
+                    // Toggle direction on each click
+                    direction = (direction === 'asc') ? 'desc' : 'asc';
+
+                    // Get the current URL
+                    const currentUrl = window.location.href;
+
+                    // Extract the current column from the URL (assuming 'nilai' is the default column)
+                    const currentColumn = currentUrl.match(/\/nilaiTugas\/(\d+)\/sort\/(\w+)\/(\w+)/)[2];
+
+                    // Build the new URL with the updated column and direction
+                    const newUrl = currentUrl.replace(`/${currentColumn}/${direction}`, `/nilai/${currentColumn}/${direction}`);
+
+                    // Perform AJAX request to get sorted data
+                    fetch(newUrl)
+                        .then(response => response.text())
+                        .then(data => {
+                            // Replace the content of the table body with the sorted data
+                            document.querySelector('tbody').innerHTML = data;
+                        })
+                        .catch(error => console.error('Error:', error));
+                });
+            });
+          </script> --}}
       </tbody>
   </table>
 </div>
 
 
 @endsection
+

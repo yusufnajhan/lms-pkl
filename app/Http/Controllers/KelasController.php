@@ -17,6 +17,12 @@ class KelasController extends Controller
 
         $idguru = auth()->user()->dataPribadi->idguru; // Get the id of the currently logged-in user
         $kelass = Kelas::where('idguru', $idguru)->get(); // Filter Kelas based on idguru
+
+        // Add the count of 'siswa' to each 'kelas'
+        foreach ($kelass as $kelas) {
+            $kelas->jumlahSiswa = $kelas->siswas->count();
+        }
+
         return view('guru.kelas', compact('kelass'));
     }
 

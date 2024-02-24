@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Kyslik\ColumnSortable\Sortable;
+
 class Tugas extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
     protected $table = 'tugas';
     protected $primaryKey = 'idtugas';
     public $timestamps = false;

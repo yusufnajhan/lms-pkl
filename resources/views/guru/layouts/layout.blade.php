@@ -26,6 +26,9 @@
     <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/f/f2/Lambang_Kota_Semarang.png">
     <link rel="manifest" href="URL_MANIFEST_BARU">
     <link rel="mask-icon" href="https://upload.wikimedia.org/wikipedia/commons/f/f2/Lambang_Kota_Semarang.png" color="#5bbad5">
+    <!-- Tambahkan stylesheet DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
 
@@ -37,6 +40,10 @@
             document.documentElement.classList.remove('dark')
         }
     </script>
+
+    <!-- Tambahkan script DataTables -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-800">

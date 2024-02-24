@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Kyslik\ColumnSortable\Sortable;
+
 class Kelas extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
     protected $table = 'kelas';
     protected $primaryKey = 'idkelas';
     public $timestamps = false;
