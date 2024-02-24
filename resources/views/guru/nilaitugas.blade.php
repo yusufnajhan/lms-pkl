@@ -54,41 +54,55 @@
 </div>
 
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-  <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-      {{-- @foreach($siswa as $s) --}}
-        @foreach($pengumpulanTugas as $pengumpulan)
-        <li class="py-3 sm:py-4">
-          <div class="flex items-center space-x-4">
-            <div class="flex-shrink-0">
-              <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image">
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-medium text-gray-900 truncate dark:text-white">
-                {{ $pengumpulan->siswa->nama }}
-              </p>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-medium text-gray-500 truncate dark:text-white">
-                {{ $pengumpulan->siswa->nik }}
-              </p>
-            </div>
-            <form action="{{ route('guru.updateNilai', $pengumpulan->idpengumpulan) }}" method="POST">
-              @csrf
-              @method('PUT')
-              <div class="flex justify-between">
-                  <input type="number" id="nilai" name="nilai" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-3/4 p-1.5 mr-4 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="nilai tugas (1-100)" value="{{ $pengumpulan->nilai }}" required>
-                  <button type="submit" class="focus:outline-none text-white text-xs bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-4 py-1.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Simpan</button>
-              </div>
-            </form>    
-            <a href="{{ Storage::url($pengumpulan->file_submit_tugas) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
-              Berkas tugas
-              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-          </a>
-          </div>
-        </li>
-        @endforeach
-      {{-- @endforeach --}}
-  </ul>
+  <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+      <thead class="bg-gray-100 dark:bg-gray-700">
+          <tr>
+              <th scope="col" class="py-2 dark:text-white">No.</th>
+              <th scope="col" class="py-2 dark:text-white">
+                <div class="flex items-center justify-center">
+                  Nama Siswa
+                <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
+                </svg></a>
+                </div>
+              </th>
+              <th scope="col" class="py-2 dark:text-white">NIM</th>
+              <th scope="col" class="py-2 dark:text-white">
+                <div class="flex items-center justify-center">
+                  Nilai Tugas
+                <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
+                </svg></a>
+                </div>
+              </th>
+              <th scope="col" class="py-2 dark:text-white">Berkas Tugas</th>
+          </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+          @foreach($pengumpulanTugas as $key => $pengumpulan)
+              <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <td scope="col" class="py-3 text-center dark:text-white">{{ $key + 1 }}.</td>
+                  <th class="py-3 text-center dark:text-white">{{ $pengumpulan->siswa->nama }}</th>
+                  <td class="py-3 text-center dark:text-white">{{ $pengumpulan->siswa->nik }}</td>
+                  <td class="py-3 text-center dark:text-white">
+                    <form action="{{ route('guru.updateNilai', $pengumpulan->idpengumpulan) }}" method="POST" class="flex justify-between">
+                        @csrf
+                        @method('PUT')
+                        <input type="number" id="nilai" name="nilai" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-1/2 p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="nilai tugas (1-100)" value="{{ $pengumpulan->nilai }}" required>
+                        <button type="submit" class="focus:outline-none text-white text-xs bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-4 py-1.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Simpan</button>
+                    </form>
+                  </td>                
+                  <td class="py-3 text-center dark:text-white">
+                      <a href="{{ Storage::url($pengumpulan->file_submit_tugas) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
+                          Lihat berkas
+                          <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                      </a>
+                  </td>
+              </tr>
+          @endforeach
+      </tbody>
+  </table>
 </div>
+
 
 @endsection
