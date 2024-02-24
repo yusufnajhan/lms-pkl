@@ -275,6 +275,9 @@ class TugasKuisController extends Controller
     {
         // Dapatkan siswa berdasarkan id
         $siswa = Siswa::findOrFail($idsiswa);
+
+        // Dapatkan objek kelas dari objek siswa
+        $kelas = $siswa->kelas()->first();  
     
         // Dapatkan idkelas dari objek siswa
         $idkelas = $siswa->kelas()->first()->idkelas;
@@ -297,7 +300,7 @@ class TugasKuisController extends Controller
         // Filter tugas yang belum dikumpulkan oleh siswa
         $tugasBelumDikumpulkan = $semuaTugas->whereNotIn('idtugas', $idTugasDikumpulkan);
     
-        return view('guru.progres', compact('siswa', 'tugasDikumpulkan', 'tugasBelumDikumpulkan'));
+        return view('guru.progres', compact('siswa', 'tugasDikumpulkan', 'tugasBelumDikumpulkan','kelas'));
     }
     
     // rekap progres siswa pdf
@@ -326,20 +329,6 @@ class TugasKuisController extends Controller
     
         // Filter tugas yang belum dikumpulkan oleh siswa
         $tugasBelumDikumpulkan = $semuaTugas->whereNotIn('idtugas', $idTugasDikumpulkan);
-    
-        // Buat view untuk PDF
-        // $pdfView = view('guru.rekapProgres', compact('siswa', 'tugasDikumpulkan', 'tugasBelumDikumpulkan'));
-    
-        // // Buat PDF dari view
-        // $pdf = FacadePdf::loadHTML($pdfView);
-    
-        // // Simpan PDF ke disk
-        // $pdf->save(storage_path('app/public/progres_siswa.pdf'));
-    
-        // return response()->json([
-        //     'message' => 'Rekap berhasil disimpan dalam bentuk PDF.',
-        //     'file_path' => 'storage/rekap.pdf'
-        // ]);
 
         // Buat PDF
         $pdf = FacadePdf::loadView('guru.rekapProgres', compact('siswa', 'tugasDikumpulkan', 'tugasBelumDikumpulkan'));
