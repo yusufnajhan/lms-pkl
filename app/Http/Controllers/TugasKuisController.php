@@ -271,50 +271,80 @@ class TugasKuisController extends Controller
     }
 
     // progres siswa
-    // public function read2(int $idsiswa)
-    // {
-    //     // Ambil data siswa
-    //     $siswa = Siswa::findOrFail($idsiswa);
-
-    //     // Ambil idkelas dari data siswa
-    //     $idkelas = $siswa->idkelas;
-
-    //     // Ambil data kelas
-    //     $kelas = Kelas::findOrFail($idkelas);
-
-    //     // Ambil semua data tugas dan pengumpulan tugas untuk kelas dan siswa tertentu
-    //     $tugass = Tugas::where('idkelas', $idkelas)
-    //         ->with(['pengumpulanTugas' => function ($query) use ($idsiswa) {
-    //             $query->where('idsiswa', $idsiswa);
-    //         }])
-    //         ->get();
-
-    //     return view('guru.progres', compact('kelas', 'siswa', 'tugass'));
-    // }
-
     public function read2(int $idsiswa)
     {
         // Dapatkan siswa berdasarkan id
-        $siswa = Siswa::where('idsiswa', $idsiswa)->first();
-
-        // Dapatkan kelas berdasarkan idkelas dari objek siswa
-        $kelas = Kelas::where('idkelas', $siswa->idkelas)->first();
-
+        $siswa = Siswa::findOrFail($idsiswa);
+    
+        // Dapatkan idkelas dari objek siswa
+        $idkelas = $siswa->kelas()->first()->idkelas;
+    
         // Dapatkan semua tugas yang telah dikumpulkan siswa tersebut pada kelas tersebut
-        $tugasSiswa = Pengumpulan_Tugas::where('idsiswa', $idsiswa)
-            ->whereHas('tugas', function ($query) use ($siswa) {
-                $query->where('idkelas', $siswa->idkelas);
-            })->with('tugas')->get();
-
+        $tugasDikumpulkan = Pengumpulan_Tugas::where('idsiswa', $idsiswa)
+            ->whereHas('tugas', function ($query) use ($idkelas) {
+                $query->where('idkelas', $idkelas);
+            })
+            ->where('status', 1)
+            ->with('tugas')
+            ->get();
+    
         // Dapatkan semua tugas untuk kelas tersebut
-        $semuaTugas = Tugas::where('idkelas', $siswa->idkelas)->get();
-
+        $semuaTugas = Tugas::where('idkelas', $idkelas)->get();
+    
+        // Dapatkan id tugas yang telah dikumpulkan
+        $idTugasDikumpulkan = $tugasDikumpulkan->pluck('tugas.idtugas');
+    
         // Filter tugas yang belum dikumpulkan oleh siswa
-        $tugasBelumDikumpulkan = $semuaTugas->diff($tugasSiswa);
-
-        return view('guru.progres', compact('siswa', 'kelas', 'tugasSiswa','tugasBelumDikumpulkan'));
+        $tugasBelumDikumpulkan = $semuaTugas->whereNotIn('idtugas', $idTugasDikumpulkan);
+    
+        return view('guru.progres', compact('siswa', 'tugasDikumpulkan', 'tugasBelumDikumpulkan'));
     }
+    
+    // rekap progres siswa pdf
+    public function rekapProgresSiswa(int $idsiswa)
+    {
+        // Dapatkan siswa berdasarkan id
+        $siswa = Siswa::findOrFail($idsiswa);
+    
+        // Dapatkan idkelas dari objek siswa
+        $idkelas = $siswa->kelas()->first()->idkelas;
+    
+        // Dapatkan semua tugas yang telah dikumpulkan siswa tersebut pada kelas tersebut
+        $tugasDikumpulkan = Pengumpulan_Tugas::where('idsiswa', $idsiswa)
+            ->whereHas('tugas', function ($query) use ($idkelas) {
+                $query->where('idkelas', $idkelas);
+            })
+            ->where('status', 1)
+            ->with('tugas')
+            ->get();
+    
+        // Dapatkan semua tugas untuk kelas tersebut
+        $semuaTugas = Tugas::where('idkelas', $idkelas)->get();
+    
+        // Dapatkan id tugas yang telah dikumpulkan
+        $idTugasDikumpulkan = $tugasDikumpulkan->pluck('tugas.idtugas');
+    
+        // Filter tugas yang belum dikumpulkan oleh siswa
+        $tugasBelumDikumpulkan = $semuaTugas->whereNotIn('idtugas', $idTugasDikumpulkan);
+    
+        // Buat view untuk PDF
+        // $pdfView = view('guru.rekapProgres', compact('siswa', 'tugasDikumpulkan', 'tugasBelumDikumpulkan'));
+    
+        // // Buat PDF dari view
+        // $pdf = FacadePdf::loadHTML($pdfView);
+    
+        // // Simpan PDF ke disk
+        // $pdf->save(storage_path('app/public/progres_siswa.pdf'));
+    
+        // return response()->json([
+        //     'message' => 'Rekap berhasil disimpan dalam bentuk PDF.',
+        //     'file_path' => 'storage/rekap.pdf'
+        // ]);
 
+        // Buat PDF
+        $pdf = FacadePdf::loadView('guru.rekapProgres', compact('siswa', 'tugasDikumpulkan', 'tugasBelumDikumpulkan'));
+        return $pdf->download('rekap_progres_siswa.pdf');
+    }
 
     // edit tugas
     public function edit(int $idtugas)

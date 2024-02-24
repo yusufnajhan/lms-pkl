@@ -96,7 +96,8 @@
                     @endphp
                     @if($pengumpulan && !is_null($pengumpulan->nilai))
                         <p class="font-medium text-gray-600 truncate dark:text-white">
-                            <a href="">Nilai: {{ $pengumpulan->nilai }}/100</a>
+                          <span>Nilai: {{ $pengumpulan->nilai }}/100</span>
+                            {{-- <a href="">Nilai: {{ $pengumpulan->nilai }}/100</a> --}}
                         </p>
                     @endif
 

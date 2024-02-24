@@ -191,6 +191,7 @@ Route::delete('/masukKelas/kuis/{idkuis}', [TugasKuisController::class, 'destroy
 Route::get('/undangSiswa/{idkelas}', [TugasKuisController::class, 'create3'])->name('enroll.create');
 Route::post('/undangSiswa', [TugasKuisController::class, 'store3'])->name('enroll.store');
 Route::get('/progresSiswa/{idsiswa}', [TugasKuisController::class, 'read2'])->name('progres.read');
+Route::get('/rekapProgresSiswa/{idsiswa}', [TugasKuisController::class, 'rekapProgresSiswa'])->name('progres.rekap');
 
 
 
