@@ -46,7 +46,13 @@ class TugasKuisController extends Controller
     {
         $kelas = Kelas::findOrFail($idkelas);
         // $kelass = Kelas::pluck('idkelas', 'idkelas');
-        $siswas = Siswa::pluck('idsiswa', 'idsiswa');
+        // $siswas = Siswa::pluck('idsiswa', 'idsiswa');
+        // $siswas = Siswa::all();
+        // Mengambil semua idsiswa yang sudah diundang ke kelas ini
+        $idsiswaUndangan = Enrollment::where('idkelas', $idkelas)->pluck('idsiswa');
+
+        // Mengambil semua siswa yang belum diundang ke kelas ini
+        $siswas = Siswa::whereNotIn('idsiswa', $idsiswaUndangan)->get();
         return view('guru.undangSiswa', compact('kelas','siswas'));
     }
 
@@ -138,13 +144,24 @@ class TugasKuisController extends Controller
     }
 
     // menampilkan siswa yang sudah mengumpulkan tugas
-    public function read(int $idtugas)
+    public function read(Request $request, int $idtugas)
     {
+        $search = $request->input('search');
+
         $tugas = Tugas::where('idtugas', $idtugas)->first();
         $kelas = Kelas::where('idkelas', $tugas->idkelas)->first();
 
         // Get the task submissions for the specific task
-        $pengumpulanTugas = Pengumpulan_Tugas::where('idtugas', $idtugas)->with('siswa')->get();
+        // $pengumpulanTugas = Pengumpulan_Tugas::where('idtugas', $idtugas)->with('siswa')->get();
+
+        $pengumpulanTugas = Pengumpulan_Tugas::where('idtugas', $idtugas)
+        ->when($search, function ($query, $search) {
+            $query->whereHas('siswa', function ($query) use ($search) {
+                $query->where('nama', 'like', '%' . $search . '%');
+            });
+        })
+        ->with('siswa')
+        ->get();
 
         // Hitung jumlah siswa yang telah mengumpulkan tugas
         $jumlahPengumpulan = $pengumpulanTugas->count();
@@ -185,6 +202,21 @@ class TugasKuisController extends Controller
         } catch (\Exception $e) {
             return back()->with('error', 'Gagal memperbarui nilai tugas.');
         }
+    }
+
+    // cari nama siswa di progres tiap tugas
+    public function search(Request $request) 
+    {
+        $search = $request->input('search');
+        $siswas = Siswa::all();
+
+        if (!empty($search)) {
+            $siswas = Siswa::where(function($query) use ($search) {
+                $query->where('nama', 'like', '%' . $search . '%');
+            })->get();
+        }
+
+        return view('guru.nilaiTugas', ['siswas' => $siswas]);
     }
 
     // sorting nilai tugas
@@ -272,10 +304,24 @@ class TugasKuisController extends Controller
         $request->validate([
             'idenroll' => 'required|numeric',
             'tanggal_enroll' => 'required',
-            'idsiswa' => 'required|numeric',
+            // 'idsiswa' => 'required|numeric',
+            'nama' => 'required|string',
             'idkelas' => 'required|numeric',
         ]);
         $idkelas = $request->input('idkelas');
+
+        // mencari idsiswa berdasarkan nama
+        $nama = $request->input('nama');
+        $siswa = Siswa::where('nama', $nama)->first();
+
+        if (!$siswa) {
+            return redirect()
+                ->route('tugaskuis.index', $idkelas)
+                ->with(['error' => 'Siswa dengan nama tersebut tidak ditemukan.']);
+        }
+
+        $idsiswa = $siswa->idsiswa;
+
 
         // Memeriksa apakah siswa sudah diundang pada kelas yang sama
         $existingEnrollment = Enrollment::where('idsiswa', $request->input('idsiswa'))
@@ -295,7 +341,8 @@ class TugasKuisController extends Controller
             Enrollment::create([
                 'idenroll' => $request->input('idenroll'),
                 'tanggal_enroll' => $request->input('tanggal_enroll'),
-                'idsiswa' => $request->input('idsiswa'),
+                // 'idsiswa' => $request->input('idsiswa'),
+                'idsiswa' => $idsiswa,
                 'idkelas' => $request->input('idkelas'),
             ]);
 

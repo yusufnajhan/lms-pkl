@@ -39,7 +39,7 @@
     </script>
 </head>
 
-<body style="background-image: url('https://dataspasial.semarangkota.go.id/foto_kantor/136_1.jpg'); background-size: cover;">
+<body style="background-image: url('{{ URL('images/kotalama.jpg') }}'); background-size: cover;">
     <section class="bg-gray-50 bg-opacity-50 dark:bg-gray-900">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <a href="/login" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">

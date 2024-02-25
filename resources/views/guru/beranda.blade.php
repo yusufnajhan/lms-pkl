@@ -74,3 +74,20 @@
     </div>
 </section>
 @endsection
+
+@section('content1')
+<div class="grid w-full grid-cols-1 gap-4 mt-4">
+    <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+      <div class="w-full text-center">
+        <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Jumlah Siswa</h3>
+        <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{ $jumlahSiswa }}</span>
+      </div>
+
+      <div class="w-full text-center">
+        <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Jumlah Kelas</h3>
+        <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{ $jumlahKelas }}</span>
+      </div>
+    </div>
+</div>
+
+@endsection

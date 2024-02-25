@@ -33,8 +33,8 @@
     <p style="font-size: 14px; margin-bottom: 10px;"><strong>NIS:</strong> {{ $siswa->nik }}</p>
     <p style="font-size: 14px; margin-bottom: 10px;"><strong>Email:</strong> {{ $siswa->email }}</p>    
 
-    <h2>Rekap Tugas</h2>
-    <h3>Tugas sudah dikumpulkan:</h3>
+    <h3 style="margin-top: 20px;">A. Rekap Tugas</h3>
+    <h4>Tugas sudah dikumpulkan:</h4>
     <table class="table">
         <thead>
           <tr>
@@ -46,7 +46,7 @@
         <tbody>
             @foreach($tugasDikumpulkan as $key => $tugas)
             <tr>
-                <th scope="row">{{ $key + 1 }}</th>
+                <th scope="row">{{ $key + 1 }}.</th>
                 <td>{{ $tugas->tugas->judul_tugas }}</td>
                 <td>{{ $tugas->nilai }}</td>
             </tr>
@@ -54,7 +54,7 @@
         </tbody>
     </table>
 
-    <h3>Tugas belum dikumpulkan:</h3>
+    <h4>Tugas belum dikumpulkan:</h4>
     <table class="table">
         <thead>
           <tr>
@@ -63,15 +63,16 @@
           </tr>
         </thead>
         <tbody>
-            @foreach($tugasBelumDikumpulkan as $key => $tugas)
+            @php $no = 1; @endphp
+            @foreach($tugasBelumDikumpulkan as $tugas)
             <tr>
-                <th scope="row">{{ $key + 1 }}</th>
+                <th scope="row">{{ $no++ }}.</th>
                 <td>{{ $tugas->judul_tugas }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
-    <h2>Rekap Kuis</h2>
+    <h3 style="margin-top: 20px;">B. Rekap Kuis</h3>
 </body>
 </html>

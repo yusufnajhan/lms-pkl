@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Guru;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class KelasController extends Controller
@@ -21,6 +22,7 @@ class KelasController extends Controller
         // Add the count of 'siswa' to each 'kelas'
         foreach ($kelass as $kelas) {
             $kelas->jumlahSiswa = $kelas->siswas->count();
+            $kelas->isExpired = Carbon::now()->greaterThan($kelas->tanggal_tutup); // Check if the class is expired
         }
 
         return view('guru.kelas', compact('kelass'));

@@ -81,9 +81,7 @@
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
                       <a href="{{ route('tugas.read', $tugas->idtugas) }}">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="w-6 h-6">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                          </svg>
+                          <img src="{{ URL('images/tugas.png') }}" alt="tugas" class="w-6 h-6">
                       </a>
                     </div>
                     <div class="flex-1 min-w-0">
@@ -290,10 +288,7 @@
               <div class="flex items-center space-x-4">
                 <a href="{{ route('progres.read', $enrollment->idsiswa) }}">
                   <div class="flex-shrink-0">
-                    {{-- <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image"> --}}
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="w-6 h-6 rounded-full">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                    </svg>
+                    <img src="{{ URL('images/siswa.png') }}" alt="siswa" class="w-6 h-6 rounded-full">
                   </div>
                 </a>
                 <a href="{{ route('progres.read', $enrollment->idsiswa) }}">
@@ -403,7 +398,7 @@
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
           <!-- Modal header -->
           <div class="flex justify-end p-2">
-              <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-modal-toggle="delete-tugas-modal">
+              <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-modal-toggle="delete-tugas-modal-{{ $tugas->idtugas }}">
                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
               </button>
           </div>
@@ -419,7 +414,7 @@
                 Ya, saya yakin
                 </button>
               </form>
-              <a href="/masukKelas/{{ $kelas->idkelas }}/{{ $tugas->idtugas }}" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700" data-modal-toggle="delete-class-modal">
+              <a href="/masukKelas/{{ $kelas->idkelas }}" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700" data-modal-toggle="delete-class-modal">
                   Tidak hapus
               </a>
           </div>

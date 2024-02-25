@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Enrollment;
 use App\Models\Guru;
+use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 
@@ -30,7 +32,16 @@ class DashboardController extends Controller
         $nik = $guru->nik;
         $username = $guru->user->username;
 
-        return view("guru.beranda", compact('nama', 'nik', 'username'));
+        // Menghitung jumlah kelas yang telah dibuat oleh guru ini
+        $jumlahKelas = Kelas::where('idguru', $guru->idguru)->count();
+
+        // Mengambil semua kelas yang dibuat oleh guru ini
+        $kelasGuru = Kelas::where('idguru', $guru->idguru)->pluck('idkelas');
+
+        // Menghitung jumlah siswa yang telah mendaftar di kelas yang dibuat oleh guru ini
+        $jumlahSiswa = Enrollment::whereIn('idkelas', $kelasGuru)->distinct('idsiswa')->count('idsiswa');
+
+        return view("guru.beranda", compact('nama', 'nik', 'username','jumlahKelas','jumlahSiswa'));
     }
 
     public function viewDashboardSiswa() {

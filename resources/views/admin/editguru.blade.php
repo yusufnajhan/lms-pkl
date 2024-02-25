@@ -24,12 +24,8 @@
 
 <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
     <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6"> 
-        <div class="text-center text-gray-500 dark:text-gray-400">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="mx-auto mb-4 w-36 h-36 rounded-full">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-            </svg>
-        </div>
-    </div>
+        <img src="{{ URL('images/guru.png') }}" alt="guru" class="mx-auto mb-4 w-36 h-36 rounded-full">
+    </div>    
     <form action="{{ route('guru.update', $idguru) }}" method="POST">
         @csrf
         <div class="grid grid-cols-6 gap-6">

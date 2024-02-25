@@ -165,6 +165,7 @@ Route::get('/tambahTugas/{idkelas}', [TugasKuisController::class, 'create'])->na
 Route::post('/tambahTugas', [TugasKuisController::class, 'store'])->name('tugas.store');
 Route::get('/nilaiTugas/{idtugas}', [TugasKuisController::class, 'read'])->name('tugas.read');
 Route::put('/nilaiTugas/{idpengumpulan}', [TugasKuisController::class, 'updateNilai'])->name('guru.updateNilai');
+// Route::get('/cariSiswa', [TugasKuisController::class, 'search'])->name('tugas.search');
 // Route::get('/nilaiTugas/sort/{idtugas}/{column}/{direction}', [TugasKuisController::class, 'sortNilai'])->name('tugas.sortNilai');
 Route::get('/rekapTugas/{idtugas}', [TugasKuisController::class, 'downloadRekap'])->name('tugas.downloadRekap');
 Route::get('/editTugas/{idtugas}', [TugasKuisController::class, 'edit'])->name('tugas.edit');
@@ -231,9 +232,9 @@ Route::get('/siswa/readDiskusi/{iddiskusi}', [DiskusiController::class, 'read2']
 Route::get('/siswa/viewMateri/{idkelas}', [MateriController::class, 'index2'])->name('materi.index2');
 Route::get('/siswa/readMateri/{idmateri}', [MateriController::class, 'read2'])->name('materi.read2');
 
-Route::get('/nilaiTugas', function () {
-    return view('guru/nilaitugas');
-});
+// Route::get('/nilaiTugas', function () {
+//     return view('guru/nilaitugas');
+// });
 
 Route::get('/nilaiKuis', function () {
     return view('guru/nilaikuis');

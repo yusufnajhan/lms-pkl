@@ -16,7 +16,7 @@
           <li>
             <a href="{{ route('tugaskuis.index', $kelas->idkelas) }}">
                 <div class="flex items-center">
-                    <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                    <svg class="w-6 h-6 text-black" fill="red" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
                     <span class="flex items-center p-2 text-base text-red-900 rounded-lg hover:bg-red-100 group dark:text-red-200 dark:hover:bg-red-700" aria-current="page">{{ $kelas->mata_pelajaran }} {{ $kelas->jenjang_kelas }}{{ $kelas->indeks_kelas }}</span>
                 </div>
             </a>
@@ -62,7 +62,7 @@
 
             </div>
 
-            <div class="col-span-6 sm:col-span-3">
+            {{-- <div class="col-span-6 sm:col-span-3">
                 <label for="idsiswa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Siswa</label>
                 <select name="idsiswa" id="idsiswa" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option value="" disabled selected>Pilih ID Siswa</option>
@@ -70,17 +70,38 @@
                         <option value="{{ $siswaId }}">{{ $siswaId }}</option>
                     @endforeach
                 </select>
-            </div>
+            </div> --}}
+
+            <div class="col-span-6 sm:col-span-3">
+                <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Siswa</label>
+                <select name="nama" id="nama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <option value="" disabled selected>Pilih Nama Siswa</option>
+                    @foreach($siswas as $siswa)
+                        <option value="{{ $siswa->nama }}">{{ $siswa->nama }}</option>
+                    @endforeach
+                </select>
+            </div>            
+
+            {{-- <div class="col-span-6 sm:col-span-3">
+                <label for="idkelas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Kelas</label>
+                <select name="idkelas" id="idkelas" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <option value="" disabled selected>Pilih ID Kelas</option>
+                    <option value="{{ $kelas->idkelas }}">{{ $kelas->idkelas }}</option> --}}
+                    {{-- @foreach($kelass as $kelasId)
+                        <option value="{{ $kelasId }}">{{ $kelasId }}</option>
+                    @endforeach --}}
+                {{-- </select>
+            </div> --}}
 
             <div class="col-span-6 sm:col-span-3">
                 <label for="idkelas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Kelas</label>
                 <select name="idkelas" id="idkelas" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                    <option value="" disabled selected>Pilih ID Kelas</option>
                     <option value="{{ $kelas->idkelas }}">{{ $kelas->idkelas }}</option>
-                    {{-- @foreach($kelass as $kelasId)
-                        <option value="{{ $kelasId }}">{{ $kelasId }}</option>
-                    @endforeach --}}
                 </select>
+
+                @error('idkelas')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="col-span-6 sm:col-full">

@@ -5,7 +5,7 @@
     <nav class="flex mb-5" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
           <li class="inline-flex items-center">
-            <a href="#"
+            <a href="/kelasGuru"
                 class="flex items-center p-2 text-base text-red-900 rounded-lg hover:bg-red-100 group dark:text-red-200 dark:hover:bg-red-700 ">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
@@ -48,7 +48,8 @@
         </div> 
     </div>
 
-    <h1 class="mt-6 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Rekap Tugas</h1>
+    <h1 class="mt-6 text-lg font-semibold text-gray-900 sm:text-xl dark:text-white">Progres Tugas</h1>
+
     <div class="mt-4 p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
         <div class="sm:hidden">
             <label for="tabs" class="sr-only">Select tab</label>
@@ -98,10 +99,11 @@
                       </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                      @php $no = 1; @endphp
                       @foreach($tugasBelumDikumpulkan as $tugas)
                           <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                             
-                              <td class="py-3 text-center dark:text-white">{{ $key + 1 }}.</td>
+                              <td class="py-3 text-center dark:text-white">{{ $no++ }}.</td>
                               <td class="py-3 text-center dark:text-white">{{ $tugas->judul_tugas }}</td>
                           </tr>
                       @endforeach
@@ -111,6 +113,7 @@
             
         </div>
     </div>
-    <h1 class="mt-6 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Rekap Kuis</h1>
+    
+    <h1 class="mt-6 text-lg font-semibold text-gray-900 sm:text-xl dark:text-white">Progres Kuis</h1>
 </div>
 @endsection
