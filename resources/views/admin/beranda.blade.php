@@ -76,7 +76,7 @@
     <div class="flex justify-between items-start w-full">
         <div class="flex-col items-center">
           <div class="flex items-center mb-1">
-                <h1 class="text-3xl font-bold leading-none text-gray-900 dark:text-white me-1">Jumlah Guru dan Siswa</h1>
+                <h1 class="max-w-2xl mb-4 text-3xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl dark:text-white">Jumlah Guru dan Siswa</h1>
               <div data-popover id="chart-info" role="tooltip" class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
                   <div class="p-3 space-y-2">
                       <a href="#" class="flex items-center font-medium text-blue-600 dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:underline">Read more <svg class="w-2 h-2 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">

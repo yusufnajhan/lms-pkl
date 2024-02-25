@@ -103,9 +103,7 @@
                                 class="flex text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                                 id="user-menu-button-2" aria-expanded="false" data-dropdown-toggle="dropdown-2">
                                 <span class="sr-only">Open user menu</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                </svg>
+                                <img src="{{ URL('images/admin.png') }}" alt="admin" class="w-7 h-7">
                             </button>                              
                         </div>
                         
@@ -125,11 +123,6 @@
                                 </p>
                             </div>
                             <ul class="py-1" role="none">
-                                {{-- <li>
-                                    <a href="/profilAdmin"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                        role="menuitem">Pengaturan</a>
-                                </li> --}}
 
                                 <li>
                                     <a href="/profilAdmin"
@@ -173,6 +166,16 @@
                         class="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                         <ul class="pb-2 space-y-2">
                             <li>
+                                <a href="/profilAdmin"
+                                    class="flex items-center p-2 text-base text-red-900 rounded-lg hover:bg-red-100 group dark:text-red-200 dark:hover:bg-red-700">
+                                    <img src="{{ URL('images/admin.png') }}" alt="admin" class="w-7 h-7">
+                                    <span class="ml-3" sidebar-toggle-item="">Admin</span>
+                                </a>
+
+                            </li>
+                        </ul>
+                        <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
+                            <li>
                                 <a href="/berandaAdmin"
                                     class="flex items-center p-2 text-base text-red-900 rounded-lg hover:bg-red-100 group dark:text-red-200 dark:hover:bg-red-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -201,6 +204,10 @@
                             </li>
                         </ul>                        
                     </div>
+                    {{-- <div class="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-white dark:bg-gray-800 z-20 border-r border-gray-200 dark:border-gray-700">
+                        <img src="{{ URL('images/sekolah2.png') }}" alt="sekolah" class="w-full h-45">
+                    </div> --}}
+                    
                 </div>
             </div>
         </aside>
