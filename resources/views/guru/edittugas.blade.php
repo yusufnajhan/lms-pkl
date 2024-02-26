@@ -111,7 +111,7 @@
 
             <div class="col-span-6 sm:col-span-3">
                 <label for="file_input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berkas Tugas</label>
-                <a href="{{ asset('storage/' . $tugas->file_tugas) }}"
+                <a href="{{ asset('storage/' . $tugas->file_tugas) }}" target="_blank"
                     class="ml-2 w-30 h-10 bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center mb-4">Lihat berkas</a>
                 </label>
                     

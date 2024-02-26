@@ -82,7 +82,7 @@
 
             <div class="col-span-6 sm:col-span-3">
                 <label for="file_materi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">File Materi</label>
-                <a href="{{ asset('storage/' . $materi->file_materi) }}"
+                <a href="{{ asset('storage/' . $materi->file_materi) }}" target="_blank"
                     class="ml-2 w-24 h-12 bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center mb-4">Lihat
                     file</a></label>
                     

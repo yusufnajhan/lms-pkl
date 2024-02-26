@@ -25,7 +25,7 @@
           <li>
             <div class="flex items-center">
               <svg class="w-6 h-6 text-red-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-              <a href="{{ route('siswamasuk.index', $kelas->idkelas) }}" class="ml-1 text-red-700 hover:text-primary-600 md:ml-2 dark:text-red-300 dark:hover:text-white">{{ $kelas->mata_pelajaran }} {{ $kelas->jenjang_kelas }}{{ $kelas->indeks_kelas }}</a>
+              <a href="#" class="ml-1 text-red-700 hover:text-primary-600 md:ml-2 dark:text-red-300 dark:hover:text-white">kelas apa yaah</a>
             </div>
           </li>
           <li>
@@ -40,53 +40,30 @@
 </div>
 
 <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-    <form action="{{ route('kumpultugas.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('kumpultugas.update', $tugas->idtugas) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="grid grid-cols-6 gap-6">
 
-            <div class="col-span-6 sm:col-span-3">
-                <label for="idpengumpulan"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Pengumpulan</label>
-                <input type="number" name="idpengumpulan" id="idpengumpulan"
-                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ old('idpengumpulan') }}" wfd-id="id1" >
-
-                    @error('idpengumpulan')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-
-            </div>
-
-            <div class="col-span-6 sm:col-span-3">
+            {{-- <div class="col-span-6 sm:col-span-3">
                 <label for="status"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status Tugas</label>
                 <select name="status" id="status"
-                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" wfd-id="id2">
-                    <option value="1"{{ old('status') == '1' ? 'selected' : ''}}>Sudah dikerjakan</option>
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    wfd-id="id2">
+                    <option value="1"{{ $pengumpulanTugas->status === '1' ? 'selected' : '' }}>Sudah dikerjakan</option>
                 </select>
             
                     @error('status')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
-            </div>
-
-            <div class="col-span-6 sm:col-span-3">
-                <label for="file_submit_tugas"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berkas Tugas</label>
-                <input type="file" name="file_submit_tugas" id="file_submit_tugas"
-                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
-            
-                @error('file_submit_tugas')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+            </div> --}}
 
             <div class="col-span-6 sm:col-span-3">
                 <label for="tanggal_pengumpulan"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Pengumpulan</label>
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Upload</label>
                 <input type="date" name="tanggal_pengumpulan" id="tanggal_pengumpulan"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ old('tanggal_pengumpulan') }}" wfd-id="id2" >
+                    value="{{ $pengumpulanTugas->tanggal_pengumpulan }}" wfd-id="id2" >
 
                     @error('tanggal_pengumpulan')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -99,30 +76,40 @@
                 <select name="idtugas" id="idtugas" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option value="{{ $tugas->idtugas }}">{{ $tugas->idtugas }}</option>
                 </select>
+
+                @error('idtugas')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
-            
+
             <div class="col-span-6 sm:col-span-3">
-                <label for="idguru" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Guru</label>
-                <select name="idguru" id="idguru" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                    <option value="{{ $guru->idguru }}">{{ $guru->idguru }}</option>
-                </select>
+                <label for="file_submit_tugas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berkas Tugas</label>
+                <a href="{{ asset('storage/' . $pengumpulanTugas->file_submit_tugas) }}" target="_blank"
+                    class="ml-2 w-30 h-10 bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center mb-4">Lihat berkas</a>
+                </label>
+                    
+                <input type="file" name="file_submit_tugas" id="file_submit_tugas"
+                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+            
+                @error('file_submit_tugas')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
             
 
-            <div class="col-span-6 sm:col-span-3">
-                <label for="idsiswa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Siswa</label>
-                <select name="idsiswa" id="idsiswa" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                    <option value="{{ auth()->user()->dataPribadi->idsiswa }}" selected>{{ auth()->user()->dataPribadi->idsiswa }}</option>
-                </select>
+            <div>
+                <input type="hidden" name="oldFile" id="oldFile" value="{{ $pengumpulanTugas->file_submit_tugas }}">
             </div>
+            
             
             <div class="col-span-6 sm:col-full">
                 <button class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                     type="submit" name="submit">
-                    Kumpul Tugas
+                    Simpan
                 </button>
             </div>                       
         </div>
     </form>
+    
 </div>
 @endsection

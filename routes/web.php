@@ -283,6 +283,8 @@ Route::get('/masukKelasSiswa/{idkelas}', [MasukKelasSiswaController::class, 'ind
 Route::get('/detailTugas/{idtugas}', [MasukKelasSiswaController::class, 'read'])->name('siswamasuk.read');
 Route::get('/kumpulTugas/{idtugas}', [MasukKelasSiswaController::class, 'create'])->name('kumpultugas.create');
 Route::post('/kumpulTugas', [MasukKelasSiswaController::class, 'store'])->name('kumpultugas.store');
+Route::get('/editkumpulTugas/{idtugas}', [MasukKelasSiswaController::class, 'edit'])->name('kumpultugas.edit');
+Route::post('/editkumpulTugas/{idtugas}', [MasukKelasSiswaController::class, 'update'])->name('kumpultugas.update');
 Route::get('/rekapTugasKuis/{idkelas}', [MasukKelasSiswaController::class, 'downloadRekapTugas'])->name('siswamasuk.rekapTugas');
 
 // Route::get('/tugasMatematika', function () {

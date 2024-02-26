@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class MasukKelasSiswaController extends Controller
 {
@@ -143,6 +144,58 @@ class MasukKelasSiswaController extends Controller
         }
     }
 
+
+    public function edit($idtugas)
+    {
+        $pengumpulanTugas = Pengumpulan_Tugas::find($idtugas);
+
+        if (!$pengumpulanTugas) {
+            // Handle the case where no pengumpulan tugas was found for the given id
+            return redirect()->back()->with('error', 'Pengumpulan tugas tidak ditemukan.');
+        }
+
+        $kelas = Kelas::where('idkelas', $pengumpulanTugas->idkelas)->first();
+        $tugas = Tugas::find($pengumpulanTugas->idtugas);
+        
+        return view('siswa.editKumpulTugas', compact('pengumpulanTugas', 'kelas', 'tugas'));
+    }
+
+    public function update(Request $request, $idtugas)
+    {
+        // Validasi data input
+        $request->validate([
+            // 'status' => 'required|in:1,0',
+            'file_submit_tugas' => 'file|max:25600',
+            'tanggal_pengumpulan' => 'required|date',
+        ]);
+    
+        $pengumpulanTugas = Pengumpulan_Tugas::find($idtugas);
+    
+        if ($request->file('file_submit_tugas')) {
+            // Hapus file lama
+            Storage::delete('public/'.$pengumpulanTugas->file_submit_tugas);
+    
+            // Upload file baru
+            $file_submit_tugas = $request->file('file_submit_tugas')->store('file_submit_tugas', 'public');
+            $pengumpulanTugas->file_submit_tugas = $file_submit_tugas;
+        }
+    
+        // $pengumpulanTugas->status = $request->input('status');
+        $pengumpulanTugas->tanggal_pengumpulan = $request->input('tanggal_pengumpulan');
+        $pengumpulanTugas->save();
+
+        // Ambil objek Tugas
+        $tugas = Tugas::find($pengumpulanTugas->idtugas);
+
+        // Ambil idkelas dari objek Tugas
+        $idkelas = $tugas->idkelas;
+
+        // return redirect()->route('siswamasuk.index', $pengumpulanTugas->idkelas)->with('success', 'Berhasil mengupdate tugas.');
+        return redirect()->route('siswamasuk.index', ['idkelas' => $idkelas])->with('success', 'Berhasil memperbarui tugas yang dikumpulkan.');
+
+    }
+
+
     // rekap tugas dan kuis siswa
     public function downloadRekapTugas($idkelas)
     {
@@ -208,21 +261,7 @@ class MasukKelasSiswaController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
