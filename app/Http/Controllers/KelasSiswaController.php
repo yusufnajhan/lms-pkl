@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Enrollment;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class KelasSiswaController extends Controller
@@ -12,9 +13,26 @@ class KelasSiswaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $status = $request->input('status');
         $kelass = Auth::user()->dataPribadi->kelas;
+
+        foreach ($kelass as $kelas) {
+            $kelas->isExpired = Carbon::now()->greaterThan($kelas->tanggal_tutup); // Check if the class is expired
+        }
+
+        if ($status) {
+            $kelass = $kelass->filter(function ($kelas) use ($status) {
+                if ($status == 'aktif') {
+                    return !$kelas->isExpired;
+                } else if ($status == 'tidak aktif') {
+                    return $kelas->isExpired;
+                } else if ($status == 'semua') {
+                    return true; // Return all classes
+                }
+            })->values();
+        }
 
         return view('siswa.kelas', compact('kelass'));
     }

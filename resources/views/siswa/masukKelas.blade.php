@@ -60,11 +60,43 @@
     <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
         <div class="hidden pt-4" id="faq" role="tabpanel" aria-labelledby="faq-tab">
           <div class="col-span-6 sm:col-span-3 flex justify-between items-center">
-            <select name="status" id="status" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-half p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
-              <option value="telah">Semua tugas dan kuis</option>  
-              <option value="telah">Sudah dikerjakan</option>
-                <option value="belum">Belum dikerjakan</option>
-            </select>
+            <form action="{{ route('siswamasuk.index', $kelas->idkelas) }}" method="GET">
+              <div class="flex items-center">
+                  <button id="dropdownDefault" data-dropdown-toggle="dropdown"
+                      class="mb-4 sm:mb-0 mr-4 inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                      type="button">
+                      Saring tugas & kuis
+                      <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="red" viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                  </button>
+                  <!-- Dropdown menu -->
+                  <div id="dropdown" class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+                      <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                          <li class="flex items-center">
+                              <input id="semua" name="status" type="radio" value="semua" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                              <label for="semua" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                  Semua tugas & kuis
+                              </label>
+                          </li>
+                          <li class="flex items-center">
+                            <input id="telah" name="status" type="radio" value="telah" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                            <label for="telah" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                Sudah dikerjakan
+                            </label>
+                          </li> 
+                          <li class="flex items-center">
+                              <input id="belum" name="status" type="radio" value="belum" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                              <label for="belum" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                  Belum dikerjakan
+                              </label>
+                          </li>
+                      </ul>
+                      <button type="submit" class="mt-3 w-full px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-500">Terapkan</button>
+                  </div>
+              </div>
+            </form>
             <a href="{{ route('siswamasuk.rekapTugas', $kelas->idkelas) }}" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-red-900 bg-white border border-red-300 rounded-lg hover:bg-red-100 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-red-800 dark:text-red-400 dark:border-red-600 dark:hover:text-white dark:hover:bg-red-700 dark:focus:ring-red-700">
               <svg class="w-5 h-5 mr-2 -ml-1" fill="red" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"></path></svg>
               Rekap Tugas & Kuis
@@ -77,9 +109,7 @@
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
                       <a href="{{ route('siswamasuk.read', $tugas->idtugas) }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="w-6 h-6">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                        </svg>
+                        <img src="{{ URL('images/tugas.png') }}" alt="tugas" class="w-6 h-6">
                       </a>
                     </div>
                     <div class="flex-1 min-w-0">
@@ -115,11 +145,16 @@
                             </span>
                         @endif
                     </td>
-
+                    @if(!$tugas->isExpired)
                     <a href="{{ route('kumpultugas.create', $tugas->idtugas) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
                       kumpul tugas
                       <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </a>
+                    @else
+                    <span class="inline-flex items-center font-medium text-gray-600 dark:text-gray-500">
+                      Tugas tutup
+                    </span>
+                    @endif
                   </div>
                 </li>
                 @endforeach
@@ -255,10 +290,7 @@
           <li class="py-3 sm:py-4">
             <div class="flex items-center space-x-4">
               <div class="flex-shrink-0">
-                {{-- <img class="w-8 h-8 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil image"> --}}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="w-6 h-6 rounded-full">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
+                <img src="{{ URL('images/siswa.png') }}" alt="siswa" class="w-6 h-6 rounded-full">
               </div>
               <div class="flex-1 min-w-0">
                 <p class="font-medium text-gray-900 truncate dark:text-white">

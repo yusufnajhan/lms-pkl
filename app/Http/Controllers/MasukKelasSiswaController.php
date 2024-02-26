@@ -11,18 +11,53 @@ use App\Models\Siswa;
 use App\Models\Tugas;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class MasukKelasSiswaController extends Controller
 {
-    public function index($idkelas)
+    public function index(Request $request, $idkelas)
     {
+        $status = $request->input('status');
         $idsiswa = auth()->user()->id;
         $kumpultugas = Pengumpulan_Tugas::where('idsiswa', $idsiswa)->get();
         $kelas = Kelas::findOrFail($idkelas);
         $tugass = Tugas::where('idkelas', $idkelas)->get();
         $kuiss = Kuis::where('idkelas', $idkelas)->get();
         $enrollments = Enrollment::with('siswa')->where('idkelas', $idkelas)->get();
+
+        foreach ($tugass as $tugas) {
+            $tugas->isExpired = Carbon::now()->greaterThan($tugas->tanggal_selesai); // Check if the tugas is expired
+            $tugas->isSubmitted = $kumpultugas->contains('idtugas', $tugas->idtugas); // Check if the tugas is submitted
+        }
+
+        foreach ($kuiss as $kuis) {
+            $kuis->isExpired = Carbon::now()->greaterThan($kuis->tanggal_selesai); // Check if the kuis is expired
+            $kuis->isSubmitted = $kumpultugas->contains('idkuis', $kuis->idkuis); // Check if the kuis is submitted
+        }
+
+        if ($status) {
+            $tugass = $tugass->filter(function ($tugas) use ($status) {
+                if ($status == 'telah') {
+                    return $tugas->isSubmitted;
+                } else if ($status == 'belum') {
+                    return !$tugas->isSubmitted;
+                } else if ($status == 'semua') {
+                    return true; // Return all tugas
+                }
+            })->values();
+    
+            $kuiss = $kuiss->filter(function ($kuis) use ($status) {
+                if ($status == 'telah') {
+                    return $kuis->isSubmitted;
+                } else if ($status == 'belum') {
+                    return !$kuis->isSubmitted;
+                } else if ($status == 'semua') {
+                    return true; // Return all kuis
+                }
+            })->values();
+        }
+
         return view('siswa.masukKelas', compact('kelas','tugass','kuiss','enrollments','kumpultugas'));
     }
 
