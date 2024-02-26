@@ -7,6 +7,7 @@ use App\Models\Kelas;
 use App\Models\Kuis;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class DasborSiswaController extends Controller
@@ -27,8 +28,13 @@ class DasborSiswaController extends Controller
         // Assuming you have a relationship in your Siswa model called 'kelas'
         $enrolledKelas = $siswa->kelas;
 
-        $tugass = Tugas::whereIn('idkelas', $enrolledKelas->pluck('idkelas'))->get();
-        $kuiss = Kuis::whereIn('idkelas', $enrolledKelas->pluck('idkelas'))->get();
+        $currentDate = Carbon::now(); // get current date
+
+        // filter the enrolledKelas based on tanggal_tutup
+        $activeKelas = $enrolledKelas->where('tanggal_tutup', '>', $currentDate);
+
+        $tugass = Tugas::whereIn('idkelas', $activeKelas->pluck('idkelas'))->get();
+        $kuiss = Kuis::whereIn('idkelas', $activeKelas->pluck('idkelas'))->get();
 
         return view('siswa.dasbor', compact('tugass', 'kuiss'));
     }

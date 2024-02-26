@@ -112,12 +112,18 @@
                         <img src="{{ URL('images/tugas.png') }}" alt="tugas" class="w-6 h-6">
                       </a>
                     </div>
+                    <style>
+                      a.hover-red-underline:hover {
+                          text-decoration: underline;
+                          text-decoration-color: red;
+                      }
+                    </style>
                     <div class="flex-1 min-w-0">
                       <p class="font-medium text-gray-900 truncate dark:text-white">
-                        <a href="{{ route('siswamasuk.read', $tugas->idtugas) }}">{{ $tugas->judul_tugas }}</a>
+                        <a href="{{ route('siswamasuk.read', $tugas->idtugas) }}" class="hover-red-underline">{{ $tugas->judul_tugas }}</a>
                       </p>
                       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                        <a href="{{ route('siswamasuk.read', $tugas->idtugas) }}">{{ $tugas->tanggal_selesai }}</a>
+                        <a href="{{ route('siswamasuk.read', $tugas->idtugas) }}" class="hover-red-underline">{{ $tugas->tanggal_selesai }}</a>
                       </p>
                     </div>
 

@@ -84,12 +84,18 @@
                           <img src="{{ URL('images/tugas.png') }}" alt="tugas" class="w-6 h-6">
                       </a>
                     </div>
+                    <style>
+                      a.hover-red-underline:hover {
+                          text-decoration: underline;
+                          text-decoration-color: red;
+                      }
+                    </style>
                     <div class="flex-1 min-w-0">
                         <p class="font-medium text-gray-900 truncate dark:text-white">
-                          <a href="{{ route('tugas.read', $tugas->idtugas) }}">{{ $tugas->judul_tugas }}</a>
+                          <a href="{{ route('tugas.read', $tugas->idtugas) }}" class="hover-red-underline">{{ $tugas->judul_tugas }}</a>
                         </p>
                         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                          <a href="{{ route('tugas.read', $tugas->idtugas) }}">{{ $tugas->tanggal_selesai }}</a>
+                          <a href="{{ route('tugas.read', $tugas->idtugas) }}" class="hover-red-underline">{{ $tugas->tanggal_selesai }}</a>
                         </p>
                     </div>                  
                     <td class="p-4 space-x-2 whitespace-nowrap">
@@ -98,7 +104,7 @@
                           class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
                           data-idtugas="{{ $tugas->idtugas }}">
                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
-                              Ubah
+                              Detail
                         </button>
                       </a>
                         <button type="button" data-modal-toggle="delete-tugas-modal-{{ $tugas->idtugas }}" class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
@@ -291,7 +297,13 @@
                     <img src="{{ URL('images/siswa.png') }}" alt="siswa" class="w-6 h-6 rounded-full">
                   </div>
                 </a>
-                <a href="{{ route('progres.read', $enrollment->idsiswa) }}">
+                <style>
+                  a.hover-red-underline:hover {
+                      text-decoration: underline;
+                      text-decoration-color: red;
+                  }
+                </style>
+                <a href="{{ route('progres.read', $enrollment->idsiswa) }}" class="hover-red-underline">
                   <div class="flex-1 min-w-0">
                     <p class="font-medium text-gray-900 truncate dark:text-white">
                       {{ $enrollment->siswa->nama }}
