@@ -27,23 +27,27 @@
         </ol>
     </nav>
     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">{{ $tugas->judul_tugas }}</h1>
+    <footer class="mt-5 flex items-center justify-between mb-2">
+      <div class="flex items-center">
+        <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022">Diunggah pada: {{ $tugas->tanggal_mulai }}</time></p>
+      </div>
+</footer>
+<p class="text-sm font-bold text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022">Tenggat waktu: {{ $tugas->tanggal_selesai }}</time></p>
 </div>
 
+<div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
 <!-- Deskripsi tugas -->
 <form class="overflow-y-auto lg:max-h-[60rem] 2xl:max-h-fit">
     <article class="mb-5">
-      <footer class="flex items-center justify-between mb-2">
-            <div class="flex items-center">
-              <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022">Diunggah pada: {{ $tugas->tanggal_mulai }}</time></p>
-            </div>
-      </footer>
-      <p class="text-sm font-bold text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022">Tenggat waktu: {{ $tugas->tanggal_selesai }}</time></p>
-      <p class="mt-5 mb-2 text-gray-900 dark:text-white">
+      <p class="text-sm font-bold text-gray-600 dark:text-gray-400">Deskripsi:</p>
+      <p class="mt-3 mb-2 text-gray-900 dark:text-white">
         {{ $tugas->deskripsi_tugas }}
       </p>
+
+      <p class="mt-5 text-sm font-bold text-gray-600 dark:text-gray-400">Berkas tugas:</p>
       <div class="items-center 2xl:space-x-4 2xl:flex">
         <!-- File tugas -->
-        <div class="flex items-center p-3 mb-3.5 border border-gray-200 dark:border-gray-700 rounded-lg">
+        <div class="mt-3 flex items-center p-3 mb-3.5 border border-gray-200 dark:border-gray-700 rounded-lg">
           <div class="flex items-center justify-center w-10 h-10 mr-3 rounded-lg bg-primary-100 dark:bg-primary-900">
             <svg class="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path clip-rule="evenodd" fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625zM7.5 15a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 017.5 15zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H8.25z"></path>
@@ -51,13 +55,13 @@
             </svg>
           </div>
           <div class="mr-4">
-              <p class="text-sm font-semibold text-gray-900 dark:text-white">berkas tugas</p>
+              <p class="text-sm font-semibold text-gray-900 dark:text-white">unduh berkas</p>
               {{-- <p class="text-sm text-gray-500 dark:text-gray-400">PDF, 2.3 MB</p> --}}
           </div>
           <div class="flex items-center ml-auto">
             <a href="{{ asset('storage/' . $tugas->file_tugas) }}" download>
-                <button type="button" class="p-2 rounded hover:bg-gray-100">
-                    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <button type="button" class="p-2 rounded hover:bg-red-100">
+                    <svg class="w-5 h-5 text-red-500 dark:text-red-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path clip-rule="evenodd" fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z"></path>
                     </svg>
                     <span class="sr-only">Download</span>
@@ -68,4 +72,5 @@
       </div>
     </article>
 </form>
+</div>
 @endsection

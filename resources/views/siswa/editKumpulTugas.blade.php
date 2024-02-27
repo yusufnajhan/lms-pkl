@@ -25,7 +25,7 @@
           <li>
             <div class="flex items-center">
               <svg class="w-6 h-6 text-red-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-              <a href="#" class="ml-1 text-red-700 hover:text-primary-600 md:ml-2 dark:text-red-300 dark:hover:text-white">kelas apa yaah</a>
+              <a href="{{ route('siswamasuk.index', $kelas->idkelas) }}" class="ml-1 text-red-700 hover:text-primary-600 md:ml-2 dark:text-red-300 dark:hover:text-white">{{ $kelas->mata_pelajaran }} {{ $kelas->jenjang_kelas }}{{ $kelas->indeks_kelas }}</a>
             </div>
           </li>
           <li>
@@ -58,20 +58,20 @@
                     @enderror
             </div> --}}
 
-            <div class="col-span-6 sm:col-span-3">
+            {{-- <div class="col-span-6 sm:col-span-3">
                 <label for="tanggal_pengumpulan"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Upload</label>
                 <input type="date" name="tanggal_pengumpulan" id="tanggal_pengumpulan"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="{{ $pengumpulanTugas->tanggal_pengumpulan }}" wfd-id="id2" >
+                    value="{{ $pengumpulan->tanggal_pengumpulan }}" wfd-id="id2" >
 
                     @error('tanggal_pengumpulan')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
 
-            </div>
+            </div> --}}
 
-            <div class="col-span-6 sm:col-span-3">
+            {{-- <div class="col-span-6 sm:col-span-3">
                 <label for="idtugas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Tugas</label>
                 <select name="idtugas" id="idtugas" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option value="{{ $tugas->idtugas }}">{{ $tugas->idtugas }}</option>
@@ -80,11 +80,11 @@
                 @error('idtugas')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
-            </div>
+            </div> --}}
 
             <div class="col-span-6 sm:col-span-3">
                 <label for="file_submit_tugas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berkas Tugas</label>
-                <a href="{{ asset('storage/' . $pengumpulanTugas->file_submit_tugas) }}" target="_blank"
+                <a href="{{ asset('storage/' . $pengumpulan->file_submit_tugas) }}" target="_blank"
                     class="ml-2 w-30 h-10 bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center mb-4">Lihat berkas</a>
                 </label>
                     
@@ -98,7 +98,7 @@
             
 
             <div>
-                <input type="hidden" name="oldFile" id="oldFile" value="{{ $pengumpulanTugas->file_submit_tugas }}">
+                <input type="hidden" name="oldFile" id="oldFile" value="{{ $pengumpulan->file_submit_tugas }}">
             </div>
             
             

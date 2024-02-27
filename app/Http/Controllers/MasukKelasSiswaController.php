@@ -145,54 +145,91 @@ class MasukKelasSiswaController extends Controller
     }
 
 
+    // public function edit($idtugas)
+    // {
+    //     $pengumpulanTugas = Pengumpulan_Tugas::find($idtugas);
+
+    //     if (!$pengumpulanTugas) {
+    //         // Handle the case where no pengumpulan tugas was found for the given id
+    //         return redirect()->back()->with('error', 'Pengumpulan tugas tidak ditemukan.');
+    //     }
+
+    //     $kelas = Kelas::where('idkelas', $pengumpulanTugas->idkelas)->first();
+    //     $tugas = Tugas::find($pengumpulanTugas->idtugas);
+        
+    //     return view('siswa.editKumpulTugas', compact('pengumpulanTugas', 'kelas', 'tugas'));
+    // }
+
     public function edit($idtugas)
     {
-        $pengumpulanTugas = Pengumpulan_Tugas::find($idtugas);
-
-        if (!$pengumpulanTugas) {
-            // Handle the case where no pengumpulan tugas was found for the given id
-            return redirect()->back()->with('error', 'Pengumpulan tugas tidak ditemukan.');
+        $tugas = Tugas::findOrFail($idtugas);
+        // Cek apakah tanggal_selesai belum lewat
+        if ($tugas->tanggal_selesai > now()) {
+            $pengumpulan = Pengumpulan_Tugas::where('idtugas', $idtugas)->first();
+            if ($pengumpulan) {
+                $kelas = $tugas->kelas;
+                return view('siswa.editKumpulTugas', compact('tugas', 'pengumpulan','kelas'));
+            } else {
+                return redirect()->route('siswamasuk.index')->with('error', 'Pengumpulan tugas tidak ditemukan.');
+            }
+        } else {
+            return redirect()->route('siswamasuk.index')->with('error', 'Tugas sudah tutup, tidak dapat mengedit.');
         }
-
-        $kelas = Kelas::where('idkelas', $pengumpulanTugas->idkelas)->first();
-        $tugas = Tugas::find($pengumpulanTugas->idtugas);
-        
-        return view('siswa.editKumpulTugas', compact('pengumpulanTugas', 'kelas', 'tugas'));
     }
+
+    // public function update(Request $request, $idtugas)
+    // {
+    //     // Validasi data input
+    //     $request->validate([
+    //         // 'status' => 'required|in:1,0',
+    //         'file_submit_tugas' => 'file|max:25600',
+    //         'tanggal_pengumpulan' => 'required|date',
+    //     ]);
+    
+    //     $pengumpulanTugas = Pengumpulan_Tugas::find($idtugas);
+    
+    //     if ($request->file('file_submit_tugas')) {
+    //         // Hapus file lama
+    //         Storage::delete('public/'.$pengumpulanTugas->file_submit_tugas);
+    
+    //         // Upload file baru
+    //         $file_submit_tugas = $request->file('file_submit_tugas')->store('file_submit_tugas', 'public');
+    //         $pengumpulanTugas->file_submit_tugas = $file_submit_tugas;
+    //     }
+    
+    //     // $pengumpulanTugas->status = $request->input('status');
+    //     $pengumpulanTugas->tanggal_pengumpulan = $request->input('tanggal_pengumpulan');
+    //     $pengumpulanTugas->save();
+
+    //     // Ambil objek Tugas
+    //     $tugas = Tugas::find($pengumpulanTugas->idtugas);
+
+    //     // Ambil idkelas dari objek Tugas
+    //     $idkelas = $tugas->idkelas;
+
+    //     // return redirect()->route('siswamasuk.index', $pengumpulanTugas->idkelas)->with('success', 'Berhasil mengupdate tugas.');
+    //     return redirect()->route('siswamasuk.index', ['idkelas' => $idkelas])->with('success', 'Berhasil memperbarui tugas yang dikumpulkan.');
+
+    // }
 
     public function update(Request $request, $idtugas)
     {
-        // Validasi data input
         $request->validate([
-            // 'status' => 'required|in:1,0',
-            'file_submit_tugas' => 'file|max:25600',
-            'tanggal_pengumpulan' => 'required|date',
+            'file_submit_tugas' => 'required|file|max:25600',
         ]);
     
-        $pengumpulanTugas = Pengumpulan_Tugas::find($idtugas);
-    
-        if ($request->file('file_submit_tugas')) {
-            // Hapus file lama
-            Storage::delete('public/'.$pengumpulanTugas->file_submit_tugas);
-    
-            // Upload file baru
-            $file_submit_tugas = $request->file('file_submit_tugas')->store('file_submit_tugas', 'public');
-            $pengumpulanTugas->file_submit_tugas = $file_submit_tugas;
+        $pengumpulan = Pengumpulan_Tugas::where('idtugas', $idtugas)->first();
+        if ($pengumpulan) {
+            if ($request->file('file_submit_tugas')) {
+                $file_submit_tugas = $request->file('file_submit_tugas')->store('file_submit_tugas', 'public');
+                $pengumpulan->file_submit_tugas = $file_submit_tugas;
+                $pengumpulan->save();
+                $idkelas = $pengumpulan->tugas->idkelas;
+                return redirect()->route('siswamasuk.index', $idkelas)->with('success', 'Pengumpulan tugas berhasil diubah.');
+            }
+        } else {
+            return redirect()->route('siswamasuk.index')->with('error', 'Pengumpulan tugas tidak ditemukan.');
         }
-    
-        // $pengumpulanTugas->status = $request->input('status');
-        $pengumpulanTugas->tanggal_pengumpulan = $request->input('tanggal_pengumpulan');
-        $pengumpulanTugas->save();
-
-        // Ambil objek Tugas
-        $tugas = Tugas::find($pengumpulanTugas->idtugas);
-
-        // Ambil idkelas dari objek Tugas
-        $idkelas = $tugas->idkelas;
-
-        // return redirect()->route('siswamasuk.index', $pengumpulanTugas->idkelas)->with('success', 'Berhasil mengupdate tugas.');
-        return redirect()->route('siswamasuk.index', ['idkelas' => $idkelas])->with('success', 'Berhasil memperbarui tugas yang dikumpulkan.');
-
     }
 
 
