@@ -164,7 +164,7 @@
                         class="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                         <ul class="pb-2 space-y-2">
                             <li>
-                                <a href="/profilSiswa"
+                                <a
                                     class="flex items-center p-2 text-base text-red-900 rounded-lg hover:bg-red-100 group dark:text-red-200 dark:hover:bg-red-700">
                                     <img src="{{ URL('images/siswa.png') }}" alt="siswa" class="w-7 h-7">
                                     <span class="ml-3" sidebar-toggle-item="">Siswa</span>

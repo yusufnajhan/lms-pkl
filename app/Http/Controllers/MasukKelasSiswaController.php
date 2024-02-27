@@ -248,6 +248,20 @@ class MasukKelasSiswaController extends Controller
                 $query->where('idsiswa', $idsiswa);
             }])
             ->get();
+
+        // Hitung rata-rata nilai tugas
+        $totalNilai = 0;
+        $jumlahTugas = 0;
+        foreach ($tugass as $tugas) {
+            foreach ($tugas->pengumpulanTugas as $pengumpulanTugas) {
+                if ($pengumpulanTugas->nilai) {
+                    $totalNilai += $pengumpulanTugas->nilai;
+                    $jumlahTugas++;
+                }
+            }
+        }
+
+        $rataTugas = $jumlahTugas > 0 ? $totalNilai / $jumlahTugas : 0;
     
         // Ambil semua data kuis dan pengumpulan kuis untuk kelas dan siswa tertentu
         $kuiss = Kuis::where('idkelas', $idkelas)
@@ -255,9 +269,23 @@ class MasukKelasSiswaController extends Controller
                 $query->where('idsiswa', $idsiswa);
             }])
             ->get();
-    
+
+        // Hitung rata-rata nilai kuis
+        // $totalNilai = 0;
+        // $jumlahKuis = 0;
+        // foreach ($kuiss as $kuis) {
+        //     foreach ($kuis->pengumpulanTugas as $pengumpulanTugas) {
+        //         if ($pengumpulanTugas->nilai) {
+        //             $totalNilai += $pengumpulanTugas->nilai;
+        //             $jumlahKuis++;
+        //         }
+        //     }
+        // }
+
+        // $rataTugas = $jumlahKuis > 0 ? $totalNilai / $jumlahKuis : 0;
+
         // Buat PDF
-        $pdf = FacadePdf::loadView('siswa.rekapTugas', compact('kelas', 'tugass', 'kuiss'));
+        $pdf = FacadePdf::loadView('siswa.rekapTugas', compact('kelas', 'tugass', 'kuiss','rataTugas'));
         return $pdf->download('rekap_tugas_kuis.pdf');
     }    
 

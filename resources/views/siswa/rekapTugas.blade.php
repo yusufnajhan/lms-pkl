@@ -73,6 +73,21 @@
               @endforeach
             </tbody>
         </table> --}}
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nilai Rata-Rata Tugas</th>
+                {{-- <th scope="col">Nilai Rata-Rata Kuis</th> --}}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ $rataTugas }}</td>
+                {{-- <td>{{ $rataRataKuis }}</td> --}}
+              </tr>
+            </tbody>
+        </table>
     
     </body>    
 </body>
