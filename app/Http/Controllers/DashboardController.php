@@ -6,7 +6,9 @@ use App\Models\Admin;
 use App\Models\Enrollment;
 use App\Models\Guru;
 use App\Models\Kelas;
+use App\Models\Pengumpulan_Tugas;
 use App\Models\Siswa;
+use App\Models\Tugas;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -51,7 +53,20 @@ class DashboardController extends Controller
         $nik = $siswa->nik;
         $username = $siswa->user->username;
 
-        return view("siswa.beranda", compact('nama', 'nik', 'username'));
+        // Ambil semua tugas yang sudah dikumpulkan dan dinilai oleh siswa
+        $pengumpulanTugas = Pengumpulan_Tugas::where('idsiswa', $siswa->idsiswa)
+        ->whereNotNull('nilai') // Pastikan tugas sudah dinilai
+        ->get();
+
+        // Hitung rata-rata nilai tugas
+        $totalNilai = $pengumpulanTugas->sum('nilai');
+        $jumlahTugas = $pengumpulanTugas->count();
+        $rataTugas = $jumlahTugas > 0 ? $totalNilai / $jumlahTugas : 0;
+
+        // Ambil semua tugas untuk kelas yang diikuti siswa
+        $tugass = Tugas::where('idkelas', $siswa->idkelas)->get();
+
+        return view("siswa.beranda", compact('nama', 'nik', 'username','rataTugas'));
     }
     
 }
