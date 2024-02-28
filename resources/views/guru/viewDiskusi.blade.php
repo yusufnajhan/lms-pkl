@@ -37,7 +37,7 @@
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
     <ul class="hidden text-sm font-medium text-center text-red-500 divide-x divide-red-200 rounded-lg sm:flex dark:divide-red-600 dark:text-red-400" id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
       <li class="w-full">
-          <button type="button" href="#" class="inline-block w-full p-4 rounded-tr-lg bg-green-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600 text-blue-500">Diskusi</button>
+          <button type="button" href="#" class="inline-block w-full p-4 rounded-tr-lg hover:bg-transparent focus:outline-none dark:bg-transparent dark:hover:bg-transparent text-gray-500">Diskusi Kelas</button>
       </li>
     </ul> 
 
