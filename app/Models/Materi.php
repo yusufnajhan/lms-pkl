@@ -13,7 +13,7 @@ class Materi extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idmateri',
+        // 'idmateri',
         'judul_materi',
         'deskripsi_materi',
         'file_materi',

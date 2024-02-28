@@ -101,7 +101,7 @@ class TugasKuisController extends Controller
     {
         // Validasi data input
         $request->validate([
-            'idtugas' => 'required|numeric',
+            // 'idtugas' => 'required|numeric',
             'judul_tugas' => 'required',
             'deskripsi_tugas' => 'required',
             'file_tugas' => 'required|file|max:25600',
@@ -120,7 +120,7 @@ class TugasKuisController extends Controller
         {
             // Simpan data tugas ke dalam database
             Tugas::create([
-                'idtugas' => $request->input('idtugas'),
+                // 'idtugas' => $request->input('idtugas'),
                 'judul_tugas' => $request->input('judul_tugas'),
                 'deskripsi_tugas' => $request->input('deskripsi_tugas'),
                 'file_tugas' => $file_tugas,
@@ -302,7 +302,7 @@ class TugasKuisController extends Controller
     {
         // Validasi data input
         $request->validate([
-            'idenroll' => 'required|numeric',
+            // 'idenroll' => 'required|numeric',
             'tanggal_enroll' => 'required',
             // 'idsiswa' => 'required|numeric',
             'nama' => 'required|string',
@@ -339,7 +339,7 @@ class TugasKuisController extends Controller
         {
             // Simpan data enrollment ke dalam database
             Enrollment::create([
-                'idenroll' => $request->input('idenroll'),
+                // 'idenroll' => $request->input('idenroll'),
                 'tanggal_enroll' => $request->input('tanggal_enroll'),
                 // 'idsiswa' => $request->input('idsiswa'),
                 'idsiswa' => $idsiswa,

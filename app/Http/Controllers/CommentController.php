@@ -58,13 +58,13 @@ class CommentController extends Controller
     
             DB::commit();
     
-            return back()->with('success', 'Comment berhasil diedit');
+            return back()->with('success', 'Comment berhasil diubah.');
                 
         } catch (\Exception $e) {
             DB::rollBack();
     
             return back()
-                ->with(['error' => 'Gagal mengedit comment. Error: ' . $e->getMessage()]);
+                ->with(['error' => 'Gagal mengubah comment. Error: ' . $e->getMessage()]);
         }
     }
 
@@ -77,7 +77,7 @@ class CommentController extends Controller
     
             DB::commit();
     
-            return back()->with('success', 'Comment berhasil dihapus');
+            return back()->with('success', 'Comment berhasil dihapus.');
                 
         } catch (\Exception $e) {
             DB::rollBack();

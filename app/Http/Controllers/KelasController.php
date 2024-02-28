@@ -6,6 +6,7 @@ use App\Models\Guru;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class KelasController extends Controller
@@ -38,19 +39,22 @@ class KelasController extends Controller
     {
         // Validasi data input
         $request->validate([
-            'idkelas' => 'required|numeric',
+            'idkelas' => 'required|numeric|unique:kelas,idkelas',
             'mata_pelajaran' => 'required|in:Agama,Matematika,Bahasa Inggris,
             Bahasa Indonesia,PKN,IPAS,IPS,Informatika,Prakarya,PJOK',
             'indeks_kelas' => 'required|in:A,B,C,D,E',
             'jenjang_kelas' => 'required|in:7,8,9',
             'tanggal_dibuat' => 'required|date',
             'tanggal_tutup' => 'required|date',
-            'idguru' => 'required|numeric',
+            // 'idguru' => 'required|numeric',
         ]);
 
         DB::beginTransaction();
         try 
         {
+            // Dapatkan idguru dari user yang sedang login
+            $idguru = Auth::user()->dataPribadi->idguru;
+
             // Simpan data kelas ke dalam database
             Kelas::create([
                 'idkelas' => $request->input('idkelas'),
@@ -59,7 +63,8 @@ class KelasController extends Controller
                 'jenjang_kelas' => $request->input('jenjang_kelas'),
                 'tanggal_dibuat' => $request->input('tanggal_dibuat'),
                 'tanggal_tutup' => $request->input('tanggal_tutup'),
-                'idguru' => $request->input('idguru'),
+                // 'idguru' => $request->input('idguru'),
+                'idguru' => $idguru,
             ]);
 
             DB::commit();
@@ -88,11 +93,11 @@ class KelasController extends Controller
         $jenjang_kelas = $kelas->jenjang_kelas;
         $tanggal_dibuat = $kelas->tanggal_dibuat;
         $tanggal_tutup = $kelas->tanggal_tutup;
-        $idguru = $kelas->idguru;
+        // $idguru = $kelas->idguru;
 
 
         return view("guru.editkelas", compact('idkelas','mata_pelajaran', 'indeks_kelas', 'jenjang_kelas', 'tanggal_dibuat',
-                                                'tanggal_tutup','idguru'));
+                                                'tanggal_tutup'));
     }
 
     public function update(Request $request, $idkelas)
@@ -104,7 +109,7 @@ class KelasController extends Controller
             'jenjang_kelas' => 'required|in:7,8,9',
             'tanggal_dibuat' => 'required|date',
             'tanggal_tutup' => 'required|date',
-            'idguru' => 'required|numeric',
+            // 'idguru' => 'required|numeric',
         ]);
 
         DB::beginTransaction();

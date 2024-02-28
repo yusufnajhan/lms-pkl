@@ -35,7 +35,7 @@ class MateriController extends Controller
     {
         // Validasi data input
         $request->validate([
-            'idmateri' => 'required|numeric',
+            // 'idmateri' => 'required|numeric',
             'judul_materi' => 'required',
             'deskripsi_materi' => 'required',
             'file_materi' => 'required|file|max:25600',
@@ -53,7 +53,7 @@ class MateriController extends Controller
         {
             // Simpan data tugas ke dalam database
             Materi::create([
-                'idmateri' => $request->input('idmateri'),
+                // 'idmateri' => $request->input('idmateri'),
                 'judul_materi' => $request->input('judul_materi'),
                 'deskripsi_materi' => $request->input('deskripsi_materi'),
                 'file_materi' => $file_materi,

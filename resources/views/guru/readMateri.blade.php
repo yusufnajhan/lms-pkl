@@ -46,13 +46,39 @@
     </li>
     </ol>
 </nav>
-    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Kelas {{ $kelas->mata_pelajaran }} {{ $kelas->jenjang_kelas }}{{ $kelas->indeks_kelas }}</h1>
+    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">{{ $materi->judul_materi }}</h1>
     {{-- <h1 class="text-base text-gray-900 sm:text-lg dark:text-white">{{ $kelas->jenjang_kelas }}{{ $kelas->indeks_kelas }}</h1> --}}
+    <footer class="mt-5 flex items-center justify-between mb-2">
+        <div class="flex items-center">
+          <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022">Diunggah pada: {{ $materi->tanggal_upload }}</time></p>
+        </div>
+  </footer>
 </div>
 
+<div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+    <form class="overflow-y-auto lg:max-h-[60rem] 2xl:max-h-fit">
+        <article class="mb-5">
+          <p class="text-sm font-bold text-gray-600 dark:text-gray-400">Deskripsi:</p>
+          <p class="mt-3 mb-2 text-gray-900 dark:text-white">
+            {{ $materi->deskripsi_materi }}
+          </p>
+    
+          <p class="mt-5 text-sm font-bold text-gray-600 dark:text-gray-400">Berkas materi:</p>
+          <div class="items-center 2xl:space-x-4 2xl:flex">
+            <div class="mt-8 flex items-center space-x-4">
+                {{-- <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">File Materi</dt> --}}
+                <a href="{{ asset('storage/' . $materi->file_materi) }}" target="_blank"
+                    class="ml-2 w-24 h-12 bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center">Lihat
+                    berkas</a></label>
+            </div>
 
+        </div>
+    </div>
+  </article>
+</form>
+</div>
 
-<section class="bg-white dark:bg-gray-900">
+{{-- <section class="bg-white dark:bg-gray-900">
     <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
         <p class="mb-4 text-xl font-extrabold leading-none text-gray-900 md:text-2xl dark:text-white">{{ $materi->judul_materi }}</p>
         <dl class="mt-8 flex items-center space-x-6">
@@ -72,6 +98,6 @@
                 file</a></label>
         </div>
     </div>
-  </section>
+  </section> --}}
 
   @endsection

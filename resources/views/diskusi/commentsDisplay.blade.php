@@ -5,7 +5,7 @@
         @if ($comment->iduser == auth()->user()->id)
             <div class="absolute top-2 right-2 text-sm">
                 <button type="button" data-modal-toggle="edit-comment-modal-{{ $comment->idcomment }}" 
-                    class="text-blue-500 hover:text-blue-700">Edit</button>
+                    class="text-blue-500 hover:text-blue-700">Ubah</button>
                 <button type="button" data-modal-toggle="delete-comment-modal-{{ $comment->idcomment }}" 
                     class="ml-2 text-red-500 hover:text-red-700">Hapus</button>
             </div>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="flex justify-between mt-4">
                     <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                        Edit
+                        Simpan
                     </button>
                     <button type="button" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700" 
                     data-modal-hide="edit-comment-modal-{{ $comment->idcomment }}">

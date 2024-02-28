@@ -33,14 +33,14 @@ class AkunGuruController extends Controller
     {
         // Validasi data input
         $request->validate([
-            'idguru' => 'required|numeric',
+            // 'idguru' => 'required|numeric',
             'nama' => 'required|string|max:255',
-            'nik' => 'required|string|max:20',
+            'nik' => 'required|string|max:20|unique:guru,nik',
             'jenis_kelamin' => 'required|in:Pria,Wanita',
             'tanggal_lahir' => 'required|date',
             'email' => 'required|email|max:255',
             'nomor_hp' => 'required|string|max:15',
-            'iduser' => 'required|numeric',
+            // 'iduser' => 'required|numeric',
             'username' => 'required|string|unique:users',
             'password' => 'required|string',
         ]);
@@ -50,7 +50,7 @@ class AkunGuruController extends Controller
         {
             // Simpan data user ke dalam database
             $user = User::create([
-                'id' => $request->input('iduser'),
+                // 'id' => $request->input('iduser'),
                 'username' => $request->input('username'),
                 'password' => bcrypt($request->input('password')),
                 'idrole' => 2, // ID untuk role guru
@@ -58,14 +58,14 @@ class AkunGuruController extends Controller
 
             // Simpan data guru ke dalam database
             Guru::create([
-                'idguru' => $request->input('idguru'),
+                // 'idguru' => $request->input('idguru'),
                 'nama' => $request->input('nama'),
                 'nik' => $request->input('nik'),
                 'jenis_kelamin' => $request->input('jenis_kelamin'),
                 'tanggal_lahir' => $request->input('tanggal_lahir'),
                 'email' => $request->input('email'),
                 'nomor_hp' => $request->input('nomor_hp'),
-                'iduser' => $request->input('iduser'),
+                'iduser' => $user->id,
             ]);
 
             DB::commit();
