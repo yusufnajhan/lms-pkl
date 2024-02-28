@@ -8,6 +8,8 @@ use App\Models\Kuis;
 use App\Models\Pengumpulan_Tugas;
 use App\Models\Siswa;
 use App\Models\Tugas;
+use App\Models\Question;
+use App\Models\Answer;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Dompdf\Dompdf;
@@ -508,6 +510,50 @@ class TugasKuisController extends Controller
 
         return view("guru.editkuis", compact('idkuis','judul_kuis', 'deskripsi_kuis', 'tanggal_mulai', 'tanggal_selesai'
                                             ,'idkelas','kelas'));
+    }
+
+    public function tambahSoal(Request $request, $idkuis)
+    {
+        $kuis = Kuis::where('idkuis', $idkuis)->first();
+        $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
+
+        return view("guru.tambahsoal", compact('kuis', 'kelas'));
+    }
+
+    public function storeSoal(Request $request, $idkuis)
+    {
+        $validated = $request->validate([
+            'soal.*.pertanyaan' => 'required',
+            'soal.*.pilihan.A' => 'required',
+            'soal.*.pilihan.B' => 'required',
+            'soal.*.pilihan.C' => 'required',
+            'soal.*.pilihan.D' => 'required',
+            'soal.*.jawaban_benar' => 'required',
+        ]); 
+
+        $kuis = Kuis::where('idkuis', $idkuis)->first();
+
+        foreach ($request->soal as $index => $soal) {
+            $soalBaru = Question::create([
+                'question' => $soal['pertanyaan'],
+                'idkuis' => $kuis->idkuis,
+            ]);
+    
+            foreach ($soal['pilihan'] as $huruf => $pilihan) {
+                $isCorrect = ($huruf === $soal['jawaban_benar']) ? 1 : 0;
+                Answer::create([
+                    'choice' => $huruf,
+                    'answer' => $pilihan,
+                    'question_id' => $soalBaru->id,
+                    'correct_answer' => $isCorrect,
+                    // tambahkan field lain jika ada
+                ]);
+            }
+        }
+    
+        return back()->with('success', 'Soal dan jawaban berhasil disimpan.');
+
+
     }
 
     public function update2(Request $request, $idkuis)
