@@ -38,7 +38,8 @@
     <div class="sm:hidden">
         <label for="tabs" class="sr-only">Select tab</label>
         <select id="tabs" class="bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-            <option>Statistics</option>
+            <option>TugasKuis</option>
+            <option>Materi</option>
             <option>Services</option>
             <option>FAQ</option>
             <option>progres</option>
@@ -47,6 +48,9 @@
     <ul class="hidden text-sm font-medium text-center text-red-500 divide-x divide-red-200 rounded-lg sm:flex dark:divide-red-600 dark:text-red-400" id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
       <li class="w-full">
           <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="faq" aria-selected="true" class="inline-block w-full p-4 rounded-tl-lg bg-red-50 hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600">Tugas dan Kuis</button>
+      </li>
+      <li class="w-full">
+        <button id="about-tab" data-tabs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="true" class="inline-block w-full p-4 rounded-tl-lg bg-red-50 hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600">Materi</button>
       </li>
       <li class="w-full">
           <a href="{{ route('materi.index', $kelas->idkelas) }}" class="inline-block w-full p-4 rounded-tr-lg hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600 text-gray-500">Materi</a>
