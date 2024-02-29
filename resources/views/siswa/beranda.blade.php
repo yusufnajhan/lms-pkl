@@ -82,7 +82,7 @@
 
       <div class="w-full text-center">
         <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Nilai Rata-Rata Kuis</h3>
-        <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">berapa hayo</span>
+        <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">"0"</span>
       </div>
     </div>
 </div>

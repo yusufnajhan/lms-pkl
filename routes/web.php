@@ -289,12 +289,13 @@ Route::get('/editkumpulTugas/{idtugas}', [MasukKelasSiswaController::class, 'edi
 Route::post('/editkumpulTugas/{idtugas}', [MasukKelasSiswaController::class, 'update'])->name('kumpultugas.update');
 Route::get('/rekapTugasKuis/{idkelas}', [MasukKelasSiswaController::class, 'downloadRekapTugas'])->name('siswamasuk.rekapTugas');
 
+
+Route::get('/detailKuis/{idkuis}', [TugasKuisController::class, 'detailKuis'])->name('siswa.detailkuis');
+Route::get('/kerjakanKuis/{idkuis}', [TugasKuisController::class, 'kerjakanKuis'])->name('siswa.kerjakankuis');
 // Route::get('/tugasMatematika', function () {
 //     return view('siswa/mattugas');
 // });
-Route::get('/kuisMatematika', function () {
-    return view('siswa/matkuis');
-});
+
 Route::get('/diskusiMatematika', function () {
     return view('siswa/diskusi');
 });

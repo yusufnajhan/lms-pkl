@@ -556,6 +556,47 @@ class TugasKuisController extends Controller
 
     }
 
+    public function detailKuis($idkuis)
+    {
+        $kuis = Kuis::where('idkuis', $idkuis)->first();
+        $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
+
+        return view('siswa.detailKuis', compact('kuis', 'kelas'));
+    }
+
+    public function kerjakanKuis($idkuis)
+    {
+        $kuis = Kuis::where('idkuis', $idkuis)->first();
+        $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
+
+        return view('siswa.kerjakanKuis', compact('kuis', 'kelas'));
+
+    }
+
+    public function submitKuis(Request $request, $idkuis)
+    {
+        // $kuis = Kuis::where('idkuis', $idkuis)->first();
+        // $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
+
+        // $submission = $request->input('jawaban');
+        // $questions = Question::where('kuis_id', $idkuis)->with('correctAnswer')->get();
+    
+        // $score = 0;
+    
+        // foreach ($questions as $question) {
+        //     if (isset($submittedAnswers[$question->id]) && $submittedAnswers[$question->id] == $question->correctAnswer->choice) {
+        //         $score++;
+        //     }
+        // }
+    
+        // $totalQuestions = count($questions);
+        // $percentageScore = ($score / $totalQuestions) * 100;
+    
+        // return back()->with('success', "Skor Anda: $score/$totalQuestions ($percentageScore%)");
+
+
+    }
+
     public function update2(Request $request, $idkuis)
     {
         $validated = $request->validate([
