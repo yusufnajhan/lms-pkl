@@ -34,7 +34,7 @@ class DiskusiController extends Controller
     {
         // Validasi data input
         $request->validate([
-            'iddiskusi' => 'required|numeric',
+            // 'iddiskusi' => 'required|numeric',
             'judul_diskusi' => 'required',
             'deskripsi_diskusi' => 'required',
             'tanggal_upload' => 'required|date',
@@ -47,7 +47,7 @@ class DiskusiController extends Controller
         {
             // Simpan data tugas ke dalam database
             Diskusi::create([
-                'iddiskusi' => $request->input('iddiskusi'),
+                // 'iddiskusi' => $request->input('iddiskusi'),
                 'judul_diskusi' => $request->input('judul_diskusi'),
                 'deskripsi_diskusi' => $request->input('deskripsi_diskusi'),
                 'tanggal_upload' => $request->input('tanggal_upload'),

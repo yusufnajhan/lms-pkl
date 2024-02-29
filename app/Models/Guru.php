@@ -13,7 +13,7 @@ class Guru extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idguru',
+        // 'idguru',
         'nama',
         'tanggal_lahir',
         'jenis_kelamin',

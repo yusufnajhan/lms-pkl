@@ -29,7 +29,7 @@
     <form action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="grid grid-cols-6 gap-6">
-            <div class="col-span-6 sm:col-span-3">
+            {{-- <div class="col-span-6 sm:col-span-3">
                 <label for="idsiswa"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Siswa</label>
                 <input type="number" name="idsiswa" id="idsiswa"
@@ -40,7 +40,7 @@
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
 
-            </div>
+            </div> --}}
             <div class="col-span-6 sm:col-span-3">
                 <label for="nama"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
@@ -132,7 +132,7 @@
                     @enderror
 
             </div>
-            <div class="col-span-6 sm:col-span-3">
+            {{-- <div class="col-span-6 sm:col-span-3">
                 <label for="iduser"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID User</label>
                 <input type="number" name="iduser" id="iduser"
@@ -143,7 +143,7 @@
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
 
-            </div>
+            </div> --}}
 
             <div class="col-span-6 sm:col-span-3">
                 <label for="username"

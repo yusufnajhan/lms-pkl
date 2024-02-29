@@ -13,7 +13,7 @@ class Diskusi extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'iddiskusi',
+        // 'iddiskusi',
         'judul_diskusi',
         'deskripsi_diskusi',
         'tanggal_upload',

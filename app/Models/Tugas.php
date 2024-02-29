@@ -15,7 +15,7 @@ class Tugas extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idtugas',
+        // 'idtugas',
         'judul_tugas',
         'deskripsi_tugas',
         'file_tugas',

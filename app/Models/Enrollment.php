@@ -14,7 +14,7 @@ class Enrollment extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idenroll',
+        // 'idenroll',
         'tanggal_enroll',
         'idsiswa',
         'idkelas'
