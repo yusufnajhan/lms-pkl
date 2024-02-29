@@ -268,9 +268,13 @@ class TugasKuisController extends Controller
             'deskripsi_kuis' => 'required',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date',
+            'jumlah_soal' => 'required|numeric',
             'idkelas' => 'required|numeric',
+            
         ]);
         $idkelas = $request->input('idkelas');
+
+        // $jumlah_soal = $request->input('jumlah_soal');
 
         DB::beginTransaction();
         try 
@@ -282,7 +286,9 @@ class TugasKuisController extends Controller
                 'deskripsi_kuis' => $request->input('deskripsi_kuis'),
                 'tanggal_mulai' => $request->input('tanggal_mulai'),
                 'tanggal_selesai' => $request->input('tanggal_selesai'),
+                'jumlah_soal' => $request->input('jumlah_soal'),
                 'idkelas' => $request->input('idkelas'),
+                
             ]);
 
             DB::commit();
@@ -517,7 +523,9 @@ class TugasKuisController extends Controller
         $kuis = Kuis::where('idkuis', $idkuis)->first();
         $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
 
-        return view("guru.tambahsoal", compact('kuis', 'kelas'));
+        $jumlah_soal = $kuis->jumlah_soal;
+
+        return view("guru.tambahsoal", compact('kuis', 'kelas','jumlah_soal'));
     }
 
     public function storeSoal(Request $request, $idkuis)

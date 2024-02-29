@@ -7,7 +7,7 @@
 </div>
 <!--Tabs widget -->
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-    <h3 class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white">Linimasa Tugas dan Kuis
+    <h3 class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white">Linimasa Tugas
     </h3>
     <div class="sm:hidden">
       <label for="tabs" class="sr-only">Select tab</label>
@@ -56,7 +56,7 @@
                   @endif
               @endforeach
 
-                @foreach($kuiss as $kuis)
+                {{-- @foreach($kuiss as $kuis)
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
@@ -81,7 +81,7 @@
                     </a>
                   </div>
                 </li>
-                @endforeach
+                @endforeach --}}
             </ul>
         </div>
         <div class="hidden pt-4" id="about" role="tabpanel" aria-labelledby="about-tab">
@@ -113,7 +113,7 @@
                   @endif
               @endforeach
             
-              <li class="py-3 sm:py-4">
+              {{-- <li class="py-3 sm:py-4">
                 <div class="flex items-center space-x-4">
                   <div class="flex-shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -129,7 +129,7 @@
                       </p>
                   </div>
                 </div>
-              </li>
+              </li> --}}
           </ul>
         </div>
     </div>

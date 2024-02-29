@@ -86,7 +86,7 @@ class MasukKelasSiswaController extends Controller
     {
         // Validasi data input
         $request->validate([
-            'idpengumpulan' => 'required|numeric',
+            // 'idpengumpulan' => 'required|numeric',
             'status' => 'required|in:1,0',
             'file_submit_tugas' => 'required|file|max:25600',
             'tanggal_pengumpulan' => 'required|date',
@@ -121,7 +121,7 @@ class MasukKelasSiswaController extends Controller
         {
             // Simpan data tugas ke dalam database
             Pengumpulan_Tugas::create([
-                'idpengumpulan' => $request->input('idpengumpulan'),
+                // 'idpengumpulan' => $request->input('idpengumpulan'),
                 'status' => $request->input('status'),
                 'file_submit_tugas' => $file_submit_tugas,
                 'tanggal_pengumpulan' => $request->input('tanggal_pengumpulan'),
@@ -264,11 +264,11 @@ class MasukKelasSiswaController extends Controller
         $rataTugas = $jumlahTugas > 0 ? $totalNilai / $jumlahTugas : 0;
     
         // Ambil semua data kuis dan pengumpulan kuis untuk kelas dan siswa tertentu
-        $kuiss = Kuis::where('idkelas', $idkelas)
-            ->with(['pengumpulanKuis' => function ($query) use ($idsiswa) {
-                $query->where('idsiswa', $idsiswa);
-            }])
-            ->get();
+        // $kuiss = Kuis::where('idkelas', $idkelas)
+        //     ->with(['pengumpulanKuis' => function ($query) use ($idsiswa) {
+        //         $query->where('idsiswa', $idsiswa);
+        //     }])
+        //     ->get();
 
         // Hitung rata-rata nilai kuis
         // $totalNilai = 0;
@@ -285,7 +285,7 @@ class MasukKelasSiswaController extends Controller
         // $rataTugas = $jumlahKuis > 0 ? $totalNilai / $jumlahKuis : 0;
 
         // Buat PDF
-        $pdf = FacadePdf::loadView('siswa.rekapTugas', compact('kelas', 'tugass', 'kuiss','rataTugas'));
+        $pdf = FacadePdf::loadView('siswa.rekapTugas', compact('kelas', 'tugass','rataTugas'));
         return $pdf->download('rekap_tugas_kuis.pdf');
     }    
 

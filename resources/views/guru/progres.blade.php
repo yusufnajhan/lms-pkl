@@ -114,6 +114,6 @@
         </div>
     </div>
     
-    <h1 class="mt-6 text-lg font-semibold text-gray-900 sm:text-xl dark:text-white">Progres Kuis</h1>
+    {{-- <h1 class="mt-6 text-lg font-semibold text-gray-900 sm:text-xl dark:text-white">Progres Kuis</h1> --}}
 </div>
 @endsection

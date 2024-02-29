@@ -44,7 +44,7 @@
         @csrf
         <div class="grid grid-cols-6 gap-6">
 
-            <div class="col-span-6 sm:col-span-3">
+            {{-- <div class="col-span-6 sm:col-span-3">
                 <label for="idpengumpulan"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Pengumpulan</label>
                 <input type="number" name="idpengumpulan" id="idpengumpulan"
@@ -55,7 +55,7 @@
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
 
-            </div>
+            </div> --}}
 
             <div class="col-span-6 sm:col-span-3">
                 <label for="status"

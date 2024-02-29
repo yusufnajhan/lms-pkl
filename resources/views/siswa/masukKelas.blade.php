@@ -45,7 +45,7 @@
     </div>
     <ul class="hidden text-sm font-medium text-center text-red-500 divide-x divide-red-200 rounded-lg sm:flex dark:divide-red-600 dark:text-red-400" id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
       <li class="w-full">
-          <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="faq" aria-selected="true" class="inline-block w-full p-4 rounded-tl-lg bg-red-50 hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600">Tugas dan Kuis</button>
+          <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="faq" aria-selected="true" class="inline-block w-full p-4 rounded-tl-lg bg-red-50 hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600">Tugas</button>
       </li>
       <li class="w-full">
           <a href="{{ route('materi.index2', $kelas->idkelas) }}" class="inline-block w-full p-4 rounded-tr-lg hover:bg-transparent focus:outline-none dark:bg-transparent dark:hover:bg-transparent text-gray-500">Materi</a>
@@ -65,7 +65,7 @@
                   <button id="dropdownDefault" data-dropdown-toggle="dropdown"
                       class="mb-4 sm:mb-0 mr-4 inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                       type="button">
-                      Saring tugas & kuis
+                      Saring tugas
                       <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="red" viewBox="0 0 24 24"
                           xmlns="http://www.w3.org/2000/svg">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
@@ -99,7 +99,7 @@
             </form>
             <a href="{{ route('siswamasuk.rekapTugas', $kelas->idkelas) }}" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-red-900 bg-white border border-red-300 rounded-lg hover:bg-red-100 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-red-800 dark:text-red-400 dark:border-red-600 dark:hover:text-white dark:hover:bg-red-700 dark:focus:ring-red-700">
               <svg class="w-5 h-5 mr-2 -ml-1" fill="red" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"></path></svg>
-              Rekap Tugas & Kuis
+              Rekap Tugas
             </a>
           </div> 
       
@@ -225,7 +225,7 @@
                 </li>
                 @endforeach
 
-                @foreach($kuiss as $kuis)
+                {{-- @foreach($kuiss as $kuis)
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
@@ -251,7 +251,7 @@
                     </a>
                   </div>
                 </li>
-                @endforeach
+                @endforeach --}}
             </ul>
         </div>
         <div class="hidden pt-4" id="about" role="tabpanel" aria-labelledby="about-tab">

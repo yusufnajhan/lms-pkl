@@ -30,6 +30,7 @@ class Kuis extends Model
         'deskripsi_kuis',
         'tanggal_mulai',
         'tanggal_selesai',
+        'jumlah_soal',
         'idkelas',
     ];
 

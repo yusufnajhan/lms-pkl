@@ -52,7 +52,7 @@
             </tbody>
         </table>
 
-        <h3>Rekap Kuis Kelas {{ $kelas->mata_pelajaran }} {{ $kelas->jenjang_kelas }}{{ $kelas->indeks_kelas }}</h3>
+        {{-- <h3>Rekap Kuis Kelas {{ $kelas->mata_pelajaran }} {{ $kelas->jenjang_kelas }}{{ $kelas->indeks_kelas }}</h3> --}}
         {{-- <table class="table">
             <thead>
               <tr>

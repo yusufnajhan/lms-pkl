@@ -47,7 +47,7 @@
     </div>
     <ul class="hidden text-sm font-medium text-center text-red-500 divide-x divide-red-200 rounded-lg sm:flex dark:divide-red-600 dark:text-red-400" id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
       <li class="w-full">
-          <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="faq" aria-selected="true" class="inline-block w-full p-4 rounded-tl-lg bg-red-50 hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600">Tugas dan Kuis</button>
+          <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="faq" aria-selected="true" class="inline-block w-full p-4 rounded-tl-lg bg-red-50 hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600">Tugas</button>
       </li>
       <li class="w-full">
           <a href="{{ route('materi.index', $kelas->idkelas) }}" class="inline-block w-full p-4 rounded-tr-lg hover:bg-transparent focus:outline-none dark:bg-transparent dark:hover:bg-transparent text-gray-500">Materi</a>
@@ -69,12 +69,12 @@
                     Tambah tugas
                 </button>  
               </a>
-              <a href="{{ route('kuis.create', $kelas->idkelas) }}">
+              {{-- <a href="{{ route('kuis.create', $kelas->idkelas) }}">
                 <button type="button" class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                   <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                   Tambah kuis
                 </button> 
-              </a>
+              </a> --}}
             </div> 
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
               @foreach($tugass as $tugas)
@@ -117,16 +117,20 @@
                 </li>
               @endforeach
 
-              @foreach($kuiss as $kuis)
+              {{-- @foreach($kuiss as $kuis)
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
-                      <a href="/nilaiKuis">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                        </svg>
+                      <a href="#">
+                          <img src="{{ URL('images/kuis.png') }}" alt="kuis" class="w-6 h-6">
                       </a>
                     </div>
+                    <style>
+                      a.hover-red-underline:hover {
+                          text-decoration: underline;
+                          text-decoration-color: red;
+                      }
+                    </style>
                     <div class="flex-1 min-w-0">
                         <p class="font-medium text-gray-900 truncate dark:text-white">
                           <a href="/nilaiKuis">{{ $kuis->judul_kuis }}</a>
@@ -151,7 +155,7 @@
                     </td>
                   </div>
                 </li>
-              @endforeach
+              @endforeach --}}
             </ul>
         </div>
         <div class="hidden pt-4" id="about" role="tabpanel" aria-labelledby="about-tab">

@@ -33,7 +33,7 @@
     <p style="font-size: 14px; margin-bottom: 10px;"><strong>NIS:</strong> {{ $siswa->nik }}</p>
     <p style="font-size: 14px; margin-bottom: 10px;"><strong>Email:</strong> {{ $siswa->email }}</p>    
 
-    <h3 style="margin-top: 20px;">A. Rekap Tugas</h3>
+    <h3 style="margin-top: 20px;">Rekap Tugas</h3>
     <h4>Tugas sudah dikumpulkan:</h4>
     <table class="table">
         <thead>
@@ -73,6 +73,6 @@
         </tbody>
     </table>
 
-    <h3 style="margin-top: 20px;">B. Rekap Kuis</h3>
+    {{-- <h3 style="margin-top: 20px;">B. Rekap Kuis</h3> --}}
 </body>
 </html>

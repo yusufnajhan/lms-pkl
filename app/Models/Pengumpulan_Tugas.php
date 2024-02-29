@@ -15,7 +15,7 @@ class Pengumpulan_Tugas extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idpengumpulan',
+        // 'idpengumpulan',
         'idtugas',
         'status',
         'tanggal_pengumpulan',
