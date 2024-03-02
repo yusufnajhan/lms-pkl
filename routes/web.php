@@ -42,6 +42,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// coba kuis pakai inertia
+Route::get('/kuis', function () {
+    return Inertia('Home');
+});
+
+Route::get('/questions', [QuestionController::class, 'index'])->name('questions');
+Route::post('/questions', [QuestionController::class, 'store']);
+Route::put('/questions', [QuestionController::class, 'update']);
+Route::delete('/questions/{question}', [QuestionController::class, 'destroy']);
+Route::put('/answers', [AnswerController::class, 'update']);
+
+Route::get('/quiz', [QuizController::class, 'index']);
+Route::post('/results', [QuizController::class, 'results']);
+
+Route::fallback(function(){
+    return Inertia('Home');
+});
 
 // login dan dasbor
 Route::controller(LoginController::class)->group(function (){
@@ -66,98 +83,58 @@ Route::controller(AdminController::class)->middleware('auth')->group(function ()
     Route::post('/editprofilAdmin', 'update')->name('update1');
 });
 
-Route::controller(AkunGuruController::class)->middleware('auth')->group(function () {
-    Route::get('/akunGuru','index')->name('guru.index');
-    Route::get('/tambahakunGuru', 'create')->name('guru.create');
-    Route::post('/tambahakunGuru', 'store')->name('guru.store');
-
-    Route::get('/editakunGuru/{idguru}', 'edit')->name('guru.edit');
-    Route::post('/editakunGuru/{idguru}', 'update')->name('guru.update');
-
-    Route::delete('/akunGuru/{idguru}', 'destroy')->name('guru.destroy');
-
-    Route::get('/searchGuru', 'search')->name('guru.search');
-
-    Route::get('/akunSiswa', 'index')->name('siswa.index');
-    Route::post('/akunSiswa', 'store')->name('siswa.store');
-
-});
-
-Route::controller(AkunSiswaController::class)->middleware('auth')->group(function () {
-    Route::get('/tambahakunSiswa', 'create')->name('siswa.create');
-    Route::post('/tambahakunSiswa', 'store')->name('siswa.store');
-
-    Route::get('/editakunSiswa/{idsiswa}', 'edit')->name('siswa.edit');
-    Route::post('/editakunSiswa/{idsiswa}', 'update')->name('siswa.update');
-
-    Route::delete('/akunSiswa/{idsiswa}', 'destroy')->name('siswa.destroy');
-
-    Route::get('/searchSiswa', 'search')->name('siswa.search');
-});
-
-
 
 // Route::get('/akunGuru', function () {
 //     return view('admin/guru');
 // });
+
+Route::get('/akunGuru', [AkunGuruController::class, 'index'])->name('guru.index');
+Route::get('/editakunGuru', function () {
+    return view('admin/editguru');
+});
+// Route::post('/akunGuru', [AkunGuruController::class, 'store'])->name('guru.store');
+
+Route::get('/tambahakunGuru', [AkunGuruController::class, 'create'])->name('guru.create');
+Route::post('/tambahakunGuru', [AkunGuruController::class, 'store'])->name('guru.store');
+
+Route::get('/editakunGuru/{idguru}', [AkunGuruController::class, 'edit'])->name('guru.edit');
+Route::post('/editakunGuru/{idguru}', [AkunGuruController::class, 'update'])->name('guru.update');
+
+Route::delete('/akunGuru/{idguru}', [AkunGuruController::class, 'destroy'])->name('guru.destroy');
+
+Route::get('/searchGuru', [AkunGuruController::class, 'search'])->name('guru.search');
 // Route::get('/akunSiswa', function () {
 //     return view('admin/siswa');
 // });
-// Route::get('/editakunSiswa', function () {
-//     return view('admin/editsiswa');
-// });
 
-// Route::get('/editakunGuru', function () {
-//     return view('admin/editguru');
-// });
-// Route::post('/akunGuru', [AkunGuruController::class, 'store'])->name('guru.store');
+Route::get('/akunSiswa', [AkunSiswaController::class, 'index'])->name('siswa.index');
+Route::post('/akunSiswa', [AkunSiswaController::class, 'store'])->name('siswa.store');
 
+Route::get('/editakunSiswa', function () {
+    return view('admin/editsiswa');
+});
 
+Route::get('/tambahakunSiswa', [AkunSiswaController::class, 'create'])->name('siswa.create');
+Route::post('/tambahakunSiswa', [AkunSiswaController::class, 'store'])->name('siswa.store');
+
+Route::get('/editakunSiswa/{idsiswa}', [AkunSiswaController::class, 'edit'])->name('siswa.edit');
+Route::post('/editakunSiswa/{idsiswa}', [AkunSiswaController::class, 'update'])->name('siswa.update');
+
+Route::delete('/akunSiswa/{idsiswa}', [AkunSiswaController::class, 'destroy'])->name('siswa.destroy');
+
+Route::get('/searchSiswa', [AkunSiswaController::class, 'search'])->name('siswa.search');
 
 // guru
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/profilGuru', [GuruController::class, 'edit'])->name('edit2');
+// });
+
 Route::controller(GuruController::class)->middleware('auth')->group(function () {
     Route::get('/profilGuru', 'edit')->name('edit2');
     Route::get('/editprofilGuru', 'showEdit')->name('showEdit2');
     Route::post('/editprofilGuru', 'update')->name('update2');
 });
 
-Route::controller(KelasController::class)->middleware('auth')->group(function () {
-    Route::get('/kelasGuru' , 'index')->name('kelas.index');
-    Route::get('/tambahkelasGuru' , 'create')->name('kelas.create');
-    Route::post('/tambahkelasGuru' , 'store')->name('kelas.store');
-    
-    Route::get('/editkelasGuru/{idkelas}' , 'edit')->name('kelas.edit');
-    Route::post('/editkelasGuru/{idkelas}' , 'update')->name('kelas.update');
-    
-    Route::delete('/kelasGuru/{idkelas}' , 'destroy')->name('kelas.destroy');
-});
-
-Route::controller(TugasKuisController::class)->middleware('auth')->group(function () {
-    Route::get('/masukKelas/{idkelas}' , 'index')->name('tugaskuis.index');
-    Route::get('/tambahTugas/{idkelas}' , 'create')->name('tugas.create');
-    Route::post('/tambahTugas' , 'store')->name('tugas.store');
-    Route::get('/nilaiTugas/{idtugas}' , 'read')->name('tugas.read');
-    Route::put('/nilaiTugas/{idpengumpulan}' , 'updateNilai')->name('guru.updateNilai');
-    Route::get('/rekapTugas/{idtugas}' , 'downloadRekap')->name('tugas.downloadRekap');
-    Route::get('/editTugas/{idtugas}' , 'edit')->name('tugas.edit');
-    Route::post('/editTugas/{idtugas}' , 'update')->name('tugas.update');
-    Route::delete('/masukKelas/{idkelas}/{idtugas}' , 'destroy')->name('tugas.destroy');
-    Route::get('/tambahKuis/{idkelas}' , 'create2')->name('kuis.create');
-    Route::post('/tambahKuis' , 'store2')->name('kuis.store');
-    Route::get('/editKuis/{idkuis}' , 'edit2')->name('kuis.edit');
-    Route::post('/editKuis/{idkuis}' , 'update2')->name('kuis.update');
-    Route::get('/tambahSoal/{idkuis}' , 'tambahSoal')->name('kuis.tambahSoal');
-    Route::post('/tambahSoal/{idkuis}' , 'storeSoal')->name('kuis.storeSoal');
-    Route::delete('/masukKelas/kuis/{idkuis}' , 'destroy2')->name('kuis.destroy');
-    Route::get('/undangSiswa/{idkelas}' , 'create3')->name('enroll.create');
-    Route::post('/undangSiswa' , 'store3')->name('enroll.store');
-    Route::get('/progresSiswa/{idsiswa}' , 'read2')->name('progres.read');
-    Route::get('/rekapProgresSiswa/{idsiswa}' , 'rekapProgresSiswa')->name('progres.rekap');
-});
-
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/profilGuru', [GuruController::class, 'edit'])->name('edit2');
-// });
 // Route::get('/profilGuru', function () {
 //     return view('guru/profil');
 // });
@@ -173,9 +150,41 @@ Route::controller(TugasKuisController::class)->middleware('auth')->group(functio
 // Route::get('/tambahkelasGuru', function () {
 //     return view('guru/tambahkelas');
 // });
+
+Route::get('/kelasGuru', [KelasController::class, 'index'])->name('kelas.index');
+Route::get('/tambahkelasGuru', [KelasController::class, 'create'])->name('kelas.create');
+Route::post('/tambahkelasGuru', [KelasController::class, 'store'])->name('kelas.store');
+
+Route::get('/editkelasGuru/{idkelas}', [KelasController::class, 'edit'])->name('kelas.edit');
+Route::post('/editkelasGuru/{idkelas}', [KelasController::class, 'update'])->name('kelas.update');
+
+Route::delete('/kelasGuru/{idkelas}', [KelasController::class, 'destroy'])->name('kelas.destroy');
+
+Route::get('/masukKelas/{idkelas}', [TugasKuisController::class, 'index'])->name('tugaskuis.index');
+Route::get('/tambahTugas/{idkelas}', [TugasKuisController::class, 'create'])->name('tugas.create');
+Route::post('/tambahTugas', [TugasKuisController::class, 'store'])->name('tugas.store');
+Route::get('/nilaiTugas/{idtugas}', [TugasKuisController::class, 'read'])->name('tugas.read');
+Route::put('/nilaiTugas/{idpengumpulan}', [TugasKuisController::class, 'updateNilai'])->name('guru.updateNilai');
 // Route::get('/cariSiswa', [TugasKuisController::class, 'search'])->name('tugas.search');
 // Route::get('/nilaiTugas/sort/{idtugas}/{column}/{direction}', [TugasKuisController::class, 'sortNilai'])->name('tugas.sortNilai');
+Route::get('/rekapTugas/{idtugas}', [TugasKuisController::class, 'downloadRekap'])->name('tugas.downloadRekap');
+Route::get('/editTugas/{idtugas}', [TugasKuisController::class, 'edit'])->name('tugas.edit');
+Route::post('/editTugas/{idtugas}', [TugasKuisController::class, 'update'])->name('tugas.update');
+Route::delete('/masukKelas/{idkelas}/{idtugas}', [TugasKuisController::class, 'destroy'])->name('tugas.destroy');
+
 // Route::get('/nilaiTugas/{idkelas}', [NilaiTugasController::class, 'index']);
+
+Route::get('/tambahKuis/{idkelas}', [TugasKuisController::class, 'create2'])->name('kuis.create');
+Route::post('/tambahKuis', [TugasKuisController::class, 'store2'])->name('kuis.store');
+Route::get('/editKuis/{idkuis}', [TugasKuisController::class, 'edit2'])->name('kuis.edit');
+Route::post('/editKuis/{idkuis}', [TugasKuisController::class, 'update2'])->name('kuis.update');
+Route::get('/tambahSoal/{idkuis}', [TugasKuisController::class, 'tambahSoal'])->name('kuis.tambahSoal');
+Route::post('/tambahSoal', [TugasKuisController::class, 'storeSoal'])->name('kuis.storeSoal');
+Route::get('/editSoalKuis/{idkuis}', [TugasKuisController::class, 'editSoal'])->name('kuis.editSoal');
+Route::post('/editSoalKuis', [TugasKuisController::class, 'updateSoal'])->name('kuis.updateSoal');
+
+Route::delete('/masukKelas/{idkelas}/{idkuis}', [TugasKuisController::class, 'destroy2'])->name('kuis.destroy');
+
 // Route::get('/soalEsai', [EsaiController::class, 'index'])->name('esai.index');
 // Route::get('/tambahEsai', [EsaiController::class, 'create'])->name('esai.create');
 // Route::post('/tambahEsai', [EsaiController::class, 'store'])->name('esai.store');
@@ -185,93 +194,72 @@ Route::controller(TugasKuisController::class)->middleware('auth')->group(functio
 
 // Route::post('/masukKelas/siswa/{idkelas}', [TugasKuisController::class, 'create3'])->name('assign.siswa');
 // Route::post('/undangSiswa/{idkelas}', [TugasKuisController::class, 'assignSiswa'])->name('assign.siswa');
+
+Route::get('/undangSiswa/{idkelas}', [TugasKuisController::class, 'create3'])->name('enroll.create');
+Route::post('/undangSiswa', [TugasKuisController::class, 'store3'])->name('enroll.store');
+Route::get('/progresSiswa/{idsiswa}', [TugasKuisController::class, 'read2'])->name('progres.read');
+Route::get('/rekapProgresSiswa/{idsiswa}', [TugasKuisController::class, 'rekapProgresSiswa'])->name('progres.rekap');
+
+
+
 // Route::get('/tambahKuis/soalEsai', function () {
 //     return view('guru/soalesai');
 // });
 
-Route::controller(MateriController::class)->middleware('auth')->group(function () {
-    Route::get('/viewMateri/{idkelas}', 'index')->name('materi.index');
-    Route::get('/uploadMateri/{idkelas}', 'create')->name('materi.create');
-    Route::post('/uploadMateri', 'store')->name('materi.store');
-    Route::get('/readMateri/{idmateri}', 'read')->name('materi.read');
-    Route::get('/editMateri/{idmateri}', 'edit')->name('materi.edit');
-    Route::post('/editMateri/{idmateri}', 'update')->name('materi.update');
-    Route::delete('/viewMateri/{idkelas}/{idmateri}', 'destroy')->name('materi.destroy');
-});
-
-Route::controller(DiskusiController::class)->middleware('auth')->group(function () {
-    Route::get('/viewDiskusi/{idkelas}', [DiskusiController::class, 'index'])->name('diskusi.index');
-    Route::get('/tambahDiskusi/{idkelas}', [DiskusiController::class, 'create'])->name('diskusi.create');
-    Route::post('/tambahDiskusi', [DiskusiController::class, 'store'])->name('diskusi.store');
-    Route::get('/readDiskusi/{iddiskusi}', [DiskusiController::class, 'read'])->name('diskusi.read');
-    Route::get('/editDiskusi/{iddiskusi}', [DiskusiController::class, 'edit'])->name('diskusi.edit');
-    Route::post('/editDiskusi/{iddiskusi}', [DiskusiController::class, 'update'])->name('diskusi.update');
-    Route::delete('/viewDiskusi/{idkelas}/{iddiskusi}', [DiskusiController::class, 'destroy'])->name('diskusi.destroy');
-});
-
-Route::controller(DiskusiController::class)->middleware('auth')->group(function () {
-    Route::post('/tambahKomen', 'store')->name('comments.store');
-    Route::post('/editKomen/{idcomment}', 'update')->name('comments.update');
-    Route::post('/deleteKomen/{idcomment}', 'destroy')->name('comments.destroy');
-});
 
 
+Route::get('/viewMateri/{idkelas}', [MateriController::class, 'index'])->name('materi.index');
+Route::get('/uploadMateri/{idkelas}', [MateriController::class, 'create'])->name('materi.create');
+Route::post('/uploadMateri', [MateriController::class, 'store'])->name('materi.store');
+Route::get('/readMateri/{idmateri}', [MateriController::class, 'read'])->name('materi.read');
+Route::get('/editMateri/{idmateri}', [MateriController::class, 'edit'])->name('materi.edit');
+Route::post('/editMateri/{idmateri}', [MateriController::class, 'update'])->name('materi.update');
+Route::delete('/viewMateri/{idkelas}/{idmateri}', [MateriController::class, 'destroy'])->name('materi.destroy');
+
+Route::get('/viewDiskusi/{idkelas}', [DiskusiController::class, 'index'])->name('diskusi.index');
+Route::get('/tambahDiskusi/{idkelas}', [DiskusiController::class, 'create'])->name('diskusi.create');
+Route::post('/tambahDiskusi', [DiskusiController::class, 'store'])->name('diskusi.store');
+Route::get('/readDiskusi/{iddiskusi}', [DiskusiController::class, 'read'])->name('diskusi.read');
+Route::get('/editDiskusi/{iddiskusi}', [DiskusiController::class, 'edit'])->name('diskusi.edit');
+Route::post('/editDiskusi/{iddiskusi}', [DiskusiController::class, 'update'])->name('diskusi.update');
+Route::delete('/viewDiskusi/{idkelas}/{iddiskusi}', [DiskusiController::class, 'destroy'])->name('diskusi.destroy');
+
+Route::post('/tambahKomen', [CommentController::class, 'store'])->name('comments.store');
+Route::post('/editKomen/{idcomment}', [CommentController::class, 'update'])->name('comments.update');
+Route::post('/deleteKomen/{idcomment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 // Route::get('/progresSiswa/{idkelas}', [ProgresSiswaController::class, 'index'])->name('progressiswa.index');
 
 
-
 //siswa
-Route::controller(TugasKuisController::class)->middleware('auth')->group(function () {
-    Route::get('/detailKuis/{idkuis}', 'detailKuis')->name('siswa.detailkuis');
-    Route::get('/kerjakanKuis/{idkuis}', 'kerjakanKuis')->name('siswa.kerjakankuis');
-});
-
-Route::controller(DiskusiController::class)->middleware('auth')->group(function () {
-    Route::get('/siswa/viewDiskusi/{idkelas}', 'index2')->name('diskusi.index2');
-    Route::get('/siswa/readDiskusi/{iddiskusi}', 'read2')->name('diskusi.read2');
-});
-Route::controller(MateriController::class)->middleware('auth')->group(function () {
-    Route::get('/siswa/viewMateri/{idkelas}', 'index2')->name('materi.index2');
-    Route::get('/siswa/readMateri/{idmateri}', 'read2')->name('materi.read2');
-});
-
-Route::controller(SiswaController::class)->middleware('auth')->group(function () {
-    Route::get('/profilSiswa', 'edit')->name('edit3');
-    Route::get('/editprofilSiswa', 'showEdit')->name('showEdit3');
-    Route::post('/editprofilSiswa', 'update')->name('update3');
-});
-
-Route::controller(MasukKelasSiswaController::class)->middleware('auth')->group(function () {
-    Route::get('/masukKelasSiswa/{idkelas}'::class, 'index')->name('siswamasuk.index');
-    Route::get('/detailTugas/{idtugas}'::class, 'read')->name('siswamasuk.read');
-    Route::get('/kumpulTugas/{idtugas}'::class, 'create')->name('kumpultugas.create');
-    Route::post('/kumpulTugas'::class, 'store')->name('kumpultugas.store');
-    Route::get('/editkumpulTugas/{idtugas}'::class, 'edit')->name('kumpultugas.edit');
-    Route::post('/editkumpulTugas/{idtugas}'::class, 'update')->name('kumpultugas.update');
-    Route::get('/rekapTugasKuis/{idkelas}'::class, 'downloadRekapTugas')->name('siswamasuk.rekapTugas');
-});
-
-Route::get('/dasborSiswa', [DasborSiswaController::class, 'index'])->name('dasborsiswa.index');
-Route::get('/kelasSiswa', [KelasSiswaController::class, 'index'])->name('siswakelas.index');
+Route::get('/siswa/viewDiskusi/{idkelas}', [DiskusiController::class, 'index2'])->name('diskusi.index2');
+Route::get('/siswa/readDiskusi/{iddiskusi}', [DiskusiController::class, 'read2'])->name('diskusi.read2');
+Route::get('/siswa/viewMateri/{idkelas}', [MateriController::class, 'index2'])->name('materi.index2');
+Route::get('/siswa/readMateri/{idmateri}', [MateriController::class, 'read2'])->name('materi.read2');
 
 // Route::get('/nilaiTugas', function () {
 //     return view('guru/nilaitugas');
 // });
 
-// Route::get('/nilaiKuis', function () {
-//     return view('guru/nilaikuis');
-// });
-// Route::get('/diskusiMat', function () {
-//     return view('guru/diskusi');
-// });
+Route::get('/nilaiKuis', function () {
+    return view('guru/nilaikuis');
+});
+Route::get('/diskusiMat', function () {
+    return view('guru/diskusi');
+});
 // Route::get('/progresMat', function () {
 //     return view('guru/progres');
 // });
-// Route::get('/progresKelasMat', function () {
-//     return view('guru/rekapkelas');
-// });
+Route::get('/progresKelasMat', function () {
+    return view('guru/rekapkelas');
+});
 
+// siswa
+Route::controller(SiswaController::class)->middleware('auth')->group(function () {
+    Route::get('/profilSiswa', 'edit')->name('edit3');
+    Route::get('/editprofilSiswa', 'showEdit')->name('showEdit3');
+    Route::post('/editprofilSiswa', 'update')->name('update3');
+});
 
 // Route::get('/profilSiswa', function () {
 //     return view('siswa/profil');
@@ -288,35 +276,29 @@ Route::get('/kelasSiswa', [KelasSiswaController::class, 'index'])->name('siswake
 // Route::get('/kelasSiswa', function () {
 //     return view('siswa/kelas');
 // });
+Route::get('/dasborSiswa', [DasborSiswaController::class, 'index'])->name('dasborsiswa.index');
 
+Route::get('/kelasSiswa', [KelasSiswaController::class, 'index'])->name('siswakelas.index');
 
 // Route::get('/kelasMatematika', function () {
 //     return view('siswa/mat');
 // });
 
+Route::get('/masukKelasSiswa/{idkelas}', [MasukKelasSiswaController::class, 'index'])->name('siswamasuk.index');
+Route::get('/detailTugas/{idtugas}', [MasukKelasSiswaController::class, 'read'])->name('siswamasuk.read');
+Route::get('/kumpulTugas/{idtugas}', [MasukKelasSiswaController::class, 'create'])->name('kumpultugas.create');
+Route::post('/kumpulTugas', [MasukKelasSiswaController::class, 'store'])->name('kumpultugas.store');
+Route::get('/editkumpulTugas/{idtugas}', [MasukKelasSiswaController::class, 'edit'])->name('kumpultugas.edit');
+Route::post('/editkumpulTugas/{idtugas}', [MasukKelasSiswaController::class, 'update'])->name('kumpultugas.update');
+Route::get('/rekapTugasKuis/{idkelas}', [MasukKelasSiswaController::class, 'downloadRekapTugas'])->name('siswamasuk.rekapTugas');
 
+
+Route::get('/detailKuis/{idkuis}', [TugasKuisController::class, 'detailKuis'])->name('siswa.detailkuis');
+Route::get('/kerjakanKuis/{idkuis}', [TugasKuisController::class, 'kerjakanKuis'])->name('siswa.kerjakankuis');
 // Route::get('/tugasMatematika', function () {
 //     return view('siswa/mattugas');
 // });
 
-// Route::get('/diskusiMatematika', function () {
-//     return view('siswa/diskusi');
-// });
-
-
-// // coba kuis pakai inertia
-// Route::get('/kuis', function () {
-//     return Inertia('Home');
-// });
-// Route::get('/questions', [QuestionController::class, 'index'])->name('questions');
-// Route::post('/questions', [QuestionController::class, 'store']);
-// Route::put('/questions', [QuestionController::class, 'update']);
-// Route::delete('/questions/{question}', [QuestionController::class, 'destroy']);
-// Route::put('/answers', [AnswerController::class, 'update']);
-
-// Route::get('/quiz', [QuizController::class, 'index']);
-// Route::post('/results', [QuizController::class, 'results']);
-
-// Route::fallback(function(){
-//     return Inertia('Home');
-// });
+Route::get('/diskusiMatematika', function () {
+    return view('siswa/diskusi');
+});

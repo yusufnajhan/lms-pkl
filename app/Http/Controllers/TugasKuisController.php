@@ -10,6 +10,7 @@ use App\Models\Siswa;
 use App\Models\Tugas;
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\Soal_Kuis;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Dompdf\Dompdf;
@@ -518,51 +519,111 @@ class TugasKuisController extends Controller
                                             ,'idkelas','kelas'));
     }
 
-    public function tambahSoal(Request $request, $idkuis)
+    // buat soal isian di tiap kuis
+    public function tambahSoal($idkuis)
     {
-        $kuis = Kuis::where('idkuis', $idkuis)->first();
-        $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
-
-        $jumlah_soal = $kuis->jumlah_soal;
-
-        return view("guru.tambahsoal", compact('kuis', 'kelas','jumlah_soal'));
+        $kuis = Kuis::findOrFail($idkuis);
+        return view('guru.buatSoal', compact('kuis'));
     }
 
-    public function storeSoal(Request $request, $idkuis)
+    public function storeSoal(Request $request)
     {
-        $validated = $request->validate([
-            'soal.*.pertanyaan' => 'required',
-            'soal.*.pilihan.A' => 'required',
-            'soal.*.pilihan.B' => 'required',
-            'soal.*.pilihan.C' => 'required',
-            'soal.*.pilihan.D' => 'required',
-            'soal.*.jawaban_benar' => 'required',
-        ]); 
+        $request->validate([
+            'soal.*' => 'required',
+            'jawaban.*' => 'required',
+        ]);
 
-        $kuis = Kuis::where('idkuis', $idkuis)->first();
-
-        foreach ($request->soal as $index => $soal) {
-            $soalBaru = Question::create([
-                'question' => $soal['pertanyaan'],
-                'idkuis' => $kuis->idkuis,
+        $soal = $request->input('soal');
+        $jawaban = $request->input('jawaban');
+        $idkuis = $request->input('idkuis');
+        for ($i = 0; $i < count($soal); $i++) {
+            Soal_Kuis::create([
+                'pertanyaan' => $soal[$i],
+                'jawaban' => $jawaban[$i],
+                'idkuis' => $idkuis,
             ]);
-    
-            foreach ($soal['pilihan'] as $huruf => $pilihan) {
-                $isCorrect = ($huruf === $soal['jawaban_benar']) ? 1 : 0;
-                Answer::create([
-                    'choice' => $huruf,
-                    'answer' => $pilihan,
-                    'question_id' => $soalBaru->id,
-                    'correct_answer' => $isCorrect,
-                    // tambahkan field lain jika ada
-                ]);
-            }
         }
-    
-        return back()->with('success', 'Soal dan jawaban berhasil disimpan.');
+        $idkelas = Kuis::find($idkuis)->idkelas;
 
-
+        return redirect()->route('tugaskuis.index', $idkelas)->with('success', 'Soal berhasil ditambahkan.');
     }
+
+    // edit soal setiap kuis
+    public function editSoal($idkuis)
+    {
+        $kuis = Kuis::findOrFail($idkuis);
+        $soal_kuis = Soal_Kuis::where('idkuis', $idkuis)->get();
+        return view('guru.editSoalKuis', compact('kuis', 'soal_kuis'));
+    }
+
+    public function updateSoal(Request $request)
+    {
+        $request->validate([
+            'soal.*' => 'required',
+            'jawaban.*' => 'required',
+        ]);
+
+        $soal = $request->input('soal');
+        $jawaban = $request->input('jawaban');
+        $idkuis = $request->input('idkuis');
+        for ($i = 0; $i < count($soal); $i++) {
+            $soal_kuis = Soal_Kuis::where('idkuis', $idkuis)->get()[$i];
+            $soal_kuis->pertanyaan = $soal[$i];
+            $soal_kuis->jawaban = $jawaban[$i];
+            $soal_kuis->save();
+        }
+
+        $idkelas = Kuis::find($idkuis)->idkelas;
+
+        return redirect()->route('tugaskuis.index', $idkelas)->with('success', 'Soal kuis berhasil diperbarui.');
+    }
+
+
+    // public function tambahSoal(Request $request, $idkuis)
+    // {
+    //     $kuis = Kuis::where('idkuis', $idkuis)->first();
+    //     $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
+
+    //     $jumlah_soal = $kuis->jumlah_soal;
+
+    //     return view("guru.tambahsoal", compact('kuis', 'kelas','jumlah_soal'));
+    // }
+
+    // public function storeSoal(Request $request, $idkuis)
+    // {
+    //     $validated = $request->validate([
+    //         'soal.*.pertanyaan' => 'required',
+    //         'soal.*.pilihan.A' => 'required',
+    //         'soal.*.pilihan.B' => 'required',
+    //         'soal.*.pilihan.C' => 'required',
+    //         'soal.*.pilihan.D' => 'required',
+    //         'soal.*.jawaban_benar' => 'required',
+    //     ]); 
+
+    //     $kuis = Kuis::where('idkuis', $idkuis)->first();
+
+    //     foreach ($request->soal as $index => $soal) {
+    //         $soalBaru = Question::create([
+    //             'question' => $soal['pertanyaan'],
+    //             'idkuis' => $kuis->idkuis,
+    //         ]);
+    
+    //         foreach ($soal['pilihan'] as $huruf => $pilihan) {
+    //             $isCorrect = ($huruf === $soal['jawaban_benar']) ? 1 : 0;
+    //             Answer::create([
+    //                 'choice' => $huruf,
+    //                 'answer' => $pilihan,
+    //                 'question_id' => $soalBaru->id,
+    //                 'correct_answer' => $isCorrect,
+    //                 // tambahkan field lain jika ada
+    //             ]);
+    //         }
+    //     }
+    
+    //     return back()->with('success', 'Soal dan jawaban berhasil disimpan.');
+
+
+    // }
 
     public function detailKuis($idkuis)
     {
@@ -666,26 +727,33 @@ class TugasKuisController extends Controller
     }
 
     // delete kuis
-    public function destroy2($idkuis)
+    public function destroy2($idkelas, $idkuis)
     {
         DB::beginTransaction();
 
         try {
-            Kuis::where('idkuis', $idkuis)->delete();
-    
+            // Hapus semua soal yang terkait dengan kuis ini
+            Soal_Kuis::where('idkuis', $idkuis)->delete();
+
+            // Kemudian hapus kuisnya
+            $kuis = Kuis::where('idkuis', $idkuis)->first();
+            $idkelas = $kuis->idkelas;
+            $kuis->delete();
+
             DB::commit();
-    
+
             return redirect()
-                ->route('tugaskuis.index')
+                ->route('tugaskuis.index', ['idkelas' => $idkelas])
                 ->with('success', 'Kuis berhasil dihapus.');
         } catch (\Exception $e) {
             DB::rollBack();
-    
+
             return redirect()
-                ->route('tugaskuis.index')
+                ->route('tugaskuis.index', ['idkelas' => $idkelas])
                 ->withErrors(['error' => 'Gagal menghapus kuis. Error: ' . $e->getMessage()]);
         }
     }
+
 
     // // delete siswa
     // public function destroy3($idenroll)

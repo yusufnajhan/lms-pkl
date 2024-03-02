@@ -40,10 +40,15 @@ class Kuis extends Model
         return $this->belongsTo(Kelas::class, 'idkelas');
     }
 
-    public function questions()
+    public function soalkuis()
     {
-        return $this->hasMany(Question::class, 'idkuis');
+        return $this->hasMany(Soal_Kuis::class, 'idkuis');
     }
+
+    // public function questions()
+    // {
+    //     return $this->hasMany(Question::class, 'idkuis');
+    // }
 
     // public function show($idkuis)
     // {
