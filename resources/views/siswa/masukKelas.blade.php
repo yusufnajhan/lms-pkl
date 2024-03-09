@@ -123,7 +123,7 @@
                         <a href="{{ route('siswamasuk.read', $tugas->idtugas) }}" class="hover-red-underline">{{ $tugas->judul_tugas }}</a>
                       </p>
                       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                        <a href="{{ route('siswamasuk.read', $tugas->idtugas) }}" class="hover-red-underline">{{ $tugas->tanggal_selesai }}</a>
+                        <a href="{{ route('siswamasuk.read', $tugas->idtugas) }}" class="hover-red-underline">Tenggat waktu: {{ $tugas->tanggal_selesai }}</a>
                       </p>
                     </div>
 
@@ -225,33 +225,55 @@
                 </li>
                 @endforeach
 
-                {{-- @foreach($kuiss as $kuis)
+                @foreach($kuiss as $kuis)
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                      </svg>
+                      <a href="{{ route('siswakuis.read', $kuis->idkuis) }}">
+                        <img src="{{ URL('images/kuis.png') }}" alt="kuis" class="w-6 h-6">
+                      </a>
                     </div>
+                    <style>
+                      a.hover-red-underline:hover {
+                          text-decoration: underline;
+                          text-decoration-color: red;
+                      }
+                    </style>
                     <div class="flex-1 min-w-0">
-                        <p class="font-medium text-gray-900 truncate dark:text-white">
-                          {{ $kuis->judul_kuis }}
-                        </p>
-                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                          {{ $kuis->tanggal_selesai }}
-                        </p>
+                      <p class="font-medium text-gray-900 truncate dark:text-white">
+                        <a href="{{ route('siswakuis.read', $kuis->idkuis) }}" class="hover-red-underline">{{ $kuis->judul_kuis }}</a>
+                      </p>
+                      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                        <a href="{{ route('siswakuis.read', $kuis->idkuis) }}" class="hover-red-underline">Tenggat waktu: {{ $kuis->tanggal_selesai }}</a>
+                      </p>
                     </div>
                     <td class="p-4 whitespace-nowrap">
                       <span
                         class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500">Sudah dikerjakan</span>
                     </td>
-                    <a href="{{ route('siswa.detailkuis', $kuis->idkuis) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
-                      Detail
-                      <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </a>
+                    
+                    @if($kuis->tanggal_selesai > now())
+                            <a href="{{ route('kumpulkuis.edit', $kuis->idkuis) }}">
+                                <button type="button" 
+                                    class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
+                                    data-idkuis="{{ $kuis->idkuis }}">
+                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
+                                    Ubah
+                                </button>
+                            </a>
+                            <a href="{{ route('kumpulkuis.create', $kuis->idkuis) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
+                                kumpul kuis
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </a>
+                    @else
+                        <span class="inline-flex items-center font-medium text-gray-600 dark:text-gray-500">
+                            Kuis tutup
+                        </span>
+                    @endif
+
                   </div>
                 </li>
-                @endforeach --}}
+                @endforeach
             </ul>
         </div>
         <div class="hidden pt-4" id="about" role="tabpanel" aria-labelledby="about-tab">

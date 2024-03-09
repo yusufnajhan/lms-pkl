@@ -96,7 +96,7 @@
                           <a href="{{ route('tugas.read', $tugas->idtugas) }}" class="hover-red-underline">{{ $tugas->judul_tugas }}</a>
                         </p>
                         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                          <a href="{{ route('tugas.read', $tugas->idtugas) }}" class="hover-red-underline">{{ $tugas->tanggal_selesai }}</a>
+                          <a href="{{ route('tugas.read', $tugas->idtugas) }}" class="hover-red-underline">Tenggat waktu: {{ $tugas->tanggal_selesai }}</a>
                         </p>
                     </div>                  
                     <td class="p-4 space-x-2 whitespace-nowrap">
@@ -121,7 +121,7 @@
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
-                      <a href="#">
+                      <a href="{{ route('kuis.read', $kuis->idkuis) }}">
                           <img src="{{ URL('images/kuis.png') }}" alt="kuis" class="w-6 h-6">
                       </a>
                     </div>
@@ -132,12 +132,12 @@
                       }
                     </style>
                     <div class="flex-1 min-w-0">
-                        <p class="font-medium text-gray-900 truncate dark:text-white">
-                          <a href="/nilaiKuis">{{ $kuis->judul_kuis }}</a>
-                        </p>
-                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                          <a href="/nilaiKuis">{{ $kuis->tanggal_selesai }}</a>
-                        </p>
+                      <p class="font-medium text-gray-900 truncate dark:text-white">
+                        <a href="{{ route('kuis.read', $kuis->idkuis) }}" class="hover-red-underline">{{ $kuis->judul_kuis }}</a>
+                      </p>
+                      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                        <a href="{{ route('kuis.read', $kuis->idkuis) }}" class="hover-red-underline">Tenggat waktu: {{ $kuis->tanggal_selesai }}</a>
+                      </p>
                     </div>
                     <td class="p-4 space-x-2 whitespace-nowrap">
                       <a href="{{ route('kuis.edit', $kuis->idkuis) }}">

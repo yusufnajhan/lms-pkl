@@ -10,6 +10,7 @@ use App\Models\Siswa;
 use App\Models\Tugas;
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\Jawaban_Kuis;
 use App\Models\Soal_Kuis;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
@@ -188,6 +189,56 @@ class TugasKuisController extends Controller
                 'jumlahPengumpulan','belumMengumpulkan','nilaiTertinggi','nilaiTerendah','nilaiRata'));
     }
 
+    // menampilkan siswa yang sudah mengumpulkan kuis 
+    public function read3(Request $request, int $idkuis)
+    {
+        $search = $request->input('search');
+
+        $kuis = Kuis::where('idkuis', $idkuis)->first();
+        $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
+
+        // Get the task submissions for the specific task
+        // $pengumpulanTugas = Pengumpulan_Tugas::where('idtugas', $idtugas)->with('siswa')->get();
+
+        // $pengumpulanKuis = Jawaban_Kuis::where('idkuis', $idkuis)
+        // ->when($search, function ($query, $search) {
+        //     $query->whereHas('siswa', function ($query) use ($search) {
+        //         $query->where('nama', 'like', '%' . $search . '%');
+        //     });
+        // })
+        // ->with('siswa')
+        // ->get();
+        $pengumpulanKuis = Jawaban_Kuis::where('idkuis', $idkuis)
+        ->select('siswa.idsiswa', DB::raw('(SELECT nilai FROM jawaban_kuis WHERE jawaban_kuis.idsiswa = siswa.idsiswa ORDER BY idjawaban DESC LIMIT 1) as nilai'))
+        ->join('siswa', 'jawaban_kuis.idsiswa', '=', 'siswa.idsiswa')
+        ->when($search, function ($query, $search) {
+            $query->where('nama', 'like', '%' . $search . '%');
+        })
+        ->groupBy('siswa.idsiswa')
+        ->get();
+
+        // Hitung jumlah siswa yang telah mengumpulkan tugas
+        $jumlahPengumpulan = $pengumpulanKuis->count();
+
+        // Hitung jumlah total siswa dalam kelas
+        $totalSiswa = $kelas->siswas()->count();
+
+        // Hitung jumlah siswa yang belum mengumpulkan tugas
+        $belumMengumpulkan = $totalSiswa - $jumlahPengumpulan;
+
+        // Hitung nilai tertinggi yang diperoleh siswa
+        $nilaiTertinggi = $pengumpulanKuis->max('nilai');
+
+        // Hitung nilai terendah yang diperoleh siswa
+        $nilaiTerendah = $pengumpulanKuis->min('nilai');
+
+        // Hitung nilai rata-rata yang diperoleh siswa
+        $nilaiRata = $pengumpulanKuis->avg('nilai');
+
+        return view('guru.nilaikuis', compact('kuis', 'kelas', 'pengumpulanKuis',
+                'jumlahPengumpulan','belumMengumpulkan','nilaiTertinggi','nilaiTerendah','nilaiRata'));
+    }
+
 
     // guru bisa memberi nilai tugas
     public function updateNilai(Request $request, $idpengumpulan)
@@ -204,6 +255,42 @@ class TugasKuisController extends Controller
             return back()->with('success', 'Berhasil memperbarui nilai tugas.');
         } catch (\Exception $e) {
             return back()->with('error', 'Gagal memperbarui nilai tugas.');
+        }
+    }
+
+    // guru bisa memberi nilai kuis
+    // public function updateNilai2(Request $request, $idjawaban)
+    // {
+    //     $request->validate([
+    //         'nilai' => 'required|integer|min:0|max:100',
+    //     ]);
+
+    //     try {
+    //         $pengumpulan = Jawaban_Kuis::find($idjawaban);
+    //         $pengumpulan->nilai = $request->nilai;
+    //         $pengumpulan->save();
+
+    //         return back()->with('success', 'Berhasil memperbarui nilai kuis.');
+    //     } catch (\Exception $e) {
+    //         return back()->with('error', 'Gagal memperbarui nilai kuis.');
+    //     }
+    // }
+    public function updateNilai2(Request $request, $idkuis)
+    {
+        $request->validate([
+            'nilai' => 'required|integer|min:0|max:100',
+        ]);
+
+        try {
+            $pengumpulan = Jawaban_Kuis::where('idkuis', $idkuis)->get();
+            foreach ($pengumpulan as $jawaban) {
+                $jawaban->nilai = $request->nilai;
+                $jawaban->save();
+            }
+
+            return back()->with('success', 'Berhasil memperbarui nilai kuis.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal memperbarui nilai kuis.');
         }
     }
 
@@ -682,7 +769,7 @@ class TugasKuisController extends Controller
             DB::commit();
 
             return redirect()
-                ->route('tugaskuis.index')
+                ->route('tugaskuis.index', ['idkelas' => $request->idkelas])
                 ->with('success', 'kuis berhasil diperbarui.');
 
         }
@@ -691,7 +778,7 @@ class TugasKuisController extends Controller
         {
             DB::rollBack();
             return redirect()
-                ->route('tugaskuis.index')
+                ->route('tugaskuis.index', ['idkelas' => $request->idkelas])
                 ->withErrors(['error' => 'Gagal memperbarui kuis. Error: ' . $e->getMessage()]);
         }
     }
@@ -733,7 +820,7 @@ class TugasKuisController extends Controller
 
         try {
             // Hapus semua soal yang terkait dengan kuis ini
-            Soal_Kuis::where('idkuis', $idkuis)->delete();
+            // Soal_Kuis::where('idkuis', $idkuis)->delete();
 
             // Kemudian hapus kuisnya
             $kuis = Kuis::where('idkuis', $idkuis)->first();

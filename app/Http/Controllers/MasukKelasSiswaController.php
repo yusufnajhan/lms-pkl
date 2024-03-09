@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Enrollment;
 use App\Models\Guru;
+use App\Models\Jawaban_Kuis;
 use App\Models\Kelas;
 use App\Models\Kuis;
+use App\Models\Pengumpulan_Kuis;
 use App\Models\Pengumpulan_Tugas;
 use App\Models\Siswa;
 use App\Models\Tugas;
@@ -22,6 +24,7 @@ class MasukKelasSiswaController extends Controller
         $status = $request->input('status');
         $idsiswa = auth()->user()->id;
         $kumpultugas = Pengumpulan_Tugas::where('idsiswa', $idsiswa)->get();
+        $kumpulkuis = Jawaban_Kuis::where('idsiswa', $idsiswa)->get();
         $kelas = Kelas::findOrFail($idkelas);
         $tugass = Tugas::where('idkelas', $idkelas)->get();
         $kuiss = Kuis::where('idkelas', $idkelas)->get();
@@ -59,7 +62,7 @@ class MasukKelasSiswaController extends Controller
             })->values();
         }
 
-        return view('siswa.masukKelas', compact('kelas','tugass','kuiss','enrollments','kumpultugas'));
+        return view('siswa.masukKelas', compact('kelas','tugass','kuiss','enrollments','kumpultugas','kumpulkuis'));
     }
 
     public function read(int $idtugas)
@@ -68,6 +71,14 @@ class MasukKelasSiswaController extends Controller
         $kelas = Kelas::where('idkelas', $tugas->idkelas)->first();
 
         return view('siswa.detailtugas', compact('tugas', 'kelas'));
+    }
+
+    public function read2(int $idkuis)
+    {
+        $kuis = Kuis::where('idkuis', $idkuis)->first();
+        $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
+
+        return view('siswa.detailkuis', compact('kuis', 'kelas'));
     }
 
     // siswa kumpul tugas
@@ -317,6 +328,121 @@ class MasukKelasSiswaController extends Controller
     //         'message' => 'Submission successful.'
     //     ], 200);
     // }
+
+    // siswa kumpul kuis
+    public function create2($idkuis)
+    {
+
+        $kuis = Kuis::findOrFail($idkuis);
+        $siswas = Siswa::pluck('idsiswa', 'idsiswa');
+        $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
+        $guru = Guru::find($kelas->idguru);
+        return view('siswa.kumpulKuis', compact('kuis', 'siswas', 'kelas', 'guru'));
+    }
+
+    public function store2(Request $request)
+    {
+        // Validasi data input
+        $request->validate([
+            'status' => 'required|in:1,0',
+            'jawaban.*' => 'required', // Menerima array jawaban
+            'tanggal_pengumpulan' => 'required|date',
+            'idsiswa' => 'required|numeric',
+            'idguru' => 'required|numeric',
+            'idkuis' => 'required|numeric',
+        ]);
+
+        $idkuis = $request->input('idkuis');
+        $kuis = Kuis::find($idkuis);
+        $idkelas = $kuis->idkelas;
+        $kelas = Kelas::find($idkelas);
+        $idguru = $kelas->idguru;
+
+        // Memeriksa apakah siswa sudah mengumpulkan tugas tersebut sebelumnya
+        $existingSubmitKuis = Jawaban_Kuis::where('idsiswa', $request->input('idsiswa'))
+            ->where('idkuis', $request->input('idkuis'))
+            ->first();
+
+        if ($existingSubmitKuis) {
+            return redirect()
+                ->route('siswamasuk.index', $idkelas)
+                ->with(['error' => 'Siswa hanya dapat sekali mengumpulkan kuis.']);
+        }
+
+        DB::beginTransaction();
+        try 
+        {
+            // Simpan setiap jawaban ke dalam tabel jawaban_kuis
+            foreach ($request->input('jawaban') as $idsoal => $jawaban) {
+                Jawaban_Kuis::create([
+                    'idsoal' => $idsoal,
+                    'status' => $request->input('status'),
+                    'tanggal_pengumpulan' => $request->input('tanggal_pengumpulan'),
+                    'jawaban' => $jawaban,
+                    'idsiswa' => $request->input('idsiswa'),
+                    'idguru' => $idguru,
+                    'idkuis' => $idkuis,
+                ]);
+            }
+
+            DB::commit();
+            // Redirect atau kembalikan respons sesuai kebutuhan
+            return redirect()->route('siswamasuk.index', $idkelas)->with('success', 'Berhasil mengumpulkan kuis.');
+        }
+
+        catch (\Exception $e) 
+        {
+            DB::rollBack();
+            return redirect()
+                ->route('siswamasuk.index', $idkelas)
+                ->with(['error' => 'Gagal mengumpulkan kuis. Error: ' . $e->getMessage()]);
+        }
+    }
+
+    // siswa edit jawaban kuis
+    public function edit2($idkuis)
+    {
+        $kuis = Kuis::findOrFail($idkuis);
+        // Cek apakah tanggal_selesai belum lewat
+        if ($kuis->tanggal_selesai > now()) {
+            $jawaban_kuis = Jawaban_Kuis::where('idkuis', $idkuis)->get();
+            if ($jawaban_kuis) {
+                $kelas = $kuis->kelas;
+                return view('siswa.editKumpulKuis', compact('kuis', 'jawaban_kuis','kelas'));
+            } else {
+                return redirect()->route('siswamasuk.index')->with('error', 'Pengumpulan kuis tidak ditemukan.');
+            }
+        } else {
+            return redirect()->route('siswamasuk.index')->with('error', 'Kuis sudah tutup, tidak dapat mengedit.');
+        }
+    }
+
+    public function update2(Request $request, $idkuis)
+    {
+        $kuis = Kuis::find($idkuis);
+        $request->validate([
+            'jawaban.*' => 'required', // Menerima array jawaban
+        ]);
+
+        $jawaban_kuis = Jawaban_Kuis::where('idkuis', $idkuis)->get();
+
+        if ($jawaban_kuis) {
+            foreach ($request->input('jawaban') as $idsoal => $jawaban) {
+                $jawaban_kuis_item = $jawaban_kuis->where('idsoal', $idsoal)->first();
+                if ($jawaban_kuis_item) {
+                    $jawaban_kuis_item->jawaban = $jawaban;
+                    $jawaban_kuis_item->save();
+                }
+            }
+
+            $idkelas = $kuis->idkelas;
+            return redirect()->route('siswamasuk.index', $idkelas)->with('success', 'Jawaban kuis berhasil diubah.');
+        } else {
+            return redirect()->route('siswamasuk.index')->with('error', 'Jawaban kuis tidak ditemukan.');
+        }
+    }
+
+
 
     /**
      * Display the specified resource.

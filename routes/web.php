@@ -176,13 +176,15 @@ Route::delete('/masukKelas/{idkelas}/{idtugas}', [TugasKuisController::class, 'd
 
 Route::get('/tambahKuis/{idkelas}', [TugasKuisController::class, 'create2'])->name('kuis.create');
 Route::post('/tambahKuis', [TugasKuisController::class, 'store2'])->name('kuis.store');
+Route::get('/nilaiKuis/{idkuis}', [TugasKuisController::class, 'read3'])->name('kuis.read');
+Route::put('/nilaiKuis/{idkuis}', [TugasKuisController::class, 'updateNilai2'])->name('guru.updateNilai2');
+
 Route::get('/editKuis/{idkuis}', [TugasKuisController::class, 'edit2'])->name('kuis.edit');
 Route::post('/editKuis/{idkuis}', [TugasKuisController::class, 'update2'])->name('kuis.update');
 Route::get('/tambahSoal/{idkuis}', [TugasKuisController::class, 'tambahSoal'])->name('kuis.tambahSoal');
 Route::post('/tambahSoal', [TugasKuisController::class, 'storeSoal'])->name('kuis.storeSoal');
 Route::get('/editSoalKuis/{idkuis}', [TugasKuisController::class, 'editSoal'])->name('kuis.editSoal');
 Route::post('/editSoalKuis', [TugasKuisController::class, 'updateSoal'])->name('kuis.updateSoal');
-
 Route::delete('/masukKelas/{idkelas}/{idkuis}', [TugasKuisController::class, 'destroy2'])->name('kuis.destroy');
 
 // Route::get('/soalEsai', [EsaiController::class, 'index'])->name('esai.index');
@@ -290,10 +292,17 @@ Route::get('/kumpulTugas/{idtugas}', [MasukKelasSiswaController::class, 'create'
 Route::post('/kumpulTugas', [MasukKelasSiswaController::class, 'store'])->name('kumpultugas.store');
 Route::get('/editkumpulTugas/{idtugas}', [MasukKelasSiswaController::class, 'edit'])->name('kumpultugas.edit');
 Route::post('/editkumpulTugas/{idtugas}', [MasukKelasSiswaController::class, 'update'])->name('kumpultugas.update');
+
+Route::get('/detailKuis/{idkuis}', [MasukKelasSiswaController::class, 'read2'])->name('siswakuis.read');
+Route::get('/kumpulKuis/{idkuis}', [MasukKelasSiswaController::class, 'create2'])->name('kumpulkuis.create');
+Route::post('/kumpulKuis', [MasukKelasSiswaController::class, 'store2'])->name('kumpulkuis.store');
+Route::get('/editkumpulKuis/{idkuis}', [MasukKelasSiswaController::class, 'edit2'])->name('kumpulkuis.edit');
+Route::post('/editkumpulKuis/{idkuis}', [MasukKelasSiswaController::class, 'update2'])->name('kumpulkuis.update');
+
 Route::get('/rekapTugasKuis/{idkelas}', [MasukKelasSiswaController::class, 'downloadRekapTugas'])->name('siswamasuk.rekapTugas');
 
 
-Route::get('/detailKuis/{idkuis}', [TugasKuisController::class, 'detailKuis'])->name('siswa.detailkuis');
+// Route::get('/detailKuis/{idkuis}', [TugasKuisController::class, 'detailKuis'])->name('siswa.detailkuis');
 Route::get('/kerjakanKuis/{idkuis}', [TugasKuisController::class, 'kerjakanKuis'])->name('siswa.kerjakankuis');
 // Route::get('/tugasMatematika', function () {
 //     return view('siswa/mattugas');

@@ -14,14 +14,14 @@ class Kuis extends Model
     protected $primaryKey = 'idkuis';
     public $timestamps = false;
 
-    protected $dates = [
-        'tanggal_mulai', 'tanggal_selesai'
-    ];
-    // atau
-    protected $casts = [
-        'tanggal_mulai' => 'datetime',
-        'tanggal_selesai' => 'datetime',
-    ];
+    // protected $dates = [
+    //     'tanggal_mulai', 'tanggal_selesai'
+    // ];
+    // // atau
+    // protected $casts = [
+    //     'tanggal_mulai' => 'datetime',
+    //     'tanggal_selesai' => 'datetime',
+    // ];
     
 
     protected $fillable = [
