@@ -178,6 +178,7 @@ Route::get('/tambahKuis/{idkelas}', [TugasKuisController::class, 'create2'])->na
 Route::post('/tambahKuis', [TugasKuisController::class, 'store2'])->name('kuis.store');
 Route::get('/nilaiKuis/{idkuis}', [TugasKuisController::class, 'read3'])->name('kuis.read');
 Route::put('/nilaiKuis/{idkuis}', [TugasKuisController::class, 'updateNilai2'])->name('guru.updateNilai2');
+Route::get('/nilaiKuis/{idkuis}/{idsiswa}', [TugasKuisController::class, 'lihatJawaban'])->name('guru.lihatJawaban');
 
 Route::get('/editKuis/{idkuis}', [TugasKuisController::class, 'edit2'])->name('kuis.edit');
 Route::post('/editKuis/{idkuis}', [TugasKuisController::class, 'update2'])->name('kuis.update');

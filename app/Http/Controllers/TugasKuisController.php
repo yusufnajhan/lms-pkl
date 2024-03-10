@@ -259,22 +259,6 @@ class TugasKuisController extends Controller
     }
 
     // guru bisa memberi nilai kuis
-    // public function updateNilai2(Request $request, $idjawaban)
-    // {
-    //     $request->validate([
-    //         'nilai' => 'required|integer|min:0|max:100',
-    //     ]);
-
-    //     try {
-    //         $pengumpulan = Jawaban_Kuis::find($idjawaban);
-    //         $pengumpulan->nilai = $request->nilai;
-    //         $pengumpulan->save();
-
-    //         return back()->with('success', 'Berhasil memperbarui nilai kuis.');
-    //     } catch (\Exception $e) {
-    //         return back()->with('error', 'Gagal memperbarui nilai kuis.');
-    //     }
-    // }
     public function updateNilai2(Request $request, $idkuis)
     {
         $request->validate([
@@ -294,6 +278,16 @@ class TugasKuisController extends Controller
         }
     }
 
+    // guru liat jawaban kuis tiap siswa
+    public function lihatJawaban($idkuis, $idsiswa)
+    {
+        $jawaban = Jawaban_Kuis::where('idkuis', $idkuis)->where('idsiswa', $idsiswa)->get();
+        $kuis = Kuis::find($idkuis);
+        $kelas = Enrollment::where('idsiswa', $idsiswa)->first()->kelas;
+
+        return view('guru.jawabanKuis', ['jawaban' => $jawaban, 'kuis' => $kuis, 'kelas' => $kelas]);
+    }
+
     // cari nama siswa di progres tiap tugas
     public function search(Request $request) 
     {
@@ -307,6 +301,21 @@ class TugasKuisController extends Controller
         }
 
         return view('guru.nilaiTugas', ['siswas' => $siswas]);
+    }
+
+    // cari nama siswa di progres tiap kuis
+    public function search2(Request $request) 
+    {
+        $search = $request->input('search');
+        $siswas = Siswa::all();
+
+        if (!empty($search)) {
+            $siswas = Siswa::where(function($query) use ($search) {
+                $query->where('nama', 'like', '%' . $search . '%');
+            })->get();
+        }
+
+        return view('guru.nilaiKuis', ['siswas' => $siswas]);
     }
 
     // sorting nilai tugas
