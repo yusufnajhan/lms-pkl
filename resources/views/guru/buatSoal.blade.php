@@ -36,16 +36,23 @@
         @csrf
         <input type="hidden" name="idkuis" value="{{ $kuis->idkuis }}">
         @for ($i = 0; $i < $kuis->jumlah_soal; $i++)
-            <div class="form-group">
-                <label for="soal[{{ $i }}]">Soal {{ $i + 1 }}</label>
-                <input type="text" name="soal[{{ $i }}]" id="soal[{{ $i }}]" class="form-control" required>
+        <div class="grid grid-cols-6 gap-6">
+            <div class="col-span-6 sm:col-span-3">
+                <label for="soal[{{ $i }}]"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Soal {{ $i + 1 }}</label>
+                <input type="text" name="soal[{{ $i }}]" id="soal[{{ $i }}]" 
+                    class="shadow-sm mb-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
             </div>
-            <div class="form-group">
-                <label for="jawaban[{{ $i }}]">Jawaban {{ $i + 1 }}</label>
-                <input type="text" name="jawaban[{{ $i }}]" id="jawaban[{{ $i }}]" class="form-control" required>
+            <div class="col-span-6 sm:col-span-3">
+                <label for="jawaban[{{ $i }}]"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jawaban {{ $i + 1 }}</label>
+                <input type="text" name="jawaban[{{ $i }}]" id="jawaban[{{ $i }}]" 
+                    class="shadow-sm mb-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
             </div>
+        </div>
         @endfor
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="text-white mt-8 bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+            Submit</button>
     </form>    
 </div>
 
