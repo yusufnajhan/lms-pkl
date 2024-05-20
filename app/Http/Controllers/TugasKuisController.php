@@ -11,6 +11,7 @@ use App\Models\Tugas;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Jawaban_Kuis;
+use App\Models\Pengumpulan_Kuis;
 use App\Models\Soal_Kuis;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
@@ -197,25 +198,41 @@ class TugasKuisController extends Controller
         $kuis = Kuis::where('idkuis', $idkuis)->first();
         $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
 
-        // Get the task submissions for the specific task
-        // $pengumpulanTugas = Pengumpulan_Tugas::where('idtugas', $idtugas)->with('siswa')->get();
+        // $pengumpulanKuis = Jawaban_Kuis::where('idkuis', $idkuis)
+        //     ->join('siswa', 'jawaban_kuis.idsiswa', '=', 'siswa.idsiswa')
+        //     ->select('siswa.idsiswa', 'siswa.nama', 'siswa.nik') // Tidak mengambil kolom nilai
+        //     ->when($search, function ($query, $search) {
+        //         $query->where('siswa.nama', 'like', '%' . $search . '%');
+        //     })
+        //     ->groupBy('siswa.idsiswa', 'siswa.nama', 'siswa.nik') // Tambahkan kolom yang dikelompokkan
+        //     ->get();
 
         // $pengumpulanKuis = Jawaban_Kuis::where('idkuis', $idkuis)
-        // ->when($search, function ($query, $search) {
-        //     $query->whereHas('siswa', function ($query) use ($search) {
-        //         $query->where('nama', 'like', '%' . $search . '%');
-        //     });
-        // })
-        // ->with('siswa')
-        // ->get();
-        $pengumpulanKuis = Jawaban_Kuis::where('idkuis', $idkuis)
-        ->select('siswa.idsiswa', DB::raw('(SELECT nilai FROM jawaban_kuis WHERE jawaban_kuis.idsiswa = siswa.idsiswa ORDER BY idjawaban DESC LIMIT 1) as nilai'))
-        ->join('siswa', 'jawaban_kuis.idsiswa', '=', 'siswa.idsiswa')
-        ->when($search, function ($query, $search) {
-            $query->where('nama', 'like', '%' . $search . '%');
-        })
-        ->groupBy('siswa.idsiswa')
-        ->get();
+        //     ->join('siswa', 'jawaban_kuis.idsiswa', '=', 'siswa.idsiswa')
+        //     ->leftJoin('pengumpulan_kuis', function($join) use ($idkuis) {
+        //         $join->on('siswa.idsiswa', '=', 'pengumpulan_kuis.idsiswa')
+        //             ->where('pengumpulan_kuis.idkuis', '=', $idkuis);
+        //     })
+        //     ->select('siswa.idsiswa', 'siswa.nama', 'siswa.nik', 'pengumpulan_kuis.nilai')
+        //     ->when($search, function ($query, $search) {
+        //         $query->where('siswa.nama', 'like', '%' . $search . '%');
+        //     })
+        //     ->groupBy('siswa.idsiswa', 'siswa.nama', 'siswa.nik', 'pengumpulan_kuis.nilai')
+        //     ->get();
+
+        $pengumpulanKuis = Jawaban_Kuis::where('jawaban_kuis.idkuis', $idkuis)
+            ->join('siswa', 'jawaban_kuis.idsiswa', '=', 'siswa.idsiswa')
+            ->leftJoin('pengumpulan_kuis', function($join) use ($idkuis) {
+                $join->on('siswa.idsiswa', '=', 'pengumpulan_kuis.idsiswa')
+                    ->where('pengumpulan_kuis.idkuis', '=', $idkuis);
+            })
+            ->select('siswa.idsiswa', 'siswa.nama', 'siswa.nik', 'pengumpulan_kuis.nilai')
+            ->when($search, function ($query, $search) {
+                $query->where('siswa.nama', 'like', '%' . $search . '%');
+            })
+            ->groupBy('siswa.idsiswa', 'siswa.nama', 'siswa.nik', 'pengumpulan_kuis.nilai')
+            ->get();
+
 
         // Hitung jumlah siswa yang telah mengumpulkan tugas
         $jumlahPengumpulan = $pengumpulanKuis->count();
@@ -259,24 +276,131 @@ class TugasKuisController extends Controller
     }
 
     // guru bisa memberi nilai kuis
-    public function updateNilai2(Request $request, $idkuis)
+    // public function updateNilai2(Request $request, $idkuis)
+    // {
+    //     $request->validate([
+    //         'nilai' => 'required|integer|min:0|max:100',
+    //     ]);
+
+    //     try {
+    //         $pengumpulan = Jawaban_Kuis::where('idkuis', $idkuis)->get();
+    //         foreach ($pengumpulan as $jawaban) {
+    //             $jawaban->nilai = $request->nilai;
+    //             $jawaban->save();
+    //         }
+
+    //         return back()->with('success', 'Berhasil memperbarui nilai kuis.');
+    //     } catch (\Exception $e) {
+    //         return back()->with('error', 'Gagal memperbarui nilai kuis.');
+    //     }
+    // }
+    // public function updateNilai2(Request $request, $idkuis)
+    // {
+    //     $request->validate([
+    //         'nilai' => 'required|integer|min:0|max:100',
+    //     ]);
+
+    //     try {
+    //         // Ambil semua pengumpulan kuis untuk kuis tertentu
+    //         $pengumpulan = Pengumpulan_Kuis::where('idkuis', $idkuis)->get();
+            
+    //         // Iterasi melalui setiap pengumpulan kuis dan perbarui nilainya
+    //         foreach ($pengumpulan as $pengumpulan) {
+    //             $pengumpulan->nilai = $request->nilai;
+    //             $pengumpulan->save();
+    //         }
+
+    //         return back()->with('success', 'Berhasil memperbarui nilai kuis.');
+    //     } catch (\Exception $e) {
+    //         return back()->with('error', 'Gagal memperbarui nilai kuis.');
+    //     }
+    // }
+
+    // public function updateNilai2(Request $request, $idkuis)
+    // {
+    //     $request->validate([
+    //         'nilai' => 'required|integer|min:0|max:100',
+    //     ]);
+
+    //     try {
+    //         // Ambil semua pengumpulan kuis untuk kuis tertentu
+    //         $pengumpulan = Pengumpulan_Kuis::where('idkuis', $idkuis)->get();
+            
+    //         // Iterasi melalui setiap pengumpulan kuis dan perbarui nilainya
+    //         foreach ($pengumpulan as $item) {
+    //             // Temukan atau buat entri pengumpulan kuis untuk siswa dan kuis yang sesuai
+    //             $pengumpulanKuis = Pengumpulan_Kuis::firstOrNew([
+    //                 'idkuis' => $idkuis,
+    //                 'idsiswa' => $item->idsiswa,
+    //             ]);
+                
+    //             // Set nilai kuis dan simpan perubahan
+    //             $pengumpulanKuis->nilai = $request->nilai;
+    //             $pengumpulanKuis->save();
+    //         }
+
+    //         return back()->with('success', 'Berhasil memperbarui nilai kuis.');
+    //     } catch (\Exception $e) {
+    //         return back()->with('error', 'Gagal memperbarui nilai kuis.');
+    //     }
+    // }
+
+    // public function updateNilai2(Request $request, $idpengumpulan)
+    // {
+    //     $request->validate([
+    //         'nilai' => 'required|integer|min:0|max:100',
+    //     ]);
+
+    //     try {
+    //         $pengumpulan = Pengumpulan_Kuis::find($idpengumpulan);
+    //         $pengumpulan->nilai = $request->nilai;
+    //         $pengumpulan->save();
+
+    //         return back()->with('success', 'Berhasil memperbarui nilai kuis.');
+    //     } catch (\Exception $e) {
+    //         return back()->with('error', 'Gagal memperbarui nilai kuis.');
+    //     }
+    // }
+
+    // public function updateNilai2(Request $request, $idkuis)
+    // {
+    //     $request->validate([
+    //         'nilai' => 'required|integer|min:0|max:100',
+    //         'idsiswa' => 'required|exists:siswa,idsiswa',
+    //     ]);
+
+    //     try {
+    //         $pengumpulan = Pengumpulan_Kuis::where('idkuis', $idkuis)
+    //             ->where('idsiswa', $request->idsiswa)
+    //             ->firstOrFail();
+    //         $pengumpulan->nilai = $request->nilai;
+    //         $pengumpulan->save();
+
+    //         return back()->with('success', 'Berhasil memperbarui nilai kuis.');
+    //     } catch (\Exception $e) {
+    //         return back()->with('error', 'Gagal memperbarui nilai kuis.');
+    //     }
+    // }
+
+    public function updateNilai2(Request $request, $idpengumpulan)
     {
         $request->validate([
             'nilai' => 'required|integer|min:0|max:100',
         ]);
 
         try {
-            $pengumpulan = Jawaban_Kuis::where('idkuis', $idkuis)->get();
-            foreach ($pengumpulan as $jawaban) {
-                $jawaban->nilai = $request->nilai;
-                $jawaban->save();
-            }
+            $pengumpulan = Pengumpulan_Kuis::findOrFail($idpengumpulan);
+            $pengumpulan->nilai = $request->nilai;
+            $pengumpulan->save();
 
             return back()->with('success', 'Berhasil memperbarui nilai kuis.');
         } catch (\Exception $e) {
             return back()->with('error', 'Gagal memperbarui nilai kuis.');
         }
     }
+
+
+
 
     // guru liat jawaban kuis tiap siswa
     public function lihatJawaban($idkuis, $idsiswa)

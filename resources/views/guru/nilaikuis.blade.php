@@ -101,18 +101,20 @@
           @foreach($pengumpulanKuis as $key => $pengumpulan)
               <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                   <td scope="col" class="py-3 text-center dark:text-white">{{ $key + 1 }}.</td>
-                  <th class="py-3 text-center dark:text-white">{{ $pengumpulan->siswa->nama }}</th>
-                  <td class="py-3 text-center dark:text-white">{{ $pengumpulan->siswa->nik }}</td>
+                  <th class="py-3 text-center dark:text-white">{{ $pengumpulan->nama }}</th>
+                  <td class="py-3 text-center dark:text-white">{{ $pengumpulan->nik }}</td>
+                  <input type="hidden" name="idpengumpulan" value="{{ $pengumpulan->idpengumpulan }}">
                   <td class="py-3 text-center dark:text-white">
                     <form action="{{ route('guru.updateNilai2', ['idkuis' => $kuis->idkuis]) }}" method="POST" class="flex justify-between">
                         @csrf
                         @method('PUT')
+                        <input type="hidden" name="idsiswa" value="{{ $pengumpulan->idsiswa }}">
                         <input type="number" id="nilai" name="nilai" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-1/2 p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="nilai kuis (1-100)" value="{{ $pengumpulan->nilai }}" required>
                         <button type="submit" class="focus:outline-none text-white text-xs bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-4 py-1.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Simpan</button>
                     </form>
-                  </td>                                              
+                  </td>                
                   <td class="py-3 text-center dark:text-white">
-                      <a href="{{ route('guru.lihatJawaban', ['idkuis' => $kuis->idkuis, 'idsiswa' => $pengumpulan->siswa->idsiswa]) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
+                      <a href="{{ route('guru.lihatJawaban', ['idkuis' => $kuis->idkuis, 'idsiswa' => $pengumpulan->idsiswa]) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
                           lihat jawaban
                           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                       </a>

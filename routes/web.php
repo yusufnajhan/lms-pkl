@@ -177,6 +177,7 @@ Route::delete('/masukKelas/{idkelas}/{idtugas}', [TugasKuisController::class, 'd
 Route::get('/tambahKuis/{idkelas}', [TugasKuisController::class, 'create2'])->name('kuis.create');
 Route::post('/tambahKuis', [TugasKuisController::class, 'store2'])->name('kuis.store');
 Route::get('/nilaiKuis/{idkuis}', [TugasKuisController::class, 'read3'])->name('kuis.read');
+// Route::put('/nilaiKuis/{idkuis}', [TugasKuisController::class, 'updateNilai2'])->name('guru.updateNilai2');
 Route::put('/nilaiKuis/{idkuis}', [TugasKuisController::class, 'updateNilai2'])->name('guru.updateNilai2');
 Route::get('/nilaiKuis/{idkuis}/{idsiswa}', [TugasKuisController::class, 'lihatJawaban'])->name('guru.lihatJawaban');
 
