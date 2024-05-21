@@ -89,7 +89,6 @@
                     <option value="{{ $guru->idguru }}">{{ $guru->idguru }}</option>
                 </select>
             </div>
-            
 
             <div class="col-span-6 sm:col-span-3" hidden>
                 <label for="idsiswa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Siswa</label>

@@ -403,14 +403,74 @@ class TugasKuisController extends Controller
 
 
     // guru liat jawaban kuis tiap siswa
+    // public function lihatJawaban($idkuis, $idsiswa)
+    // {
+    //     $jawaban = Jawaban_Kuis::where('idkuis', $idkuis)->where('idsiswa', $idsiswa)->get();
+    //     $kuis = Kuis::find($idkuis);
+    //     $kelas = Enrollment::where('idsiswa', $idsiswa)->first()->kelas;
+
+    //     return view('guru.jawabanKuis', ['jawaban' => $jawaban, 'kuis' => $kuis, 'kelas' => $kelas]);
+    // }
+
     public function lihatJawaban($idkuis, $idsiswa)
     {
         $jawaban = Jawaban_Kuis::where('idkuis', $idkuis)->where('idsiswa', $idsiswa)->get();
         $kuis = Kuis::find($idkuis);
         $kelas = Enrollment::where('idsiswa', $idsiswa)->first()->kelas;
 
-        return view('guru.jawabanKuis', ['jawaban' => $jawaban, 'kuis' => $kuis, 'kelas' => $kelas]);
+        return view('guru.jawabanKuis', [
+            'jawaban' => $jawaban,
+            'kuis' => $kuis,
+            'kelas' => $kelas,
+            'idsiswa' => $idsiswa, // Tambahkan variabel ini
+            'idkuis' => $idkuis, // Tambahkan variabel ini
+        ]);
     }
+
+
+    public function simpanNilai(Request $request)
+    {
+        $idsiswa = $request->input('idsiswa');
+        $idkuis = $request->input('idkuis');
+        $nilai = $request->input('nilai');
+
+        // Simpan nilai ke dalam tabel jawaban_kuis
+        // $jawabanKuis = Jawaban_Kuis::where('idsiswa', $idsiswa)
+        //     ->where('idkuis', $idkuis)
+        //     ->first();
+
+        // if ($jawabanKuis) {
+        //     $jawabanKuis->nilai = $nilai;
+        //     $jawabanKuis->save();
+        //     return redirect()->back()->with('success', 'Nilai berhasil disimpan.');
+        // } else {
+        //     return redirect()->back()->with('error', 'Data jawaban kuis tidak ditemukan.');
+        // }
+
+        // Simpan nilai untuk jawaban pertama
+        $jawabanPertama = Jawaban_Kuis::where('idsiswa', $idsiswa)
+            ->where('idkuis', $idkuis)
+            ->first();
+
+        if ($jawabanPertama) {
+            $jawabanPertama->nilai = $nilai;
+            $jawabanPertama->save();
+        }
+
+        // Set nilai untuk jawaban lain dengan idsiswa dan idkuis yang sama
+        $jawabanLain = Jawaban_Kuis::where('idsiswa', $idsiswa)
+            ->where('idkuis', $idkuis)
+            ->where('idjawaban', '!=', $jawabanPertama->idjawaban) // Exclude jawaban pertama
+            ->get();
+
+        foreach ($jawabanLain as $jawaban) {
+            $jawaban->nilai = $nilai;
+            $jawaban->save();
+        }
+
+        return redirect()->back()->with('success', 'Nilai berhasil disimpan.');
+    }
+
 
     // cari nama siswa di progres tiap tugas
     public function search(Request $request) 

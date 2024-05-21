@@ -180,6 +180,7 @@ Route::get('/nilaiKuis/{idkuis}', [TugasKuisController::class, 'read3'])->name('
 // Route::put('/nilaiKuis/{idkuis}', [TugasKuisController::class, 'updateNilai2'])->name('guru.updateNilai2');
 Route::put('/nilaiKuis/{idkuis}', [TugasKuisController::class, 'updateNilai2'])->name('guru.updateNilai2');
 Route::get('/nilaiKuis/{idkuis}/{idsiswa}', [TugasKuisController::class, 'lihatJawaban'])->name('guru.lihatJawaban');
+Route::post('/simpanNilai', [TugasKuisController::class, 'simpanNilai'])->name('guru.simpanNilai');
 
 Route::get('/editKuis/{idkuis}', [TugasKuisController::class, 'edit2'])->name('kuis.edit');
 Route::post('/editKuis/{idkuis}', [TugasKuisController::class, 'update2'])->name('kuis.update');

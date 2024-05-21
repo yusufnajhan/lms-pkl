@@ -18,8 +18,8 @@ class Jawaban_Kuis extends Model
         'tanggal_pengumpulan',
         'jawaban',
         'idsiswa',
-        // 'nilai', // kolom baru untuk nilai
-        // 'idguru', // kolom baru untuk id guru
+        'nilai', // kolom baru untuk nilai
+        'idguru', // kolom baru untuk id guru
         'idkuis', // kolom baru untuk id kuis
     ];
 
@@ -33,10 +33,10 @@ class Jawaban_Kuis extends Model
         return $this->belongsTo(Soal_Kuis::class, 'idsoal');
     } 
     
-    // public function guru()
-    // {
-    //     return $this->belongsTo(Guru::class, 'idguru'); // relasi baru ke model Guru
-    // }
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class, 'idguru'); // relasi baru ke model Guru
+    }
     public function kuis()
     {
         return $this->belongsTo(Kuis::class, 'idkuis');

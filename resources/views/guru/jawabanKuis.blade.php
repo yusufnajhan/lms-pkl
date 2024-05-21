@@ -60,8 +60,16 @@
             {{ $j->jawaban }}
             </p>
         </article>
-    @endforeach
+      @endforeach
+  </form>
+  <form action="{{ route('guru.simpanNilai') }}" method="POST">
+    @csrf
+    <input type="hidden" name="idsiswa" value="{{ $idsiswa }}">
+    <input type="hidden" name="idkuis" value="{{ $idkuis }}">
+    <input type="number" name="nilai" placeholder="Nilai kuis (1-100)" required>
+    <button type="submit">Simpan Nilai</button>
   </form>
 </div>
+
 
 @endsection
