@@ -190,24 +190,7 @@ class TugasKuisController extends Controller
                 'jumlahPengumpulan','belumMengumpulkan','nilaiTertinggi','nilaiTerendah','nilaiRata'));
     }
 
-    // menampilkan siswa yang sudah mengumpulkan kuis 
-    public function read3(Request $request, int $idkuis)
-    {
-        $search = $request->input('search');
-
-        $kuis = Kuis::where('idkuis', $idkuis)->first();
-        $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
-
-        // $pengumpulanKuis = Jawaban_Kuis::where('idkuis', $idkuis)
-        //     ->join('siswa', 'jawaban_kuis.idsiswa', '=', 'siswa.idsiswa')
-        //     ->select('siswa.idsiswa', 'siswa.nama', 'siswa.nik') // Tidak mengambil kolom nilai
-        //     ->when($search, function ($query, $search) {
-        //         $query->where('siswa.nama', 'like', '%' . $search . '%');
-        //     })
-        //     ->groupBy('siswa.idsiswa', 'siswa.nama', 'siswa.nik') // Tambahkan kolom yang dikelompokkan
-        //     ->get();
-
-        // $pengumpulanKuis = Jawaban_Kuis::where('idkuis', $idkuis)
+    // $pengumpulanKuis = Jawaban_Kuis::where('jawaban_kuis.idkuis', $idkuis)
         //     ->join('siswa', 'jawaban_kuis.idsiswa', '=', 'siswa.idsiswa')
         //     ->leftJoin('pengumpulan_kuis', function($join) use ($idkuis) {
         //         $join->on('siswa.idsiswa', '=', 'pengumpulan_kuis.idsiswa')
@@ -220,19 +203,24 @@ class TugasKuisController extends Controller
         //     ->groupBy('siswa.idsiswa', 'siswa.nama', 'siswa.nik', 'pengumpulan_kuis.nilai')
         //     ->get();
 
-        $pengumpulanKuis = Jawaban_Kuis::where('jawaban_kuis.idkuis', $idkuis)
-            ->join('siswa', 'jawaban_kuis.idsiswa', '=', 'siswa.idsiswa')
-            ->leftJoin('pengumpulan_kuis', function($join) use ($idkuis) {
-                $join->on('siswa.idsiswa', '=', 'pengumpulan_kuis.idsiswa')
-                    ->where('pengumpulan_kuis.idkuis', '=', $idkuis);
-            })
-            ->select('siswa.idsiswa', 'siswa.nama', 'siswa.nik', 'pengumpulan_kuis.nilai')
-            ->when($search, function ($query, $search) {
-                $query->where('siswa.nama', 'like', '%' . $search . '%');
-            })
-            ->groupBy('siswa.idsiswa', 'siswa.nama', 'siswa.nik', 'pengumpulan_kuis.nilai')
-            ->get();
+    // menampilkan siswa yang sudah mengumpulkan kuis 
+    public function read3(Request $request, int $idkuis)
+    {
+        $search = $request->input('search');
 
+        $kuis = Kuis::where('idkuis', $idkuis)->first();
+        $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
+
+        $pengumpulanKuis = Jawaban_Kuis::where('idkuis', $idkuis)
+        ->when($search, function ($query, $search) {
+            $query->whereHas('siswa', function ($query) use ($search) {
+                $query->where('nama', 'like', '%' . $search . '%');
+            });
+        })
+        ->with('siswa')
+        ->groupBy('idsiswa')
+        ->selectRaw('idsiswa, MAX(nilai) as nilai')
+        ->get();
 
         // Hitung jumlah siswa yang telah mengumpulkan tugas
         $jumlahPengumpulan = $pengumpulanKuis->count();
@@ -251,6 +239,12 @@ class TugasKuisController extends Controller
 
         // Hitung nilai rata-rata yang diperoleh siswa
         $nilaiRata = $pengumpulanKuis->avg('nilai');
+
+        // Ubah nilai null menjadi "belum dinilai"
+        $pengumpulanKuis->transform(function ($item) {
+            $item->nilai = $item->nilai ?? 'belum dinilai';
+            return $item;
+        });
 
         return view('guru.nilaikuis', compact('kuis', 'kelas', 'pengumpulanKuis',
                 'jumlahPengumpulan','belumMengumpulkan','nilaiTertinggi','nilaiTerendah','nilaiRata'));
@@ -418,12 +412,16 @@ class TugasKuisController extends Controller
         $kuis = Kuis::find($idkuis);
         $kelas = Enrollment::where('idsiswa', $idsiswa)->first()->kelas;
 
+        // Ambil nilai dari jawaban kuis (misalnya dari kolom 'nilai')
+        $nilai = $jawaban->first()->nilai;
+
         return view('guru.jawabanKuis', [
             'jawaban' => $jawaban,
             'kuis' => $kuis,
             'kelas' => $kelas,
             'idsiswa' => $idsiswa, // Tambahkan variabel ini
             'idkuis' => $idkuis, // Tambahkan variabel ini
+            'nilai' => $nilai, // Tambahkan variabel ini
         ]);
     }
 
@@ -434,18 +432,10 @@ class TugasKuisController extends Controller
         $idkuis = $request->input('idkuis');
         $nilai = $request->input('nilai');
 
-        // Simpan nilai ke dalam tabel jawaban_kuis
-        // $jawabanKuis = Jawaban_Kuis::where('idsiswa', $idsiswa)
-        //     ->where('idkuis', $idkuis)
-        //     ->first();
-
-        // if ($jawabanKuis) {
-        //     $jawabanKuis->nilai = $nilai;
-        //     $jawabanKuis->save();
-        //     return redirect()->back()->with('success', 'Nilai berhasil disimpan.');
-        // } else {
-        //     return redirect()->back()->with('error', 'Data jawaban kuis tidak ditemukan.');
-        // }
+        // Validasi nilai (harus berada dalam rentang 0-100)
+        if ($nilai < 0 || $nilai > 100) {
+            return redirect()->back()->with('error', 'Nilai harus berada dalam rentang 0 hingga 100.');
+        }
 
         // Simpan nilai untuk jawaban pertama
         $jawabanPertama = Jawaban_Kuis::where('idsiswa', $idsiswa)
@@ -455,6 +445,8 @@ class TugasKuisController extends Controller
         if ($jawabanPertama) {
             $jawabanPertama->nilai = $nilai;
             $jawabanPertama->save();
+        } else {
+            return redirect()->back()->with('error', 'Gagal menyimpan nilai kuis.');
         }
 
         // Set nilai untuk jawaban lain dengan idsiswa dan idkuis yang sama
@@ -468,7 +460,7 @@ class TugasKuisController extends Controller
             $jawaban->save();
         }
 
-        return redirect()->back()->with('success', 'Nilai berhasil disimpan.');
+        return redirect()->back()->with('success', 'Berhasil menyimpan nilai kuis.');
     }
 
 
@@ -544,7 +536,7 @@ class TugasKuisController extends Controller
     {
         // Validasi data input
         $request->validate([
-            'idkuis' => 'required|numeric',
+            // 'idkuis' => 'required|numeric',
             'judul_kuis' => 'required',
             'deskripsi_kuis' => 'required',
             'tanggal_mulai' => 'required|date',
@@ -562,7 +554,7 @@ class TugasKuisController extends Controller
         {
             // Simpan data kuis ke dalam database
             Kuis::create([
-                'idkuis' => $request->input('idkuis'),
+                // 'idkuis' => $request->input('idkuis'),
                 'judul_kuis' => $request->input('judul_kuis'),
                 'deskripsi_kuis' => $request->input('deskripsi_kuis'),
                 'tanggal_mulai' => $request->input('tanggal_mulai'),
@@ -584,6 +576,30 @@ class TugasKuisController extends Controller
                 ->route('tugaskuis.index', $idkelas)
                 ->with(['error' => 'Gagal menambah kuis baru. Error: ' . $e->getMessage()]);
         }
+    }
+
+    // download rekap setiap kuis
+    public function downloadRekapKuis($idkuis)
+    {
+        $kuis = Kuis::where('idkuis', $idkuis)->first();
+        $kelas = Kelas::where('idkelas', $kuis->idkelas)->first();
+        $pengumpulanKuis = Jawaban_Kuis::where('idkuis', $idkuis)->with('siswa')
+        ->with('siswa')
+        ->groupBy('idsiswa')
+        ->selectRaw('idsiswa, MAX(nilai) as nilai')
+        ->get();
+
+        // Hitung nilai tertinggi yang diperoleh siswa
+        $nilaiTertinggi = $pengumpulanKuis->max('nilai');
+
+        // Hitung nilai terendah yang diperoleh siswa
+        $nilaiTerendah = $pengumpulanKuis->min('nilai');
+
+        // Hitung nilai rata-rata yang diperoleh siswa
+        $nilaiRata = $pengumpulanKuis->avg('nilai');
+
+        $pdf = FacadePdf::loadView('guru.rekapKuis', compact('kuis', 'kelas', 'pengumpulanKuis','nilaiTertinggi','nilaiTerendah','nilaiRata'));
+        return $pdf->download('rekap_kuis.pdf');
     }
 
     // undang siswa
@@ -679,8 +695,25 @@ class TugasKuisController extends Controller
     
         // Filter tugas yang belum dikumpulkan oleh siswa
         $tugasBelumDikumpulkan = $semuaTugas->whereNotIn('idtugas', $idTugasDikumpulkan);
+
+         // Dapatkan semua kuis yang telah dikumpulkan siswa tersebut pada kelas tersebut
+        $kuisDikumpulkan = Jawaban_Kuis::where('idsiswa', $idsiswa)
+        ->whereHas('kuis', function ($query) use ($idkelas) {
+            $query->where('idkelas', $idkelas);
+        })
+        ->with('kuis')
+        ->get();
+
+        // Dapatkan semua kuis untuk kelas tersebut
+        $semuaKuis = Kuis::where('idkelas', $idkelas)->get();
+
+        // Dapatkan id kuis yang telah dikumpulkan
+        $idKuisDikumpulkan = $kuisDikumpulkan->pluck('kuis.idkuis');
+
+        // Filter kuis yang belum dikumpulkan oleh siswa
+        $kuisBelumDikumpulkan = $semuaKuis->whereNotIn('idkuis', $idKuisDikumpulkan);
     
-        return view('guru.progres', compact('siswa', 'tugasDikumpulkan', 'tugasBelumDikumpulkan','kelas'));
+        return view('guru.progres', compact('siswa', 'tugasDikumpulkan', 'tugasBelumDikumpulkan','kelas', 'kuisDikumpulkan', 'kuisBelumDikumpulkan'));
     }
     
     // rekap progres siswa pdf
@@ -1007,16 +1040,45 @@ class TugasKuisController extends Controller
     }
 
     // delete kuis
+    // public function destroy2($idkelas, $idkuis)
+    // {
+    //     DB::beginTransaction();
+
+    //     try {
+    //         // Hapus semua soal yang terkait dengan kuis ini
+    //         // Soal_Kuis::where('idkuis', $idkuis)->delete();
+
+    //         // Kemudian hapus kuisnya
+    //         $kuis = Kuis::where('idkuis', $idkuis)->first();
+    //         $idkelas = $kuis->idkelas;
+    //         $kuis->delete();
+
+    //         DB::commit();
+
+    //         return redirect()
+    //             ->route('tugaskuis.index', ['idkelas' => $idkelas])
+    //             ->with('success', 'Kuis berhasil dihapus.');
+    //     } catch (\Exception $e) {
+    //         DB::rollBack();
+
+    //         return redirect()
+    //             ->route('tugaskuis.index', ['idkelas' => $idkelas])
+    //             ->withErrors(['error' => 'Gagal menghapus kuis. Error: ' . $e->getMessage()]);
+    //     }
+    // }
     public function destroy2($idkelas, $idkuis)
     {
         DB::beginTransaction();
 
         try {
-            // Hapus semua soal yang terkait dengan kuis ini
-            // Soal_Kuis::where('idkuis', $idkuis)->delete();
+            // Hapus semua data jawaban kuis yang terkait dengan kuis tertentu
+            Jawaban_Kuis::where('idkuis', $idkuis)->delete();
 
-            // Kemudian hapus kuisnya
-            $kuis = Kuis::where('idkuis', $idkuis)->first();
+            // Hapus semua data soal kuis yang terkait dengan kuis tertentu
+            Soal_Kuis::where('idkuis', $idkuis)->delete();
+
+            // Kemudian hapus kuis itu sendiri
+            $kuis = Kuis::find($idkuis);
             $idkelas = $kuis->idkelas;
             $kuis->delete();
 
@@ -1033,6 +1095,8 @@ class TugasKuisController extends Controller
                 ->withErrors(['error' => 'Gagal menghapus kuis. Error: ' . $e->getMessage()]);
         }
     }
+
+
 
 
     // // delete siswa

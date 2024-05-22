@@ -1,6 +1,16 @@
 @extends('guru.layouts.layout')
 @section('content')
 <div class="mb-4">
+  @if(session()->has('success'))
+  <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+      <p>{{ session('success') }}</p>
+  </div>
+  @endif
+  @if (session()->has('error'))
+  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <p>{{ session('error') }}</p>
+  </div>
+  @endif
     <nav class="flex mb-5" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
           <li class="inline-flex items-center">
@@ -62,13 +72,14 @@
         </article>
       @endforeach
   </form>
-  <form action="{{ route('guru.simpanNilai') }}" method="POST">
+  <form action="{{ route('guru.simpanNilai') }}" method="POST" class="flex justify-between">
     @csrf
     <input type="hidden" name="idsiswa" value="{{ $idsiswa }}">
     <input type="hidden" name="idkuis" value="{{ $idkuis }}">
-    <input type="number" name="nilai" placeholder="Nilai kuis (1-100)" required>
-    <button type="submit">Simpan Nilai</button>
+    <input type="number" name="nilai" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-1/2 p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nilai kuis (1-100)" value="{{ $nilai }}" required>
+    <button type="submit" class="focus:outline-none text-white text-xs bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-4 py-1.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Simpan Nilai</button>
   </form>
+
 </div>
 
 

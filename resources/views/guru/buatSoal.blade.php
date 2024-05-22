@@ -52,7 +52,7 @@
         </div>
         @endfor
         <button type="submit" class="text-white mt-8 bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-            Submit</button>
+            Simpan soal</button>
     </form>    
 </div>
 

@@ -188,6 +188,7 @@ Route::get('/tambahSoal/{idkuis}', [TugasKuisController::class, 'tambahSoal'])->
 Route::post('/tambahSoal', [TugasKuisController::class, 'storeSoal'])->name('kuis.storeSoal');
 Route::get('/editSoalKuis/{idkuis}', [TugasKuisController::class, 'editSoal'])->name('kuis.editSoal');
 Route::post('/editSoalKuis', [TugasKuisController::class, 'updateSoal'])->name('kuis.updateSoal');
+Route::get('/rekapKuis/{idkuis}', [TugasKuisController::class, 'downloadRekapKuis'])->name('kuis.downloadRekap');
 Route::delete('/masukKelas/{idkelas}/{idkuis}', [TugasKuisController::class, 'destroy2'])->name('kuis.destroy');
 
 // Route::get('/soalEsai', [EsaiController::class, 'index'])->name('esai.index');

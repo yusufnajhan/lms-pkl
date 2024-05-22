@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Rekap Nilai Tugas</title>
+    <title>Rekap Nilai Kuis</title>
     <style>
         body {
             font-size: 16px;
@@ -29,9 +29,9 @@
     </style>
 </head>
 <body>
-    <h2>Rekap Nilai Tugas - {{ $tugas->judul_tugas }}</h2>
-    <p>Tanggal Mulai: {{ $tugas->tanggal_mulai }}</p>
-    <p>Tanggal Selesai: {{ $tugas->tanggal_selesai }}</p>
+    <h2>Rekap Nilai Kuis - {{ $kuis->judul_kuis }}</h2>
+    <p>Tanggal Mulai: {{ $kuis->tanggal_mulai }}</p>
+    <p>Tanggal Selesai: {{ $kuis->tanggal_selesai }}</p>
     <table class="table">
       <thead>
         <tr>
@@ -59,7 +59,7 @@
           </tr>
         </thead>
         <tbody>
-            @foreach($pengumpulanTugas as $index => $pengumpulan)
+            @foreach($pengumpulanKuis as $index => $pengumpulan)
           <tr>
             <th scope="row">{{ $index + 1 }}.</th>
             <td>{{ $pengumpulan->siswa->nama }}</td>

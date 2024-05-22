@@ -97,7 +97,7 @@
                 </select>
             </div> --}}
 
-            <div class="col-span-6 sm:col-span-3">
+            <div class="col-span-6 sm:col-span-3" hidden>
                 <label for="idkelas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Kelas</label>
                 <select name="idkelas" id="idkelas" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option value="{{ $kelas->idkelas }}">{{ $kelas->idkelas }}</option>
@@ -115,12 +115,12 @@
                 </a>    
             </div> --}}
             
-            <div class="col-span-6 sm:col-full">
+            {{-- <div class="col-span-6 sm:col-full">
                 <a href="{{ route('kuis.tambahSoal', $idkuis) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
                     pilihan ganda
                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </a>
-            </div>
+            </div> --}}
             
             <div class="col-span-6 sm:col-full">
                 <button class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"

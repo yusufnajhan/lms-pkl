@@ -114,6 +114,70 @@
         </div>
     </div>
     
-    {{-- <h1 class="mt-6 text-lg font-semibold text-gray-900 sm:text-xl dark:text-white">Progres Kuis</h1> --}}
+    <h1 class="mt-6 text-lg font-semibold text-gray-900 sm:text-xl dark:text-white">Progres Kuis</h1>
+    <div class="mt-4 p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+      <div class="sm:hidden">
+          <label for="tabs" class="sr-only">Select tab</label>
+          <select id="tabs" class="bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+              <option>Statistics</option>
+              <option>Services</option>
+          </select>
+      </div>
+      <ul class="hidden text-sm font-medium text-center text-red-500 divide-x divide-red-200 rounded-lg sm:flex dark:divide-red-600 dark:text-red-400" id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
+        <li class="w-full">
+          <button id="sudah-tab" data-tabs-target="#sudah" type="button" role="tab" aria-controls="sudah" aria-selected="true" class="inline-block w-full p-4 rounded-tr-lg bg-red-50 hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600">Sudah Dikumpulkan</button>
+        </li>
+        <li class="w-full">
+            <button id="belum-tab" data-tabs-target="#belum" type="button" role="tab" aria-controls="belum" aria-selected="false" class="inline-block w-full p-4 rounded-tl-lg bg-red-50 hover:bg-red-100 focus:outline-none dark:bg-red-700 dark:hover:bg-red-600">Belum Dikumpulkan</button>
+        </li>
+      </ul> 
+      
+      <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
+            <div class="hidden pt-4" id="sudah" role="tabpanel" aria-labelledby="sudah-tab">
+              <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+                  <thead class="bg-gray-100 dark:bg-gray-700">
+                      <tr>
+                          <th class="py-2 dark:text-white">No.</th>
+                          <th class="py-2 dark:text-white">Judul Kuis</th>
+                          <th class="py-2 dark:text-white">Nilai</th>
+                      </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                      @foreach($kuisDikumpulkan as $key => $kuis)
+                          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                            
+                              <td class="py-3 text-center dark:text-white">{{ $key + 1 }}.</td>
+                              <td class="py-3 text-center dark:text-white">{{ $kuis->kuis->judul_kuis }}</td>
+                              <td class="py-3 text-center dark:text-white">{{ $kuis->nilai }}</td>
+                          </tr>
+                      @endforeach
+                  </tbody>
+              </table>
+          </div>
+
+          <div class="hidden pt-4" id="belum" role="tabpanel" aria-labelledby="belum-tab">
+            <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+                <thead class="bg-gray-100 dark:bg-gray-700">
+                    <tr>
+                        <th class="py-2 dark:text-white">No.</th>
+                        <th class="py-2 dark:text-white">Judul Kuis</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                    @php $no = 1; @endphp
+                    @foreach($kuisBelumDikumpulkan as $kuis)
+                        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                          
+                            <td class="py-3 text-center dark:text-white">{{ $no++ }}.</td>
+                            <td class="py-3 text-center dark:text-white">{{ $kuis->judul_kuis }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+          </div>
+          
+      </div>
+  </div>
+
 </div>
 @endsection

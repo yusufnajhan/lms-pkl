@@ -14,18 +14,8 @@ class Kuis extends Model
     protected $primaryKey = 'idkuis';
     public $timestamps = false;
 
-    // protected $dates = [
-    //     'tanggal_mulai', 'tanggal_selesai'
-    // ];
-    // // atau
-    // protected $casts = [
-    //     'tanggal_mulai' => 'datetime',
-    //     'tanggal_selesai' => 'datetime',
-    // ];
-    
-
     protected $fillable = [
-        'idkuis',
+        // 'idkuis',
         'judul_kuis',
         'deskripsi_kuis',
         'tanggal_mulai',
@@ -44,17 +34,5 @@ class Kuis extends Model
     {
         return $this->hasMany(Soal_Kuis::class, 'idkuis');
     }
-
-    // public function questions()
-    // {
-    //     return $this->hasMany(Question::class, 'idkuis');
-    // }
-
-    // public function show($idkuis)
-    // {
-    //     $esais = Esai::where('idkuis', $idkuis)->get();
-
-    //     return view('esai.index', compact('esais'));
-    // }
 
 }

@@ -35,7 +35,7 @@
     <form action="{{ route('kuis.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="grid grid-cols-6 gap-6">
-            <div class="col-span-6 sm:col-span-3">
+            {{-- <div class="col-span-6 sm:col-span-3">
                 <label for="idkuis"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Kuis</label>
                 <input type="number" name="idkuis" id="idkuis"
@@ -46,7 +46,7 @@
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
 
-            </div>
+            </div> --}}
             
             <div class="col-span-6 sm:col-span-3">
                 <label for="judul_kuis"
@@ -112,12 +112,23 @@
 
             </div>
 
-            <div class="col-span-6 sm:col-span-3">
+            {{-- <div class="col-span-6 sm:col-span-3">
                 <label for="idkelas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Kelas</label>
                 <select name="idkelas" id="idkelas" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option value="" disabled selected>Pilih ID Kelas</option>
                     <option value="{{ $kelas->idkelas }}">{{ $kelas->idkelas }}</option>
                 </select>
+            </div> --}}
+
+            <div class="col-span-6 sm:col-span-3" hidden>
+                <label for="idkelas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Kelas</label>
+                <select name="idkelas" id="idkelas" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <option value="{{ $kelas->idkelas }}">{{ $kelas->idkelas }}</option>
+                </select>
+
+                @error('idkelas')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             {{-- <div class="col-span-6 sm:col-full">
