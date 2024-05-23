@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\Enrollment;
 use App\Models\Guru;
+use App\Models\Jawaban_Kuis;
 use App\Models\Kelas;
 use App\Models\Pengumpulan_Tugas;
 use App\Models\Siswa;
@@ -66,7 +67,20 @@ class DashboardController extends Controller
         // Ambil semua tugas untuk kelas yang diikuti siswa
         $tugass = Tugas::where('idkelas', $siswa->idkelas)->get();
 
-        return view("siswa.beranda", compact('nama', 'nik', 'username','rataTugas'));
+        // Ambil semua kuis yang sudah dikumpulkan dan dinilai oleh siswa
+        $pengumpulanKuis = Jawaban_Kuis::where('idsiswa', $siswa->idsiswa)
+        ->whereNotNull('nilai') // Pastikan tugas sudah dinilai
+        ->get();
+
+        // Hitung rata-rata nilai kuis
+        $totalNilaiKuis = $pengumpulanKuis->sum('nilai');
+        $jumlahKuis = $pengumpulanKuis->count();
+        $rataKuis = $jumlahKuis > 0 ? $totalNilaiKuis / $jumlahKuis : 0;
+
+        // Ambil semua tugas untuk kelas yang diikuti siswa
+        $kuiss = Tugas::where('idkelas', $siswa->idkelas)->get();
+
+        return view("siswa.beranda", compact('nama', 'nik', 'username','rataTugas', 'rataKuis'));
     }
     
 }

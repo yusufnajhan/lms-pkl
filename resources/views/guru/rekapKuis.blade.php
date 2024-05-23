@@ -29,7 +29,9 @@
     </style>
 </head>
 <body>
-    <h2>Rekap Nilai Kuis - {{ $kuis->judul_kuis }}</h2>
+    <div style="text-align: center;">
+      <h2>Rekap Nilai Kuis - {{ $kuis->judul_kuis }}</h2>
+    </div>
     <p>Tanggal Mulai: {{ $kuis->tanggal_mulai }}</p>
     <p>Tanggal Selesai: {{ $kuis->tanggal_selesai }}</p>
     <table class="table">

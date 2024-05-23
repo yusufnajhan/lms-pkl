@@ -696,12 +696,15 @@ class TugasKuisController extends Controller
         // Filter tugas yang belum dikumpulkan oleh siswa
         $tugasBelumDikumpulkan = $semuaTugas->whereNotIn('idtugas', $idTugasDikumpulkan);
 
-         // Dapatkan semua kuis yang telah dikumpulkan siswa tersebut pada kelas tersebut
+        // Dapatkan semua kuis yang telah dikumpulkan siswa tersebut pada kelas tersebut
         $kuisDikumpulkan = Jawaban_Kuis::where('idsiswa', $idsiswa)
         ->whereHas('kuis', function ($query) use ($idkelas) {
             $query->where('idkelas', $idkelas);
         })
+        ->where('status', 1)
         ->with('kuis')
+        ->groupBy('idkuis')
+        ->selectRaw('idkuis, MAX(nilai) as nilai')
         ->get();
 
         // Dapatkan semua kuis untuk kelas tersebut
@@ -743,8 +746,28 @@ class TugasKuisController extends Controller
         // Filter tugas yang belum dikumpulkan oleh siswa
         $tugasBelumDikumpulkan = $semuaTugas->whereNotIn('idtugas', $idTugasDikumpulkan);
 
+        // Dapatkan semua kuis yang telah dikumpulkan siswa tersebut pada kelas tersebut
+        $kuisDikumpulkan = Jawaban_Kuis::where('idsiswa', $idsiswa)
+        ->whereHas('kuis', function ($query) use ($idkelas) {
+            $query->where('idkelas', $idkelas);
+        })
+        ->where('status', 1)
+        ->with('kuis')
+        ->groupBy('idkuis')
+        ->selectRaw('idkuis, MAX(nilai) as nilai')
+        ->get();
+
+        // Dapatkan semua kuis untuk kelas tersebut
+        $semuaKuis = Kuis::where('idkelas', $idkelas)->get();
+
+        // Dapatkan id kuis yang telah dikumpulkan
+        $idKuisDikumpulkan = $kuisDikumpulkan->pluck('kuis.idkuis');
+
+        // Filter kuis yang belum dikumpulkan oleh siswa
+        $kuisBelumDikumpulkan = $semuaKuis->whereNotIn('idkuis', $idKuisDikumpulkan);
+   
         // Buat PDF
-        $pdf = FacadePdf::loadView('guru.rekapProgres', compact('siswa', 'tugasDikumpulkan', 'tugasBelumDikumpulkan'));
+        $pdf = FacadePdf::loadView('guru.rekapProgres', compact('siswa', 'tugasDikumpulkan', 'tugasBelumDikumpulkan', 'kuisDikumpulkan', 'kuisBelumDikumpulkan'));
         return $pdf->download('rekap_progres_siswa.pdf');
     }
 

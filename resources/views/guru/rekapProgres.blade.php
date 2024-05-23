@@ -29,12 +29,15 @@
     </style>
 </head>
 <body>
+    <div style="text-align: center;">
+        <h2>Progres Siswa</h2>
+    </div>
     <p style="font-size: 14px; margin-bottom: 10px;"><strong>Nama:</strong> {{ $siswa->nama }}</p>
     <p style="font-size: 14px; margin-bottom: 10px;"><strong>NIS:</strong> {{ $siswa->nik }}</p>
     <p style="font-size: 14px; margin-bottom: 10px;"><strong>Email:</strong> {{ $siswa->email }}</p>    
 
     <h3 style="margin-top: 20px;">Rekap Tugas</h3>
-    <h4>Tugas sudah dikumpulkan:</h4>
+    <p>Tugas sudah dikumpulkan:</p>
     <table class="table">
         <thead>
           <tr>
@@ -54,7 +57,7 @@
         </tbody>
     </table>
 
-    <h4>Tugas belum dikumpulkan:</h4>
+    <p>Tugas belum dikumpulkan:</p>
     <table class="table">
         <thead>
           <tr>
@@ -73,6 +76,44 @@
         </tbody>
     </table>
 
-    {{-- <h3 style="margin-top: 20px;">B. Rekap Kuis</h3> --}}
+    <h3 style="margin-top: 20px;">Rekap Kuis</h3>
+    <p>Kuis sudah dikumpulkan:</p>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Judul Kuis</th>
+            <th scope="col">Nilai</th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach($kuisDikumpulkan as $key => $kuis)
+            <tr>
+                <th scope="row">{{ $key + 1 }}.</th>
+                <td>{{ $kuis->kuis->judul_kuis }}</td>
+                <td>{{ $kuis->nilai }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    <p>Kuis belum dikumpulkan:</p>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Judul Kuis</th>
+          </tr>
+        </thead>
+        <tbody>
+            @php $no = 1; @endphp
+            @foreach($kuisBelumDikumpulkan as $kuis)
+            <tr>
+                <th scope="row">{{ $no++ }}.</th>
+                <td>{{ $kuis->judul_kuis }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </body>
 </html>
