@@ -5,7 +5,6 @@ namespace App\Models;
 use CreateSoalEsai;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use SoalEsai;
 
 class Kuis extends Model
 {
@@ -33,6 +32,11 @@ class Kuis extends Model
     public function soalkuis()
     {
         return $this->hasMany(Soal_Kuis::class, 'idkuis');
+    }
+
+    public function pengumpulanKuis()
+    {
+        return $this->hasMany(Jawaban_Kuis::class, 'idkuis');
     }
 
 }

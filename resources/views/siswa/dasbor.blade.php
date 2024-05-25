@@ -55,8 +55,9 @@
                       </li>
                   @endif
               @endforeach
-
+              
                 @foreach($kuiss as $kuis)
+                @if($kuis->pengumpulanKuis !== null && $kuis->pengumpulanKuis->count() == 0)
                 <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
@@ -81,6 +82,7 @@
                     </a>
                   </div>
                 </li>
+                @endif
                 @endforeach
             </ul>
         </div>

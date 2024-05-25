@@ -30,7 +30,10 @@
 </head>
 <body>
     <body>
-        <h3>Rekap Tugas Kelas {{ $kelas->mata_pelajaran }} {{ $kelas->jenjang_kelas }}{{ $kelas->indeks_kelas }}</h3>
+      <div style="text-align: center;">
+          <h2>Rekap Tugas & Kuis - {{ $kelas->mata_pelajaran }} {{ $kelas->jenjang_kelas }}{{ $kelas->indeks_kelas }}</h2>
+      </div>
+      <p style="font-size: 14px; margin-bottom: 10px;">Rekap Tugas</p>
         <table class="table">
             <thead>
               <tr>
@@ -44,16 +47,16 @@
                 <tr>
                     <th scope="row">{{ $index + 1 }}</th>
                     <td>{{ $tugas->judul_tugas }}</td>
-                    @foreach ($tugas->pengumpulanTugas as $pengumpulan)
-                    <td>{{ $pengumpulan->nilai }}</td>
+                    @foreach ($pengumpulanTugas as $pengumpulan)
+                      <td>{{ $pengumpulan->nilai }}</td>
                     @endforeach
                 </tr>
                 @endforeach
             </tbody>
         </table>
 
-        {{-- <h3>Rekap Kuis Kelas {{ $kelas->mata_pelajaran }} {{ $kelas->jenjang_kelas }}{{ $kelas->indeks_kelas }}</h3> --}}
-        {{-- <table class="table">
+        <p style="font-size: 14px; margin-bottom: 10px;">Rekap Kuis</p>
+        <table class="table">
             <thead>
               <tr>
                 <th scope="col">No.</th>
@@ -62,29 +65,29 @@
               </tr>
             </thead>
             <tbody>
-                @foreach ($kuiss as $kuis)
+                @foreach ($kuiss as $index => $kuis)
               <tr>
                 <th scope="row">{{ $index + 1 }}</th>
                 <td>{{ $kuis->judul_kuis }}</td>
-                @foreach ($kuis->pengumpulanTugas as $pengumpulan)
-                <td>{{ $pengumpulan->nilai }}</td>
+                @foreach ($pengumpulanKuis as $pengumpulan)
+                  <td>{{ $pengumpulan->nilai }}</td>
                 @endforeach
               </tr>
               @endforeach
             </tbody>
-        </table> --}}
+        </table>
 
         <table class="table">
             <thead>
               <tr>
                 <th scope="col">Nilai Rata-Rata Tugas</th>
-                {{-- <th scope="col">Nilai Rata-Rata Kuis</th> --}}
+                <th scope="col">Nilai Rata-Rata Kuis</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>{{ $rataTugas }}</td>
-                {{-- <td>{{ $rataRataKuis }}</td> --}}
+                <td>{{ $rataKuis }}</td>
               </tr>
             </tbody>
         </table>

@@ -22,4 +22,8 @@ class Soal_Kuis extends Model
     {
         return $this->belongsTo(Kuis::class, 'idkuis');
     } 
+    public function jawabanKuis()
+    {
+        return $this->hasMany(Jawaban_Kuis::class, 'idsoal');
+    }
 }

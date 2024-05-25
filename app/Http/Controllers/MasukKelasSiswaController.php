@@ -249,6 +249,8 @@ class MasukKelasSiswaController extends Controller
     {
         // Dapatkan idsiswa dari sesi atau guard auth saat ini
         $idsiswa = auth()->user()->id;
+
+        $siswa = Siswa::where('iduser', $idsiswa)->first();
     
         // Ambil data kelas
         $kelas = Kelas::findOrFail($idkelas);
@@ -259,44 +261,63 @@ class MasukKelasSiswaController extends Controller
                 $query->where('idsiswa', $idsiswa);
             }])
             ->get();
+      
+        // Ambil nilai tugas yang sudah dinilai untuk siswa pada kelas tertentu
+        $pengumpulanTugas = Pengumpulan_Tugas::where('idsiswa', $siswa->idsiswa)
+        ->whereNotNull('nilai') // Pastikan tugas sudah dinilai
+        ->whereIn('idtugas', function ($query) use ($idkelas) {
+            $query->select('idtugas')
+                ->from('tugas')
+                ->where('idkelas', $idkelas);
+        })
+        ->get();
+
 
         // Hitung rata-rata nilai tugas
-        $totalNilai = 0;
-        $jumlahTugas = 0;
-        foreach ($tugass as $tugas) {
-            foreach ($tugas->pengumpulanTugas as $pengumpulanTugas) {
-                if ($pengumpulanTugas->nilai) {
-                    $totalNilai += $pengumpulanTugas->nilai;
-                    $jumlahTugas++;
-                }
-            }
-        }
-
+        $totalNilai = $pengumpulanTugas->sum('nilai');
+        $jumlahTugas = $pengumpulanTugas->count();
         $rataTugas = $jumlahTugas > 0 ? $totalNilai / $jumlahTugas : 0;
-    
-        // Ambil semua data kuis dan pengumpulan kuis untuk kelas dan siswa tertentu
-        // $kuiss = Kuis::where('idkelas', $idkelas)
-        //     ->with(['pengumpulanKuis' => function ($query) use ($idsiswa) {
-        //         $query->where('idsiswa', $idsiswa);
-        //     }])
-        //     ->get();
 
-        // Hitung rata-rata nilai kuis
+        // Hitung rata-rata nilai tugas
         // $totalNilai = 0;
-        // $jumlahKuis = 0;
-        // foreach ($kuiss as $kuis) {
-        //     foreach ($kuis->pengumpulanTugas as $pengumpulanTugas) {
+        // $jumlahTugas = 0;
+        // foreach ($tugass as $tugas) {
+        //     foreach ($tugas->pengumpulanTugas as $pengumpulanTugas) {
         //         if ($pengumpulanTugas->nilai) {
         //             $totalNilai += $pengumpulanTugas->nilai;
-        //             $jumlahKuis++;
+        //             $jumlahTugas++;
         //         }
         //     }
         // }
 
-        // $rataTugas = $jumlahKuis > 0 ? $totalNilai / $jumlahKuis : 0;
+        // $rataTugas = $jumlahTugas > 0 ? $totalNilai / $jumlahTugas : 0;
+    
+        // Ambil semua data kuis dan pengumpulan kuis untuk kelas dan siswa tertentu
+        $kuiss = Kuis::where('idkelas', $idkelas)
+            ->with(['pengumpulanKuis' => function ($query) use ($idsiswa) {
+                $query->where('idsiswa', $idsiswa);
+            }])
+            ->get();
+
+        // Ambil nilai kuis yang sudah dinilai untuk siswa pada kelas tertentu
+        $pengumpulanKuis = Jawaban_Kuis::select('idkuis', 'idsiswa', DB::raw('MAX(nilai) as nilai'))
+            ->where('idsiswa', $siswa->idsiswa)
+            ->whereNotNull('nilai') // Pastikan kuis sudah dinilai
+            ->whereIn('idkuis', function ($query) use ($idkelas) {
+                $query->select('idkuis')
+                    ->from('kuis')
+                    ->where('idkelas', $idkelas);
+            })
+            ->groupBy('idkuis', 'idsiswa') // Group berdasarkan idkuis dan idsiswa
+            ->get();
+
+        // Hitung rata-rata nilai kuis
+        $totalNilaiKuis = $pengumpulanKuis->sum('nilai');
+        $jumlahKuis = $pengumpulanKuis->count();
+        $rataKuis = $jumlahKuis > 0 ? $totalNilaiKuis / $jumlahKuis : 0;
 
         // Buat PDF
-        $pdf = FacadePdf::loadView('siswa.rekapTugas', compact('kelas', 'tugass','rataTugas'));
+        $pdf = FacadePdf::loadView('siswa.rekapTugas', compact('kelas', 'tugass', 'kuiss','rataTugas','rataKuis','pengumpulanKuis','pengumpulanTugas'));
         return $pdf->download('rekap_tugas_kuis.pdf');
     }    
 

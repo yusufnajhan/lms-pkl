@@ -7,6 +7,7 @@ use App\Models\Enrollment;
 use App\Models\Guru;
 use App\Models\Jawaban_Kuis;
 use App\Models\Kelas;
+use App\Models\Kuis;
 use App\Models\Pengumpulan_Tugas;
 use App\Models\Siswa;
 use App\Models\Tugas;
@@ -69,7 +70,7 @@ class DashboardController extends Controller
 
         // Ambil semua kuis yang sudah dikumpulkan dan dinilai oleh siswa
         $pengumpulanKuis = Jawaban_Kuis::where('idsiswa', $siswa->idsiswa)
-        ->whereNotNull('nilai') // Pastikan tugas sudah dinilai
+        ->whereNotNull('nilai') // Pastikan kuis sudah dinilai
         ->get();
 
         // Hitung rata-rata nilai kuis
@@ -78,7 +79,7 @@ class DashboardController extends Controller
         $rataKuis = $jumlahKuis > 0 ? $totalNilaiKuis / $jumlahKuis : 0;
 
         // Ambil semua tugas untuk kelas yang diikuti siswa
-        $kuiss = Tugas::where('idkelas', $siswa->idkelas)->get();
+        $kuiss = Kuis::where('idkelas', $siswa->idkelas)->get();
 
         return view("siswa.beranda", compact('nama', 'nik', 'username','rataTugas', 'rataKuis'));
     }
