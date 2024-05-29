@@ -60,21 +60,22 @@
     <form class="overflow-y-auto lg:max-h-[60rem] 2xl:max-h-fit" method="POST" action="{{ route('comments.store') }}">
         @csrf
         <article class="mb-5">
-          <p class="text-sm font-bold text-gray-600 dark:text-gray-400">Deskripsi:</p>
-          <p class="mt-3 mb-2 text-gray-900 dark:text-white">
+            <img src="{{ URL('images/diskusi.png') }}" alt="diskusi" class="mx-auto w-12 h-12">
+            <p class="text-m font-bold text-gray-600 dark:text-gray-400">Deskripsi:</p>
+            <p class="mt-2 mb-4 text-gray-900 dark:text-white">
             {{ $diskusi->deskripsi_diskusi }}
           </p>
 
           <div class="mt-3 py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <label for="body" class="sr-only">Your comment</label>
             <textarea id="body" name="body" rows="6"
-                class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-                placeholder="Write a comment..." required></textarea>
+                class="px-0 w-full text-m text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                placeholder="Tuliskan komentar anda..." required></textarea>
         <input type="hidden" name="iduser" value="{{ auth()->user()->id }}"/>
             <input type="hidden" name="iddiskusi" value="{{ $diskusi->iddiskusi }}">
         </div>
         <button type="submit" name="submit"
-            class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+            class="inline-flex items-center py-2.5 px-4 text-s font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
             Kirim komentar
         </button>
     

@@ -1,5 +1,5 @@
 @foreach($comments as $comment)
-<section class="bg-white dark:bg-gray-900 py-1 lg:py-16 antialiased">
+<section class="bg-white dark:bg-gray-900 py-1 lg:py-16 antialiased mr-8 ml-8">
     <!-- Wrapper untuk setiap komentar dengan border, shadow, dan margin untuk pemisahan -->
     <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900 shadow-lg border border-gray-200 dark:border-gray-700 mb-1 relative">
         @if ($comment->iduser == auth()->user()->id)
@@ -7,7 +7,7 @@
                 <button type="button" data-modal-toggle="edit-comment-modal-{{ $comment->idcomment }}" 
                     class="text-blue-500 hover:text-blue-700">Ubah</button>
                 <button type="button" data-modal-toggle="delete-comment-modal-{{ $comment->idcomment }}" 
-                    class="ml-2 text-red-500 hover:text-red-700">Hapus</button>
+                    class="ml-2 text-red-500 hover:text-red-700 mr-4">Hapus</button>
             </div>
         @endif
         
