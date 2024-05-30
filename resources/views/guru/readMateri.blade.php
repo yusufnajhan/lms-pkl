@@ -58,17 +58,18 @@
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
     <form class="overflow-y-auto lg:max-h-[60rem] 2xl:max-h-fit">
         <article class="mb-5">
-          <p class="text-sm font-bold text-gray-600 dark:text-gray-400">Deskripsi:</p>
-          <p class="mt-3 mb-2 text-gray-900 dark:text-white">
+        <img src="{{ URL('images/materi.png') }}" alt="materi" class="mx-auto w-12 h-12">
+          <p class="text-m font-bold text-gray-600 dark:text-gray-400 mt-3">Deskripsi:</p>
+          <p class="mt-2 mb-2 text-gray-900 dark:text-white">
             {{ $materi->deskripsi_materi }}
           </p>
     
-          <p class="mt-5 text-sm font-bold text-gray-600 dark:text-gray-400">Berkas materi:</p>
+          <p class="mt-5 text-m font-bold text-gray-600 dark:text-gray-400">Berkas materi:</p>
           <div class="items-center 2xl:space-x-4 2xl:flex">
-            <div class="mt-8 flex items-center space-x-4">
+            <div class="mt-2 flex items-center space-x-4">
                 {{-- <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">File Materi</dt> --}}
                 <a href="{{ asset('storage/' . $materi->file_materi) }}" target="_blank"
-                    class="ml-2 w-24 h-12 bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center">Lihat
+                    class="w-30 h-12 bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center">Lihat
                     berkas</a></label>
             </div>
 
