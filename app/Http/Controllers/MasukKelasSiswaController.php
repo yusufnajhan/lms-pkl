@@ -25,10 +25,20 @@ class MasukKelasSiswaController extends Controller
         $idsiswa = auth()->user()->id;
         $kumpultugas = Pengumpulan_Tugas::where('idsiswa', $idsiswa)->get();
         $kumpulkuis = Jawaban_Kuis::where('idsiswa', $idsiswa)->get();
+        // dd($kumpulkuis);
         $kelas = Kelas::findOrFail($idkelas);
         $tugass = Tugas::where('idkelas', $idkelas)->get();
         $kuiss = Kuis::where('idkelas', $idkelas)->get();
         $enrollments = Enrollment::with('siswa')->where('idkelas', $idkelas)->get();
+        
+        $pengumpulanTugas = Pengumpulan_Tugas::where('idsiswa', $idsiswa)
+        ->whereNotNull('nilai') // Pastikan tugas sudah dinilai
+        ->whereIn('idtugas', function ($query) use ($idkelas) {
+            $query->select('idtugas')
+                ->from('tugas')
+                ->where('idkelas', $idkelas);
+        })
+        ->get();
 
         foreach ($tugass as $tugas) {
             $tugas->isExpired = Carbon::now()->greaterThan($tugas->tanggal_selesai); // Check if the tugas is expired
@@ -36,7 +46,7 @@ class MasukKelasSiswaController extends Controller
         }
 
         foreach ($kuiss as $kuis) {
-            $kuis->isExpired = Carbon::now()->greaterThan($kuis->tanggal_selesai); // Check if the kuis is expired
+            $kuis->isExpiredkuis = Carbon::now()->greaterThan($kuis->tanggal_selesai); // Check if the kuis is expired
             $kuis->isSubmitted = $kumpultugas->contains('idkuis', $kuis->idkuis); // Check if the kuis is submitted
         }
 
@@ -62,8 +72,9 @@ class MasukKelasSiswaController extends Controller
             })->values();
         }
 
-        return view('siswa.masukKelas', compact('kelas','tugass','kuiss','enrollments','kumpultugas','kumpulkuis'));
+        return view('siswa.masukKelas', compact('kelas','tugass','kuiss','enrollments','kumpultugas','kumpulkuis','pengumpulanTugas'));
     }
+
 
     public function read(int $idtugas)
     {

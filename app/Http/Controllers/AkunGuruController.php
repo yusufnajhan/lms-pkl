@@ -10,6 +10,7 @@ use App\Models\Kelas;
 use App\Models\Kuis;
 use App\Models\Materi;
 use App\Models\Pengumpulan_Tugas;
+use App\Models\Soal_Kuis;
 use App\Models\Tugas;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -165,6 +166,9 @@ class AkunGuruController extends Controller
             foreach ($kelas as $k) {
                 // Delete all enrollments for the kelas
                 Enrollment::where('idkelas', $k->idkelas)->delete();
+
+                // Delete all soal kuis for the kelas
+                Soal_Kuis::where('idkuis', $k->idkuis)->delete();
 
                 // Delete all kuis for the kelas
                 Kuis::where('idkelas', $k->idkelas)->delete();

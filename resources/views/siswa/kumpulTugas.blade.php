@@ -57,7 +57,7 @@
 
             </div> --}}
 
-            <div class="col-span-6 sm:col-span-3">
+            <div class="col-span-6 sm:col-span-3" hidden>
                 <label for="status"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status Tugas</label>
                 <select name="status" id="status"
@@ -81,7 +81,7 @@
                 @enderror
             </div>
 
-            <div class="col-span-6 sm:col-span-3">
+            {{-- <div class="col-span-6 sm:col-span-3">
                 <label for="tanggal_pengumpulan"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Pengumpulan</label>
                 <input type="date" name="tanggal_pengumpulan" id="tanggal_pengumpulan"
@@ -92,16 +92,36 @@
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
 
-            </div>
+            </div> --}}
 
             <div class="col-span-6 sm:col-span-3">
+                <label for="tanggal_pengumpulan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Pengumpulan</label>
+                <input type="date" name="tanggal_pengumpulan" id="tanggal_pengumpulan" class="shadow-sm bg-gray-200 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" 
+                value="{{ old('tanggal_pengumpulan') }}" readonly>
+                
+                @error('tanggal_pengumpulan')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const tanggalPengumpulanInput = document.getElementById('tanggal_pengumpulan');
+                    if (!tanggalPengumpulanInput.value) {
+                        const today = new Date().toISOString().split('T')[0];
+                        tanggalPengumpulanInput.value = today;
+                    }
+                });
+            </script>
+
+            <div class="col-span-6 sm:col-span-3" hidden>
                 <label for="idtugas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Tugas</label>
                 <select name="idtugas" id="idtugas" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option value="{{ $tugas->idtugas }}">{{ $tugas->idtugas }}</option>
                 </select>
             </div>
             
-            <div class="col-span-6 sm:col-span-3">
+            <div class="col-span-6 sm:col-span-3" hidden>
                 <label for="idguru" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Guru</label>
                 <select name="idguru" id="idguru" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option value="{{ $guru->idguru }}">{{ $guru->idguru }}</option>
@@ -109,7 +129,7 @@
             </div>
             
 
-            <div class="col-span-6 sm:col-span-3">
+            <div class="col-span-6 sm:col-span-3" hidden>
                 <label for="idsiswa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Siswa</label>
                 <select name="idsiswa" id="idsiswa" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option value="{{ auth()->user()->dataPribadi->idsiswa }}" selected>{{ auth()->user()->dataPribadi->idsiswa }}</option>

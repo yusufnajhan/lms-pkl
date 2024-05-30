@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Enrollment;
+use App\Models\Jawaban_Kuis;
+use App\Models\Pengumpulan_Tugas;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -144,30 +146,119 @@ class AkunSiswaController extends Controller
 
 
     // delete
+    // public function destroy($idsiswa)
+    // {
+    //     $siswa = Siswa::where('idsiswa', $idsiswa)->first();
+
+    //     if ($siswa){
+    //         $userId = $siswa->iduser; 
+
+    //         // Delete all enrollments for the siswa
+    //         Enrollment::where('idsiswa', $idsiswa)->delete();
+
+    //         $siswa->delete();
+
+    //         $user = User::find($userId);
+    //         if ($user) {
+    //             $user->delete();
+    //         }
+
+    //         return redirect()->route('siswa.index')->with('success', 'Akun siswa berhasil dihapus.');
+    //     }
+    //     else{
+    //         return redirect()
+    //             ->route('siswa.index')
+    //             ->withErrors('error', 'Gagal menghapus akun siswa.');
+        
+    //     }
+    // }
+    // public function destroy($idsiswa)
+    // {
+    //     $siswa = Siswa::where('idsiswa', $idsiswa)->first();
+
+    //     if ($siswa) {
+    //         // Delete all related jawaban_kuis records first
+    //         Jawaban_Kuis::where('idsiswa', $idsiswa)->delete();
+
+    //         // Delete all related enrollment records first
+    //         Enrollment::where('idsiswa', $idsiswa)->delete();
+
+    //         // Delete all related pengumpulan_tugas records first
+    //         Pengumpulan_Tugas::where('idsiswa', $idsiswa)->delete();
+
+    //         // Delete the siswa record
+    //         $siswa->delete();
+
+    //         // Also delete the associated user record (if exists)
+    //         $user = User::find($siswa->iduser);
+    //         if ($user) {
+    //             $user->delete();
+    //         }
+
+    //         return redirect()->route('siswa.index')->with('success', 'Akun siswa berhasil dihapus.');
+    //     } else {
+    //         return redirect()->route('siswa.index')->withErrors('error', 'Gagal menghapus akun siswa.');
+    //     }
+    // }
+    // public function destroy($idsiswa)
+    // {
+    //     $siswa = Siswa::where('idsiswa', $idsiswa)->first();
+
+    //     if ($siswa) {
+    //         // Hapus semua catatan terkait di tabel enrollment, jawaban_kuis, dan pengumpulan_tugas
+    //         Enrollment::where('idsiswa', $idsiswa)->delete();
+    //         Jawaban_Kuis::where('idsiswa', $idsiswa)->delete();
+    //         Pengumpulan_Tugas::where('idsiswa', $idsiswa)->delete();
+
+    //         // Hapus catatan siswa
+    //         $siswa->delete();
+
+    //         // Juga hapus catatan pengguna yang terkait (jika ada)
+    //         $user = User::find($siswa->iduser);
+    //         if ($user) {
+    //             $user->delete();
+    //         }
+
+    //         return redirect()->route('siswa.index')->with('success', 'Akun siswa berhasil dihapus.');
+    //     } else {
+    //         return redirect()->route('siswa.index')->withErrors('error', 'Gagal menghapus akun siswa.');
+    //     }
+    // }
+
     public function destroy($idsiswa)
     {
-        $siswa = Siswa::where('idsiswa', $idsiswa)->first();
-
-        if ($siswa){
-            $userId = $siswa->iduser; 
-
-            // Delete all enrollments for the siswa
-            Enrollment::where('idsiswa', $idsiswa)->delete();
-
-            $siswa->delete();
-
-            $user = User::find($userId);
-            if ($user) {
-                $user->delete();
-            }
-
-            return redirect()->route('siswa.index')->with('success', 'Akun siswa berhasil dihapus.');
-        }
-        else{
-            return redirect()
-                ->route('siswa.index')
-                ->withErrors('error', 'Gagal menghapus akun siswa.');
         
+        DB::beginTransaction();
+        try {
+
+            // Hapus semua catatan terkait di tabel enrollment, jawaban_kuis, dan pengumpulan_tugas
+            Enrollment::where('idsiswa', $idsiswa)->delete();
+            Jawaban_Kuis::where('idsiswa', $idsiswa)->delete();
+            Pengumpulan_Tugas::where('idsiswa', $idsiswa)->delete();
+
+            // Hapus catatan siswa
+            $siswa = Siswa::find($idsiswa);
+            if ($siswa) {
+                $siswa->delete();
+
+                // Juga hapus catatan pengguna yang terkait (jika ada)
+                $user = User::find($siswa->iduser);
+                if ($user) {
+                    $user->delete();
+                }
+
+                DB::commit();
+                return redirect()->route('siswa.index')->with('success', 'Akun siswa berhasil dihapus.');
+            } else {
+                DB::rollback();
+                return redirect()->route('siswa.index')->withErrors('error', 'Gagal menghapus akun siswa.');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('siswa.index')->withErrors('error', 'Terjadi kesalahan saat menghapus akun siswa.');
         }
     }
+
+
+
 }

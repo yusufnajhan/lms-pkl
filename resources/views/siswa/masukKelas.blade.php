@@ -62,7 +62,7 @@
           <div class="col-span-6 sm:col-span-3 flex justify-between items-center">
             <form action="{{ route('siswamasuk.index', $kelas->idkelas) }}" method="GET">
               <div class="flex items-center">
-                  <button id="dropdownDefault" data-dropdown-toggle="dropdown"
+                  {{-- <button id="dropdownDefault" data-dropdown-toggle="dropdown"
                       class="mb-4 sm:mb-0 mr-4 inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                       type="button">
                       Saring tugas & kuis
@@ -70,9 +70,9 @@
                           xmlns="http://www.w3.org/2000/svg">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
                       </svg>
-                  </button>
+                  </button> --}}
                   <!-- Dropdown menu -->
-                  <div id="dropdown" class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+                  {{-- <div id="dropdown" class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
                       <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
                           <li class="flex items-center">
                               <input id="semua" name="status" type="radio" value="semua" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
@@ -94,7 +94,7 @@
                           </li>
                       </ul>
                       <button type="submit" class="mt-3 w-full px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-500">Terapkan</button>
-                  </div>
+                  </div> --}}
               </div>
             </form>
             <a href="{{ route('siswamasuk.rekapTugas', $kelas->idkelas) }}" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-red-900 bg-white border border-red-300 rounded-lg hover:bg-red-100 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-red-800 dark:text-red-400 dark:border-red-600 dark:hover:text-white dark:hover:bg-red-700 dark:focus:ring-red-700">
@@ -126,14 +126,13 @@
                         <a href="{{ route('siswamasuk.read', $tugas->idtugas) }}" class="hover-red-underline">Tenggat waktu: {{ $tugas->tanggal_selesai }}</a>
                       </p>
                     </div>
-
+                    
                     @php
                         $pengumpulan = $kumpultugas->where('idtugas', $tugas->idtugas)->first();
                     @endphp
                     @if($pengumpulan && !is_null($pengumpulan->nilai))
                         <p class="font-medium text-gray-600 truncate dark:text-white">
-                          <span>Nilai: {{ $pengumpulan->nilai }}/100</span>
-                            {{-- <a href="">Nilai: {{ $pengumpulan->nilai }}/100</a> --}}
+                            <span>Nilai: {{ $pengumpulan->nilai }}/100</span>
                         </p>
                     @endif
 
@@ -141,54 +140,17 @@
                         $pengumpulan = $kumpultugas->where('idtugas', $tugas->idtugas)->first();
                     @endphp
                     <td class="p-4 whitespace-nowrap">
-                        @if ($pengumpulan && $pengumpulan->status == '1')
+                        @if($tugas->pengumpulanTugas->count() > 0)
                             <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500">
                                 Sudah dikerjakan
                             </span>
-                        @else
+                        {{-- @else
                             <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-red-400 border border-red-100 dark:border-red-500">
                                 Belum dikerjakan
-                            </span>
+                            </span> --}}
                         @endif
                     </td>
-                    {{-- @if(!$tugas->isExpired)
-                    <a href="{{ route('kumpultugas.create', $tugas->idtugas) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
-                      kumpul tugas
-                      <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </a>
-                    @else
-                    <span class="inline-flex items-center font-medium text-gray-600 dark:text-gray-500">
-                      Tugas tutup
-                    </span>
-                    @endif
-                    <a href="{{ route('kumpultugas.edit', $tugas->idtugas) }}">
-                      <button type="button" 
-                        class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
-                        data-idtugas="{{ $tugas->idtugas }}">
-                          <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
-                            Ubah
-                      </button>
-                    </a> --}}
-
-                    {{-- @if(!$tugas->isExpired)
-                        <a href="{{ route('kumpultugas.create', $tugas->idtugas) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
-                            kumpul tugas
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        </a>
-                        <a href="{{ route('kumpultugas.edit', $tugas->idtugas) }}">
-                            <button type="button" 
-                                class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
-                                data-idtugas="{{ $tugas->idtugas }}">
-                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
-                                Ubah
-                            </button>
-                        </a>
-                    @else
-                        <span class="inline-flex items-center font-medium text-gray-600 dark:text-gray-500">
-                            Tugas tutup
-                        </span>
-                    @endif --}}
-
+                   
                     @if(!$tugas->isExpired)
                         {{-- @php
                             $pengumpulan = \App\Models\Pengumpulan_Tugas::where('idtugas', $tugas->idtugas)
@@ -199,7 +161,7 @@
                           $pengumpulan = $kumpultugas->where('idtugas', $tugas->idtugas)->first();
                         @endphp
 
-                        @if($pengumpulan)
+                        @if($tugas->pengumpulanTugas->count() > 0)
                             <a href="{{ route('kumpultugas.edit', $tugas->idtugas) }}">
                                 <button type="button" 
                                     class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
@@ -247,28 +209,48 @@
                         <a href="{{ route('siswakuis.read', $kuis->idkuis) }}" class="hover-red-underline">Tenggat waktu: {{ $kuis->tanggal_selesai }}</a>
                       </p>
                     </div>
-                    <td class="p-4 whitespace-nowrap">
-                      <span
-                        class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500">Sudah dikerjakan</span>
-                    </td>
                     
-                    @if($kuis->tanggal_selesai > now())
+                    @php
+                        $jawaban_kuis = $kumpulkuis->where('idkuis', $kuis->idkuis)->first();
+                    @endphp
+                    @if($jawaban_kuis && !is_null($jawaban_kuis->nilai))
+                        <p class="font-medium text-gray-600 truncate dark:text-white">
+                          <span>Nilai: {{ $jawaban_kuis->nilai }}/100</span>
+                        </p>
+                    @endif
+
+                    @php
+                        $jawaban_kuis = $kumpulkuis->where('idkuis', $kuis->idkuis)->first();
+                    @endphp
+                    <td class="p-4 whitespace-nowrap">
+                      @if($kuis->pengumpulanKuis->count() > 0)
+                          <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500">
+                              Sudah dikerjakan
+                          </span>
+                      @endif
+                    </td>
+                    {{-- Mengumpulkan Kuis --}}
+                    
+                    @if (!$kuis->isExpiredkuis)
+                        @if ($kuis->pengumpulanKuis->count() > 0)
                             <a href="{{ route('kumpulkuis.edit', $kuis->idkuis) }}">
-                                <button type="button" 
+                              <button type="button" 
                                     class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
                                     data-idkuis="{{ $kuis->idkuis }}">
                                     <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                                     Ubah
-                                </button>
+                              </button>
                             </a>
-                            <a href="{{ route('kumpulkuis.create', $kuis->idkuis) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
-                                kumpul kuis
-                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                            </a>
+                        @else
+                          <a href="{{ route('kumpulkuis.create', $kuis->idkuis) }}" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-red-700 sm:text-sm hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
+                              Kumpul kuis
+                              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                          </a>
+                        @endif
                     @else
-                        <span class="inline-flex items-center font-medium text-gray-600 dark:text-gray-500">
-                            Kuis tutup
-                        </span>
+                      <span class="inline-flex items-center font-medium text-gray-600 dark:text-gray-500">
+                        Kuis tutup
+                      </span>
                     @endif
 
                   </div>
